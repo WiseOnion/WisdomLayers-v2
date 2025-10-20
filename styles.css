@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+h1, h2, h3, h4, h5, h6 { 
+    font-family: 'Poppins', sans-serif; 
+}
+
+/* Project Modal Styles */
+.project-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.project-modal.active {
+    display: block;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #6b7280;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.modal-close:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.modal-images {
+    margin-bottom: 2rem;
+}
+
+.modal-image-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(to bottom right, #ccfbf1, #99f6e4);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.modal-details {
+    padding: 1rem 0;
+}
+
+.modal-details h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.modal-details p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .modal-details h2 {
+        font-size: 1.5rem;
+    }
+}
