@@ -28,15 +28,17 @@ function openModal(projectId) {
             <!-- Tabbed Media Section -->
             <div class="mb-8">
                 <!-- Tab Buttons -->
-                <div class="flex border-b border-gray-200 mb-6">
+                <div class="tab-buttons-container border-b border-gray-200 mb-6">
                     ${project.desktopVideo ? `
-                        <button onclick="switchTab('desktop-${projectId}')" class="tab-button active px-6 py-3 font-semibold text-teal-600 border-b-2 border-teal-600 transition-colors" data-tab="desktop-${projectId}">
-                            Desktop Demo
+                        <button onclick="switchTab('desktop-${projectId}')" class="tab-button ${!project.mobileVideo || window.innerWidth >= 768 ? 'active' : ''} px-4 py-3 font-semibold text-teal-600 border-b-2 border-teal-600 transition-colors" data-tab="desktop-${projectId}">
+                            <span class="hidden sm:inline">Desktop Demo</span>
+                            <span class="sm:hidden">Desktop</span>
                         </button>
                     ` : ''}
                     ${project.mobileVideo ? `
-                        <button onclick="switchTab('mobile-${projectId}')" class="tab-button px-6 py-3 font-semibold text-gray-600 hover:text-teal-600 border-b-2 border-transparent transition-colors" data-tab="mobile-${projectId}">
-                            Mobile Demo
+                        <button onclick="switchTab('mobile-${projectId}')" class="tab-button ${!project.desktopVideo || window.innerWidth < 768 ? 'active' : ''} px-4 py-3 font-semibold text-gray-600 hover:text-teal-600 border-b-2 border-transparent transition-colors" data-tab="mobile-${projectId}">
+                            <span class="hidden sm:inline">Mobile Demo</span>
+                            <span class="sm:hidden">Mobile</span>
                         </button>
                     ` : ''}
                 </div>
@@ -45,7 +47,7 @@ function openModal(projectId) {
                 <div class="tab-content-container">
                     ${project.desktopVideo ? `
                         <!-- Desktop Screenshot Tab -->
-                        <div id="desktop-${projectId}" class="tab-content active">
+                        <div id="desktop-${projectId}" class="tab-content ${!project.mobileVideo || window.innerWidth >= 768 ? 'active' : ''}" ${!project.mobileVideo || window.innerWidth >= 768 ? '' : 'style="display: none;"'}>
                             <div class="screenshot-with-nav bg-gray-100 rounded-xl overflow-hidden shadow-2xl">
                                 <div class="screenshot-main-container">
                                     <img src="${project.desktopVideo.replace('.webm', '-screenshot.png').replace('pj-desktop-demo-screenshot.png', 'pj-desktop-demo-screenshot.png')}" alt="Desktop Screenshot" class="screenshot-image clickable-screenshot" id="desktop-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
@@ -75,7 +77,7 @@ function openModal(projectId) {
                     
                     ${project.mobileVideo ? `
                         <!-- Mobile Screenshot Tab -->
-                        <div id="mobile-${projectId}" class="tab-content" style="display: none;">
+                        <div id="mobile-${projectId}" class="tab-content ${!project.desktopVideo || window.innerWidth < 768 ? 'active' : ''}" ${!project.desktopVideo || window.innerWidth < 768 ? '' : 'style="display: none;"'}>
                             <div class="flex justify-center items-center gap-6">
                                 <!-- Phone Frame with Scrolling -->
                                 <div class="relative" style="width: 375px;">
