@@ -78,12 +78,12 @@ function openModal(projectId) {
                     ${project.mobileVideo ? `
                         <!-- Mobile Screenshot Tab -->
                         <div id="mobile-${projectId}" class="tab-content ${!project.desktopVideo || window.innerWidth < 768 ? 'active' : ''}" ${!project.desktopVideo || window.innerWidth < 768 ? '' : 'style="display: none;"'}>
-                            <div class="flex justify-center items-center gap-6">
+                            <div class="flex justify-center items-center gap-4 md:gap-6">
                                 <!-- Phone Frame with Scrolling -->
-                                <div class="relative" style="width: 375px;">
+                                <div class="relative phone-frame-container">
                                     <!-- Phone Frame -->
-                                    <div class="bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
-                                        <div class="bg-black rounded-[2.5rem] overflow-y-auto overflow-x-hidden phone-screen" style="aspect-ratio: 375/812;">
+                                    <div class="bg-gray-900 rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-2xl">
+                                        <div class="bg-black rounded-[1.5rem] md:rounded-[2.5rem] overflow-y-auto overflow-x-hidden phone-screen">
                                             <img src="${project.mobileVideo.replace('.webm', '-screenshot.png')}" alt="Mobile Screenshot" class="w-full clickable-screenshot" id="mobile-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
                                         </div>
                                     </div>
