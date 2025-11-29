@@ -160,6 +160,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Screenshot Navigation Styles */
 .screenshot-with-nav {
     display: flex;
+    flex-direction: column; /* Stack vertically on desktop */
     max-height: 70vh;
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -170,21 +171,19 @@ h1, h2, h3, h4, h5, h6 {
     flex: 1;
     overflow-y: auto;
     padding: 1rem;
+    order: 1; /* Main content on top */
 }
 
 .screenshot-nav {
-    width: 120px;
+    width: 100%; /* Full width for thumbnails below */
     background-color: #f1f5f9;
-    border-left: 1px solid #e2e8f0;
+    border-top: 1px solid #e2e8f0;
     padding: 1rem 0.5rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    order: 2; /* Put navigation on the right for desktop */
-}
-
-.screenshot-main-container {
-    order: 1; /* Put main content on the left for desktop */
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    order: 2; /* Navigation below main content */
 }
 
 .nav-section {
@@ -569,13 +568,15 @@ html {
         aspect-ratio: 375/812;
     }
 
-    /* Screenshot navigation stays side-by-side */
+    /* Screenshot navigation now stacked vertically */
     .screenshot-with-nav {
-        max-height: 70vh;
+        max-height: 80vh; /* Allow more height for vertical layout */
     }
 
     .screenshot-nav {
-        width: 120px;
+        width: 100%; /* Full width for horizontal thumbnail layout */
+        border-left: none; /* Remove left border since it's now on top */
+        border-top: 1px solid #e2e8f0; /* Add top border */
     }
 
     /* Modal remains centered with good spacing */
