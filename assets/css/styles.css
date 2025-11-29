@@ -759,3 +759,109 @@ html {
         gap: 0.75rem !important;
     }
 }
+
+/* Desktop Enhancements */
+@media (min-width: 1024px) {
+    /* Hero Section Desktop Improvements */
+    .hero-section {
+        padding: 8rem 0 !important;
+    }
+
+    .hero-section h1 {
+        font-size: 5rem !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    .hero-section p {
+        font-size: 1.5rem !important;
+        line-height: 1.6 !important;
+        max-width: 48rem !important;
+        margin: 0 auto 3rem !important;
+    }
+
+    .hero-section .flex {
+        gap: 2rem !important;
+    }
+
+    .hero-section a {
+        padding: 1rem 2.5rem !important;
+        font-size: 1.125rem !important;
+        font-weight: 600 !important;
+    }
+
+    /* Section Spacing */
+    .featured-work,
+    .testimonials,
+    .how-it-works,
+    .pricing-section,
+    .faq-section,
+    .about-section,
+    .contact-section {
+        padding: 6rem 0 !important;
+    }
+
+    /* Section Headings */
+    .featured-work h2,
+    .testimonials h2,
+    .how-it-works h2,
+    .pricing-section h2,
+    .faq-section h2,
+    .about-section h2,
+    .contact-section h2 {
+        font-size: 3.5rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 2rem !important;
+    }
+
+    /* Grid Improvements */
+    .grid {
+        gap: 3rem !important;
+    }
+
+    /* Card Enhancements */
+    .featured-work .bg-white,
+    .testimonials .bg-white {
+        padding: 2.5rem !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .featured-work .bg-white:hover,
+    .testimonials .bg-white:hover {
+        transform: translateY(-8px) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Pricing Cards */
+    .pricing-section .bg-white {
+        padding: 3rem !important;
+    }
+
+    /* Contact Form */
+    .contact-section form {
+        padding: 3rem !important;
+        max-width: 32rem !important;
+        margin: 0 auto !important;
+    }
+
+    /* Button Enhancements */
+    .contact-section button {
+        padding: 1rem 2rem !important;
+        font-size: 1.125rem !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    /* Large Desktop */
+    .hero-section h1 {
+        font-size: 6rem !important;
+    }
+
+    .hero-section {
+        padding: 10rem 0 !important;
+    }
+
+    .max-w-7xl {
+        max-width: 80rem !important;
+    }
+}
