@@ -633,3 +633,118 @@ html {
         max-width: 98vw;
     }
 }
+
+/* Mobile Responsive Improvements */
+@media (max-width: 640px) {
+    /* Hero Section */
+    .hero-title {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Full height sections on mobile */
+    .min-h-screen {
+        min-height: auto !important;
+        padding: 4rem 0 !important;
+    }
+
+    /* Section headings */
+    .section-title {
+        font-size: 2rem !important;
+    }
+
+    /* Grid gaps */
+    .grid {
+        gap: 1rem !important;
+    }
+
+    /* Button sizes */
+    .btn-primary, .btn-secondary {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+
+    /* Form elements */
+    .form-input, .form-textarea, .form-select {
+        font-size: 1rem !important;
+        padding: 0.75rem !important;
+    }
+
+    /* Card padding */
+    .card-padding {
+        padding: 1rem !important;
+    }
+
+    /* Testimonial cards */
+    .testimonial-card {
+        padding: 1rem !important;
+    }
+
+    /* FAQ items */
+    .faq-item {
+        padding: 1rem !important;
+    }
+
+    /* Pricing cards */
+    .pricing-card {
+        padding: 1.5rem !important;
+    }
+
+    /* Contact form */
+    .contact-form {
+        padding: 1.5rem !important;
+    }
+
+    /* Footer */
+    .footer-section {
+        padding: 2rem 0 !important;
+    }
+
+    /* Pricing carousel mobile adjustments */
+    .pricing-carousel-wrapper {
+        padding: 0 !important;
+    }
+
+    .pricing-card {
+        padding: 0 1rem !important;
+    }
+
+    /* Modal improvements */
+    .modal-content {
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+
+    .modal-images {
+        margin-bottom: 1rem !important;
+    }
+
+    .modal-details h2 {
+        font-size: 1.25rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small screens */
+    .hero-title {
+        font-size: 2rem !important;
+    }
+
+    .section-title {
+        font-size: 1.75rem !important;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 0.625rem 1.25rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .grid {
+        gap: 0.75rem !important;
+    }
+}
