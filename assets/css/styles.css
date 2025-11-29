@@ -637,12 +637,12 @@ html {
 /* Mobile Responsive Improvements */
 @media (max-width: 640px) {
     /* Hero Section */
-    .hero-title {
+    .hero-section h1 {
         font-size: 2.5rem !important;
         line-height: 1.2 !important;
     }
 
-    .hero-subtitle {
+    .hero-section p {
         font-size: 1.125rem !important;
         line-height: 1.5 !important;
     }
@@ -654,7 +654,13 @@ html {
     }
 
     /* Section headings */
-    .section-title {
+    .featured-work h2,
+    .testimonials h2,
+    .how-it-works h2,
+    .pricing-section h2,
+    .faq-section h2,
+    .about-section h2,
+    .contact-section h2 {
         font-size: 2rem !important;
     }
 
@@ -664,39 +670,37 @@ html {
     }
 
     /* Button sizes */
-    .btn-primary, .btn-secondary {
+    .hero-section a,
+    .contact-section button {
         padding: 0.75rem 1.5rem !important;
         font-size: 1rem !important;
     }
 
     /* Form elements */
-    .form-input, .form-textarea, .form-select {
+    .contact-section input,
+    .contact-section textarea,
+    .contact-section select {
         font-size: 1rem !important;
         padding: 0.75rem !important;
     }
 
     /* Card padding */
-    .card-padding {
+    .featured-work .p-6 {
         padding: 1rem !important;
     }
 
     /* Testimonial cards */
-    .testimonial-card {
-        padding: 1rem !important;
-    }
-
-    /* FAQ items */
-    .faq-item {
+    .testimonials .p-6 {
         padding: 1rem !important;
     }
 
     /* Pricing cards */
-    .pricing-card {
+    .pricing-section .p-8 {
         padding: 1.5rem !important;
     }
 
     /* Contact form */
-    .contact-form {
+    .contact-section form {
         padding: 1.5rem !important;
     }
 
@@ -710,7 +714,7 @@ html {
         padding: 0 !important;
     }
 
-    .pricing-card {
+    .pricing-section .pricing-card {
         padding: 0 1rem !important;
     }
 
@@ -731,15 +735,22 @@ html {
 
 @media (max-width: 480px) {
     /* Extra small screens */
-    .hero-title {
+    .hero-section h1 {
         font-size: 2rem !important;
     }
 
-    .section-title {
+    .featured-work h2,
+    .testimonials h2,
+    .how-it-works h2,
+    .pricing-section h2,
+    .faq-section h2,
+    .about-section h2,
+    .contact-section h2 {
         font-size: 1.75rem !important;
     }
 
-    .btn-primary, .btn-secondary {
+    .hero-section a,
+    .contact-section button {
         padding: 0.625rem 1.25rem !important;
         font-size: 0.95rem !important;
     }
