@@ -2,8 +2,10 @@
 // Dynamic path resolution based on current page location
 
 // Detect if we're on the root page or in a subdirectory
-const isSubdirectory = window.location.pathname.includes('/html/');
-const assetsPath = isSubdirectory ? '../assets' : 'assets';
+const pathname = window.location.pathname;
+const isProjectsSubdirectory = pathname.includes('/projects/');
+const isHtmlSubdirectory = pathname.includes('/html/') && !isProjectsSubdirectory;
+const assetsPath = isProjectsSubdirectory ? '../../assets' : isHtmlSubdirectory ? '../assets' : 'assets';
 
 const projectData = {
     miles2wisdom: {
