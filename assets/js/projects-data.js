@@ -43,17 +43,17 @@ const projectData = {
             },
             {
                 title: "Booking System",
-                image: `${assetsPath}/images/miles2wisdom/m2w-booking.png`,
+                image: `${assetsPath}/images/miles2wisdom/m2w-booking-desktop-view.png`,
                 description: "Self-service appointment scheduling"
             },
             {
                 title: "Meet the Team",
-                image: `${assetsPath}/images/miles2wisdom/m2w-teams.png`,
+                image: `${assetsPath}/images/miles2wisdom/m2w-team-desktop-view.png`,
                 description: "Therapist profiles and credentials"
             },
             {
                 title: "Services Page",
-                image: `${assetsPath}/images/miles2wisdom/m2w-services.png`,
+                image: `${assetsPath}/images/miles2wisdom/m2w-services-desktop-view.png`,
                 description: "Detailed service offerings"
             }
         ]
@@ -98,17 +98,17 @@ const projectData = {
             },
             {
                 title: "Service Areas",
-                image: `${assetsPath}/images/pjpressure/pj-areas.png`,
+                image: `${assetsPath}/images/pjpressure/pj-areas-desktop-view.png`,
                 description: "Service area coverage map"
             },
             {
                 title: "About",
-                image: `${assetsPath}/images/pjpressure/pj-about.png`,
+                image: `${assetsPath}/images/pjpressure/pj-about-desktop-view.png`,
                 description: "About PJ Pressure"
             },
             {
                 title: "Gallery",
-                image: `${assetsPath}/images/pjpressure/pj-gallery.png`,
+                image: `${assetsPath}/images/pjpressure/pj-gallery-desktop-view.png`,
                 description: "Before/after gallery"
             }
         ]
