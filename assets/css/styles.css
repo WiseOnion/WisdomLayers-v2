@@ -297,16 +297,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .phone-screen {
-    max-height: 600px;
+    max-height: 700px;
+    min-height: 600px;
     overflow-y: auto;
     overflow-x: hidden;
-    border-radius: 2rem;
+    border-radius: 2.5rem;
     -webkit-overflow-scrolling: touch;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 640px) {
     .phone-screen {
-        max-height: 500px;
+        max-height: 600px;
+        min-height: 450px;
+        border-radius: 2rem;
     }
 }
 
