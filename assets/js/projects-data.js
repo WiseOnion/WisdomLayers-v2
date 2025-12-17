@@ -37,6 +37,11 @@ const projectData = {
         mobileVideo: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo.webm`,
         screenshots: [
             {
+                title: "Home",
+                image: `${assetsPath}/images/miles2wisdom/m2w-card.png`,
+                description: "Main website homepage"
+            },
+            {
                 title: "Booking System",
                 image: `${assetsPath}/images/miles2wisdom/m2w-booking.png`,
                 description: "Self-service appointment scheduling"
@@ -86,6 +91,11 @@ const projectData = {
         desktopVideo: `${assetsPath}/images/pjpressure/pj-desktop-demo.webm`,
         mobileVideo: `${assetsPath}/images/pjpressure/pj-mobile-demo.webm`,
         screenshots: [
+            {
+                title: "Home",
+                image: `${assetsPath}/images/pjpressure/pj-card.png`,
+                description: "Main website homepage"
+            },
             {
                 title: "Service Areas",
                 image: `${assetsPath}/images/pjpressure/pj-areas.png`,

@@ -56,7 +56,7 @@ function openModal(projectId) {
 
     // Determine default tab based on screen size
     const isMobile = window.innerWidth < 768;
-    const defaultTab = project.mobileVideo && isMobile ? 'mobile' : 'desktop';
+    let defaultTab = isMobile ? 'mobile' : 'desktop';
 
     let modalHTML = `
         <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -73,92 +73,73 @@ function openModal(projectId) {
             ` : ''}
         </div>
 
-        ${project.desktopVideo || project.mobileVideo ? `
+        ${(project.screenshots || project.cardImage) ? `
             <!-- Tabbed Media Section -->
             <div class="mb-8">
                 <!-- Tab Buttons -->
                 <div class="tab-buttons-container">
-                    ${project.desktopVideo ? `
-                        <button onclick="switchTab('desktop-${projectId}')" class="tab-button ${defaultTab === 'desktop' ? 'active' : ''}" data-tab="desktop-${projectId}">
-                            Desktop Demo
-                        </button>
-                    ` : ''}
-                    ${project.mobileVideo ? `
-                        <button onclick="switchTab('mobile-${projectId}')" class="tab-button ${defaultTab === 'mobile' ? 'active' : ''}" data-tab="mobile-${projectId}">
-                            Mobile Demo
-                        </button>
-                    ` : ''}
+                    <button onclick="switchTab('desktop-${projectId}')" class="tab-button ${defaultTab === 'desktop' ? 'active' : ''}" data-tab="desktop-${projectId}">
+                        Desktop View
+                    </button>
+                    <button onclick="switchTab('mobile-${projectId}')" class="tab-button ${defaultTab === 'mobile' ? 'active' : ''}" data-tab="mobile-${projectId}">
+                        Mobile View
+                    </button>
                 </div>
 
                 <!-- Tab Content -->
                 <div class="tab-content-container">
-                    ${project.desktopVideo ? `
-                        <!-- Desktop Screenshot Tab -->
-                        <div id="desktop-${projectId}" class="tab-content" style="display: ${defaultTab === 'desktop' ? 'block' : 'none'};">
-                            <div class="screenshot-with-nav">
-                                <div class="screenshot-main-container">
-                                    <img src="${project.desktopVideo.replace('.webm', '-screenshot.png')}" alt="Desktop Screenshot" class="screenshot-image clickable-screenshot" id="desktop-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
-                                </div>
-                                <div class="screenshot-nav">
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('.webm', '-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-card.png').replace('m2w-desktop-demo.webm', 'm2w-card.png').replace('desktop-demo.webm', 'card.png')}" alt="Home Section" class="nav-thumbnail">
-                                        <span class="nav-label">Home</span>
-                                    </div>
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-areas-screenshot.png').replace('m2w-desktop-demo.webm', 'm2w-booking-screenshot.png').replace('desktop-demo.webm', 'booking-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-areas.png').replace('m2w-desktop-demo.webm', 'm2w-booking.png').replace('desktop-demo.webm', 'booking.png')}" alt="${projectId === 'pjpressure' ? 'Service Areas Section' : 'Booking Section'}" class="nav-thumbnail">
-                                        <span class="nav-label">${projectId === 'pjpressure' ? 'Areas' : 'Booking'}</span>
-                                    </div>
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-about-screenshot.png').replace('m2w-desktop-demo.webm', 'm2w-team-screenshot.png').replace('desktop-demo.webm', 'team-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-about.png').replace('m2w-desktop-demo.webm', 'm2w-teams.png').replace('desktop-demo.webm', 'teams.png')}" alt="${projectId === 'pjpressure' ? 'About Section' : 'Team Section'}" class="nav-thumbnail">
-                                        <span class="nav-label">${projectId === 'pjpressure' ? 'About' : 'Team'}</span>
-                                    </div>
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-gallery-screenshot.png').replace('m2w-desktop-demo.webm', 'm2w-services-screenshot.png').replace('desktop-demo.webm', 'services-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-gallery.png').replace('m2w-desktop-demo.webm', 'm2w-services.png').replace('desktop-demo.webm', 'services.png')}" alt="${projectId === 'pjpressure' ? 'Gallery Section' : 'Services Section'}" class="nav-thumbnail">
-                                        <span class="nav-label">${projectId === 'pjpressure' ? 'Gallery' : 'Services'}</span>
-                                    </div>
-                                </div>
+                    <!-- Desktop Screenshot Tab -->
+                    <div id="desktop-${projectId}" class="tab-content" style="display: ${defaultTab === 'desktop' ? 'block' : 'none'};">
+                        <div class="screenshot-with-nav">
+                            <div class="screenshot-main-container">
+                                <img src="${project.screenshots ? project.screenshots[0].image : project.cardImage}" alt="Desktop Screenshot" class="screenshot-image clickable-screenshot" id="desktop-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
                             </div>
-                            <p class="text-sm text-gray-500 mt-3 text-center">Desktop experience • 1920x1080 • Click screenshot to visit live site</p>
-                        </div>
-                    ` : ''}
-                    
-                    ${project.mobileVideo ? `
-                        <!-- Mobile Screenshot Tab -->
-                        <div id="mobile-${projectId}" class="tab-content" style="display: ${defaultTab === 'mobile' ? 'block' : 'none'};">
-                            <div class="flex flex-col md:flex-row justify-center items-start gap-4 md:gap-6">
-                                <!-- Phone Frame with Scrolling -->
-                                <div class="phone-frame-container">
-                                    <div class="bg-gray-900 rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-2xl">
-                                        <div class="bg-black rounded-[1.5rem] md:rounded-[2.5rem] overflow-y-auto overflow-x-hidden phone-screen">
-                                            <img src="${project.mobileVideo.replace('.webm', '-screenshot.png')}" alt="Mobile Screenshot" class="w-full clickable-screenshot" id="mobile-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
-                                        </div>
+                            <div class="screenshot-nav">
+                                ${project.screenshots ? project.screenshots.map((screenshot, index) => `
+                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${screenshot.image}')">
+                                        <img src="${screenshot.image}" alt="${screenshot.title}" class="nav-thumbnail">
+                                        <span class="nav-label">${screenshot.title}</span>
                                     </div>
-                                </div>
+                                `).join('') : `
+                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.cardImage}')">
+                                        <img src="${project.cardImage}" alt="Project Image" class="nav-thumbnail">
+                                        <span class="nav-label">Project</span>
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-3 text-center">Desktop experience • 1920x1080 • Click screenshot to visit live site</p>
+                    </div>
 
-                                <!-- Navigation Thumbnails -->
-                                <div class="mobile-nav-sidebar w-full md:w-auto">
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('.webm', '-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-card.png').replace('m2w-mobile-demo.webm', 'm2w-card.png').replace('mobile-demo.webm', 'card.png')}" alt="Home Section" class="nav-thumbnail-mobile">
-                                        <span class="nav-label-mobile">Home</span>
-                                    </div>
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-areas-mobile-screenshot.png').replace('m2w-mobile-demo.webm', 'm2w-booking-mobile-screenshot.png').replace('mobile-demo.webm', 'booking-mobile-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-areas.png').replace('m2w-mobile-demo.webm', 'm2w-booking.png').replace('mobile-demo.webm', 'booking.png')}" alt="${projectId === 'pjpressure' ? 'Service Areas Section' : 'Booking Section'}" class="nav-thumbnail-mobile">
-                                        <span class="nav-label-mobile">${projectId === 'pjpressure' ? 'Areas' : 'Booking'}</span>
-                                    </div>
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-about-mobile-screenshot.png').replace('m2w-mobile-demo.webm', 'm2w-team-mobile-screenshot.png').replace('mobile-demo.webm', 'team-mobile-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-about.png').replace('m2w-mobile-demo.webm', 'm2w-teams.png').replace('mobile-demo.webm', 'teams.png')}" alt="${projectId === 'pjpressure' ? 'About Section' : 'Team Section'}" class="nav-thumbnail-mobile">
-                                        <span class="nav-label-mobile">${projectId === 'pjpressure' ? 'About' : 'Team'}</span>
-                                    </div>
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-gallery-mobile-screenshot.png').replace('m2w-mobile-demo.webm', 'm2w-services-mobile-screenshot.png').replace('mobile-demo.webm', 'services-mobile-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-gallery.png').replace('m2w-mobile-demo.webm', 'm2w-services.png').replace('mobile-demo.webm', 'services.png')}" alt="${projectId === 'pjpressure' ? 'Gallery Section' : 'Services Section'}" class="nav-thumbnail-mobile">
-                                        <span class="nav-label-mobile">${projectId === 'pjpressure' ? 'Gallery' : 'Services'}</span>
+                    <!-- Mobile Screenshot Tab -->
+                    <div id="mobile-${projectId}" class="tab-content" style="display: ${defaultTab === 'mobile' ? 'block' : 'none'};">
+                        <div class="flex flex-col md:flex-row justify-center items-start gap-4 md:gap-6">
+                            <!-- Phone Frame with Scrolling -->
+                            <div class="phone-frame-container">
+                                <div class="bg-gray-900 rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-2xl">
+                                    <div class="bg-black rounded-[1.5rem] md:rounded-[2.5rem] overflow-y-auto overflow-x-hidden phone-screen">
+                                        <img src="${project.screenshots ? project.screenshots[0].image.replace('-card.png', '-mobile-view.png').replace('-desktop-view.png', '-mobile-view.png') : project.cardImage}" alt="Mobile Screenshot" class="w-full clickable-screenshot" id="mobile-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-sm text-gray-500 mt-3 text-center">Mobile experience • 375x812 • Click screenshot to visit live site</p>
+
+                            <!-- Navigation Thumbnails -->
+                            <div class="mobile-nav-sidebar w-full md:w-auto">
+                                ${project.screenshots ? project.screenshots.map((screenshot, index) => `
+                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${screenshot.image.replace('-card.png', '-mobile-view.png').replace('-desktop-view.png', '-mobile-view.png')}')">
+                                        <img src="${screenshot.image}" alt="${screenshot.title}" class="nav-thumbnail-mobile">
+                                        <span class="nav-label-mobile">${screenshot.title}</span>
+                                    </div>
+                                `).join('') : `
+                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.cardImage}')">
+                                        <img src="${project.cardImage}" alt="Project Image" class="nav-thumbnail-mobile">
+                                        <span class="nav-label-mobile">Project</span>
+                                    </div>
+                                `}
+                            </div>
                         </div>
-                    ` : ''}
-                    
+                        <p class="text-sm text-gray-500 mt-3 text-center">Mobile experience • 375x812 • Click screenshot to visit live site</p>
+                    </div>
                 </div>
             </div>
         ` : `
