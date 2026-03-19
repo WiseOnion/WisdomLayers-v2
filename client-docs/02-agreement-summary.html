@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WisdomLayers Project Summary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            margin: 0.75in;
+            size: letter;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            font-size: 11pt;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .screen-wrapper {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        /* ── COVER PAGE ── */
+        .cover-page {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            padding: 80px 60px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            page-break-after: always;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 420px;
+            height: 420px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cover-page::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cover-logo-wrap {
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo-wrap img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+
+        .cover-company-name {
+            font-size: 2.4em;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .cover-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 10px 0 40px 0;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        .cover-info-box {
+            background: rgba(255,255,255,0.97);
+            border-radius: 16px;
+            padding: 40px 44px;
+            width: 100%;
+            max-width: 560px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        .cover-info-box h2 {
+            color: #0d9488;
+            font-size: 1.35em;
+            font-weight: 700;
+            margin-bottom: 28px;
+            border: none;
+            text-align: left;
+        }
+
+        .info-field {
+            text-align: left;
+            margin: 18px 0;
+        }
+
+        .info-field label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+        }
+
+        .cover-fill-line {
+            border-bottom: 2px solid rgba(13,148,136,0.5);
+            min-height: 28px;
+            margin-top: 4px;
+            width: 100%;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .package-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .package-checkboxes label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 0.97em;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .package-checkboxes input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #0d9488;
+            cursor: pointer;
+        }
+
+        .cover-tagline {
+            margin-top: 36px;
+            font-size: 0.97em;
+            opacity: 0.88;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        /* ── CONTENT ── */
+        .content {
+            padding: 58px 60px;
+        }
+
+        /* ── HEADINGS ── */
+        h2 {
+            color: #0d9488;
+            font-size: 1.7em;
+            font-weight: 700;
+            margin: 48px 0 22px 0;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0d9488;
+        }
+
+        h3 {
+            color: #1e293b;
+            font-size: 1.15em;
+            font-weight: 600;
+            margin: 22px 0 10px 0;
+        }
+
+        p { margin: 10px 0; }
+
+        ul, ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 8px 0;
+            line-height: 1.75;
+        }
+
+        /* ── PACKAGE BOXES ── */
+        .package-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border: 1.5px solid #14b8a6;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin: 22px 0;
+            page-break-inside: avoid;
+        }
+
+        .package-box h3 {
+            color: #0d9488;
+            margin: 0 0 14px 0;
+            border-bottom: 1.5px solid #a7f3d0;
+            padding-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .package-box strong { color: #0d9488; }
+
+        .package-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .package-box ul li::before {
+            content: '- ';
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        /* ── COLORED BOXES ── */
+        .info-box {
+            background: #dbeafe;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border-left: 4px solid #3b82f6;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        .info-box h3, .info-box p, .info-box li { color: #1e40af; }
+        .info-box h3 { margin-bottom: 8px; font-size: 1.02em; }
+
+        .success-box {
+            background: #d1fae5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        .success-box h3, .success-box p, .success-box li { color: #065f46; }
+        .success-box h3 { margin-bottom: 8px; font-size: 1.02em; }
+
+        .warning-box {
+            background: #fef3c7;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border-left: 4px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        .warning-box h3, .warning-box p, .warning-box li { color: #78350f; }
+        .warning-box h3 { margin-bottom: 8px; font-size: 1.02em; }
+
+        /* ── CHECKBOX INPUTS ── */
+        .check-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .check-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #0d9488;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* ── TABLE ── */
+        .table-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin: 22px 0;
+            page-break-inside: avoid;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color: white;
+            padding: 13px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        tbody td {
+            padding: 13px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+
+        tbody tr.highlight-row {
+            background: #f0fdfa;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── TIMELINE FILL-IN ── */
+        .timeline-box {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        .timeline-box p {
+            margin: 12px 0;
+            color: #1e293b;
+        }
+
+        .fill-line {
+            display: inline-block;
+            border-bottom: 2px solid #0d9488;
+            width: 220px;
+            vertical-align: bottom;
+            margin-left: 6px;
+        }
+
+        /* ── STEPS LIST ── */
+        ol.steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ol.steps li {
+            counter-increment: step-counter;
+            margin: 18px 0;
+            padding-left: 58px;
+            position: relative;
+            font-size: 1.02em;
+            color: #1e293b;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+        }
+
+        ol.steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 3px 10px rgba(13,148,136,0.3);
+        }
+
+        /* ── CONTACT BOX ── */
+        .contact-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border: 1.5px solid #14b8a6;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin: 28px 0;
+            page-break-inside: avoid;
+        }
+
+        .contact-box h3 {
+            color: #0d9488;
+            margin: 0 0 14px 0;
+            font-size: 1.1em;
+        }
+
+        /* ── SIGNATURE SECTION ── */
+        .signature-section {
+            margin-top: 44px;
+            padding: 32px 36px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px solid #cbd5e1;
+            page-break-inside: avoid;
+        }
+
+        .signature-section h2 {
+            margin-top: 0;
+            color: #0d9488;
+            border: none;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .sig-intro {
+            color: #475569;
+            font-size: 0.97em;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .sig-note {
+            color: #64748b;
+            font-size: 0.88em;
+            font-style: italic;
+            margin-bottom: 28px;
+        }
+
+        .sig-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 24px;
+        }
+
+        .sig-block h3 {
+            color: #0d9488;
+            font-size: 1em;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid #1e293b;
+            min-height: 40px;
+            margin: 20px 0 8px 0;
+        }
+
+        .sig-label {
+            color: #64748b;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .sig-prefilled {
+            border-bottom: 2px solid #1e293b;
+            min-height: 40px;
+            margin: 20px 0 8px 0;
+            padding: 6px 0;
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        /* ── CTA BOX ── */
+        .cta-box {
+            text-align: center;
+            margin-top: 44px;
+            padding: 40px;
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color: white;
+            border-radius: 12px;
+            page-break-inside: avoid;
+        }
+
+        .cta-box p:first-child {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cta-box p:last-child {
+            font-size: 1.05em;
+            opacity: 0.92;
+        }
+
+        /* ── FOOTER ── */
+        .doc-footer {
+            margin-top: 44px;
+            padding-top: 28px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .doc-footer p {
+            font-size: 0.87em;
+            color: #64748b;
+            margin: 4px 0;
+        }
+
+        /* ── PAGE BREAK ── */
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media screen {
+            .page-break {
+                border-top: 2px dashed #cbd5e1;
+                margin: 50px 0 0 0;
+                padding-top: 50px;
+            }
+        }
+
+        /* ── PRINT ── */
+        @media print {
+            body { background: white; }
+            .screen-wrapper { max-width: 100%; margin: 0; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .cover-page { page-break-after: always; }
+            .cover-page::before, .cover-page::after { display: none; }
+            h2, h3 { page-break-after: avoid; }
+            .package-box, .info-box, .success-box, .warning-box,
+            .contact-box, .signature-section, .table-wrapper, .timeline-box { page-break-inside: avoid; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 680px) {
+            .content { padding: 36px 24px; }
+            .cover-page { padding: 60px 28px; }
+            .cover-company-name { font-size: 2em; }
+            .sig-grid { grid-template-columns: 1fr; gap: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-wrapper">
+        <div class="container">
+
+            <!-- ══════════════════════════════════════
+                 COVER PAGE
+            ══════════════════════════════════════ -->
+            <div class="cover-page">
+                <div class="cover-logo-wrap">
+                    <img src="images/Logo.png" alt="WisdomLayers">
+                </div>
+                <div class="cover-company-name">WisdomLayers</div>
+                <div class="cover-title">Project Summary</div>
+
+                <div class="cover-info-box">
+                    <h2>Client Information</h2>
+                    <div class="info-field">
+                        <label>Client Name</label>
+                        <div class="cover-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="info-field">
+                        <label>Business Name (if applicable)</label>
+                        <div class="cover-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="info-field">
+                        <label>Project Start Date</label>
+                        <div class="cover-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="info-field">
+                        <label>Selected Package</label>
+                        <div class="package-checkboxes">
+                            <label><input type="checkbox"> Starter ($499)</label>
+                            <label><input type="checkbox"> Professional ($799)</label>
+                            <label><input type="checkbox"> Premium ($1,199)</label>
+                            <label><input type="checkbox"> Custom (quote)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="cover-tagline">This document provides a summary of your project scope and terms.<br>
+                The complete and binding terms are contained in the signed Web Development Agreement.</p>
+            </div>
+
+            <!-- ══════════════════════════════════════
+                 CONTENT PAGES
+            ══════════════════════════════════════ -->
+            <div class="content">
+
+                <!-- Important Notice -->
+                <div class="warning-box">
+                    <h3>Important Notice: This Document Is a Summary Only</h3>
+                    <p>Please review the complete Web Development Agreement for all binding terms and conditions. This Project Summary is provided for reference and convenience only and does not constitute a contract.</p>
+                </div>
+
+                <!-- Package Overview -->
+                <h2>Package Overview</h2>
+
+                <div class="package-box">
+                    <h3>STARTER — $499</h3>
+                    <p><strong>Designed for:</strong> Small businesses requiring a professional online presence</p>
+                    <p><strong>Deliverables Include:</strong></p>
+                    <ul>
+                        <li>3 to 5 custom pages (Home, About, Services, Contact)</li>
+                        <li>Mobile-responsive design</li>
+                        <li>Basic SEO (page titles, meta descriptions, image alt text)</li>
+                        <li>Contact form with email notifications</li>
+                        <li>Google Maps integration (if applicable)</li>
+                        <li>Collaborative development with ongoing feedback opportunities</li>
+                        <li>1 month post-launch support</li>
+                        <li>Delivery as hosted website or downloadable source files</li>
+                    </ul>
+                    <p><strong>Estimated Timeline:</strong> 1 to 2 weeks from deposit and complete content delivery</p>
+                    <p><strong>Payment Structure:</strong> $249.50 deposit | $249.50 upon completion</p>
+                </div>
+
+                <div class="package-box">
+                    <h3>PROFESSIONAL — $799</h3>
+                    <p><strong>Designed for:</strong> Growing businesses requiring advanced features and capabilities</p>
+                    <p><strong>Includes all Starter Package deliverables, plus:</strong></p>
+                    <ul>
+                        <li>6 to 10 custom pages</li>
+                        <li>Advanced SEO (Google Analytics, Search Console, keyword research, schema markup)</li>
+                        <li>Advanced animations and interactive elements</li>
+                        <li>CMS integration for client-managed content updates</li>
+                        <li>Blog or portfolio section</li>
+                        <li>Advanced forms and social media integration</li>
+                        <li>2 months post-launch support</li>
+                    </ul>
+                    <p><strong>Estimated Timeline:</strong> 2 to 3 weeks from deposit and complete content delivery</p>
+                    <p><strong>Payment Structure:</strong> $399.50 deposit | $399.50 upon completion</p>
+                </div>
+
+                <div class="package-box">
+                    <h3>PREMIUM — $1,199</h3>
+                    <p><strong>Designed for:</strong> Businesses requiring advanced functionality and integrations</p>
+                    <p><strong>Includes all Professional Package deliverables, plus:</strong></p>
+                    <ul>
+                        <li>10 or more custom pages</li>
+                        <li>Booking system integration</li>
+                        <li>Basic e-commerce functionality (up to 10 products)</li>
+                        <li>Member login areas or custom features</li>
+                        <li>Priority support during development</li>
+                        <li>3 months post-launch support</li>
+                    </ul>
+                    <p><strong>Estimated Timeline:</strong> 3 to 4 weeks from deposit and complete content delivery</p>
+                    <p><strong>Payment Structure:</strong> $599.50 deposit | $599.50 upon completion</p>
+                </div>
+
+                <div class="package-box">
+                    <h3>CUSTOM — Quote Required</h3>
+                    <p><strong>Designed for:</strong> Projects with specialized or complex requirements</p>
+                    <p><strong>Available Options:</strong></p>
+                    <ul>
+                        <li>Landing pages: Starting at $500</li>
+                        <li>Full e-commerce stores: Starting at $2,500</li>
+                        <li>Complex web applications</li>
+                        <li>Custom third-party integrations (APIs, databases, user portals)</li>
+                        <li>Up to 6 months post-launch support (based on project scope)</li>
+                    </ul>
+                    <p><strong>Estimated Timeline:</strong> Determined following consultation (typically 4 to 8 weeks)</p>
+                    <p><strong>Payment Structure:</strong> 50% deposit | 50% upon completion</p>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- Payment Terms -->
+                <h2>Payment Terms</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Deposit (50%)</strong></td>
+                                <td>$_____________</td>
+                                <td>Upon contract execution</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Final Payment (50%)</strong></td>
+                                <td>$_____________</td>
+                                <td>Upon completion, prior to launch</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>Total Project Cost</strong></td>
+                                <td><strong>$_____________</strong></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>Accepted Payment Methods:</strong> PayPal, Bank Transfer, CashApp</p>
+
+                <div class="warning-box">
+                    <h3>Important Payment Information</h3>
+                    <ul>
+                        <li>All deposits are non-refundable once work commences, including planning, design drafts, or any development activity.</li>
+                        <li>Final payments overdue by 14 or more days may incur a <strong>$50 per week late fee</strong> plus 1.5% monthly interest.</li>
+                        <li>Source files will not be transferred and the website will not launch until full payment is received and cleared.</li>
+                    </ul>
+                </div>
+
+                <!-- Optional Services -->
+                <h2>Optional Services</h2>
+
+                <div class="package-box">
+                    <h3>Domain Purchase Setup — $35 One-Time Fee</h3>
+                    <p>Upon selection, WisdomLayers will perform the following on behalf of the Client:</p>
+                    <ul>
+                        <li>Domain research and availability verification</li>
+                        <li>Domain purchase processing</li>
+                        <li>DNS configuration and setup</li>
+                        <li>Hosting connection and configuration</li>
+                        <li>Full account access transferred to Client upon completion</li>
+                    </ul>
+                    <p>The Client retains full domain ownership at all times. The domain registration cost plus the $35 setup fee will be invoiced prior to purchase.</p>
+                    <p style="margin-top: 18px;">
+                        <label class="check-label"><input type="checkbox"> Yes, purchase my domain on my behalf (domain cost + $35 setup fee)</label>
+                        <label class="check-label"><input type="checkbox"> No, I will purchase and manage my own domain</label>
+                    </p>
+                </div>
+
+                <div class="package-box">
+                    <h3>Domain Renewal Management — $45 Per Year</h3>
+                    <p>WisdomLayers will manage domain renewal to prevent expiration and service interruption:</p>
+                    <ul>
+                        <li>Track domain expiration dates</li>
+                        <li>Provide 1 to 2 email reminders approximately 30 days in advance</li>
+                        <li>Process renewals upon Client authorization</li>
+                        <li>Serve as a single point of contact for domain matters</li>
+                    </ul>
+                    <p>The Client retains full domain ownership at all times.</p>
+                    <p style="margin-top: 18px;">
+                        <label class="check-label"><input type="checkbox"> Yes, I want Domain Renewal Management ($45 per year)</label>
+                        <label class="check-label"><input type="checkbox"> No, I will manage my own domain renewal</label>
+                    </p>
+                </div>
+
+                <div class="package-box">
+                    <h3>Content Migration — Quote Required</h3>
+                    <p>If the Client has an existing website with content to be transferred:</p>
+                    <ul>
+                        <li>Assessment of existing content volume and complexity</li>
+                        <li>Custom quote provided based on specific project needs</li>
+                        <li>Must be requested prior to project commencement</li>
+                    </ul>
+                    <p style="margin-top: 18px;">
+                        <label class="check-label"><input type="checkbox"> Yes, I need content migration assistance (custom quote required)</label>
+                        <label class="check-label"><input type="checkbox"> No, this project starts fresh</label>
+                    </p>
+                </div>
+
+                <div class="package-box">
+                    <h3>Expedited Delivery — 25% Additional Fee</h3>
+                    <p>Rush delivery is available subject to Developer availability:</p>
+                    <ul>
+                        <li>Accelerated timeline (subject to availability)</li>
+                        <li>25% additional fee applied to total project cost</li>
+                        <li>Must be agreed upon in writing prior to commencement</li>
+                    </ul>
+                    <p style="margin-top: 18px;">
+                        <label class="check-label"><input type="checkbox"> Yes, I require expedited delivery (+25% of project cost)</label>
+                        <label class="check-label"><input type="checkbox"> No, standard timeline is acceptable</label>
+                    </p>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- Project Timeline -->
+                <h2>Project Timeline</h2>
+
+                <div class="timeline-box">
+                    <p><strong>Estimated Start Date:</strong> <span class="fill-line">&nbsp;</span></p>
+                    <p><strong>Estimated Completion Date:</strong> <span class="fill-line">&nbsp;</span></p>
+                    <p><strong>Estimated Launch Date:</strong> <span class="fill-line">&nbsp;</span> (following receipt of final payment)</p>
+                    <p><strong>Support Period End Date:</strong> <span class="fill-line">&nbsp;</span> (1 to 3 months post-launch, per package)</p>
+                </div>
+
+                <div class="info-box">
+                    <p>Note: Estimated timelines may be extended if content, feedback, or payment is delayed beyond 30 days. The Client will be notified promptly of any adjustments.</p>
+                </div>
+
+                <!-- Communication -->
+                <h2>Communication and Client Responsibilities</h2>
+
+                <p><strong>To maintain the project schedule, the Client must provide the following in a timely manner:</strong></p>
+                <ul>
+                    <li>All content (written copy, images, logos) in final form prior to development commencement</li>
+                    <li>Timely feedback within 5 to 10 business days of each milestone delivery</li>
+                    <li>Access to domain, hosting, and any required third-party platforms</li>
+                    <li>Written approval at all designated milestones</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h3>30-Day Communication Policy</h3>
+                    <p>If WisdomLayers does not receive responses or required materials within <strong>30 days</strong> after two documented contact attempts, WisdomLayers reserves the right to pause or terminate the project. All payments received for completed work will be retained.</p>
+                    <p style="margin-top: 12px;"><strong>Timely communication ensures your project remains on schedule and is launched as efficiently as possible.</strong></p>
+                </div>
+
+                <!-- What You Need to Provide -->
+                <h2>Required Materials Checklist</h2>
+
+                <div class="success-box">
+                    <h3>Prior to Development Commencement</h3>
+                    <label class="check-label"><input type="checkbox"> Written copy for all pages</label>
+                    <label class="check-label"><input type="checkbox"> Images and photographs (high resolution preferred)</label>
+                    <label class="check-label"><input type="checkbox"> Logo and brand colors (hexadecimal codes preferred)</label>
+                    <label class="check-label"><input type="checkbox"> Domain name (purchased independently, or via our $35 setup service)</label>
+                    <label class="check-label"><input type="checkbox"> Hosting account access credentials</label>
+                    <label class="check-label"><input type="checkbox"> Content from existing website (if applicable — subject to migration quote)</label>
+                </div>
+
+                <div class="success-box">
+                    <h3>During Development</h3>
+                    <label class="check-label"><input type="checkbox"> Timely feedback (within 5 to 10 business days of each milestone)</label>
+                    <label class="check-label"><input type="checkbox"> Written approval at designated milestones</label>
+                    <label class="check-label"><input type="checkbox"> Written final approval prior to launch</label>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- Post-Launch Support -->
+                <h2>Post-Launch Support</h2>
+
+                <div class="success-box">
+                    <h3>During Support Period — No Charge</h3>
+                    <ul>
+                        <li>Bug corrections (broken links, display issues, form failures)</li>
+                        <li>Minor text updates (telephone numbers, business hours, typographical corrections)</li>
+                        <li>Image replacements (same-size substitutions)</li>
+                        <li>Minor styling adjustments</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h3>During Support Period — Billable</h3>
+                    <ul>
+                        <li>Medium changes: <strong>$150</strong> (new sections, advanced forms, layout modifications)</li>
+                        <li>Large changes: <strong>$300+</strong> (new pages, new features, integrations)</li>
+                    </ul>
+                </div>
+
+                <h3>After Support Period Expires</h3>
+
+                <div class="info-box">
+                    <h3>Option 1 — Pay Per Change (Default)</h3>
+                    <ul>
+                        <li>Small changes: $50 each</li>
+                        <li>Medium changes: $150 each</li>
+                        <li>Large changes: $300+ each</li>
+                        <li>No monthly commitment required</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h3>Option 2 — Monthly Retainer</h3>
+                    <ul>
+                        <li>$150 per month</li>
+                        <li>Includes 3 small changes per month</li>
+                        <li>Priority 24-hour response time</li>
+                        <li>Monthly website health check</li>
+                        <li>Medium and large changes billed separately</li>
+                        <li>Cancellable with 30 days written notice</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <p>WisdomLayers will email the Client <strong>two weeks before the support period expires</strong> to discuss available options. If no response is received within 14 days, the account will automatically default to pay-per-change pricing.</p>
+                </div>
+
+                <!-- What Happens Next -->
+                <h2>Next Steps</h2>
+
+                <ol class="steps">
+                    <li>Review and execute the complete Web Development Agreement</li>
+                    <li>Submit deposit payment ($________) via PayPal, Bank Transfer, or CashApp</li>
+                    <li>Submit all required content and materials by email to contact@wisdomlayers.com</li>
+                    <li>Development commences within 2 business days of deposit confirmation</li>
+                    <li>Receive regular progress updates throughout the development phase</li>
+                    <li>Review the completed website and provide written approval</li>
+                    <li>Submit final payment ($________)</li>
+                    <li>Website launches and the post-launch support period begins</li>
+                </ol>
+
+                <!-- Contact Box -->
+                <div class="contact-box">
+                    <h3>Contact Information</h3>
+                    <p><strong>WisdomLayers</strong><br>
+                    Fayetteville, NC<br>
+                    Fayetteville, NC 28314</p>
+                    <p style="margin-top: 10px;"><strong>Email:</strong> contact@wisdomlayers.com<br>
+                    <strong>Website:</strong> wisdomlayers.com</p>
+                </div>
+
+                <!-- Reminder -->
+                <div class="info-box" style="text-align: center;">
+                    <p><strong>This summary is provided for your convenience and reference only.</strong></p>
+                    <p>The complete and binding terms of this engagement are contained in the signed Web Development Agreement.</p>
+                </div>
+
+                <!-- Questions -->
+                <div class="warning-box" style="text-align: center;">
+                    <p style="font-size: 1.05em; font-weight: 700;">Questions?</p>
+                    <p>Please contact WisdomLayers at contact@wisdomlayers.com at any time. We are committed to ensuring this process is clear and well-organized.</p>
+                </div>
+
+                <!-- Signature Section -->
+                <div class="signature-section">
+                    <h2>Client Acknowledgment</h2>
+                    <p class="sig-intro">By signing below, the undersigned acknowledges receipt and review of this Project Summary and understands that the complete and binding terms are contained in the Web Development Agreement.</p>
+                    <p class="sig-note">This acknowledgment does not constitute a binding contract.</p>
+
+                    <div class="sig-grid">
+                        <!-- CLIENT -->
+                        <div class="sig-block">
+                            <h3>Client</h3>
+                            <p><strong>Signature:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Client Signature</p>
+
+                            <p style="margin-top: 22px;"><strong>Printed Name:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Print Full Legal Name</p>
+
+                            <p style="margin-top: 22px;"><strong>Date:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Date Signed</p>
+                        </div>
+
+                        <!-- WISDOMLAYERS REPRESENTATIVE -->
+                        <div class="sig-block">
+                            <h3>WisdomLayers Representative</h3>
+                            <p><strong>Signature:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">WisdomLayers Representative Signature</p>
+
+                            <p style="margin-top: 22px;"><strong>Printed Name:</strong></p>
+                            <div class="sig-prefilled">Wisdom Johnson — WisdomLayers</div>
+                            <p class="sig-label">Print Full Name</p>
+
+                            <p style="margin-top: 22px;"><strong>Date:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Date Signed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Box -->
+                <div class="cta-box">
+                    <p>Thank you for choosing WisdomLayers.</p>
+                    <p>We look forward to building something exceptional for you.</p>
+                </div>
+
+                <!-- Doc Footer -->
+                <div class="doc-footer">
+                    <p>WisdomLayers Project Summary — Version 2.0 | 2026</p>
+                    <p>Fayetteville, NC | contact@wisdomlayers.com | wisdomlayers.com</p>
+                    <p style="margin-top:6px; font-size:0.82em;">This document is governed by the laws of the State of North Carolina. For binding terms, refer to the signed Web Development Agreement.</p>
+                </div>
+
+            </div><!-- /content -->
+        </div><!-- /container -->
+    </div><!-- /screen-wrapper -->
+</body>
+</html>

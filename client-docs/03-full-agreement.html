@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WisdomLayers Web Development Agreement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            margin: 0.75in;
+            size: letter;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.75;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            font-size: 10.5pt;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .screen-wrapper {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            padding: 52px 60px 44px 60px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 320px;
+            height: 320px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+            pointer-events: none;
+        }
+
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-wrap img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+
+        .header-company {
+            font-size: 1.1em;
+            font-weight: 600;
+            opacity: 0.92;
+            margin: 0 0 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.6em;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 1.05em;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 24px;
+        }
+
+        .header-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+            margin-top: 8px;
+        }
+
+        .header-field {
+            background: rgba(255,255,255,0.18);
+            border-radius: 8px;
+            padding: 10px 16px;
+            min-width: 200px;
+        }
+
+        .header-field .field-label {
+            font-size: 0.78em;
+            opacity: 0.85;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .header-fill-line {
+            border-bottom: 1.5px solid rgba(255,255,255,0.7);
+            min-height: 28px;
+            margin-top: 4px;
+            width: 100%;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── CONTENT ── */
+        .content {
+            padding: 52px 60px;
+        }
+
+        /* ── TABLE OF CONTENTS ── */
+        .toc {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px 36px;
+            margin-bottom: 44px;
+            page-break-inside: avoid;
+        }
+
+        .toc h2 {
+            color: #0d9488;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin: 0 0 18px 0;
+            padding: 0 0 12px 0;
+            border-bottom: 2px solid #0d9488;
+        }
+
+        .toc ol {
+            padding-left: 24px;
+            column-count: 2;
+            column-gap: 36px;
+        }
+
+        .toc li {
+            margin: 6px 0;
+            font-size: 0.95em;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* ── SECTION HEADINGS ── */
+        .section {
+            margin: 40px 0;
+        }
+
+        .section-heading {
+            color: #0d9488;
+            font-size: 1.55em;
+            font-weight: 700;
+            margin: 0 0 18px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #0d9488;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            color: #1e293b;
+            font-size: 1.05em;
+            font-weight: 700;
+            margin: 20px 0 8px 0;
+        }
+
+        p {
+            margin: 9px 0;
+            color: #475569;
+        }
+
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 7px 0;
+            line-height: 1.7;
+        }
+
+        /* ── SUBSECTION NUMBERING ── */
+        .subsection {
+            margin: 16px 0;
+        }
+
+        .sub-num {
+            font-weight: 700;
+            color: #0d9488;
+            margin-right: 4px;
+        }
+
+        /* ── COLORED BOXES ── */
+        .info-box {
+            background: #dbeafe;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border-left: 4px solid #3b82f6;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            page-break-inside: avoid;
+        }
+
+        .info-box p, .info-box li { color: #1e40af; }
+        .info-box h3 { color: #1e40af; margin-bottom: 6px; }
+
+        .success-box {
+            background: #d1fae5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            page-break-inside: avoid;
+        }
+
+        .success-box p, .success-box li { color: #065f46; }
+        .success-box h3 { color: #065f46; margin-bottom: 6px; }
+
+        .warning-box {
+            background: #fef3c7;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            border-left: 4px solid #f59e0b;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            page-break-inside: avoid;
+        }
+
+        .warning-box p, .warning-box li { color: #78350f; }
+        .warning-box h3 { color: #92400e; margin-bottom: 6px; }
+
+        /* ── TABLE ── */
+        .table-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin: 18px 0;
+            page-break-inside: avoid;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.92em;
+        }
+
+        tbody td {
+            padding: 11px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── SIGNATURE SECTION ── */
+        .signature-section {
+            margin-top: 44px;
+            padding: 34px 38px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px solid #cbd5e1;
+            page-break-inside: avoid;
+        }
+
+        .signature-section h2 {
+            color: #0d9488;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            border: none;
+        }
+
+        .signature-section > p {
+            color: #475569;
+            margin-bottom: 28px;
+        }
+
+        .sig-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 44px;
+            margin-top: 28px;
+        }
+
+        .sig-block h3 {
+            color: #0d9488;
+            font-size: 1em;
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid #1e293b;
+            min-height: 40px;
+            margin: 20px 0 8px 0;
+        }
+
+        .sig-label {
+            font-size: 0.82em;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .sig-prefilled {
+            border-bottom: 2px solid #1e293b;
+            min-height: 40px;
+            margin: 20px 0 8px 0;
+            padding: 6px 0;
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .sig-fine-print {
+            font-size: 0.82em;
+            color: #94a3b8;
+            margin-top: 22px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* ── PAGE BREAKS ── */
+        .page-break {
+            break-before: page;
+            page-break-before: always;
+        }
+
+        @media screen {
+            .page-break {
+                border-top: 2px dashed #cbd5e1;
+                margin: 50px 0 0 0;
+                padding-top: 50px;
+            }
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: #f8fafc;
+            padding: 24px 60px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.85em;
+            color: #64748b;
+            margin: 3px 0;
+        }
+
+        .footer strong { color: #1e293b; }
+
+        /* ── PRINT ── */
+        @media print {
+            body { background: white; }
+            .screen-wrapper { max-width: 100%; margin: 0; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .header::before { display: none; }
+            .header { padding: 28px 50px; }
+            .content { padding: 32px 50px; }
+            .section-heading, h3 { page-break-after: avoid; }
+            .info-box, .success-box, .warning-box, .table-wrapper, .signature-section { page-break-inside: avoid; }
+            .page-break { display: none; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 680px) {
+            .content { padding: 34px 24px; }
+            .header { padding: 40px 26px; }
+            .header h1 { font-size: 1.9em; }
+            .header-fields { flex-direction: column; }
+            .toc ol { column-count: 1; }
+            .sig-grid { grid-template-columns: 1fr; gap: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-wrapper">
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="header">
+                <div class="logo-wrap">
+                    <img src="images/Logo.png" alt="WisdomLayers">
+                </div>
+                <div class="header-company">WisdomLayers — Web Development Services</div>
+                <h1>Web Development Agreement</h1>
+                <p class="subtitle">Professional Services Contract — Please Read Carefully Before Signing</p>
+                <div class="header-fields">
+                    <div class="header-field">
+                        <div class="field-label">Effective Date</div>
+                        <div class="header-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="header-field">
+                        <div class="field-label">Client Name</div>
+                        <div class="header-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="header-field">
+                        <div class="field-label">Project / Package</div>
+                        <div class="header-fill-line">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <!-- TABLE OF CONTENTS -->
+                <div class="toc">
+                    <h2>Table of Contents</h2>
+                    <ol>
+                        <li>Scope of Services</li>
+                        <li>Third-Party Services</li>
+                        <li>Compensation and Payment Terms</li>
+                        <li>Project Timeline</li>
+                        <li>Client Responsibilities</li>
+                        <li>Client Approval and Launch</li>
+                        <li>Post-Launch Support</li>
+                        <li>Ownership and Intellectual Property</li>
+                        <li>Portfolio and Marketing Rights</li>
+                        <li>SEO Disclaimer</li>
+                        <li>Confidentiality</li>
+                        <li>Maintenance and Ongoing Services</li>
+                        <li>Termination</li>
+                        <li>Limitation of Liability</li>
+                        <li>Warranties and Disclaimers</li>
+                        <li>Indemnification</li>
+                        <li>Force Majeure</li>
+                        <li>Governing Law and Dispute Resolution</li>
+                        <li>Electronic Signatures</li>
+                        <li>Amendments</li>
+                        <li>Severability</li>
+                        <li>Entire Agreement</li>
+                    </ol>
+                </div>
+
+                <!-- SECTION 1 -->
+                <div class="section" id="s1">
+                    <h2 class="section-heading">1. Scope of Services</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">1.1 Service Description.</span> The Developer (WisdomLayers) agrees to provide custom website design and development services to the Client in accordance with the selected package and any additional terms agreed to in writing. All services are performed remotely unless otherwise agreed in writing by both parties.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">1.2 Package Specifications.</span> The following packages define the scope of deliverables:</p>
+
+                        <h3>1.2.1 Starter Package — $499</h3>
+                        <ul>
+                            <li>3 to 5 custom pages (e.g., Home, About, Services, Contact)</li>
+                            <li>Estimated timeline: 1 to 2 weeks from deposit and complete content delivery</li>
+                            <li>Mobile-responsive design with modern browser compatibility</li>
+                            <li>Basic SEO (page titles, meta descriptions, image alt text, basic accessibility)</li>
+                            <li>Contact form with email notifications</li>
+                            <li>Google Maps integration (if applicable)</li>
+                            <li>Collaborative development with structured feedback opportunities</li>
+                            <li>1 month post-launch support</li>
+                            <li>Delivery as hosted website or downloadable source files</li>
+                        </ul>
+
+                        <h3>1.2.2 Professional Package — $799</h3>
+                        <ul>
+                            <li>6 to 10 custom pages; estimated timeline: 2 to 3 weeks</li>
+                            <li>All Starter Package deliverables</li>
+                            <li>Advanced SEO: Google Analytics setup, Google Search Console, keyword research, schema markup</li>
+                            <li>Advanced animations and interactive elements</li>
+                            <li>CMS integration for client-managed content updates</li>
+                            <li>Blog or portfolio section</li>
+                            <li>Advanced forms and social media integration</li>
+                            <li>2 months post-launch support</li>
+                        </ul>
+
+                        <h3>1.2.3 Premium Package — $1,199</h3>
+                        <ul>
+                            <li>10 or more custom pages; estimated timeline: 3 to 4 weeks</li>
+                            <li>All Professional Package deliverables</li>
+                            <li>Booking system integration</li>
+                            <li>Basic e-commerce functionality (up to 10 products)</li>
+                            <li>Member login areas or custom features</li>
+                            <li>Priority support during development</li>
+                            <li>3 months post-launch support</li>
+                        </ul>
+
+                        <h3>1.2.4 Custom Package — Quote Required</h3>
+                        <ul>
+                            <li>Landing pages: Starting at $500</li>
+                            <li>Full e-commerce stores: Starting at $2,500</li>
+                            <li>Complex web applications and platforms</li>
+                            <li>Custom third-party integrations (APIs, databases, user portals)</li>
+                            <li>Estimated timeline: 4 to 8 weeks (determined following consultation)</li>
+                            <li>Up to 6 months post-launch support (based on project scope)</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">1.3 Minor vs. Major Revisions.</span> Minor revisions — including small text edits, color adjustments, image substitutions, and layout refinements within the agreed scope — are included throughout the development phase at no additional cost. Major revisions that alter the agreed scope, add new pages, or require significant rework constitute out-of-scope work and will be quoted separately in writing.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">1.4 Scope Change Management.</span> Any changes to the agreed scope must be submitted in writing and approved by both parties before implementation. A written quote shall be provided for all out-of-scope work prior to commencement. No verbal agreements regarding scope changes shall be binding under this Agreement.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">1.5 Out of Scope.</span> The following are expressly excluded unless separately agreed upon in writing: ongoing SEO campaigns or paid advertising management; server administration, security monitoring, or hosting management; development of third-party applications or plugins; content writing or professional photography; and any services not described in the selected package or a signed written amendment.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 2 -->
+                <div class="section" id="s2">
+                    <h2 class="section-heading">2. Third-Party Services</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">2.1 Client Responsibility.</span> The Client is solely responsible for procuring and maintaining all third-party services required for the website, including but not limited to domain registration, web hosting, payment processors, third-party APIs, and software plugins, unless an optional service described herein has been expressly selected.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">2.2 Optional: Domain Purchase Setup — $35 One-Time Fee.</span> Upon Client selection, the Developer will: (a) research and identify a suitable domain name; (b) process the domain purchase on Client's behalf; (c) configure DNS settings; (d) connect the domain to Client's hosting; and (e) transfer full account access to the Client upon completion. The domain registration cost plus a $35 setup fee will be invoiced prior to purchase. The Client retains full domain ownership at all times.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">2.3 Optional: Domain Renewal Management — $45 Per Year.</span> Upon Client selection, the Developer will: (a) track domain expiration dates; (b) provide 1 to 2 email reminders approximately 30 days in advance; and (c) process renewals on Client's behalf upon written authorization. The Client retains full domain ownership at all times. This service renews annually unless cancelled in writing with 30 days notice.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">2.4 Cost Reimbursement.</span> Any third-party costs incurred on the Client's behalf — including domain registration, stock photography, premium plugins, or other services — will be invoiced to the Client prior to purchase. The Developer shall not incur third-party costs without prior written approval from the Client.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">2.5 Third-Party Limitations.</span> The Developer is not responsible for failures, outages, security breaches, or policy changes of any third-party services. The Client acknowledges that third-party platforms operate under their own terms of service, which are outside the Developer's control.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- SECTION 3 -->
+                <div class="section" id="s3">
+                    <h2 class="section-heading">3. Compensation and Payment Terms</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.1 Payment Structure.</span> The total project fee shall be paid in two installments: (a) a <strong>50% deposit</strong> due upon contract execution, before any work commences; and (b) a <strong>50% final payment</strong> due upon project completion and prior to website launch. All amounts are denominated in U.S. dollars.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.2 Deposit Policy.</span> The deposit is non-refundable once work has commenced. "Work commencement" includes, without limitation, any discovery calls, planning sessions, design drafts, research, or development activity. In the event the Client cancels after work has commenced, all fees paid to date shall be forfeited and retained by the Developer as compensation for work performed.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.3 Additional Work Rates.</span> Work outside the agreed scope, or work performed during or after the support period for billable changes, will be charged as follows: Small changes — $50; Medium changes — $150; Large changes — $300 and above. Rates are subject to change upon 30 days written notice to the Client.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.4 Late Payment Consequences.</span> Final payments not received within 14 days of the invoice due date will incur a late fee of $50 per week. Outstanding balances will also accrue interest at 1.5% per month (18% per year), compounded monthly. Accounts unpaid after 30 days may be referred to a collections agency. The Client shall be responsible for all collection costs, including reasonable attorney fees. The Developer reserves the right to withhold project delivery, suspend website access, and pursue all available legal remedies for unpaid balances.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.5 Payment Disputes.</span> The Client must report any payment concerns or billing disputes in writing within 5 business days of the invoice date. Disputes submitted after this window may not be eligible for adjustment or credit.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.6 File Retention.</span> The Developer retains all project files, source code, and deliverables until full payment has been received and cleared. Website access credentials and source files will be transferred to the Client only after all outstanding balances are settled in full.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">3.7 Processing Fees.</span> The Client is responsible for any transaction or processing fees charged by the selected payment method (e.g., PayPal fees). Payments must be submitted in the full amount stated on the invoice.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 4 -->
+                <div class="section" id="s4">
+                    <h2 class="section-heading">4. Project Timeline</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">4.1 Timeline Estimates.</span> Timelines stated in Section 1.2 are good-faith estimates only. The Developer shall make reasonable efforts to deliver on schedule but does not guarantee completion by a specific date unless a firm deadline is agreed upon in writing and reflected in the project fee structure.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">4.2 Timeline Adjustments.</span> Delivery timelines may be extended due to: (a) delays in Client content delivery; (b) Client feedback delays beyond 5 to 10 business days; (c) scope changes requested by the Client; (d) technical issues outside the Developer's reasonable control; or (e) holidays or illness. The Developer will communicate any timeline changes to the Client promptly and in writing.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">4.3 Progress Updates.</span> The Developer will provide written progress updates at major milestones, or at minimum on a weekly basis during active development. The Client may request a status update at any time via email or through the Client Portal.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">4.4 Expedited Delivery.</span> Rush delivery is available at an additional fee of 25% of the total project cost. Expedited delivery must be agreed upon in writing before work begins and is subject to Developer availability at the time of the request.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">4.5 Client Communication Requirement.</span> If the Developer does not receive required content, feedback, or responses from the Client within 30 days after two documented contact attempts, the Developer reserves the right to pause or terminate the project pursuant to Section 13. All payments received to date shall be retained as compensation for work completed.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 5 -->
+                <div class="section" id="s5">
+                    <h2 class="section-heading">5. Client Responsibilities</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">5.1 Content Provision.</span> The Client shall provide all content required for the project — including but not limited to written copy, images, logos, videos, and documents — in a timely manner and in the formats specified by the Developer. All content must be provided in its final, production-ready form. The Developer bears no responsibility for delays resulting from incomplete or late content submission.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">5.2 Timely Feedback.</span> The Client agrees to review all deliverables and provide consolidated, actionable written feedback within 5 to 10 business days of each milestone delivery. Feedback submitted after this window may result in timeline adjustments at the Developer's discretion.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">5.3 Approval at Milestones.</span> The Client agrees to provide written approval at designated project milestones before the Developer proceeds to the next project phase. Verbal approvals are not binding under this Agreement.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">5.4 Domain and Hosting Access.</span> Where required, the Client agrees to provide timely access to domain registrar accounts, hosting control panels, FTP or SFTP credentials, and any other necessary platforms or accounts.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">5.5 Brand Guidelines.</span> The Client is responsible for providing any brand guidelines, style guides, or creative direction prior to or at the commencement of development. If no guidelines are provided, the Developer will apply reasonable creative judgment, subject to the Client's review and feedback during the development phase.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 6 -->
+                <div class="section" id="s6">
+                    <h2 class="section-heading">6. Client Approval and Launch</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">6.1 Review Period.</span> Upon completion of development, the Client will be provided a 10-business-day review period to inspect the website and submit consolidated written feedback. Failure to respond within this period may be treated as deemed acceptance of the work as delivered.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">6.2 Revision Policy.</span> The Developer will implement an unlimited number of revisions on items within the agreed scope during the development and review phases. Revisions that expand or alter the agreed scope will be quoted and billed as additional work per Section 3.3.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">6.3 Final Payment Before Launch.</span> The website shall not be launched until: (a) the Client has provided written approval of the completed work; and (b) the final 50% payment has been received and cleared in full. No exceptions shall be made to this requirement.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">6.4 Launch Process.</span> Upon receipt of final payment and written approval, the Developer will deploy the website to the Client's hosting environment. The post-launch support period commences on the date of deployment, as defined in Section 7.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- SECTION 7 -->
+                <div class="section" id="s7">
+                    <h2 class="section-heading">7. Post-Launch Support</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">7.1 Complimentary Support Includes.</span> During the support period, the Developer will provide the following at no additional charge: (a) bug corrections — broken links, display issues, form submission failures, browser rendering errors; (b) minor text updates — telephone numbers, business hours, addresses, typographical corrections; (c) image replacements — substituting existing images with same-size alternatives; and (d) minor styling adjustments — small color, spacing, or font modifications within the existing design.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">7.2 Support Period Durations.</span> Post-launch complimentary support periods by package: Starter — 1 month; Professional — 2 months; Premium — 3 months; Custom — up to 6 months (as specified in the project agreement). The support period commences on the date the website is launched.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">7.3 Billable Work During Support Period.</span> Work that falls outside the complimentary support scope will be billed even during the active support period: Medium changes (new sections, advanced forms, layout modifications) — $150; Large changes (new pages, new features, third-party integrations) — $300 and above. A written quote will be provided and approved before any billable work begins.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">7.4 Options After Support Period Expires.</span> After the support period expires, the Client may select one of the following: (a) <strong>Pay Per Change</strong> — Small $50, Medium $150, Large $300+, with no monthly commitment required; or (b) <strong>Monthly Retainer</strong> — $150 per month, includes 3 small changes per month, priority 24-hour response time, monthly website health check, medium and large changes billed separately, and cancellable upon 30 days written notice.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">7.5 Support Expiration Notice.</span> The Developer will email the Client 2 weeks before the support period ends to advise of available ongoing service options. If no response is received within 14 days of that notice, the account will automatically default to pay-per-change pricing. It is the Client's sole responsibility to maintain accurate contact information on file.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 8 -->
+                <div class="section" id="s8">
+                    <h2 class="section-heading">8. Ownership and Intellectual Property</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">8.1 Ownership During Project.</span> All work product, source code, design files, and deliverables remain the exclusive property of WisdomLayers until full payment is received and cleared. The Client has no rights to the work product, in whole or in part, prior to full payment.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">8.2 Ownership Transfer Upon Full Payment.</span> Upon receipt and clearance of full payment, WisdomLayers transfers full ownership of the final deliverable — including all HTML, CSS, JavaScript, and associated project assets created specifically for this engagement — to the Client. The Client may use, modify, and deploy the delivered work product without restriction. The Client may not resell or redistribute the delivered work product as a generic template, theme, or development asset to third parties without the Developer's prior written consent.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">8.3 Source Files Delivery.</span> Upon full payment clearance, the Developer will provide the Client with all relevant source files, assets, and deployment-ready code created specifically for this project.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">8.4 Developer's Retained Rights.</span> The Developer retains all rights to general methodologies, frameworks, code libraries, development techniques, and non-project-specific knowledge acquired or applied during the engagement. The Developer's proprietary tools and workflows are not transferred to the Client under any circumstances.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">8.5 Portfolio Rights.</span> WisdomLayers retains the right to display the completed work in its portfolio, website, social media, and marketing materials unless a written confidentiality agreement is in place. See Section 9 for confidentiality options.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 9 -->
+                <div class="section" id="s9">
+                    <h2 class="section-heading">9. Portfolio and Marketing Rights</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">9.1 Developer's Portfolio Rights.</span> The Developer reserves the right to display the completed project in its portfolio, website, social media accounts, and marketing materials as a representative sample of the Developer's work, unless the Client has executed a written confidentiality arrangement as described in Section 9.2.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">9.2 Confidentiality Option.</span> If the Client does not wish the completed project to appear in the Developer's portfolio or marketing materials, the Client may request a written confidentiality arrangement. A confidentiality fee, to be determined at the time of the request, will apply and must be paid in full before confidentiality protections take effect.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">9.3 Approval for Specific Promotional Use.</span> The Developer will seek Client approval before using project screenshots or specific project details in paid advertising or press materials. General portfolio display does not require separate written approval.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 10 -->
+                <div class="section" id="s10">
+                    <h2 class="section-heading">10. SEO Disclaimer</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">10.1 No Ranking Guarantees.</span> The Developer makes no guarantees, representations, or warranties regarding search engine rankings, organic traffic volumes, or specific positions in search engine results pages. SEO outcomes depend on numerous factors outside the Developer's control and cannot be predicted or guaranteed.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">10.2 Best Practices Implemented.</span> The Developer will implement SEO best practices as included in the selected package (e.g., page titles, meta descriptions, image alt text, schema markup, site speed optimization, mobile responsiveness). These practices improve the website's SEO readiness but do not guarantee rankings or traffic.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">10.3 External Factors.</span> Search engine algorithms, competitor activity, domain age, content quality, backlink profiles, and other external factors all influence SEO performance. The Client acknowledges that search engine rankings may fluctuate over time for reasons entirely unrelated to the Developer's work or the quality of the delivered website.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- SECTION 11 -->
+                <div class="section" id="s11">
+                    <h2 class="section-heading">11. Confidentiality</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">11.1 Mutual Confidentiality.</span> Both parties agree to maintain in strict confidence any proprietary, sensitive, or business information disclosed during the course of the project, including but not limited to business plans, financial data, pricing, technical specifications, and client data. Neither party shall disclose such information to third parties without the prior written consent of the disclosing party.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">11.2 Exceptions.</span> Confidentiality obligations do not apply to: (a) information already in the public domain through no breach by the receiving party; (b) information required to be disclosed by applicable law, regulation, or valid court order; or (c) disclosures made to legal counsel solely for the purpose of obtaining legal advice.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">11.3 Survival.</span> The confidentiality obligations set forth in this Section shall survive the termination of this Agreement for a period of 3 years.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 12 -->
+                <div class="section" id="s12">
+                    <h2 class="section-heading">12. Maintenance and Ongoing Services</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">12.1 Hosting and Domain.</span> Ongoing hosting and domain registration are the sole responsibility of the Client following the website launch, unless an optional management service has been expressly selected and paid for. The Developer bears no responsibility for website downtime resulting from hosting provider failures or domain expiration.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">12.2 Data Loss.</span> The Developer is not responsible for loss of Client data, files, or databases resulting from hosting provider failures, accidental deletion, security breaches, or hacking incidents after the website has been delivered and transferred to the Client. The Client is strongly encouraged to maintain regular, independent data backups.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">12.3 Update Notifications.</span> The Developer may notify the Client of significant updates to frameworks, CMS platforms, or security patches that could affect the website's functionality or security. Implementation of such updates after the support period constitutes additional paid work and will be quoted accordingly.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">12.4 Post-Support Changes.</span> After the support period expires, all maintenance, updates, and changes are available under the pay-per-change or monthly retainer options described in Section 7.4.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 13 -->
+                <div class="section" id="s13">
+                    <h2 class="section-heading">13. Termination</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">13.1 By Mutual Consent.</span> Either party may terminate this Agreement at any time by mutual written consent. The terms of any partial payments, deliverables, or outstanding work will be negotiated in good faith at the time of termination.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">13.2 By Client.</span> The Client may terminate this Agreement upon 30 days written notice to the Developer. Upon termination: (a) all deposits and payments made to date are non-refundable and forfeited; (b) the Client will be invoiced for any work completed that exceeds the deposit amount; and (c) no deliverables will be transferred until all outstanding balances are paid in full.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">13.3 By Developer.</span> The Developer may terminate this Agreement immediately upon written notice under the following circumstances: (a) non-payment of any invoice within 14 days of the due date; (b) Client communication failure as defined in Section 4.5; (c) Client requests the Developer create content that is illegal, defamatory, or in violation of third-party rights; or (d) any material breach of this Agreement by the Client.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">13.4 Effect of Termination.</span> Upon termination by the Developer for cause: (a) all work product and deliverables shall be withheld until all outstanding fees are paid in full; (b) the Client forfeits any deposits paid; and (c) the Developer retains the right to invoice for all work completed up to the date of termination.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">13.5 Support Termination.</span> Upon termination of this Agreement for any reason, all post-launch support obligations cease immediately unless a separate written agreement governing such support has been executed by both parties.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- SECTION 14 -->
+                <div class="section" id="s14">
+                    <h2 class="section-heading">14. Limitation of Liability</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">14.1 Maximum Liability.</span> WisdomLayers' total liability to the Client for any claim arising out of or related to this Agreement shall not exceed the total amount paid by the Client to WisdomLayers under this Agreement. This limitation applies regardless of the theory of liability, whether in contract, tort, or otherwise.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">14.2 No Indirect Damages.</span> WisdomLayers shall not be liable to the Client for any indirect, incidental, consequential, punitive, or special damages of any kind, including but not limited to loss of profits, loss of revenue, loss of business opportunity, or loss of goodwill, even if WisdomLayers has been advised of the possibility of such damages.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">14.3 Specific Exclusions.</span> WisdomLayers is not liable for: (a) data loss or corruption of any kind; (b) business interruption or lost revenue; (c) failures or unavailability of third-party services or platforms; (d) unauthorized access or security breaches to Client systems or accounts; or (e) the Client's failure to maintain appropriate data backups.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 15 -->
+                <div class="section" id="s15">
+                    <h2 class="section-heading">15. Warranties and Disclaimers</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">15.1 As-Is After Delivery.</span> Except as expressly set forth in this Agreement, the website and all deliverables are provided on an "as is" basis after the post-launch support period expires. The Developer makes no implied warranties of merchantability or fitness for a particular purpose beyond the scope of the active support period.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">15.2 No Continuous Operation Warranty.</span> The Developer does not warrant that the website will operate without interruption or error after the handoff date. Website uptime, speed, and performance are dependent on the Client's chosen hosting provider and are entirely outside the Developer's control following launch.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">15.3 Third-Party Services.</span> The Developer makes no warranties regarding the performance, availability, or reliability of any third-party platforms, APIs, or plugins integrated into the website.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">15.4 Browser and Device Compatibility.</span> The Developer warrants compatibility with current major browsers (Chrome, Firefox, Safari, Edge) and standard devices at the time of delivery. The Developer does not guarantee compatibility with future browser versions, operating system updates, or new devices released after the project delivery date.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 16 -->
+                <div class="section" id="s16">
+                    <h2 class="section-heading">16. Indemnification</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">16.1 By Client.</span> The Client agrees to indemnify, defend, and hold harmless WisdomLayers and its affiliates, officers, and agents from and against any and all claims, damages, losses, and expenses (including reasonable attorney's fees) arising from: (a) Client-supplied content, materials, or data; (b) the Client's use of the website after launch; (c) the Client's violation of any applicable law or third-party right; or (d) any misrepresentation by the Client in connection with this Agreement.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">16.2 By Developer.</span> The Developer agrees to indemnify the Client against third-party claims alleging that the Developer's original, custom-created work product (excluding Client-supplied content and third-party components) infringes the copyright of a third party.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 17 — FORCE MAJEURE -->
+                <div class="section" id="s17">
+                    <h2 class="section-heading">17. Force Majeure</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">17.1</span> Neither party shall be held liable for any delay or failure to perform obligations under this Agreement caused by circumstances beyond their reasonable control, including but not limited to natural disasters, internet outages, power failures, government actions, civil disturbances, pandemics, or acts of God. The affected party shall provide prompt written notice to the other party and shall use commercially reasonable efforts to resume performance as soon as practicable.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 18 — GOVERNING LAW -->
+                <div class="section" id="s18">
+                    <h2 class="section-heading">18. Governing Law and Dispute Resolution</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">18.1 Governing Law.</span> This Agreement shall be governed by and construed in accordance with the laws of the State of North Carolina, without regard to its conflict of law provisions.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">18.2 Dispute Resolution.</span> In the event of a dispute arising out of or relating to this Agreement, the parties agree to first attempt resolution in good faith through direct negotiation. If the dispute remains unresolved within 30 days of written notice, the parties agree to submit the matter to non-binding mediation in Cumberland County, North Carolina, before initiating any litigation.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">18.3 Jurisdiction.</span> Any legal action or proceeding not resolved through the above process shall be brought exclusively in the state or federal courts located in North Carolina. Both parties expressly consent to the personal jurisdiction of such courts.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 19 — ELECTRONIC SIGNATURES -->
+                <div class="section" id="s19">
+                    <h2 class="section-heading">19. Electronic Signatures</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">19.1</span> The parties agree that electronic signatures are legally binding and shall have the same force and effect as original handwritten signatures. This Agreement may be executed electronically, and any such electronic execution shall constitute a valid and enforceable agreement between the parties.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 20 — AMENDMENTS -->
+                <div class="section" id="s20">
+                    <h2 class="section-heading">20. Amendments</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">20.1</span> Any amendments or modifications to this Agreement must be made in writing and signed by authorized representatives of both parties. No oral statements, promises, or representations shall constitute an amendment to this Agreement. A written change order signed by both parties is required before any out-of-scope work commences.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 21 — SEVERABILITY -->
+                <div class="section" id="s21">
+                    <h2 class="section-heading">21. Severability</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">21.1</span> If any provision of this Agreement is found to be invalid, illegal, or unenforceable by a court of competent jurisdiction, that provision shall be modified to the minimum extent necessary to make it enforceable, or if modification is not possible, it shall be severed from this Agreement. The invalidity or unenforceability of any provision shall not affect the validity or enforceability of the remaining provisions, which shall remain in full force and effect.</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 22 — ENTIRE AGREEMENT -->
+                <div class="section" id="s22">
+                    <h2 class="section-heading">22. Entire Agreement</h2>
+
+                    <div class="subsection">
+                        <p><span class="sub-num">22.1</span> This Agreement constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior discussions, representations, negotiations, or agreements, whether written or oral. No prior or contemporaneous communication shall be binding unless expressly incorporated into this Agreement in writing and signed by both parties.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE BREAK -->
+                <div class="page-break"></div>
+
+                <!-- SIGNATURE SECTION -->
+                <div class="signature-section">
+                    <h2>Signatures</h2>
+                    <p>By signing below, both parties acknowledge that they have read, understood, and agree to all terms and conditions of this Web Development Agreement. This Agreement is governed by the laws of the State of North Carolina.</p>
+
+                    <div class="sig-grid">
+                        <!-- CLIENT -->
+                        <div class="sig-block">
+                            <h3>Client</h3>
+                            <p><strong>Signature:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Client Signature</p>
+
+                            <p style="margin-top: 22px;"><strong>Printed Name:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Print Full Legal Name</p>
+
+                            <p style="margin-top: 22px;"><strong>Date:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Date Signed</p>
+                        </div>
+
+                        <!-- DEVELOPER -->
+                        <div class="sig-block">
+                            <h3>Developer — WisdomLayers</h3>
+                            <p><strong>Signature:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Developer Signature</p>
+
+                            <p style="margin-top: 22px;"><strong>Printed Name:</strong></p>
+                            <div class="sig-prefilled">Wisdom Johnson — WisdomLayers</div>
+                            <p class="sig-label">Print Full Name</p>
+
+                            <p style="margin-top: 22px;"><strong>Date:</strong></p>
+                            <div class="signature-line"></div>
+                            <p class="sig-label">Date Signed</p>
+                        </div>
+                    </div>
+
+                    <p class="sig-fine-print">This Agreement becomes legally binding upon the valid signature of both parties. Please retain a signed copy for your records. Electronic signatures are accepted and legally enforceable per Section 19.</p>
+                </div>
+
+            </div><!-- /content -->
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <p><strong>WisdomLayers</strong> Web Development Agreement — Version 2.0 | 2026</p>
+                <p>Fayetteville, NC | contact@wisdomlayers.com | wisdomlayers.com</p>
+                <p style="margin-top:6px; font-size:0.8em;">This Agreement is governed by the laws of the State of North Carolina. Document prepared 2026.</p>
+            </div>
+
+        </div><!-- /container -->
+    </div><!-- /screen-wrapper -->
+</body>
+</html>

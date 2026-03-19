@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WisdomLayers — Client Documents</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+
+        .wrapper { max-width: 820px; margin: 0 auto; }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            border-radius: 16px;
+            padding: 40px 44px;
+            color: white;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-wrap img { width: 54px; height: 54px; object-fit: contain; }
+        .header-text h1 { font-size: 1.9em; font-weight: 700; margin-bottom: 4px; }
+        .header-text p { font-size: 0.97em; opacity: 0.88; }
+
+        /* FLOW NOTICE */
+        .flow-notice {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 28px;
+        }
+        .flow-notice h2 { color: #0d9488; font-size: 1.1em; margin-bottom: 14px; }
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.92em;
+            color: #475569;
+        }
+        .flow-step {
+            background: #f0fdfa;
+            border: 1px solid #14b8a6;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-weight: 600;
+            color: #0d9488;
+            white-space: nowrap;
+        }
+        .flow-arrow { color: #94a3b8; font-size: 1.1em; }
+
+        /* SECTION LABEL */
+        .section-label {
+            font-size: 0.78em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #94a3b8;
+            margin: 28px 0 12px;
+        }
+
+        /* DOCUMENT CARDS */
+        .doc-grid { display: flex; flex-direction: column; gap: 12px; }
+
+        .doc-card {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px 26px;
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .doc-card:hover {
+            border-color: #14b8a6;
+            box-shadow: 0 4px 16px rgba(13,148,136,0.12);
+        }
+
+        .doc-number {
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15em;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .doc-info h3 { color: #1e293b; font-size: 1em; font-weight: 600; margin-bottom: 3px; }
+        .doc-info p { font-size: 0.87em; color: #64748b; line-height: 1.5; }
+
+        .doc-tag {
+            font-size: 0.75em;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        .tag-info { background: #dbeafe; color: #1e40af; }
+        .tag-sign { background: #fef3c7; color: #92400e; }
+        .tag-pay  { background: #d1fae5; color: #065f46; }
+        .tag-pdf  { background: #f1f5f9; color: #475569; }
+
+        /* PDF SECTION */
+        .pdf-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 18px 26px;
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .pdf-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+        .pdf-icon {
+            background: #f1f5f9;
+            border: 1.5px solid #e2e8f0;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7em;
+            font-weight: 700;
+            color: #475569;
+            letter-spacing: 0.03em;
+        }
+        .pdf-info h3 { color: #1e293b; font-size: 0.97em; font-weight: 600; margin-bottom: 2px; }
+        .pdf-info p { font-size: 0.84em; color: #94a3b8; }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.84em;
+            color: #94a3b8;
+            padding-bottom: 20px;
+        }
+        .footer strong { color: #64748b; }
+
+        @media (max-width: 600px) {
+            .header { flex-direction: column; text-align: center; padding: 30px 24px; }
+            .doc-card, .pdf-card { grid-template-columns: 40px 1fr; }
+            .doc-tag, .tag-pdf { display: none; }
+            .flow-steps { flex-direction: column; align-items: flex-start; }
+            .flow-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo-wrap">
+            <img src="images/Logo.png" alt="WisdomLayers Logo">
+        </div>
+        <div class="header-text">
+            <h1>Client Documents</h1>
+            <p>WisdomLayers — All forms organized in order of use</p>
+        </div>
+    </div>
+
+    <!-- SEND ORDER -->
+    <div class="flow-notice">
+        <h2>Send in This Order</h2>
+        <div class="flow-steps">
+            <span class="flow-step">1. Welcome + Discovery Q</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">2. Discovery Call</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">3. Agreement Summary + Full Agreement + Deposit Invoice</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">4. Change Requests (as needed)</span>
+            <span class="flow-arrow">&#8594;</span>
+            <span class="flow-step">5. Launch Approval + Final Invoice</span>
+        </div>
+    </div>
+
+    <!-- OPERATIONS GUIDE -->
+    <div class="section-label">Internal Reference</div>
+    <div class="doc-grid">
+
+        <a class="doc-card" href="00-operations-guide.html" target="_blank">
+            <div class="doc-number">00</div>
+            <div class="doc-info">
+                <h3>Operations Guide</h3>
+                <p>Internal playbook. Full lifecycle steps 0–11, objection handling, pricing logic, discovery call script, and Quick Reference card. Not sent to clients.</p>
+            </div>
+            <span class="doc-tag tag-info">Internal</span>
+        </a>
+
+    </div>
+
+    <!-- ACTIVE DOCUMENTS -->
+    <div class="section-label">Client Documents — Active HTML</div>
+    <div class="doc-grid">
+
+        <a class="doc-card" href="01-welcome.html" target="_blank">
+            <div class="doc-number">01</div>
+            <div class="doc-info">
+                <h3>Welcome Document</h3>
+                <p>Sent first (with Discovery Questionnaire). Explains the 7-step process, timelines, revision policy, and what the client needs to prepare. No signature required.</p>
+            </div>
+            <span class="doc-tag tag-info">Read Only</span>
+        </a>
+
+        <a class="doc-card" href="05-discovery-questionnaire.html" target="_blank">
+            <div class="doc-number">05</div>
+            <div class="doc-info">
+                <h3>Discovery Questionnaire</h3>
+                <p>Sent alongside the Welcome doc. Client fills out business details, goals, design preferences, and content status before the discovery call.</p>
+            </div>
+            <span class="doc-tag tag-info">Fill In</span>
+        </a>
+
+        <a class="doc-card" href="02-agreement-summary.html" target="_blank">
+            <div class="doc-number">02</div>
+            <div class="doc-info">
+                <h3>Agreement Summary</h3>
+                <p>Sent after the discovery call (with Full Agreement and Deposit Invoice). Shows package details, pricing, optional services, and timeline. Has a client acknowledgment signature block.</p>
+            </div>
+            <span class="doc-tag tag-sign">Sign</span>
+        </a>
+
+        <a class="doc-card" href="03-full-agreement.html" target="_blank">
+            <div class="doc-number">03</div>
+            <div class="doc-info">
+                <h3>Full Web Development Agreement</h3>
+                <p>The binding legal contract. Covers scope, IP (full ownership on final payment), payment terms, revisions, cancellation, liability, force majeure, governing law, and signatures.</p>
+            </div>
+            <span class="doc-tag tag-sign">Sign</span>
+        </a>
+
+        <a class="doc-card" href="04-invoice.html" target="_blank">
+            <div class="doc-number">04</div>
+            <div class="doc-info">
+                <h3>Invoice</h3>
+                <p>Payment invoice for the 50% deposit or final balance. Includes line items, payment methods, terms, and client acknowledgment.</p>
+            </div>
+            <span class="doc-tag tag-pay">Payment</span>
+        </a>
+
+        <a class="doc-card" href="06-change-request.html" target="_blank">
+            <div class="doc-number">06</div>
+            <div class="doc-info">
+                <h3>Change Request Form</h3>
+                <p>Used during development when the client requests scope additions or changes beyond the original agreement. Documents the request and agreed price before work begins.</p>
+            </div>
+            <span class="doc-tag tag-sign">Sign</span>
+        </a>
+
+        <a class="doc-card" href="07-launch-approval.html" target="_blank">
+            <div class="doc-number">07</div>
+            <div class="doc-info">
+                <h3>Launch Approval Form</h3>
+                <p>Sent after revisions are complete. Client provides written sign-off confirming the website is approved for launch. Triggers the final invoice.</p>
+            </div>
+            <span class="doc-tag tag-sign">Sign</span>
+        </a>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>WisdomLayers</strong> — Internal Document Index</p>
+        <p>Fayetteville, NC &nbsp;|&nbsp; contact@wisdomlayers.com &nbsp;|&nbsp; wisdomlayers.com</p>
+    </div>
+
+</div>
+</body>
+</html>

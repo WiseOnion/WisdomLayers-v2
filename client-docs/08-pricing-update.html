@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Update 2026 — WisdomLayers Internal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #cbd5e1;
+            font-size: 11pt;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        .page-wrap { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        /* HEADER */
+        .top-header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            border-radius: 16px;
+            padding: 48px 50px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 32px;
+        }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-wrap img { width: 60px; height: 60px; object-fit: contain; }
+        .top-header-text h1 { font-size: 2em; font-weight: 700; margin-bottom: 4px; }
+        .top-header-text p { opacity: 0.88; font-size: 0.97em; }
+        .internal-badge {
+            margin-left: auto;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82em;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        /* NOTICE BOX */
+        .notice {
+            background: #1e293b;
+            border-left: 4px solid #f59e0b;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            color: #fcd34d;
+            font-size: 0.95em;
+        }
+        .notice strong { color: #fde68a; }
+
+        /* SECTION */
+        .section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 36px 38px;
+            margin-bottom: 28px;
+        }
+        .section-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #14b8a6;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .num {
+            background: #0d9488;
+            color: white;
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-size: 0.85em;
+        }
+
+        /* PRICING TABLE */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+        .price-table thead th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            padding: 10px 14px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+        }
+        .price-table tbody td {
+            padding: 13px 14px;
+            border-bottom: 1px solid #334155;
+            color: #cbd5e1;
+            font-size: 0.95em;
+            vertical-align: top;
+        }
+        .price-table tbody tr:last-child td { border-bottom: none; }
+        .price-table tbody tr:hover td { background: rgba(14,165,147,0.05); }
+        .old { color: #ef4444; text-decoration: line-through; font-weight: 600; }
+        .new { color: #34d399; font-weight: 700; }
+        .arrow { color: #64748b; margin: 0 6px; }
+        .label { color: #f1f5f9; font-weight: 600; }
+        .desc { font-size: 0.85em; color: #64748b; margin-top: 3px; }
+
+        /* PACKAGE CARD */
+        .pkg-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .pkg-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 22px 24px;
+        }
+        .pkg-card.highlight { border-color: #0d9488; }
+        .pkg-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #f1f5f9;
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+        .pkg-prices {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .pkg-old { color: #ef4444; text-decoration: line-through; font-size: 0.9em; }
+        .pkg-new { color: #34d399; font-weight: 700; font-size: 1.2em; }
+        .pkg-list {
+            list-style: none;
+            padding: 0;
+        }
+        .pkg-list li {
+            color: #94a3b8;
+            font-size: 0.88em;
+            padding: 3px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+        .pkg-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #0d9488;
+            font-weight: 700;
+        }
+        .pkg-hours {
+            margin-top: 10px;
+            font-size: 0.82em;
+            color: #475569;
+            font-style: italic;
+        }
+
+        /* BADGE */
+        .badge {
+            display: inline-block;
+            background: #0d9488;
+            color: white;
+            font-size: 0.72em;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .badge.yellow { background: #d97706; }
+        .badge.red { background: #dc2626; }
+
+        /* INFO BOX */
+        .info-box {
+            background: rgba(14, 165, 147, 0.08);
+            border: 1px solid #0d9488;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 18px;
+            font-size: 0.92em;
+            color: #5eead4;
+        }
+
+        /* WHY BOX */
+        .why-box {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid #d97706;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 18px;
+            font-size: 0.92em;
+            color: #fcd34d;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #475569;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 680px) {
+            .top-header { flex-direction: column; padding: 32px 24px; }
+            .internal-badge { margin-left: 0; }
+            .pkg-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- HEADER -->
+    <div class="top-header">
+        <div class="logo-wrap">
+            <img src="images/Logo.png" alt="WisdomLayers">
+        </div>
+        <div class="top-header-text">
+            <h1>Pricing Update 2026</h1>
+            <p>Updated solo freelancer rates based on current market research — March 2026</p>
+        </div>
+        <div class="internal-badge">Internal</div>
+    </div>
+
+    <!-- NOTICE -->
+    <div class="notice">
+        <strong>Why update prices?</strong> Current rates are below the solo freelancer market floor ($1,000–$5,000 for small business sites). At $499 for a Starter, you are pricing below your own time value. A 15-hour build at a modest $65/hr = $975 minimum. These updated prices are still on the conservative end for a solo — not agency rates.
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="section">
+        <div class="section-title"><span class="num">01</span> Package Prices</div>
+        <div class="pkg-grid">
+            <div class="pkg-card">
+                <div class="pkg-name">Starter</div>
+                <div class="pkg-prices">
+                    <span class="pkg-old">$499</span>
+                    <span style="color:#475569;">→</span>
+                    <span class="pkg-new">$800–$1,000</span>
+                </div>
+                <ul class="pkg-list">
+                    <li>3–5 custom pages</li>
+                    <li>Mobile responsive</li>
+                    <li>Contact form</li>
+                    <li>Basic SEO (meta, alt text, page speed)</li>
+                    <li>Google Analytics setup</li>
+                    <li>1 round of revisions</li>
+                    <li>30-day post-launch support</li>
+                </ul>
+                <div class="pkg-hours">~15–20 hrs of real work</div>
+            </div>
+
+            <div class="pkg-card highlight">
+                <div class="pkg-name">Professional <span class="badge">Most Popular</span></div>
+                <div class="pkg-prices">
+                    <span class="pkg-old">$799</span>
+                    <span style="color:#475569;">→</span>
+                    <span class="pkg-new">$1,500–$1,800</span>
+                </div>
+                <ul class="pkg-list">
+                    <li>6–10 custom pages</li>
+                    <li>Everything in Starter</li>
+                    <li>Advanced animations</li>
+                    <li>CMS integration (editable sections)</li>
+                    <li>Enhanced SEO (schema, sitemap, Search Console)</li>
+                    <li>Blog or portfolio section</li>
+                    <li>Google Business Profile setup</li>
+                    <li>2 rounds of revisions</li>
+                    <li>60-day post-launch support</li>
+                </ul>
+                <div class="pkg-hours">~25–35 hrs of real work</div>
+            </div>
+
+            <div class="pkg-card">
+                <div class="pkg-name">Premium</div>
+                <div class="pkg-prices">
+                    <span class="pkg-old">$1,199</span>
+                    <span style="color:#475569;">→</span>
+                    <span class="pkg-new">$2,200–$2,800</span>
+                </div>
+                <ul class="pkg-list">
+                    <li>10+ custom pages</li>
+                    <li>Everything in Professional</li>
+                    <li>Booking system integration</li>
+                    <li>Simple e-commerce (up to 20 products)</li>
+                    <li>Custom intake/contact forms</li>
+                    <li>Priority communication</li>
+                    <li>3 rounds of revisions</li>
+                    <li>90-day post-launch support</li>
+                </ul>
+                <div class="pkg-hours">~35–50 hrs of real work</div>
+            </div>
+
+            <div class="pkg-card">
+                <div class="pkg-name">Custom</div>
+                <div class="pkg-prices">
+                    <span class="pkg-old">$2,500+</span>
+                    <span style="color:#475569;">→</span>
+                    <span class="pkg-new">$4,000+</span>
+                </div>
+                <ul class="pkg-list">
+                    <li>Full e-commerce stores</li>
+                    <li>User auth / client portals</li>
+                    <li>Custom APIs & integrations</li>
+                    <li>Dashboards & web apps</li>
+                    <li>Scoped per project</li>
+                    <li>Up to 6 months support</li>
+                </ul>
+                <div class="pkg-hours">Quoted after discovery call</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            Landing pages (standalone) previously listed at $500 should now start at <strong>$800</strong>. Full e-commerce previously listed at $2,500 should now start at <strong>$4,000</strong>.
+        </div>
+    </div>
+
+    <!-- ADD-ONS -->
+    <div class="section">
+        <div class="section-title"><span class="num">02</span> Add-Ons & Optional Services</div>
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Old Price</th>
+                    <th>New Price</th>
+                    <th>What it involves</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="label">Domain Purchase Setup</span></td>
+                    <td><span class="old">$35</span></td>
+                    <td><span class="new">$50–$75</span></td>
+                    <td><span class="desc">Research, register, configure DNS, connect to hosting, transfer account. ~45–60 min.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Domain Renewal Management</span></td>
+                    <td><span class="old">$45/yr</span></td>
+                    <td><span class="new">$60–$75/yr</span></td>
+                    <td><span class="desc">Track expiry, send reminders, process renewal on client approval. Minimal effort, recurring income.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Content Migration</span></td>
+                    <td><span class="old">Custom quote</span></td>
+                    <td><span class="new">$100–$300</span></td>
+                    <td><span class="desc">Moving content from old site. Lower end = simple/small. Upper end = messy or large. Quote only if truly complex.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Rush / Expedited Delivery</span></td>
+                    <td><span class="old">+25%</span></td>
+                    <td><span class="new">+25–30%</span> <span class="badge yellow">Keep</span></td>
+                    <td><span class="desc">Rearranging schedule, working faster/nights/weekends. The % scales automatically with project size — good structure.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Hosting Setup / Config</span></td>
+                    <td><span class="old">Not listed</span></td>
+                    <td><span style="color:#94a3b8; font-weight:600;">Included in all packages</span></td>
+                    <td><span class="desc">Upload files, configure Netlify/GitHub Pages/cPanel, SSL cert, test. Part of delivering a finished site — not a separate charge. Only billable if client switches hosts after launch.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Google Business Profile Setup</span></td>
+                    <td><span class="old">Not listed</span></td>
+                    <td><span class="new">$75–$100</span> <span class="badge">New</span></td>
+                    <td><span class="desc">Claim/verify listing, add photos, hours, services, link to site. ~45–60 min. High value to local clients.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Logo Design</span></td>
+                    <td><span class="old">Not listed</span></td>
+                    <td><span class="new">$150–$250</span> <span class="badge">New</span></td>
+                    <td><span class="desc">Subcontract to Fiverr (~$50), mark up, handle client revisions. You manage, they execute.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Copywriting (per page)</span></td>
+                    <td><span class="old">Not listed</span></td>
+                    <td><span class="new">$75–$125/page</span> <span class="badge">New</span></td>
+                    <td><span class="desc">Subcontract to a writer (~$30–50/page), review, fit to design. Clients who can't write their own content will pay for this.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- POST-LAUNCH -->
+    <div class="section">
+        <div class="section-title"><span class="num">03</span> Post-Launch Changes</div>
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Change Type</th>
+                    <th>Old Price</th>
+                    <th>New Price</th>
+                    <th>What it involves</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="label">Small Change (pay-per)</span></td>
+                    <td><span class="old">$50</span></td>
+                    <td><span class="new">$65–$75</span></td>
+                    <td><span class="desc">Text swap, image swap, color tweak, typo fix. Under 30 min.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Medium Change (pay-per)</span></td>
+                    <td><span class="old">$150</span></td>
+                    <td><span class="new">$175–$200</span></td>
+                    <td><span class="desc">New section, form update, layout modification. 1–3 hours.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Large Change (pay-per)</span></td>
+                    <td><span class="old">$300+</span></td>
+                    <td><span class="new">$350–$400+</span></td>
+                    <td><span class="desc">New page, new feature, third-party integration. 4–8+ hours.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Medium Change (during support)</span></td>
+                    <td><span class="old">$150</span></td>
+                    <td><span class="new">$175</span></td>
+                    <td><span class="desc">Same as above — billable even within support window for scope additions.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Large Change (during support)</span></td>
+                    <td><span class="old">$300+</span></td>
+                    <td><span class="new">$350+</span></td>
+                    <td><span class="desc">New pages, new features — clearly outside included support scope.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Monthly Retainer</span></td>
+                    <td><span class="old">$150/mo (3 small changes)</span></td>
+                    <td><span class="new">$175–$200/mo</span></td>
+                    <td><span class="desc">Predictable recurring income. Covers 3 small changes, priority response, monthly health check. Medium/large billed separately.</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="why-box">
+            <strong>Late fees:</strong> $50/week + 1.5%/mo interest is solid and professional — keep this exactly as is.
+        </div>
+    </div>
+
+    <!-- WHERE TO UPDATE -->
+    <div class="section">
+        <div class="section-title"><span class="num">04</span> Where to Update These Prices</div>
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>What Needs Updating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="label">index.html</span></td>
+                    <td><span class="desc">Pricing section ($499/$799/$1,199/$2,500+) and FAQ section (still shows old $374/$599/$899 prices — these must match)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">client-docs/02-agreement-summary.html</span></td>
+                    <td><span class="desc">Package checkboxes on cover page ($499/$799/$1,199), all package boxes, payment structure amounts ($249.50, $399.50, $599.50 deposits)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">client-docs/04-invoice.html</span></td>
+                    <td><span class="desc">Line item showing Professional at $799 / deposit at $399.50 — update to new rates when sending to clients</span></td>
+                </tr>
+                <tr>
+                    <td><span class="label">client-docs/03-full-agreement.html</span></td>
+                    <td><span class="desc">Review for any hardcoded price references</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>WisdomLayers — Internal Pricing Reference | March 2026</p>
+        <p style="margin-top:4px;">Not a client-facing document. For internal use only.</p>
+    </div>
+
+</div>
+</body>
+</html>

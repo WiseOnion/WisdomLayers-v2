@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Questionnaire — WisdomLayers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page { margin: 0.75in; size: letter; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            font-size: 11pt;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .screen-wrapper { max-width: 850px; margin: 40px auto; padding: 0 20px; }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            padding: 60px 50px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: ''; position: absolute; top: -60px; right: -60px;
+            width: 320px; height: 320px;
+            background: rgba(255,255,255,0.08); border-radius: 50%; pointer-events: none;
+        }
+        .header::after {
+            content: ''; position: absolute; bottom: -90px; left: -90px;
+            width: 380px; height: 380px;
+            background: rgba(255,255,255,0.05); border-radius: 50%; pointer-events: none;
+        }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .logo-wrap img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+        .header h1 {
+            font-size: 2.4em; font-weight: 700;
+            margin: 0 0 6px; position: relative; z-index: 1; letter-spacing: -0.5px;
+        }
+        .header .company-name {
+            font-size: 1.05em; font-weight: 600; opacity: 0.92;
+            position: relative; z-index: 1; margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 1.02em; opacity: 0.85; font-weight: 400;
+            position: relative; z-index: 1;
+        }
+
+        /* CONTENT */
+        .content { padding: 52px 50px; }
+
+        /* INTRO BOX */
+        .intro-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 2px solid #14b8a6; border-radius: 12px;
+            padding: 28px 32px; margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+        .intro-box h2 { color: #0d9488; font-size: 1.25em; font-weight: 700; margin-bottom: 10px; border: none; padding: 0; margin-top: 0; }
+        .intro-box p { font-size: 1em; line-height: 1.75; color: #1e293b; margin: 8px 0 0; }
+
+        /* SECTION HEADINGS */
+        h2 {
+            color: #0d9488; font-size: 1.4em; font-weight: 700;
+            margin: 40px 0 18px; padding-bottom: 10px;
+            border-bottom: 3px solid #0d9488;
+        }
+        h3 { color: #1e293b; font-size: 1.05em; font-weight: 600; margin: 20px 0 6px; }
+        p { margin: 10px 0; }
+
+        /* FORM FIELDS */
+        .field-group { margin: 0 0 24px; }
+        .field-label {
+            font-weight: 600; color: #1e293b; font-size: 0.95em;
+            display: block; margin-bottom: 6px;
+        }
+        .field-note {
+            font-size: 0.85em; color: #64748b; margin-bottom: 8px; display: block;
+        }
+        .field-input {
+            width: 100%;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: #1e293b;
+            background: #f8fafc;
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+        .field-input:focus {
+            outline: none;
+            border-color: #0d9488;
+            background: white;
+        }
+        input.field-input { resize: none; height: 42px; }
+        textarea.field-input { min-height: 80px; }
+        textarea.field-input.tall { min-height: 110px; }
+
+        /* TWO-COL */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 0 0 24px; }
+
+        /* SECTION CARD */
+        .section-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin: 0 0 28px;
+            page-break-inside: avoid;
+        }
+        .section-card h3 {
+            color: #0d9488; font-size: 1.05em; font-weight: 700;
+            margin: 0 0 18px; padding-bottom: 8px;
+            border-bottom: 2px solid #ccfbf1;
+        }
+        .section-card .field-group:last-child { margin-bottom: 0; }
+
+        /* INFO BOX */
+        .info-box {
+            background: #dbeafe; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #3b82f6; border-radius: 8px;
+            padding: 18px 22px; margin: 20px 0; page-break-inside: avoid;
+        }
+        .info-box p { color: #1e40af; font-size: 0.93em; margin: 0; }
+
+        /* SUBMIT NOTE */
+        .submit-note {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-radius: 12px; color: white;
+            padding: 32px 36px; margin: 36px 0 0;
+            text-align: center; page-break-inside: avoid;
+        }
+        .submit-note h2 { color: white; border: none; margin: 0 0 10px; font-size: 1.4em; }
+        .submit-note p { opacity: 0.92; font-size: 1em; margin: 8px 0 0; }
+        .submit-note .email-highlight {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-weight: 600;
+            font-size: 1.02em;
+        }
+
+        /* CLIENT INFO BLOCK */
+        .client-info-block {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin-bottom: 32px;
+            page-break-inside: avoid;
+        }
+        .client-info-block h3 {
+            color: #0d9488; font-size: 1.05em; font-weight: 700;
+            margin: 0 0 16px; padding-bottom: 8px;
+            border-bottom: 2px solid #f0fdfa;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #f8fafc; padding: 24px 50px;
+            border-top: 2px solid #e2e8f0; text-align: center;
+        }
+        .footer p { margin: 4px 0; color: #64748b; font-size: 0.87em; }
+        .footer strong { color: #1e293b; }
+
+        /* PRINT */
+        @media print {
+            body { background: white; }
+            .screen-wrapper { max-width: 100%; margin: 0; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .header::before, .header::after { display: none; }
+            .header { padding: 28px 40px; }
+            .content { padding: 32px 40px; }
+            .field-input { border: 1px solid #cbd5e1; background: white; }
+            h2 { page-break-after: avoid; }
+            .section-card, .client-info-block, .intro-box, .submit-note { page-break-inside: avoid; }
+            .two-col { page-break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 680px) {
+            .content { padding: 30px 22px; }
+            .header { padding: 44px 26px; }
+            .header h1 { font-size: 1.9em; }
+            .two-col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="screen-wrapper">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-wrap">
+                <img src="images/Logo.png" alt="WisdomLayers">
+            </div>
+            <div class="company-name">WisdomLayers</div>
+            <h1>Discovery Questionnaire</h1>
+            <p class="subtitle">Web Development Services — Project Discovery Document</p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="intro-box">
+                <h2>Before We Begin Building</h2>
+                <p>This questionnaire helps WisdomLayers understand your business, goals, and vision before the discovery call. Completing it in advance ensures our session is focused and productive. There are no wrong answers — answer as thoroughly as you can. Incomplete answers are fine; we will cover remaining questions during the call.</p>
+            </div>
+
+            <!-- CLIENT INFORMATION -->
+            <div class="client-info-block">
+                <h3>Client Information</h3>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Full Name</label>
+                        <input type="text" class="field-input" placeholder="Your name">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Business Name</label>
+                        <input type="text" class="field-input" placeholder="Business or brand name">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Email Address</label>
+                        <input type="email" class="field-input" placeholder="your@email.com">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Phone Number</label>
+                        <input type="tel" class="field-input" placeholder="(___) ___-____">
+                    </div>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">Best Day and Time to Reach You</label>
+                    <input type="text" class="field-input" placeholder="e.g., Weekdays after 3pm, Saturday mornings">
+                </div>
+            </div>
+
+            <!-- SECTION 1: BUSINESS -->
+            <h2>Section 1 — Your Business</h2>
+
+            <div class="section-card">
+                <h3>Business Overview</h3>
+                <div class="field-group">
+                    <label class="field-label">Describe your business in 2 to 3 sentences.</label>
+                    <span class="field-note">What do you do, and what makes you different from competitors?</span>
+                    <textarea class="field-input tall" placeholder="Example: We are a mobile auto detailing company serving Fayetteville, NC. We come to the client's location and offer premium detailing packages. Unlike competitors, we specialize in ceramic coating for long-term protection."></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Who is your target customer?</label>
+                    <span class="field-note">Describe the type of person most likely to buy from you (age range, location, profession, lifestyle, problem they have, etc.)</span>
+                    <textarea class="field-input" placeholder="Example: Car enthusiasts aged 25–50 in the Fayetteville area who value their vehicles and want professional-level results without going to a shop."></textarea>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">What is the primary goal of this website?</label>
+                    <span class="field-note">Check all that apply or describe in your own words.</span>
+                    <textarea class="field-input" placeholder="Examples: Generate leads / inquiries, sell products or services online, build credibility, replace an outdated site, provide information to existing customers, book appointments..."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 2: WEBSITE SCOPE -->
+            <h2>Section 2 — Website Scope</h2>
+
+            <div class="section-card">
+                <h3>Pages and Features</h3>
+                <div class="field-group">
+                    <label class="field-label">What pages do you need on your website?</label>
+                    <span class="field-note">List every page you want (e.g., Home, About, Services, Portfolio, Contact, Blog, FAQ, etc.)</span>
+                    <textarea class="field-input" placeholder="Example: Home, About, Services (with individual pages for each service), Gallery, Pricing, Testimonials, Contact, Booking"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">What specific features do you need?</label>
+                    <span class="field-note">List any functionality beyond standard pages. Note: some features may require third-party tools or additional cost.</span>
+                    <textarea class="field-input tall" placeholder="Examples: Online booking / scheduling, contact form, photo gallery, payment integration, newsletter signup, live chat, social media feed, e-commerce / product store, member login area, FAQ accordion, popup or lead magnet..."></textarea>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">Do you have any existing content (text, images, videos) ready to use?</label>
+                    <span class="field-note">Let us know what exists and what still needs to be written or created.</span>
+                    <textarea class="field-input" placeholder="Example: I have a logo and some photos. I need help with the written copy. I have a services list but no photos of the work yet."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 3: BRAND -->
+            <h2>Section 3 — Brand and Design</h2>
+
+            <div class="section-card">
+                <h3>Visual Identity</h3>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Do you have a logo?</label>
+                        <input type="text" class="field-input" placeholder="Yes / No / In progress">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Do you have brand colors?</label>
+                        <input type="text" class="field-input" placeholder="Yes (list hex codes) / No">
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">List your brand colors (hex codes or descriptions)</label>
+                    <span class="field-note">If you do not have hex codes, describe the colors or the feeling you want (e.g., professional dark navy with gold accents).</span>
+                    <input type="text" class="field-input" placeholder="Example: #1a1a2e (dark navy), #e8b96a (gold), white">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">List 3 to 5 websites whose design you like</label>
+                    <span class="field-note">These do not need to be in your industry — just sites whose look and feel appeals to you. This is one of the most helpful things you can provide.</span>
+                    <textarea class="field-input tall" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5."></textarea>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">Describe the overall look and feel you want</label>
+                    <span class="field-note">Think about words like: modern, minimal, bold, elegant, warm, playful, professional, luxury, corporate, casual...</span>
+                    <textarea class="field-input" placeholder="Example: Clean and modern. I want it to feel high-end and professional but not cold. Think luxury service brand — dark background, clean typography, gold accents."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 4: COMPETITION -->
+            <h2>Section 4 — Competition and Market</h2>
+
+            <div class="section-card">
+                <h3>Competitive Landscape</h3>
+                <div class="field-group">
+                    <label class="field-label">List 2 to 3 competitors or businesses in your space</label>
+                    <span class="field-note">Include their website URLs if possible. This helps us understand the market standard and how to position your site.</span>
+                    <textarea class="field-input" placeholder="1. &#10;2. &#10;3."></textarea>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">What do you want your site to do better than your competitors?</label>
+                    <span class="field-note">This could be design quality, clarity of services, stronger call to action, mobile experience, trust signals, etc.</span>
+                    <textarea class="field-input" placeholder="Example: My competitors' sites look outdated and are hard to navigate on mobile. I want mine to feel premium and make it very easy to get a quote within 30 seconds of landing on the page."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 5: DOMAIN / HOSTING -->
+            <h2>Section 5 — Domain and Hosting</h2>
+
+            <div class="section-card">
+                <h3>Technical Setup</h3>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Do you own a domain name?</label>
+                        <input type="text" class="field-input" placeholder="Yes / No / Not sure">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">If yes — what is the domain?</label>
+                        <input type="text" class="field-input" placeholder="www.yourbusiness.com">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Do you have web hosting?</label>
+                        <input type="text" class="field-input" placeholder="Yes / No / Not sure">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">If yes — who is your hosting provider?</label>
+                        <input type="text" class="field-input" placeholder="e.g., GoDaddy, Hostgator, Bluehost, etc.">
+                    </div>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">Do you have an existing website?</label>
+                    <span class="field-note">If so, provide the URL and describe what you want to keep, improve, or completely replace.</span>
+                    <textarea class="field-input" placeholder="Example: Yes — www.mybusiness.com. It was built in 2018 and I want a full redesign. Keep the overall color scheme but replace everything else."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 6: SOCIAL MEDIA -->
+            <h2>Section 6 — Social Media and Online Presence</h2>
+
+            <div class="section-card">
+                <h3>Online Profiles</h3>
+                <span class="field-note" style="display:block; margin-bottom:16px;">List all active social media and online profiles to be linked or integrated in the website. Leave blank if you do not have that platform.</span>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Instagram</label>
+                        <input type="text" class="field-input" placeholder="@handle or full URL">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Facebook</label>
+                        <input type="text" class="field-input" placeholder="Page name or full URL">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">LinkedIn</label>
+                        <input type="text" class="field-input" placeholder="Profile or company page URL">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">TikTok</label>
+                        <input type="text" class="field-input" placeholder="@handle or full URL">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">YouTube</label>
+                        <input type="text" class="field-input" placeholder="Channel URL">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Google Business Profile</label>
+                        <input type="text" class="field-input" placeholder="Profile URL or business name">
+                    </div>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">Other platforms (Pinterest, Twitter/X, Yelp, etc.)</label>
+                    <input type="text" class="field-input" placeholder="Platform: URL">
+                </div>
+            </div>
+
+            <!-- SECTION 7: ADDITIONAL NOTES -->
+            <h2>Section 7 — Anything Else</h2>
+
+            <div class="section-card">
+                <h3>Final Notes</h3>
+                <div class="field-group">
+                    <label class="field-label">Is there anything important about your business or project that we have not covered?</label>
+                    <span class="field-note">Any unique requirements, constraints, special requests, or context we should know before we begin.</span>
+                    <textarea class="field-input tall" placeholder="Share anything else that is on your mind regarding the project."></textarea>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                    <label class="field-label">What does success look like to you?</label>
+                    <span class="field-note">When you look at the finished website, what would make you say "this is exactly what I wanted"?</span>
+                    <textarea class="field-input" placeholder="Example: Success to me looks like a site that immediately makes visitors trust us, clearly shows our services and pricing, and makes it easy to call or book. I want to feel proud to share it with anyone."></textarea>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Note:</strong> You do not need to answer every question perfectly. Bring your best effort and we will clarify anything during the discovery call. The more detail you provide here, the more productive and focused our conversation will be.</p>
+            </div>
+
+            <!-- SUBMIT NOTE -->
+            <div class="submit-note">
+                <h2>How to Return This Form</h2>
+                <p>Once completed, please return this questionnaire by email to:</p>
+                <p style="margin-top:12px;"><span class="email-highlight">contact@wisdomlayers.com</span></p>
+                <p style="margin-top:10px;">You may print this form and scan/photograph it, or type your answers directly and email the file as a PDF or Word document. You can also photograph and email the completed printed pages.</p>
+                <p style="margin-top:10px;">Your discovery call will be scheduled once this form is received.</p>
+            </div>
+
+        </div><!-- /content -->
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>WisdomLayers</strong> | Web Development Services | Fayetteville, NC | contact@wisdomlayers.com | wisdomlayers.com</p>
+            <p>Discovery Questionnaire — Confidential Client Document</p>
+        </div>
+
+    </div><!-- /container -->
+</div><!-- /screen-wrapper -->
+</body>
+</html>

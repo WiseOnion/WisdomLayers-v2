@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Request Form — WisdomLayers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page { margin: 0.75in; size: letter; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            font-size: 11pt;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .screen-wrapper { max-width: 850px; margin: 40px auto; padding: 0 20px; }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            padding: 56px 50px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: ''; position: absolute; top: -60px; right: -60px;
+            width: 320px; height: 320px;
+            background: rgba(255,255,255,0.08); border-radius: 50%; pointer-events: none;
+        }
+        .header::after {
+            content: ''; position: absolute; bottom: -90px; left: -90px;
+            width: 380px; height: 380px;
+            background: rgba(255,255,255,0.05); border-radius: 50%; pointer-events: none;
+        }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .logo-wrap img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+        .header h1 {
+            font-size: 2.4em; font-weight: 700;
+            margin: 0 0 6px; position: relative; z-index: 1; letter-spacing: -0.5px;
+        }
+        .header .company-name {
+            font-size: 1.05em; font-weight: 600; opacity: 0.92;
+            position: relative; z-index: 1; margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 1.02em; opacity: 0.85; font-weight: 400;
+            position: relative; z-index: 1;
+        }
+
+        /* CONTENT */
+        .content { padding: 52px 50px; }
+
+        /* WARNING BOX */
+        .warning-box {
+            background: #fef3c7; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #f59e0b; border-radius: 8px;
+            padding: 20px 22px; margin: 0 0 36px; page-break-inside: avoid;
+        }
+        .warning-box h3 { color: #92400e; margin: 0 0 8px; font-size: 1em; }
+        .warning-box p, .warning-box li { color: #78350f; font-size: 0.93em; }
+        .warning-box ul { padding-left: 18px; margin-top: 6px; }
+        .warning-box li { margin: 6px 0; }
+
+        /* SECTION HEADINGS */
+        h2 {
+            color: #0d9488; font-size: 1.4em; font-weight: 700;
+            margin: 36px 0 18px; padding-bottom: 10px;
+            border-bottom: 3px solid #0d9488;
+        }
+
+        /* FORM CARD */
+        .form-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin: 0 0 24px;
+            page-break-inside: avoid;
+        }
+        .form-card h3 {
+            color: #0d9488; font-size: 1.05em; font-weight: 700;
+            margin: 0 0 16px; padding-bottom: 8px;
+            border-bottom: 2px solid #ccfbf1;
+        }
+
+        /* FIELDS */
+        .field-group { margin: 0 0 20px; }
+        .field-group:last-child { margin-bottom: 0; }
+        .field-label {
+            font-weight: 600; color: #1e293b; font-size: 0.95em;
+            display: block; margin-bottom: 6px;
+        }
+        .field-note {
+            font-size: 0.84em; color: #64748b; margin-bottom: 8px; display: block;
+        }
+        .field-input {
+            width: 100%;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: #1e293b;
+            background: white;
+            resize: vertical;
+        }
+        .field-input:focus {
+            outline: none;
+            border-color: #0d9488;
+        }
+        input.field-input { resize: none; height: 42px; }
+        textarea.field-input { min-height: 90px; }
+        textarea.field-input.tall { min-height: 120px; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+        /* COST TABLE */
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 0 20px;
+            font-size: 0.95em;
+        }
+        .cost-table th {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            color: white; padding: 10px 14px; text-align: left;
+            font-family: 'Poppins', sans-serif; font-weight: 600;
+        }
+        .cost-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+            vertical-align: top;
+        }
+        .cost-table tr:last-child td { border-bottom: none; }
+        .cost-table tr:nth-child(even) td {
+            background: #f8fafc;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+        }
+        .cost-table td.label-col { font-weight: 600; color: #1e293b; width: 44%; }
+        .cost-table td.value-col { width: 56%; }
+        .cost-table td input {
+            width: 100%;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 7px 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.93em;
+            color: #1e293b;
+            background: white;
+        }
+        .cost-table td input:focus { outline: none; border-color: #0d9488; }
+
+        /* SIGNATURE BLOCK */
+        .signature-section {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px 34px;
+            margin: 28px 0 0;
+            page-break-inside: avoid;
+        }
+        .signature-section h2 {
+            color: #0d9488; font-size: 1.3em; font-weight: 700;
+            margin: 0 0 6px; padding-bottom: 10px;
+            border-bottom: 3px solid #0d9488;
+        }
+        .sig-statement {
+            background: #f0fdfa;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 1.5px solid #14b8a6;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0 24px;
+            font-size: 0.93em;
+            color: #1e293b;
+            line-height: 1.75;
+        }
+        .sig-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 24px;
+        }
+        .sig-field label {
+            font-weight: 600; color: #1e293b; font-size: 0.88em;
+            display: block; margin-bottom: 8px;
+        }
+        .sig-line {
+            border: none;
+            border-bottom: 2px solid #1e293b;
+            width: 100%;
+            height: 42px;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: #1e293b;
+            padding: 0 4px;
+        }
+        .sig-line:focus { outline: none; border-bottom-color: #0d9488; }
+        .sig-divider {
+            border: none; border-top: 1.5px solid #e2e8f0;
+            margin: 28px 0;
+        }
+        .provider-block { margin-top: 0; }
+        .provider-block p {
+            font-size: 0.93em; color: #475569; margin: 4px 0;
+        }
+        .provider-block strong { color: #1e293b; }
+
+        /* FOOTER */
+        .footer {
+            background: #f8fafc; padding: 24px 50px;
+            border-top: 2px solid #e2e8f0; text-align: center;
+        }
+        .footer p { margin: 4px 0; color: #64748b; font-size: 0.87em; }
+        .footer strong { color: #1e293b; }
+
+        /* PRINT */
+        @media print {
+            body { background: white; }
+            .screen-wrapper { max-width: 100%; margin: 0; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .header::before, .header::after { display: none; }
+            .header { padding: 28px 40px; }
+            .content { padding: 32px 40px; }
+            .field-input, .sig-line, .cost-table td input { border-color: #cbd5e1; background: white; }
+            h2 { page-break-after: avoid; }
+            .form-card, .signature-section, .warning-box { page-break-inside: avoid; }
+            .two-col, .sig-row { page-break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 680px) {
+            .content { padding: 30px 22px; }
+            .header { padding: 44px 26px; }
+            .header h1 { font-size: 1.9em; }
+            .two-col, .sig-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="screen-wrapper">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-wrap">
+                <img src="images/Logo.png" alt="WisdomLayers">
+            </div>
+            <div class="company-name">WisdomLayers</div>
+            <h1>Change Request Form</h1>
+            <p class="subtitle">Web Development Services — Out-of-Scope Change Authorization</p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="warning-box">
+                <h3>Important — Scope Change Policy</h3>
+                <p>This form is required for any requested change that falls outside the original agreed project scope. No out-of-scope work will begin until this form is signed and the additional cost is confirmed in writing.</p>
+                <ul>
+                    <li>Verbal change requests are not accepted and will not be acted upon.</li>
+                    <li>Signing this form authorizes the additional work and associated charge.</li>
+                    <li>Payment for change order fees follows the same terms as the original invoice.</li>
+                    <li>Timeline adjustments take effect from the date this form is countersigned by WisdomLayers.</li>
+                </ul>
+            </div>
+
+            <!-- PROJECT REFERENCE -->
+            <h2>Project Reference</h2>
+            <div class="form-card">
+                <h3>Client and Project Details</h3>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Client Name</label>
+                        <input type="text" class="field-input" placeholder="Full name">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Business Name</label>
+                        <input type="text" class="field-input" placeholder="Business or brand name">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Client Email</label>
+                        <input type="email" class="field-input" placeholder="your@email.com">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Date of Request</label>
+                        <input type="text" class="field-input" placeholder="MM / DD / YYYY">
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Original Agreement Date</label>
+                    <span class="field-note">The date the Web Development Agreement was signed.</span>
+                    <input type="text" class="field-input" placeholder="MM / DD / YYYY">
+                </div>
+            </div>
+
+            <!-- CHANGE DESCRIPTION -->
+            <h2>Change Description</h2>
+            <div class="form-card">
+                <h3>What Is Being Requested</h3>
+                <div class="field-group">
+                    <label class="field-label">Describe the requested change in detail</label>
+                    <span class="field-note">Be as specific as possible. Include which page(s) are affected, what needs to be added, removed, or modified, and any reference materials if applicable.</span>
+                    <textarea class="field-input tall" placeholder="Example: I would like to add a new Services page specifically for commercial clients, separate from the existing residential services page. It should include the same layout as the current services page with a custom hero image and three service cards with different pricing. Additionally, I would like a PDF download button that links to a commercial rate sheet."></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Why is this change needed?</label>
+                    <span class="field-note">Brief explanation of the business reason for this addition or modification.</span>
+                    <textarea class="field-input" placeholder="Example: We recently expanded our services to commercial properties and need a separate landing page to target those clients specifically."></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Are there any reference materials, examples, or files to attach?</label>
+                    <input type="text" class="field-input" placeholder="e.g., Google Drive link, screenshot, reference website URL...">
+                </div>
+            </div>
+
+            <!-- COST AND TIMELINE -->
+            <h2>Estimated Cost and Timeline Impact</h2>
+            <div class="form-card">
+                <h3>Change Order Terms (Completed by WisdomLayers)</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="label-col">Change Order Number</td>
+                            <td class="value-col"><input type="text" placeholder="CO-001"></td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Additional Cost</td>
+                            <td class="value-col"><input type="text" placeholder="$ 0.00"></td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Estimated Hours</td>
+                            <td class="value-col"><input type="text" placeholder="e.g., 4 hours"></td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Timeline Impact</td>
+                            <td class="value-col"><input type="text" placeholder="e.g., +3 business days to delivery date"></td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Revised Delivery Estimate</td>
+                            <td class="value-col"><input type="text" placeholder="MM / DD / YYYY"></td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Payment Due</td>
+                            <td class="value-col"><input type="text" placeholder="e.g., Due before work begins / Due upon completion"></td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Payment Method</td>
+                            <td class="value-col"><input type="text" placeholder="PayPal / CashApp $WisdomLayers / Bank Transfer"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="field-group">
+                    <label class="field-label">Additional Notes from WisdomLayers</label>
+                    <textarea class="field-input" placeholder="Any conditions, limitations, or clarifications regarding this change order..."></textarea>
+                </div>
+            </div>
+
+            <!-- AUTHORIZATION -->
+            <div class="signature-section">
+                <h2>Client Authorization</h2>
+                <div class="sig-statement">
+                    By signing below, I acknowledge and agree that:
+                    (1) the change described above falls outside the scope of the original Web Development Agreement;
+                    (2) I authorize WisdomLayers to perform the additional work described;
+                    (3) I agree to pay the additional cost specified above under the stated payment terms;
+                    (4) I understand that work on this change will not begin until this form is signed and countersigned by WisdomLayers;
+                    and (5) all other terms of the original Web Development Agreement remain in full effect.
+                </div>
+
+                <div class="sig-row">
+                    <div class="sig-field">
+                        <label>Client Signature</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                    <div class="sig-field">
+                        <label>Date</label>
+                        <input type="text" class="sig-line" placeholder="MM / DD / YYYY">
+                    </div>
+                </div>
+                <div class="sig-row">
+                    <div class="sig-field">
+                        <label>Printed Name</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                    <div class="sig-field">
+                        <label>Client Email</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                </div>
+
+                <hr class="sig-divider">
+
+                <div class="provider-block">
+                    <p><strong>WisdomLayers Authorization</strong></p>
+                    <p>Authorized By: Wisdom Johnson &nbsp;|&nbsp; WisdomLayers</p>
+                </div>
+                <div class="sig-row" style="margin-top:14px;">
+                    <div class="sig-field">
+                        <label>WisdomLayers Signature</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                    <div class="sig-field">
+                        <label>Date Countersigned</label>
+                        <input type="text" class="sig-line" placeholder="MM / DD / YYYY">
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /content -->
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>WisdomLayers</strong> | Web Development Services | Fayetteville, NC | contact@wisdomlayers.com | wisdomlayers.com</p>
+            <p>Change Request Form — Retain a copy for your records. Binding upon signature by both parties.</p>
+        </div>
+
+    </div><!-- /container -->
+</div><!-- /screen-wrapper -->
+</body>
+</html>

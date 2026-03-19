@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Plan — WisdomLayers Internal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #cbd5e1;
+            font-size: 11pt;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        .page-wrap { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        /* HEADER */
+        .top-header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            border-radius: 16px;
+            padding: 48px 50px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 32px;
+        }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-wrap img { width: 60px; height: 60px; object-fit: contain; }
+        .top-header-text h1 { font-size: 2em; font-weight: 700; margin-bottom: 4px; }
+        .top-header-text p { opacity: 0.88; font-size: 0.97em; }
+        .internal-badge {
+            margin-left: auto;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82em;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        /* SECTION */
+        .section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 36px 38px;
+            margin-bottom: 28px;
+        }
+        .section-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #14b8a6;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .num {
+            background: #0d9488;
+            color: white;
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-size: 0.85em;
+        }
+
+        /* PHASE */
+        .phase {
+            margin-bottom: 32px;
+        }
+        .phase:last-child { margin-bottom: 0; }
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .phase-dot {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 1em;
+            flex-shrink: 0;
+        }
+        .phase-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #f1f5f9;
+            font-size: 1.05em;
+        }
+        .phase-sub {
+            font-size: 0.85em;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* STEP LIST */
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin-left: 54px;
+        }
+        .step-list li {
+            padding: 9px 0;
+            border-bottom: 1px solid #1e293b;
+            color: #94a3b8;
+            font-size: 0.93em;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-list li::before {
+            content: '→';
+            color: #0d9488;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .step-list li strong { color: #f1f5f9; }
+
+        /* PLATFORM GRID */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 8px;
+        }
+        .platform-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+        .platform-card.top { border-color: #0d9488; }
+        .platform-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #f1f5f9;
+            font-size: 0.97em;
+            margin-bottom: 6px;
+        }
+        .platform-best {
+            font-size: 0.82em;
+            color: #0d9488;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .platform-desc {
+            font-size: 0.85em;
+            color: #64748b;
+            line-height: 1.6;
+        }
+        .platform-cost {
+            margin-top: 10px;
+            font-size: 0.82em;
+            color: #475569;
+        }
+        .platform-cost strong { color: #34d399; }
+
+        /* ROLE GRID */
+        .role-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 8px;
+        }
+        .role-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+        .role-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #f1f5f9;
+            font-size: 0.97em;
+            margin-bottom: 4px;
+        }
+        .role-priority {
+            font-size: 0.78em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        .role-priority.high { color: #34d399; }
+        .role-priority.medium { color: #fcd34d; }
+        .role-priority.low { color: #94a3b8; }
+        .role-details {
+            font-size: 0.85em;
+            color: #64748b;
+            line-height: 1.6;
+        }
+        .role-details strong { color: #94a3b8; }
+
+        /* MILESTONE TABLE */
+        .mile-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .mile-table thead th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            padding: 10px 14px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+        }
+        .mile-table tbody td {
+            padding: 13px 14px;
+            border-bottom: 1px solid #334155;
+            color: #cbd5e1;
+            font-size: 0.93em;
+            vertical-align: top;
+        }
+        .mile-table tbody tr:last-child td { border-bottom: none; }
+        .milestone { font-weight: 600; color: #f1f5f9; }
+        .milestone-desc { font-size: 0.85em; color: #64748b; margin-top: 3px; }
+        .signal { color: #34d399; font-weight: 600; }
+
+        /* INFO / WARNING BOXES */
+        .info-box {
+            background: rgba(14, 165, 147, 0.08);
+            border: 1px solid #0d9488;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 18px;
+            font-size: 0.92em;
+            color: #5eead4;
+        }
+        .warn-box {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid #d97706;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 18px;
+            font-size: 0.92em;
+            color: #fcd34d;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #475569;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 680px) {
+            .top-header { flex-direction: column; padding: 32px 24px; }
+            .internal-badge { margin-left: 0; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .role-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- HEADER -->
+    <div class="top-header">
+        <div class="logo-wrap">
+            <img src="images/Logo.png" alt="WisdomLayers">
+        </div>
+        <div class="top-header-text">
+            <h1>Growth Plan</h1>
+            <p>How to grow WisdomLayers from solo to studio — without hiring full-time employees</p>
+        </div>
+        <div class="internal-badge">Internal</div>
+    </div>
+
+    <!-- THE MODEL -->
+    <div class="section">
+        <div class="section-title"><span class="num">01</span> The Model — Solo to Studio</div>
+        <p style="color:#94a3b8; margin-bottom:20px;">You don't need employees. You need <strong style="color:#f1f5f9;">subcontractors</strong> — people you hire per project to handle specific tasks. You land the client, manage the relationship, keep the margin. They do the work you assign them. No payroll, no benefits, no commitment beyond the project.</p>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-dot">1</div>
+                <div>
+                    <div class="phase-title">Right Now — Fill the Portfolio</div>
+                    <div class="phase-sub">0–3 months</div>
+                </div>
+            </div>
+            <ul class="step-list">
+                <li>Complete the 5 empty portfolio slots on the site — get to 7 total projects</li>
+                <li>Raise prices to updated rates (see Pricing Update doc)</li>
+                <li>Start posting work on LinkedIn — before/after, project breakdowns, behind the scenes</li>
+                <li>Ask Miles2Wisdom and PJ Pressure Washing for referrals and Google reviews</li>
+                <li>Do NOT hire anyone yet — learn your own workflow first</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-dot">2</div>
+                <div>
+                    <div class="phase-title">First Subcontractor — One Role Only</div>
+                    <div class="phase-sub">When you're turning down or delaying 2+ projects/month</div>
+                </div>
+            </div>
+            <ul class="step-list">
+                <li><strong>Logo/graphic design</strong> is the first thing to outsource — you're a developer, not a designer</li>
+                <li>Find a designer on Fiverr or Upwork, test them on a small project first</li>
+                <li>You pay ~$50–100, charge client $150–250 — that's your margin</li>
+                <li>You still manage the client, handle revisions, deliver the final files</li>
+                <li>Once that's smooth, add copywriting as the second subcontract role</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-dot">3</div>
+                <div>
+                    <div class="phase-title">Build a Reliable Roster</div>
+                    <div class="phase-sub">When you have 3–4 active/recurring clients</div>
+                </div>
+            </div>
+            <ul class="step-list">
+                <li>Have 2–3 subcontractors you trust and can call on per project: designer, writer, SEO</li>
+                <li>Keep relationships warm — check in monthly even when not actively working together</li>
+                <li>Start packaging their services into your own offerings (you sell it, they deliver it)</li>
+                <li>Consider a junior developer for overflow dev work when you're fully booked</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-dot">4</div>
+                <div>
+                    <div class="phase-title">Hire First Part-Time Person</div>
+                    <div class="phase-sub">When revenue is consistent enough to cover their rate + your profit</div>
+                </div>
+            </div>
+            <ul class="step-list">
+                <li>First hire should be for your most time-consuming repeatable task — likely project management or dev</li>
+                <li>Start part-time (10–15 hrs/week), not full-time</li>
+                <li>Must have documented processes before hiring — if you can't explain it, you can't delegate it</li>
+                <li>Minimum revenue signal: consistently hitting $5,000–$8,000/month before considering this step</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- WHERE TO FIND PEOPLE -->
+    <div class="section">
+        <div class="section-title"><span class="num">02</span> Where to Find Subcontractors</div>
+        <div class="platform-grid">
+            <div class="platform-card top">
+                <div class="platform-name">Fiverr</div>
+                <div class="platform-best">Best for: Logo, graphics, copywriting</div>
+                <div class="platform-desc">Fixed-price gigs. Fast turnaround. Good for one-off tasks where you know exactly what you need. Filter by reviews and portfolio.</div>
+                <div class="platform-cost">You pay: <strong>$30–$150/gig</strong></div>
+            </div>
+            <div class="platform-card top">
+                <div class="platform-name">Upwork</div>
+                <div class="platform-best">Best for: Developers, SEO, ongoing work</div>
+                <div class="platform-desc">Better for longer-term relationships. You post a job, review proposals, hire. More vetting required but better for complex or recurring work.</div>
+                <div class="platform-cost">You pay: <strong>$25–$75/hr</strong></div>
+            </div>
+            <div class="platform-card">
+                <div class="platform-name">LinkedIn</div>
+                <div class="platform-best">Best for: Designers, marketers, junior devs</div>
+                <div class="platform-desc">Search "freelance web designer Fayetteville" or browse profiles. Message directly. Great for local collabs and people who want portfolio work.</div>
+                <div class="platform-cost">You pay: <strong>Negotiated directly</strong></div>
+            </div>
+            <div class="platform-card">
+                <div class="platform-name">Discord</div>
+                <div class="platform-best">Best for: Dev communities, long-term collabs</div>
+                <div class="platform-desc">Join web dev / design Discord servers. Post in #looking-for-work channels. People here want real project experience, not just gig money.</div>
+                <div class="platform-cost">You pay: <strong>Negotiated, often low</strong></div>
+            </div>
+            <div class="platform-card">
+                <div class="platform-name">Local Colleges</div>
+                <div class="platform-best">Best for: Hungry students, low cost</div>
+                <div class="platform-desc">FTCC, Methodist University, Fayetteville State. Students want portfolio pieces. Offer a small fee + portfolio credit. Great for design and content work.</div>
+                <div class="platform-cost">You pay: <strong>$50–$150 + credit</strong></div>
+            </div>
+            <div class="platform-card">
+                <div class="platform-name">Referrals</div>
+                <div class="platform-best">Best for: Trusted, pre-vetted people</div>
+                <div class="platform-desc">Ask current clients, other freelancers, and your network. Word of mouth finds the most reliable people. Always your best long-term source.</div>
+                <div class="platform-cost">You pay: <strong>Market rate</strong></div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Rule:</strong> Always test a new subcontractor on a small, low-stakes task before putting them on a real client project. One bad experience with a subcontractor can damage a client relationship you worked hard to build.
+        </div>
+    </div>
+
+    <!-- ROLES TO FILL -->
+    <div class="section">
+        <div class="section-title"><span class="num">03</span> Roles to Fill (In Order)</div>
+        <div class="role-grid">
+            <div class="role-card">
+                <div class="role-name">Graphic / Logo Designer</div>
+                <div class="role-priority high">Priority 1 — First to Outsource</div>
+                <div class="role-details">
+                    <strong>What they do:</strong> Logo design, brand colors, icons, basic graphics for the site.<br><br>
+                    <strong>Where to find:</strong> Fiverr (search "modern logo design"), check portfolio carefully.<br><br>
+                    <strong>Your margin:</strong> Pay $50–100, charge client $150–250.
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">Copywriter</div>
+                <div class="role-priority high">Priority 2 — Most Clients Need This</div>
+                <div class="role-details">
+                    <strong>What they do:</strong> Write page content, service descriptions, About sections, CTAs.<br><br>
+                    <strong>Where to find:</strong> Fiverr, Upwork. Look for writers with small business or web copy experience.<br><br>
+                    <strong>Your margin:</strong> Pay $30–50/page, charge client $75–125/page.
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">SEO Specialist</div>
+                <div class="role-priority medium">Priority 3 — Add When You Offer Ongoing SEO</div>
+                <div class="role-details">
+                    <strong>What they do:</strong> Keyword research, on-page optimization, reporting, link building.<br><br>
+                    <strong>Where to find:</strong> Upwork is best for this. Look for proven results and case studies.<br><br>
+                    <strong>Your margin:</strong> Pay $150–300/mo, charge client $300–500/mo.
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">Junior Developer</div>
+                <div class="role-priority medium">Priority 4 — When You're Fully Booked</div>
+                <div class="role-details">
+                    <strong>What they do:</strong> Handle overflow dev work — HTML/CSS builds, basic JS, updates.<br><br>
+                    <strong>Where to find:</strong> Discord dev communities, local colleges, GitHub profiles.<br><br>
+                    <strong>Your margin:</strong> Pay $25–40/hr, bill client at your standard rate.
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">Project Manager / VA</div>
+                <div class="role-priority low">Priority 5 — When Admin Is Eating Your Time</div>
+                <div class="role-details">
+                    <strong>What they do:</strong> Client communication, follow-ups, scheduling, sending docs/invoices.<br><br>
+                    <strong>Where to find:</strong> Upwork, LinkedIn. Look for someone organized with client experience.<br><br>
+                    <strong>Your margin:</strong> Frees your time to take on more projects — indirect ROI.
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">Photographer / Videographer</div>
+                <div class="role-priority low">Priority 6 — Niche Add-On</div>
+                <div class="role-details">
+                    <strong>What they do:</strong> Professional photos for client websites — restaurants, therapists, local biz.<br><br>
+                    <strong>Where to find:</strong> Local Fayetteville photographers on Instagram or Google.<br><br>
+                    <strong>Your margin:</strong> Refer or package — charge a coordination fee on top.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MILESTONES -->
+    <div class="section">
+        <div class="section-title"><span class="num">04</span> Growth Milestones — When to Make Each Move</div>
+        <table class="mile-table">
+            <thead>
+                <tr>
+                    <th>Milestone</th>
+                    <th>Signal That You're Ready</th>
+                    <th>Next Move</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="milestone">7 Portfolio Projects</div>
+                        <div class="milestone-desc">Currently at 2 complete, 1 in progress</div>
+                    </td>
+                    <td><span class="signal">Portfolio is full, no more "coming soon" slots</span></td>
+                    <td>Raise prices to updated rates. Start pushing LinkedIn harder.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="milestone">First Subcontractor</div>
+                        <div class="milestone-desc">Logo designer via Fiverr</div>
+                    </td>
+                    <td><span class="signal">Client asks for logo and you're spending time on it you don't have</span></td>
+                    <td>Test a Fiverr designer on a real project. Build the relationship.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="milestone">Reliable Roster of 3</div>
+                        <div class="milestone-desc">Designer, writer, one more</div>
+                    </td>
+                    <td><span class="signal">Turning away 2+ projects/month due to capacity</span></td>
+                    <td>Start packaging subcontractor services into your own offerings.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="milestone">$5,000/Month Revenue</div>
+                        <div class="milestone-desc">Consistent, not one-off</div>
+                    </td>
+                    <td><span class="signal">3+ months in a row at this level</span></td>
+                    <td>Consider first part-time hire. Document every process before hiring.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="milestone">First Part-Time Hire</div>
+                        <div class="milestone-desc">Developer or project manager</div>
+                    </td>
+                    <td><span class="signal">You have more work than hours and processes are documented</span></td>
+                    <td>10–15 hrs/week. Paid per project or hourly, not salary yet.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warn-box">
+            <strong>Do not skip steps.</strong> Hiring before you have consistent revenue and documented processes is the #1 way early studios fail. Build the demand first, then bring people in to meet it.
+        </div>
+    </div>
+
+    <!-- QUICK WINS -->
+    <div class="section">
+        <div class="section-title"><span class="num">05</span> Quick Wins to Do Right Now</div>
+        <ul class="step-list" style="margin-left: 0;">
+            <li><strong>Update prices</strong> on index.html and all client docs (see Pricing Update doc)</li>
+            <li><strong>Post on LinkedIn</strong> — share the Miles2Wisdom project with a short breakdown of what you built and why</li>
+            <li><strong>Ask for referrals</strong> — email your 2 current clients and ask if they know anyone who needs a site</li>
+            <li><strong>Create a Fiverr account</strong> — browse logo designers now so you know who to call when the need arises</li>
+            <li><strong>Fix the FAQ</strong> on your site — it still shows $374/$599/$899 which is inconsistent with your pricing section</li>
+            <li><strong>Add Google Business Profile setup</strong> as an add-on to your packages — it takes an hour and clients love it</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>WisdomLayers — Internal Growth Plan | March 2026</p>
+        <p style="margin-top:4px;">Not a client-facing document. For internal use only.</p>
+    </div>
+
+</div>
+</body>
+</html>

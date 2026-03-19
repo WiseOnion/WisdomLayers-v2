@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WisdomLayers Invoice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page { margin: 0.75in; size: letter; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            font-size: 11pt;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .screen-wrapper { max-width: 850px; margin: 40px auto; padding: 0 20px; }
+        .container { background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); overflow: hidden; }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            padding: 36px 50px; color: white;
+            display: flex; justify-content: space-between; align-items: center; gap: 20px;
+        }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo-wrap img { height: 60px; width: 60px; object-fit: contain; }
+        .header-left-text h1 { font-size: 1.8em; font-weight: 700; margin: 0 0 2px; }
+        .header-left-text .tagline { font-size: 0.88em; opacity: 0.85; font-weight: 400; }
+        .header-right { text-align: right; }
+        .invoice-title { font-size: 2.6em; font-weight: 700; letter-spacing: 3px; line-height: 1; margin-bottom: 8px; font-family: 'Poppins', sans-serif; }
+        .invoice-number-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+        .invoice-number-wrap label { font-size: 0.82em; opacity: 0.8; white-space: nowrap; }
+        .invoice-fill-line {
+            border-bottom: 1.5px solid rgba(255,255,255,0.7);
+            min-height: 26px;
+            width: 160px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* CONTENT */
+        .content { padding: 46px 50px; }
+
+        /* FROM / BILL TO */
+        .info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px; }
+        .info-block { background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 20px 22px; }
+        .info-block h3 {
+            color: #0d9488; font-size: 0.8em; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;
+        }
+        .info-block p { font-size: 0.93em; color: #475569; margin: 3px 0; }
+        .info-block strong { color: #1e293b; }
+        .bill-to-field { margin: 7px 0; }
+        .bill-to-field label {
+            display: block; font-size: 0.75em; font-weight: 600; color: #64748b;
+            text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;
+        }
+        .bill-to-fill-line {
+            border-bottom: 1.5px solid #0d9488;
+            min-height: 26px;
+            width: 100%;
+            margin: 3px 0 8px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* INVOICE DETAILS STRIP */
+        .invoice-details {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 1.5px solid #14b8a6; border-radius: 12px;
+            padding: 20px 26px; margin-bottom: 32px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+            page-break-inside: avoid;
+        }
+        .detail-item .d-label {
+            font-size: 0.78em; color: #64748b; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+        }
+        .detail-fill-line {
+            border-bottom: 1.5px solid #0d9488;
+            min-height: 26px;
+            width: 100%;
+            margin-top: 4px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .status-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82em; }
+        .status-badge.due { background: #fef3c7; -webkit-print-color-adjust: exact; print-color-adjust: exact; color: #92400e; }
+        .status-badge.paid { background: #d1fae5; -webkit-print-color-adjust: exact; print-color-adjust: exact; color: #065f46; }
+
+        /* LINE ITEMS TABLE */
+        .table-wrapper { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.07); margin-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        thead th {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            color: white; padding: 13px 15px; text-align: left;
+            font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.88em;
+        }
+        thead th.right { text-align: right; }
+        thead th.center { text-align: center; }
+        tbody td { padding: 14px 15px; border-bottom: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr.shaded td { background: #f8fafc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        td.right { text-align: right; }
+        td.center { text-align: center; }
+        .item-name { font-weight: 600; color: #1e293b; display: block; margin-bottom: 3px; }
+        .item-desc { font-size: 0.86em; color: #64748b; }
+
+        /* TOTALS */
+        .totals-section {
+            margin: 22px 0 34px; display: flex; flex-direction: column;
+            align-items: flex-end; border-top: 3px solid #0d9488; padding-top: 16px;
+        }
+        .total-row { display: flex; justify-content: space-between; width: 290px; padding: 7px 14px; font-size: 0.97em; }
+        .total-row.subtotal { color: #64748b; }
+        .total-row.tax { color: #64748b; border-bottom: 1px solid #e2e8f0; margin-bottom: 6px; padding-bottom: 10px; }
+        .total-row.grand-total {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-radius: 8px; font-weight: 700; font-size: 1.25em;
+            color: #0d9488; margin-top: 4px; padding: 11px 14px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* INVOICE TYPE NOTE */
+        .invoice-type-note {
+            background: #f0fdfa; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 1.5px solid #14b8a6; border-radius: 8px;
+            padding: 14px 18px; margin-bottom: 28px; font-size: 0.92em;
+            color: #0d9488; font-weight: 600;
+        }
+
+        /* PAYMENT INFO */
+        .payment-info {
+            background: #dbeafe; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #3b82f6; border-radius: 8px;
+            padding: 22px 24px; margin: 26px 0; page-break-inside: avoid;
+        }
+        .payment-info h3 { color: #1e40af; font-size: 1.05em; margin-bottom: 6px; }
+        .payment-info .payment-intro { color: #1e40af; font-size: 0.93em; margin-bottom: 16px; }
+        .payment-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+        .payment-method { background: white; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px 14px; text-align: center; }
+        .payment-method strong { display: block; color: #1e40af; font-size: 0.88em; margin-bottom: 3px; }
+        .payment-method span { font-size: 0.86em; color: #475569; }
+        .payment-ref { font-size: 0.88em; color: #1e40af; margin-top: 8px; }
+
+        /* TERMS */
+        .terms-box {
+            background: #fef3c7; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #f59e0b; border-radius: 8px;
+            padding: 20px 22px; margin: 26px 0; page-break-inside: avoid;
+        }
+        .terms-box h3 { color: #92400e; font-size: 1.02em; margin-bottom: 10px; }
+        .terms-box ul { padding-left: 18px; }
+        .terms-box li { color: #78350f; margin: 6px 0; font-size: 0.93em; }
+
+        /* LATE PAYMENT NOTICE */
+        .late-payment-box {
+            background: #fee2e2; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #ef4444; border-radius: 8px;
+            padding: 18px 22px; margin: 18px 0; page-break-inside: avoid;
+        }
+        .late-payment-box h3 { color: #991b1b; font-size: 1.02em; margin-bottom: 8px; }
+        .late-payment-box p { color: #7f1d1d; font-size: 0.93em; }
+
+        /* NEXT STEPS */
+        .next-steps {
+            background: #d1fae5; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #10b981; border-radius: 8px;
+            padding: 20px 22px; margin: 26px 0; page-break-inside: avoid;
+        }
+        .next-steps h3 { color: #065f46; font-size: 1.02em; margin-bottom: 10px; }
+        .next-steps p { color: #047857; margin: 6px 0; font-size: 0.93em; }
+
+        /* SIGNATURE LINE */
+        .sig-section {
+            margin: 32px 0 10px; padding: 24px 26px;
+            background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px;
+            page-break-inside: avoid;
+        }
+        .sig-section h3 { color: #0d9488; margin-bottom: 14px; font-size: 1.05em; }
+        .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 10px; }
+        .sig-block p { font-size: 0.9em; color: #64748b; margin-bottom: 4px; }
+        .sig-line { border-bottom: 2px solid #1e293b; min-height: 38px; margin: 4px 0 6px; }
+        .sig-label { font-size: 0.78em; color: #94a3b8; }
+
+        /* QUESTIONS */
+        .questions-box { text-align: center; margin: 28px 0; padding: 22px; background: #f8fafc; border-radius: 12px; }
+        .questions-box p { margin: 4px 0; color: #64748b; font-size: 0.92em; }
+        .questions-box .q-heading { font-size: 1.05em; font-weight: 700; color: #1e293b; }
+        .questions-box a { color: #0d9488; text-decoration: none; font-weight: 600; }
+
+        /* FOOTER */
+        .footer { background: #f8fafc; padding: 24px 50px; border-top: 2px solid #e2e8f0; text-align: center; }
+        .footer p { margin: 4px 0; color: #64748b; font-size: 0.86em; }
+        .footer strong { color: #1e293b; }
+
+        /* PRINT */
+        @media print {
+            body { background: white; }
+            .screen-wrapper { max-width: 100%; margin: 0; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .table-wrapper { page-break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 680px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .header-right { text-align: left; }
+            .invoice-number-wrap { justify-content: flex-start; }
+            .info-section { grid-template-columns: 1fr; }
+            .invoice-details { grid-template-columns: 1fr; }
+            .payment-methods { grid-template-columns: 1fr; }
+            .content { padding: 30px 22px; }
+            .total-row { width: 100%; }
+            .sig-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="screen-wrapper">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-wrap">
+                    <img src="images/Logo.png" alt="WisdomLayers">
+                </div>
+                <div class="header-left-text">
+                    <h1>WisdomLayers</h1>
+                    <p class="tagline">Web Development Services — Fayetteville, NC</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="invoice-title">INVOICE</div>
+                <div class="invoice-number-wrap">
+                    <label>Invoice No.</label>
+                    <div class="invoice-fill-line">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <!-- FROM / BILL TO -->
+            <div class="info-section">
+                <div class="info-block">
+                    <h3>From</h3>
+                    <p><strong>WisdomLayers</strong></p>
+                    <p>Fayetteville, NC</p>
+                    <p>contact@wisdomlayers.com</p>
+                    <p>wisdomlayers.com</p>
+                </div>
+                <div class="info-block">
+                    <h3>Bill To</h3>
+                    <div class="bill-to-field">
+                        <label>Client / Business Name</label>
+                        <div class="bill-to-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="bill-to-field">
+                        <label>Address</label>
+                        <div class="bill-to-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="bill-to-field">
+                        <label>City, State ZIP</label>
+                        <div class="bill-to-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="bill-to-field">
+                        <label>Email</label>
+                        <div class="bill-to-fill-line">&nbsp;</div>
+                    </div>
+                    <div class="bill-to-field">
+                        <label>Phone</label>
+                        <div class="bill-to-fill-line">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVOICE DETAILS STRIP -->
+            <div class="invoice-details">
+                <div class="detail-item">
+                    <div class="d-label">Invoice Date</div>
+                    <div class="detail-fill-line">&nbsp;</div>
+                </div>
+                <div class="detail-item">
+                    <div class="d-label">Due Date</div>
+                    <div class="detail-fill-line">&nbsp;</div>
+                </div>
+                <div class="detail-item">
+                    <div class="d-label">Status</div>
+                    <div style="margin-top:4px;"><span class="status-badge due">Payment Due</span></div>
+                </div>
+            </div>
+
+            <!-- INVOICE TYPE NOTE -->
+            <div class="invoice-type-note">
+                This invoice is for the <strong>50% Deposit</strong> — due upon contract execution. The remaining 50% will be invoiced upon project completion, prior to website launch.
+            </div>
+
+            <!-- LINE ITEMS TABLE -->
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:50%;">Description</th>
+                            <th class="center" style="width:12%;">Qty</th>
+                            <th class="right" style="width:16%;">Unit Price</th>
+                            <th class="right" style="width:22%;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="item-name">Professional Website Package</span>
+                                <span class="item-desc">6 to 10 custom pages · Advanced SEO · CMS integration · Blog/portfolio · Advanced forms · Social media integration · 2 months post-launch support</span>
+                            </td>
+                            <td class="center">1</td>
+                            <td class="right">$799.00</td>
+                            <td class="right"><strong>$799.00</strong></td>
+                        </tr>
+                        <tr class="shaded">
+                            <td>
+                                <span class="item-name">50% Deposit — Due Upon Contract Execution</span>
+                                <span class="item-desc">Required to commence project. Non-refundable once work begins, including discovery calls, planning, or any development activity.</span>
+                            </td>
+                            <td class="center">1</td>
+                            <td class="right">$399.50</td>
+                            <td class="right"><strong>$399.50</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="item-name">Optional: Domain Purchase Setup</span>
+                                <span class="item-desc">Domain research, registration, DNS configuration, hosting connection, and full account transfer to Client. Client retains full ownership. Includes domain registration cost plus $35 setup fee.</span>
+                            </td>
+                            <td class="center">1</td>
+                            <td class="right">$47.00</td>
+                            <td class="right"><strong>$47.00</strong></td>
+                        </tr>
+                        <tr class="shaded">
+                            <td>
+                                <span class="item-name" style="color:#94a3b8; font-weight:400; font-style:italic;">Additional item (if applicable)</span>
+                                <span class="item-desc"></span>
+                            </td>
+                            <td class="center">-</td>
+                            <td class="right">-</td>
+                            <td class="right">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TOTALS -->
+            <div class="totals-section">
+                <div class="total-row subtotal">
+                    <span>Subtotal</span>
+                    <span>$446.50</span>
+                </div>
+                <div class="total-row tax">
+                    <span>Tax (0%)</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total Due</span>
+                    <span>$446.50</span>
+                </div>
+            </div>
+
+            <!-- PAYMENT INFO -->
+            <div class="payment-info">
+                <h3>Payment Information</h3>
+                <p class="payment-intro">Please submit payment using one of the methods listed below. Include your invoice number with all payments to ensure proper processing.</p>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <strong>PayPal</strong>
+                        <span>payments@wisdomlayers.com</span>
+                    </div>
+                    <div class="payment-method">
+                        <strong>CashApp</strong>
+                        <span>$WisdomLayers</span>
+                    </div>
+                    <div class="payment-method">
+                        <strong>Bank Transfer</strong>
+                        <span>Request details by email</span>
+                    </div>
+                </div>
+                <p class="payment-ref"><strong>Payment Reference:</strong> Please include your invoice number with your payment to ensure correct allocation.</p>
+            </div>
+
+            <!-- TERMS -->
+            <div class="terms-box">
+                <h3>Payment Terms and Conditions</h3>
+                <ul>
+                    <li><strong>Deposit is non-refundable</strong> once work has commenced — this includes discovery calls, planning sessions, design drafts, and any development activity.</li>
+                    <li>Payment is due within <strong>7 days</strong> of invoice date. Invoices unpaid beyond 7 days may result in a delayed project start.</li>
+                    <li>Late payments (14 or more days overdue) will incur a <strong>$50 per week late fee</strong> plus 1.5% monthly interest (18% annually).</li>
+                    <li>Development commences within <strong>2 business days</strong> of deposit receipt and clearance.</li>
+                    <li>The final 50% balance is due upon project completion — <strong>prior to</strong> website launch or file transfer.</li>
+                    <li>Source files, login credentials, and website access are delivered only after full payment is received and cleared.</li>
+                    <li>Billing disputes must be reported in writing within <strong>5 business days</strong> of invoice receipt.</li>
+                </ul>
+            </div>
+
+            <!-- LATE PAYMENT CONSEQUENCES -->
+            <div class="late-payment-box">
+                <h3>Late Payment Consequences</h3>
+                <p>Accounts unpaid after 30 days may be referred to a collections agency. The Client shall be responsible for all collection costs, including reasonable attorney fees. WisdomLayers reserves the right to pursue all available legal remedies for unpaid balances.</p>
+            </div>
+
+            <!-- WHAT HAPPENS AFTER YOU PAY -->
+            <div class="next-steps">
+                <h3>What Happens After Payment Is Received</h3>
+                <p>- Payment received — project locked into the development schedule</p>
+                <p>- Welcome email sent with Client Portal access within 24 hours</p>
+                <p>- Discovery call scheduled to align on vision, goals, and design direction</p>
+                <p>- Development commences within 2 business days — regular progress updates throughout</p>
+            </div>
+
+            <!-- CLIENT ACKNOWLEDGMENT / SIGNATURE -->
+            <div class="sig-section">
+                <h3>Client Acknowledgment</h3>
+                <p style="font-size:0.92em; color:#475569; margin-bottom:18px;">By submitting payment for this invoice, the Client acknowledges receipt of this invoice, agrees to the payment terms stated above, and confirms that the deposit is non-refundable once work commences as defined in the Web Development Agreement. This invoice is governed by the laws of the State of North Carolina.</p>
+                <div class="sig-grid">
+                    <div class="sig-block">
+                        <p>Client Signature</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-label">Signature</p>
+                        <p style="margin-top:16px;">Printed Name</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-label">Print Full Legal Name</p>
+                    </div>
+                    <div class="sig-block">
+                        <p>Date</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-label">Date Signed</p>
+                        <p style="margin-top:16px;">Project / Package</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-label">Package Selected</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTIONS -->
+            <div class="questions-box">
+                <p class="q-heading">Questions about this invoice?</p>
+                <p>Please contact us at <a href="mailto:contact@wisdomlayers.com">contact@wisdomlayers.com</a></p>
+                <p>We respond within 24 business hours, Monday through Friday.</p>
+            </div>
+
+        </div><!-- /content -->
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>WisdomLayers</strong> | Web Development Services</p>
+            <p>Fayetteville, NC &nbsp;|&nbsp; contact@wisdomlayers.com &nbsp;|&nbsp; wisdomlayers.com</p>
+            <p style="margin-top:10px; font-size:0.8em;">Invoice prepared 2026. Please retain a copy for your records. This invoice is governed by the laws of the State of North Carolina.</p>
+        </div>
+
+    </div><!-- /container -->
+</div><!-- /screen-wrapper -->
+</body>
+</html>

@@ -1,8 +1,9 @@
 // Combined JavaScript for WisdomLayers
 
 
-// Modal functions
+// Modal functions — delegate to projects.js
 function openModal(projectId) {
+    if (typeof openProjectModal === 'function') { openProjectModal(projectId); return; }
     const project = projectData[projectId];
     if (!project) return;
 
@@ -289,9 +290,32 @@ function switchDesktopImage(imageId, newImageSrc) {
     }
 }
 
+// ===== MOBILE MENU =====
+function initMobileMenu() {
+    const btn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if (!btn || !menu) return;
+    const icon = btn.querySelector('.mobile-menu-icon');
+
+    function open() {
+        menu.classList.add('active');
+        if (icon) icon.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function close() {
+        menu.classList.remove('active');
+        if (icon) icon.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', () => menu.classList.contains('active') ? close() : open());
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    
-    
+
+    initMobileMenu();
+
     // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -418,131 +442,150 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== PRICING CAROUSEL =====
     const carousel = document.querySelector('.pricing-carousel');
+    const carouselWrapper = document.querySelector('.pricing-carousel-wrapper');
     const prevBtn = document.querySelector('.carousel-prev');
     const nextBtn = document.querySelector('.carousel-next');
     const dots = document.querySelectorAll('.carousel-dot');
-    
-    if (carousel && prevBtn && nextBtn) {
-        let currentIndex = 0;
-        const totalCards = 4; // Starter, Professional, Premium, Custom
-        const isMobile = window.innerWidth < 768;
-        const maxIndex = isMobile ? totalCards - 1 : 1; // Desktop shows 3 at a time, so only 2 positions
-        
-        function updateCarousel() {
-            const isMobile = window.innerWidth < 768;
-            const cardWidth = isMobile ? 100 : 100 / 3; // 100% on mobile, 33.33% on desktop
-            const translateX = -(currentIndex * cardWidth);
-            carousel.style.transform = `translateX(${translateX}%)`;
-            
-            // Update dots
-            dots.forEach((dot, index) => {
-                if (index === currentIndex) {
-                    dot.classList.add('active');
-                    dot.classList.remove('bg-gray-300');
-                    dot.classList.add('bg-teal-600');
-                    dot.style.width = '1rem';
-                } else {
-                    dot.classList.remove('active');
-                    dot.classList.add('bg-gray-300');
-                    dot.classList.remove('bg-teal-600');
-                    dot.style.width = '0.5rem';
-                }
+
+    if (carousel && carouselWrapper && prevBtn && nextBtn) {
+        const CARD_COUNT = carousel.querySelectorAll('.pricing-card').length;
+        let realIndex = 1; // Start on Professional (Most Popular)
+
+        function getVisibleCount() {
+            return window.innerWidth < 768 ? 1 : 3;
+        }
+
+        function getCardWidth() {
+            return carouselWrapper.offsetWidth / getVisibleCount();
+        }
+
+        function setAllCardWidths() {
+            const cardWidth = getCardWidth();
+            carousel.querySelectorAll('.pricing-card').forEach(card => {
+                card.style.width = cardWidth + 'px';
+                card.style.flex = `0 0 ${cardWidth}px`;
             });
         }
-        
-        prevBtn.addEventListener('click', function() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
+
+        function updateActiveCard() {
+            carousel.querySelectorAll('.pricing-card').forEach((card, i) => {
+                card.classList.toggle('active', i === realIndex);
+            });
+        }
+
+        function updateDots() {
+            dots.forEach((dot, i) => {
+                const isActive = i === realIndex;
+                dot.classList.toggle('active', isActive);
+                dot.classList.toggle('bg-teal-600', isActive);
+                dot.classList.toggle('bg-gray-300', !isActive);
+                dot.style.width = isActive ? '1rem' : '0.5rem';
+            });
+        }
+
+        function updateArrows() {
+            prevBtn.style.opacity = realIndex === 0 ? '0.3' : '1';
+            prevBtn.style.pointerEvents = realIndex === 0 ? 'none' : 'auto';
+            nextBtn.style.opacity = realIndex === CARD_COUNT - 1 ? '0.3' : '1';
+            nextBtn.style.pointerEvents = realIndex === CARD_COUNT - 1 ? 'none' : 'auto';
+        }
+
+        function getTranslateX(index) {
+            const visibleCount = getVisibleCount();
+            const cardWidth = getCardWidth();
+            const offset = visibleCount === 1 ? 0 : 1;
+            const raw = (index - offset) * cardWidth;
+            const max = (CARD_COUNT - visibleCount) * cardWidth;
+            return Math.max(0, Math.min(raw, max));
+        }
+
+        function goTo(index) {
+            realIndex = Math.max(0, Math.min(CARD_COUNT - 1, index));
+            carousel.classList.remove('no-transition');
+            carousel.style.transform = `translateX(-${getTranslateX(realIndex)}px)`;
+            updateActiveCard();
+            updateDots();
+            updateArrows();
+        }
+
+        function snapTo(index) {
+            realIndex = Math.max(0, Math.min(CARD_COUNT - 1, index));
+            carousel.classList.add('no-transition');
+            carousel.style.transform = `translateX(-${getTranslateX(realIndex)}px)`;
+            updateActiveCard();
+            updateDots();
+            updateArrows();
+        }
+
+        [prevBtn, nextBtn].forEach(btn => {
+            btn.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
+            btn.addEventListener('touchend', e => e.stopPropagation(), { passive: true });
+            btn.addEventListener('mousedown', e => e.stopPropagation());
         });
-        
-        nextBtn.addEventListener('click', function() {
-            const isMobile = window.innerWidth < 768;
-            const maxIdx = isMobile ? totalCards - 1 : 1;
-            if (currentIndex < maxIdx) {
-                currentIndex++;
-                updateCarousel();
-            }
+
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            goTo(realIndex - 1);
         });
-        
-        // Dot navigation
+
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            goTo(realIndex + 1);
+        });
+
         dots.forEach((dot, index) => {
             dot.addEventListener('click', function() {
-                currentIndex = index;
-                updateCarousel();
+                goTo(index);
             });
         });
-        
-        // Handle window resize
+
+        let touchStartX = 0;
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', function(e) {
+            const delta = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(delta) > 50) {
+                if (delta > 0) goTo(realIndex + 1);
+                else goTo(realIndex - 1);
+            }
+        }, { passive: true });
+
         let resizeTimer;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
-                currentIndex = 0; // Reset to first slide on resize
-                updateCarousel();
+                setAllCardWidths();
+                snapTo(realIndex);
             }, 250);
         });
-        
-        // Touch swipe support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        carousel.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, false);
-        
-        carousel.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, false);
-        
-        function handleSwipe() {
-            const isMobile = window.innerWidth < 768;
-            if (!isMobile) return;
-            
-            if (touchEndX < touchStartX - 50) {
-                // Swipe left
-                if (currentIndex < totalCards - 1) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            }
-            
-            if (touchEndX > touchStartX + 50) {
-                // Swipe right
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                }
-            }
-        }
-        
+
         // Initialize
-        updateCarousel();
+        setAllCardWidths();
+        snapTo(1); // Start on Professional
     }
     
     // ===== FAQ ACCORDION =====
     const faqQuestions = document.querySelectorAll('.faq-question');
-    
+
     faqQuestions.forEach(question => {
         question.addEventListener('click', function() {
             const answer = this.nextElementSibling;
-            const isOpen = !answer.classList.contains('hidden');
-            
-            // Close all other answers
-            document.querySelectorAll('.faq-answer').forEach(a => {
-                a.classList.add('hidden');
-            });
-            
-            document.querySelectorAll('.faq-question').forEach(q => {
-                q.classList.remove('active');
-            });
-            
-            // Toggle current answer
+            const isOpen = answer.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+            document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+            document.querySelectorAll('.faq-item-active').forEach(el => el.classList.remove('faq-item-active'));
+
+            // Open this one if it wasn't already open
             if (!isOpen) {
-                answer.classList.remove('hidden');
+                answer.classList.add('open');
                 this.classList.add('active');
+                this.parentElement.classList.add('faq-item-active');
             }
         });
     });

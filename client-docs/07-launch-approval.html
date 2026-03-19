@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Approval Form — WisdomLayers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page { margin: 0.75in; size: letter; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: #475569;
+            font-size: 11pt;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .screen-wrapper { max-width: 850px; margin: 40px auto; padding: 0 20px; }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            padding: 56px 50px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: ''; position: absolute; top: -60px; right: -60px;
+            width: 320px; height: 320px;
+            background: rgba(255,255,255,0.08); border-radius: 50%; pointer-events: none;
+        }
+        .header::after {
+            content: ''; position: absolute; bottom: -90px; left: -90px;
+            width: 380px; height: 380px;
+            background: rgba(255,255,255,0.05); border-radius: 50%; pointer-events: none;
+        }
+        .logo-wrap {
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .logo-wrap img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+        .header h1 {
+            font-size: 2.4em; font-weight: 700;
+            margin: 0 0 6px; position: relative; z-index: 1; letter-spacing: -0.5px;
+        }
+        .header .company-name {
+            font-size: 1.05em; font-weight: 600; opacity: 0.92;
+            position: relative; z-index: 1; margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 1.02em; opacity: 0.85; font-weight: 400;
+            position: relative; z-index: 1;
+        }
+
+        /* CONTENT */
+        .content { padding: 52px 50px; }
+
+        /* INTRO BOX */
+        .intro-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 2px solid #14b8a6; border-radius: 12px;
+            padding: 28px 32px; margin-bottom: 36px;
+            page-break-inside: avoid;
+        }
+        .intro-box h2 { color: #0d9488; font-size: 1.25em; font-weight: 700; margin-bottom: 10px; border: none; padding: 0; margin-top: 0; }
+        .intro-box p { font-size: 0.97em; line-height: 1.75; color: #1e293b; margin: 8px 0 0; }
+
+        /* SECTION HEADINGS */
+        h2 {
+            color: #0d9488; font-size: 1.4em; font-weight: 700;
+            margin: 36px 0 18px; padding-bottom: 10px;
+            border-bottom: 3px solid #0d9488;
+        }
+
+        p { margin: 10px 0; }
+
+        /* FORM CARD */
+        .form-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 26px 28px;
+            margin: 0 0 24px;
+            page-break-inside: avoid;
+        }
+        .form-card h3 {
+            color: #0d9488; font-size: 1.02em; font-weight: 700;
+            margin: 0 0 16px; padding-bottom: 8px;
+            border-bottom: 2px solid #ccfbf1;
+        }
+
+        /* FIELDS */
+        .field-group { margin: 0 0 18px; }
+        .field-group:last-child { margin-bottom: 0; }
+        .field-label {
+            font-weight: 600; color: #1e293b; font-size: 0.95em;
+            display: block; margin-bottom: 6px;
+        }
+        .field-note {
+            font-size: 0.84em; color: #64748b; margin-bottom: 8px; display: block;
+        }
+        .field-input {
+            width: 100%;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: #1e293b;
+            background: white;
+            resize: vertical;
+        }
+        .field-input:focus {
+            outline: none;
+            border-color: #0d9488;
+        }
+        input.field-input { resize: none; height: 42px; }
+        textarea.field-input { min-height: 80px; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+        /* REVIEW CHECKLIST */
+        .review-checklist {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 26px 28px;
+            margin: 0 0 24px;
+            page-break-inside: avoid;
+        }
+        .review-checklist h3 {
+            color: #0d9488; font-size: 1.05em; font-weight: 700;
+            margin: 0 0 18px;
+        }
+        .checklist-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            margin: 10px 0; padding: 12px 14px;
+            background: #f8fafc; border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .checklist-item input[type="checkbox"] {
+            width: 17px; height: 17px; accent-color: #0d9488;
+            cursor: pointer; margin-top: 3px; flex-shrink: 0;
+        }
+        .checklist-item .item-text {
+            font-size: 0.93em; color: #1e293b; line-height: 1.6;
+        }
+        .checklist-item .item-text strong { color: #0d9488; }
+
+        /* ALERT BOX */
+        .alert-box {
+            background: #fee2e2; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #ef4444; border-radius: 8px;
+            padding: 18px 22px; margin: 0 0 28px; page-break-inside: avoid;
+        }
+        .alert-box h3 { color: #991b1b; margin: 0 0 8px; font-size: 1em; }
+        .alert-box p, .alert-box li { color: #7f1d1d; font-size: 0.93em; }
+        .alert-box ul { padding-left: 18px; margin-top: 6px; }
+        .alert-box li { margin: 6px 0; }
+
+        /* SUCCESS BOX */
+        .success-box {
+            background: #d1fae5; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-left: 4px solid #10b981; border-radius: 8px;
+            padding: 18px 22px; margin: 0 0 28px; page-break-inside: avoid;
+        }
+        .success-box h3 { color: #065f46; margin: 0 0 8px; font-size: 1em; }
+        .success-box p, .success-box li { color: #065f46; font-size: 0.93em; }
+        .success-box ul { padding-left: 18px; margin-top: 6px; }
+        .success-box li { margin: 6px 0; }
+
+        /* SIGNATURE BLOCK */
+        .signature-section {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px 34px;
+            margin: 28px 0 0;
+            page-break-inside: avoid;
+        }
+        .signature-section h2 {
+            color: #0d9488; font-size: 1.3em; font-weight: 700;
+            margin: 0 0 6px; padding-bottom: 10px;
+            border-bottom: 3px solid #0d9488;
+        }
+        .sig-statement {
+            background: #f0fdfa;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 1.5px solid #14b8a6;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin: 16px 0 24px;
+            font-size: 0.93em;
+            color: #1e293b;
+            line-height: 1.75;
+        }
+        .sig-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 20px;
+        }
+        .sig-field label {
+            font-weight: 600; color: #1e293b; font-size: 0.88em;
+            display: block; margin-bottom: 8px;
+        }
+        .sig-line {
+            border: none;
+            border-bottom: 2px solid #1e293b;
+            width: 100%;
+            height: 42px;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            color: #1e293b;
+            padding: 0 4px;
+        }
+        .sig-line:focus { outline: none; border-bottom-color: #0d9488; }
+
+        /* LAUNCH BANNER */
+        .launch-banner {
+            text-align: center;
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-radius: 12px;
+            padding: 36px 40px;
+            margin: 36px 0 0;
+            color: white;
+            page-break-inside: avoid;
+        }
+        .launch-banner h2 { color: white; border: none; margin: 0 0 10px; font-size: 1.6em; }
+        .launch-banner p { opacity: 0.92; font-size: 1em; margin: 6px 0 0; }
+
+        /* FOOTER */
+        .footer {
+            background: #f8fafc; padding: 24px 50px;
+            border-top: 2px solid #e2e8f0; text-align: center;
+        }
+        .footer p { margin: 4px 0; color: #64748b; font-size: 0.87em; }
+        .footer strong { color: #1e293b; }
+
+        /* PRINT */
+        @media print {
+            body { background: white; }
+            .screen-wrapper { max-width: 100%; margin: 0; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .header::before, .header::after { display: none; }
+            .header { padding: 28px 40px; }
+            .content { padding: 32px 40px; }
+            .field-input, .sig-line { border-color: #cbd5e1; background: white; }
+            h2 { page-break-after: avoid; }
+            .form-card, .review-checklist, .signature-section, .alert-box, .success-box, .launch-banner { page-break-inside: avoid; }
+            .two-col, .sig-row, .checklist-item { page-break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 680px) {
+            .content { padding: 30px 22px; }
+            .header { padding: 44px 26px; }
+            .header h1 { font-size: 1.9em; }
+            .two-col, .sig-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="screen-wrapper">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-wrap">
+                <img src="images/Logo.png" alt="WisdomLayers">
+            </div>
+            <div class="company-name">WisdomLayers</div>
+            <h1>Launch Approval Form</h1>
+            <p class="subtitle">Web Development Services — Final Authorization to Deploy</p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="intro-box">
+                <h2>Your Website Is Ready</h2>
+                <p>This form confirms that you have thoroughly reviewed your completed website and authorize WisdomLayers to proceed with deployment. Please review every page, link, form, and piece of content before signing. Once this form is signed and the final payment is received, your site will go live within the timeframe specified.</p>
+            </div>
+
+            <!-- PROJECT INFO -->
+            <h2>Project Reference</h2>
+            <div class="form-card">
+                <h3>Client and Project Details</h3>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Client Name</label>
+                        <input type="text" class="field-input" placeholder="Full name">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Business Name</label>
+                        <input type="text" class="field-input" placeholder="Business or brand name">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Website URL (Preview / Staging)</label>
+                        <input type="text" class="field-input" placeholder="https://preview.yourdomain.com">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Final Domain (Live URL)</label>
+                        <input type="text" class="field-input" placeholder="https://www.yourdomain.com">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="field-group">
+                        <label class="field-label">Package Purchased</label>
+                        <input type="text" class="field-input" placeholder="Starter / Professional / Premium / Custom">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Date of Review</label>
+                        <input type="text" class="field-input" placeholder="MM / DD / YYYY">
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVIEW CHECKLIST -->
+            <h2>Pre-Launch Review Checklist</h2>
+            <p style="font-size:0.95em; color:#475569; margin-bottom:18px;">Please confirm each item below before signing. Check each box only after you have personally verified that item on the live preview link.</p>
+
+            <div class="review-checklist">
+                <h3>Content and Accuracy</h3>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Business Information:</strong> Business name, address, phone number, email, and hours are correct on all pages where displayed.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Written Copy:</strong> All text content on every page has been reviewed and is accurate, free of errors, and approved for publication.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Images and Media:</strong> All photos, images, and graphics are correct and properly represent your business. No placeholder images remain.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Services and Pricing:</strong> All listed services, packages, and pricing information are accurate and up to date.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Social Media Links:</strong> All social media icons and links direct to the correct profiles and open properly.</div>
+                </div>
+            </div>
+
+            <div class="review-checklist">
+                <h3>Functionality</h3>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Navigation:</strong> All menu links work correctly and navigate to the right pages. Mobile menu opens and closes properly.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Contact Form:</strong> Contact form submits successfully. A test submission was completed and the confirmation message appeared.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Buttons and Links:</strong> All call-to-action buttons, internal links, and external links have been tested and work correctly.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Mobile Display:</strong> The website was viewed on a mobile device (or browser mobile preview). Layout appears correct on small screens.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Integrated Tools:</strong> Any booking links, payment integrations, chat tools, or third-party embeds are working as expected.</div>
+                </div>
+            </div>
+
+            <div class="review-checklist">
+                <h3>Final Confirmation</h3>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Full Review Completed:</strong> I have reviewed every page of the website thoroughly and not just the homepage.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>No Outstanding Revision Requests:</strong> I confirm there are no pending revision requests. Any requests submitted after signing this form are considered new, billable work.</div>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox">
+                    <div class="item-text"><strong>Ready to Launch:</strong> I confirm the website is complete and I authorize WisdomLayers to proceed with deployment to my live domain.</div>
+                </div>
+            </div>
+
+            <!-- FINAL NOTES -->
+            <div class="field-group" style="margin: 0 0 24px;">
+                <label class="field-label">Final Notes or Comments (Optional)</label>
+                <span class="field-note">If you have any last observations or notes to document before launch, enter them here. This is not for revision requests — it is for informational notes only.</span>
+                <textarea class="field-input" placeholder="Any final comments for the record..."></textarea>
+            </div>
+
+            <!-- POLICY REMINDERS -->
+            <div class="alert-box">
+                <h3>Post-Approval Policy — Please Read Before Signing</h3>
+                <ul>
+                    <li>Changes requested after this form is signed are <strong>billable as new work</strong>, regardless of how minor.</li>
+                    <li>The website will not go live until both this form is signed and final payment is confirmed received.</li>
+                    <li>Your post-launch support period begins on the date the site goes live, not the date of this form.</li>
+                    <li>Minor bug fixes discovered within 14 days of launch are covered at no charge and are not considered new requests.</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h3>What Happens After You Sign</h3>
+                <ul>
+                    <li>WisdomLayers will issue the final invoice for the remaining 50% balance.</li>
+                    <li>Upon confirmed payment, your website will be deployed to your live domain.</li>
+                    <li>You will receive a launch confirmation email with your live URL and support period start date.</li>
+                    <li>Your post-launch support period begins on the date of deployment.</li>
+                </ul>
+            </div>
+
+            <!-- SIGNATURE -->
+            <div class="signature-section">
+                <h2>Client Authorization</h2>
+                <div class="sig-statement">
+                    By signing below, I confirm that I have personally reviewed the completed website in full, that all content, links, and functionality have been verified and are correct to the best of my knowledge, that I have no outstanding revision requests, and that I authorize WisdomLayers to deploy the website to the live domain. I understand and agree that any changes requested after this authorization are considered out of scope and will be quoted and billed as new work under the standard post-launch rates.
+                </div>
+
+                <div class="sig-row">
+                    <div class="sig-field">
+                        <label>Client Signature</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                    <div class="sig-field">
+                        <label>Date</label>
+                        <input type="text" class="sig-line" placeholder="MM / DD / YYYY">
+                    </div>
+                </div>
+                <div class="sig-row">
+                    <div class="sig-field">
+                        <label>Printed Name</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                    <div class="sig-field">
+                        <label>Business Name</label>
+                        <input type="text" class="sig-line" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAUNCH BANNER -->
+            <div class="launch-banner">
+                <h2>Time to Launch</h2>
+                <p>Thank you for a great project. Your website is ready to represent your business to the world.</p>
+                <p>Questions before signing? Contact us at contact@wisdomlayers.com</p>
+            </div>
+
+        </div><!-- /content -->
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>WisdomLayers</strong> | Web Development Services | Fayetteville, NC | contact@wisdomlayers.com | wisdomlayers.com</p>
+            <p>Launch Approval Form — Retain a signed copy for your records.</p>
+        </div>
+
+    </div><!-- /container -->
+</div><!-- /screen-wrapper -->
+</body>
+</html>

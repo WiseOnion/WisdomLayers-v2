@@ -37,19 +37,28 @@ const projectData = {
         mobileVideo: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo.webm`,
         screenshots: [
             {
+                title: "Home",
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-card.png`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-desktop-demo-screenshot.png`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo-screenshot.png`
+            },
+            {
                 title: "Booking System",
-                image: `${assetsPath}/images/miles2wisdom/m2w-booking.png`,
-                description: "Self-service appointment scheduling"
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-booking.png`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-booking-screenshot.png`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-booking-mobile-screenshot.png`
             },
             {
                 title: "Meet the Team",
-                image: `${assetsPath}/images/miles2wisdom/m2w-teams.png`,
-                description: "Therapist profiles and credentials"
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-teams.png`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-team-screenshot.png`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-team-mobile-screenshot.png`
             },
             {
                 title: "Services Page",
-                image: `${assetsPath}/images/miles2wisdom/m2w-services.png`,
-                description: "Detailed service offerings"
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-services.png`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-services-screenshot.png`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-services-mobile-screenshot.png`
             }
         ]
     },
@@ -81,25 +90,30 @@ const projectData = {
             author: "PJ Pressure Owner"
         },
         tech: ["HTML/CSS", "JavaScript", "Interactive before/after slider", "Fully responsive design", "Online quote forms and contact integration", "Local SEO optimization"],
-        link: "#",
+        link: "https://pjpressurewash.com",
         cardImage: `${assetsPath}/images/pjpressure/pj-card.png`,
         desktopVideo: `${assetsPath}/images/pjpressure/pj-desktop-demo.webm`,
         mobileVideo: `${assetsPath}/images/pjpressure/pj-mobile-demo.webm`,
         screenshots: [
             {
+                title: "Home",
+                desktop: `${assetsPath}/images/pjpressure/pj-desktop-demo-screenshot.png`,
+                mobile: `${assetsPath}/images/pjpressure/pj-mobile-demo-screenshot.png`
+            },
+            {
                 title: "Service Areas",
-                image: `${assetsPath}/images/pjpressure/pj-areas.png`,
-                description: "Service area coverage map"
+                desktop: `${assetsPath}/images/pjpressure/pj-areas-screenshot.png`,
+                mobile: `${assetsPath}/images/pjpressure/pj-areas-mobile-screenshot.png`
             },
             {
                 title: "About",
-                image: `${assetsPath}/images/pjpressure/pj-about.png`,
-                description: "About PJ Pressure"
+                desktop: `${assetsPath}/images/pjpressure/pj-about-screenshot.png`,
+                mobile: `${assetsPath}/images/pjpressure/pj-about-mobile-screenshot.png`
             },
             {
                 title: "Gallery",
-                image: `${assetsPath}/images/pjpressure/pj-gallery.png`,
-                description: "Before/after gallery"
+                desktop: `${assetsPath}/images/pjpressure/pj-gallery-screenshot.png`,
+                mobile: `${assetsPath}/images/pjpressure/pj-gallery-mobile-screenshot.png`
             }
         ]
     },

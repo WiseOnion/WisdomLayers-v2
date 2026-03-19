@@ -1,0 +1,14 @@
+Options -Indexes
+RewriteEngine On
+
+# Clean URLs
+RewriteRule ^projects$ /html/projects.html [L]
+RewriteRule ^privacy-policy$ /html/privacy-policy.html [L]
+
+# Serve existing files and directories as-is
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Fallback to index.html
+RewriteRule ^ /index.html [L]
