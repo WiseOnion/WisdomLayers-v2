@@ -51,23 +51,23 @@ function openModal(projectId) {
                         <div id="desktop-${projectId}" class="tab-content ${!project.mobileVideo || window.innerWidth >= 768 ? 'active' : ''}" ${!project.mobileVideo || window.innerWidth >= 768 ? '' : 'style="display: none;"'}>
                             <div class="screenshot-with-nav bg-gray-100 rounded-xl overflow-hidden shadow-2xl">
                                 <div class="screenshot-main-container">
-                                    <img src="${project.desktopVideo.replace('.webm', '-screenshot.png').replace('pj-desktop-demo-screenshot.png', 'pj-desktop-demo-screenshot.png')}" alt="Desktop Screenshot" class="screenshot-image clickable-screenshot" id="desktop-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
+                                    <img src="${project.desktopVideo.replace('.webm', '-screenshot.webp').replace('pj-desktop-demo-screenshot.webp', 'pj-desktop-demo-screenshot.webp')}" alt="Desktop Screenshot" class="screenshot-image clickable-screenshot" id="desktop-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
                                 </div>
                                 <div class="screenshot-nav">
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('.webm', '-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-card.png').replace('m2w-desktop-demo.webm', 'm2w-card.png').replace('desktop-demo.webm', 'card.png')}" alt="Home Section" class="nav-thumbnail">
+                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('.webm', '-screenshot.webp')}')">
+                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-card.webp').replace('m2w-desktop-demo.webm', 'm2w-card.webp').replace('desktop-demo.webm', 'card.webp')}" alt="Home Section" class="nav-thumbnail">
                                         <span class="nav-label">Home</span>
                                     </div>
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-areas-screenshot.png').replace('m2w-desktop-demo.webm', 'm2w-booking-screenshot.png').replace('desktop-demo.webm', 'booking-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-areas.png').replace('m2w-desktop-demo.webm', 'm2w-booking.png').replace('desktop-demo.webm', 'booking.png')}" alt="${projectId === 'pjpressure' ? 'Service Areas Section' : 'Booking Section'}" class="nav-thumbnail">
+                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-areas-screenshot.webp').replace('m2w-desktop-demo.webm', 'm2w-booking-screenshot.webp').replace('desktop-demo.webm', 'booking-screenshot.webp')}')">
+                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-areas.webp').replace('m2w-desktop-demo.webm', 'm2w-booking.webp').replace('desktop-demo.webm', 'booking.webp')}" alt="${projectId === 'pjpressure' ? 'Service Areas Section' : 'Booking Section'}" class="nav-thumbnail">
                                         <span class="nav-label">${projectId === 'pjpressure' ? 'Areas' : 'Booking'}</span>
                                     </div>
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-about-screenshot.png').replace('m2w-desktop-demo.webm', 'm2w-team-screenshot.png').replace('desktop-demo.webm', 'team-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-about.png').replace('m2w-desktop-demo.webm', 'm2w-teams.png').replace('desktop-demo.webm', 'teams.png')}" alt="${projectId === 'pjpressure' ? 'About Section' : 'Team Section'}" class="nav-thumbnail">
+                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-about-screenshot.webp').replace('m2w-desktop-demo.webm', 'm2w-team-screenshot.webp').replace('desktop-demo.webm', 'team-screenshot.webp')}')">
+                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-about.webp').replace('m2w-desktop-demo.webm', 'm2w-teams.webp').replace('desktop-demo.webm', 'teams.webp')}" alt="${projectId === 'pjpressure' ? 'About Section' : 'Team Section'}" class="nav-thumbnail">
                                         <span class="nav-label">${projectId === 'pjpressure' ? 'About' : 'Team'}</span>
                                     </div>
-                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-gallery-screenshot.png').replace('m2w-desktop-demo.webm', 'm2w-services-screenshot.png').replace('desktop-demo.webm', 'services-screenshot.png')}')">
-                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-gallery.png').replace('m2w-desktop-demo.webm', 'm2w-services.png').replace('desktop-demo.webm', 'services.png')}" alt="${projectId === 'pjpressure' ? 'Gallery Section' : 'Services Section'}" class="nav-thumbnail">
+                                    <div class="nav-section" onclick="switchDesktopImage('desktop-screenshot-${projectId}', '${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-gallery-screenshot.webp').replace('m2w-desktop-demo.webm', 'm2w-services-screenshot.webp').replace('desktop-demo.webm', 'services-screenshot.webp')}')">
+                                        <img src="${project.desktopVideo.replace('pj-desktop-demo.webm', 'pj-gallery.webp').replace('m2w-desktop-demo.webm', 'm2w-services.webp').replace('desktop-demo.webm', 'services.webp')}" alt="${projectId === 'pjpressure' ? 'Gallery Section' : 'Services Section'}" class="nav-thumbnail">
                                         <span class="nav-label">${projectId === 'pjpressure' ? 'Gallery' : 'Services'}</span>
                                     </div>
                                 </div>
@@ -85,27 +85,27 @@ function openModal(projectId) {
                                     <!-- Phone Frame -->
                                     <div class="bg-gray-900 rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-2xl">
                                         <div class="bg-black rounded-[1.5rem] md:rounded-[2.5rem] overflow-y-auto overflow-x-hidden phone-screen">
-                                            <img src="${project.mobileVideo.replace('.webm', '-screenshot.png')}" alt="Mobile Screenshot" class="w-full clickable-screenshot" id="mobile-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
+                                            <img src="${project.mobileVideo.replace('.webm', '-screenshot.webp')}" alt="Mobile Screenshot" class="w-full clickable-screenshot" id="mobile-screenshot-${projectId}" onclick="window.open('${project.link}', '_blank')">
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Navigation Thumbnails (Right Side) -->
                                 <div class="mobile-nav-sidebar">
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('.webm', '-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-card.png').replace('m2w-mobile-demo.webm', 'm2w-card.png').replace('mobile-demo.webm', 'card.png')}" alt="Home Section" class="nav-thumbnail-mobile">
+                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('.webm', '-screenshot.webp')}')">
+                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-card.webp').replace('m2w-mobile-demo.webm', 'm2w-card.webp').replace('mobile-demo.webm', 'card.webp')}" alt="Home Section" class="nav-thumbnail-mobile">
                                         <span class="nav-label-mobile">Home</span>
                                     </div>
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-areas-mobile-screenshot.png').replace('m2w-mobile-demo.webm', 'm2w-booking-mobile-screenshot.png').replace('mobile-demo.webm', 'booking-mobile-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-areas.png').replace('m2w-mobile-demo.webm', 'm2w-booking.png').replace('mobile-demo.webm', 'booking.png')}" alt="${projectId === 'pjpressure' ? 'Service Areas Section' : 'Booking Section'}" class="nav-thumbnail-mobile">
+                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-areas-mobile-screenshot.webp').replace('m2w-mobile-demo.webm', 'm2w-booking-mobile-screenshot.webp').replace('mobile-demo.webm', 'booking-mobile-screenshot.webp')}')">
+                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-areas.webp').replace('m2w-mobile-demo.webm', 'm2w-booking.webp').replace('mobile-demo.webm', 'booking.webp')}" alt="${projectId === 'pjpressure' ? 'Service Areas Section' : 'Booking Section'}" class="nav-thumbnail-mobile">
                                         <span class="nav-label-mobile">${projectId === 'pjpressure' ? 'Areas' : 'Booking'}</span>
                                     </div>
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-about-mobile-screenshot.png').replace('m2w-mobile-demo.webm', 'm2w-team-mobile-screenshot.png').replace('mobile-demo.webm', 'team-mobile-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-about.png').replace('m2w-mobile-demo.webm', 'm2w-teams.png').replace('mobile-demo.webm', 'teams.png')}" alt="${projectId === 'pjpressure' ? 'About Section' : 'Team Section'}" class="nav-thumbnail-mobile">
+                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-about-mobile-screenshot.webp').replace('m2w-mobile-demo.webm', 'm2w-team-mobile-screenshot.webp').replace('mobile-demo.webm', 'team-mobile-screenshot.webp')}')">
+                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-about.webp').replace('m2w-mobile-demo.webm', 'm2w-teams.webp').replace('mobile-demo.webm', 'teams.webp')}" alt="${projectId === 'pjpressure' ? 'About Section' : 'Team Section'}" class="nav-thumbnail-mobile">
                                         <span class="nav-label-mobile">${projectId === 'pjpressure' ? 'About' : 'Team'}</span>
                                     </div>
-                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-gallery-mobile-screenshot.png').replace('m2w-mobile-demo.webm', 'm2w-services-mobile-screenshot.png').replace('mobile-demo.webm', 'services-mobile-screenshot.png')}')">
-                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-gallery.png').replace('m2w-mobile-demo.webm', 'm2w-services.png').replace('mobile-demo.webm', 'services.png')}" alt="${projectId === 'pjpressure' ? 'Gallery Section' : 'Services Section'}" class="nav-thumbnail-mobile">
+                                    <div class="nav-section-mobile" onclick="switchMobileImage('mobile-screenshot-${projectId}', '${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-gallery-mobile-screenshot.webp').replace('m2w-mobile-demo.webm', 'm2w-services-mobile-screenshot.webp').replace('mobile-demo.webm', 'services-mobile-screenshot.webp')}')">
+                                        <img src="${project.mobileVideo.replace('pj-mobile-demo.webm', 'pj-gallery.webp').replace('m2w-mobile-demo.webm', 'm2w-services.webp').replace('mobile-demo.webm', 'services.webp')}" alt="${projectId === 'pjpressure' ? 'Gallery Section' : 'Services Section'}" class="nav-thumbnail-mobile">
                                         <span class="nav-label-mobile">${projectId === 'pjpressure' ? 'Gallery' : 'Services'}</span>
                                     </div>
                                 </div>

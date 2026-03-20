@@ -32,33 +32,33 @@ const projectData = {
         },
         tech: ["HTML/CSS", "JavaScript", "Booking Integration", "Form Handling", "Payment Setup"],
         link: "https://miles2wisdom.com",
-        cardImage: `${assetsPath}/images/miles2wisdom/m2w-card.png`,
+        cardImage: `${assetsPath}/images/miles2wisdom/m2w-card.webp`,
         desktopVideo: `${assetsPath}/images/miles2wisdom/m2w-desktop-demo.webm`,
         mobileVideo: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo.webm`,
         screenshots: [
             {
                 title: "Home",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-card.png`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-desktop-demo-screenshot.png`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo-screenshot.png`
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-card.webp`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-desktop-demo-screenshot.webp`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo-screenshot.webp`
             },
             {
                 title: "Booking System",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-booking.png`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-booking-screenshot.png`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-booking-mobile-screenshot.png`
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-booking.webp`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-booking-screenshot.webp`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-booking-mobile-screenshot.webp`
             },
             {
                 title: "Meet the Team",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-teams.png`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-team-screenshot.png`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-team-mobile-screenshot.png`
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-teams.webp`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-team-screenshot.webp`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-team-mobile-screenshot.webp`
             },
             {
                 title: "Services Page",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-services.png`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-services-screenshot.png`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-services-mobile-screenshot.png`
+                thumb: `${assetsPath}/images/miles2wisdom/m2w-services.webp`,
+                desktop: `${assetsPath}/images/miles2wisdom/m2w-services-screenshot.webp`,
+                mobile: `${assetsPath}/images/miles2wisdom/m2w-services-mobile-screenshot.webp`
             }
         ]
     },
@@ -91,29 +91,29 @@ const projectData = {
         },
         tech: ["HTML/CSS", "JavaScript", "Interactive before/after slider", "Fully responsive design", "Online quote forms and contact integration", "Local SEO optimization"],
         link: "https://pjpressurewash.com",
-        cardImage: `${assetsPath}/images/pjpressure/pj-card.png`,
+        cardImage: `${assetsPath}/images/pjpressure/pj-card.webp`,
         desktopVideo: `${assetsPath}/images/pjpressure/pj-desktop-demo.webm`,
         mobileVideo: `${assetsPath}/images/pjpressure/pj-mobile-demo.webm`,
         screenshots: [
             {
                 title: "Home",
-                desktop: `${assetsPath}/images/pjpressure/pj-desktop-demo-screenshot.png`,
-                mobile: `${assetsPath}/images/pjpressure/pj-mobile-demo-screenshot.png`
+                desktop: `${assetsPath}/images/pjpressure/pj-desktop-demo-screenshot.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-mobile-demo-screenshot.webp`
             },
             {
                 title: "Service Areas",
-                desktop: `${assetsPath}/images/pjpressure/pj-areas-screenshot.png`,
-                mobile: `${assetsPath}/images/pjpressure/pj-areas-mobile-screenshot.png`
+                desktop: `${assetsPath}/images/pjpressure/pj-areas-screenshot.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-areas-mobile-screenshot.webp`
             },
             {
                 title: "About",
-                desktop: `${assetsPath}/images/pjpressure/pj-about-screenshot.png`,
-                mobile: `${assetsPath}/images/pjpressure/pj-about-mobile-screenshot.png`
+                desktop: `${assetsPath}/images/pjpressure/pj-about-screenshot.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-about-mobile-screenshot.webp`
             },
             {
                 title: "Gallery",
-                desktop: `${assetsPath}/images/pjpressure/pj-gallery-screenshot.png`,
-                mobile: `${assetsPath}/images/pjpressure/pj-gallery-mobile-screenshot.png`
+                desktop: `${assetsPath}/images/pjpressure/pj-gallery-screenshot.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-gallery-mobile-screenshot.webp`
             }
         ]
     },
