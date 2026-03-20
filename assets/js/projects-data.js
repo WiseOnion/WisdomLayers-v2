@@ -97,23 +97,23 @@ const projectData = {
         screenshots: [
             {
                 title: "Home",
-                desktop: `${assetsPath}/images/pjpressure/pj-home-desktop-alt.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-home-mobile-alt.webp`
+                desktop: `${assetsPath}/images/pjpressure/pj-home-desktop.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-home-mobile.webp`
             },
             {
                 title: "Service Areas",
-                desktop: `${assetsPath}/images/pjpressure/pj-areas-desktop-alt.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-areas-mobile-alt.webp`
+                desktop: `${assetsPath}/images/pjpressure/pj-areas-desktop.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-areas-mobile.webp`
             },
             {
                 title: "About",
-                desktop: `${assetsPath}/images/pjpressure/pj-about-desktop-alt.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-about-mobile-alt.webp`
+                desktop: `${assetsPath}/images/pjpressure/pj-about-desktop.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-about-mobile.webp`
             },
             {
                 title: "Gallery",
-                desktop: `${assetsPath}/images/pjpressure/pj-gallery-desktop-alt.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-gallery-mobile-alt.webp`
+                desktop: `${assetsPath}/images/pjpressure/pj-gallery-desktop.webp`,
+                mobile: `${assetsPath}/images/pjpressure/pj-gallery-mobile.webp`
             }
         ]
     },
