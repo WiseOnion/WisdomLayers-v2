@@ -54,6 +54,7 @@
     .badge-tattoo    { background: #2a0a0a; color: #ff6b6b; }
     .badge-lawn      { background: #0a2a0a; color: #5eead4; }
     .badge-catering  { background: #2a1a0a; color: #fb923c; }
+    .badge-concrete  { background: #2a2020; color: #f4a261; }
     .badge-opp-none  { background: #3a0a0a; color: #f87171; }
     .badge-opp-bad   { background: #2a1a00; color: #fbbf24; }
     .status-new      { background: #0f2a1a; color: #4ade80; }
@@ -125,6 +126,7 @@
   <button data-filter="Catering">Catering</button>
   <button data-filter="Tattoo">Tattoo</button>
   <button data-filter="Security">Security</button>
+  <button data-filter="Concrete">Concrete</button>
   <button data-filter="__no_website__" style="background:#3a0a0a;border-color:#7f1d1d;color:#f87171">No Website</button>
   <button data-filter="__bad_website__" style="background:#2a1a00;border-color:#78350f;color:#fbbf24">Bad Website</button>
 </div>
@@ -559,6 +561,23 @@ const leads = [
   { name: "Marly's Hair Braiding", category: "Braiding", phone: "(919) 878-8851", address: "5540 Atlantic Springs Rd Suite 108, Raleigh, NC 27616", fb: "https://www.facebook.com/marlys.hairbraiding/", opportunity: "No Website", status: "New", notes: "Owner Jainaba Manneh. Instagram-first booking (@marlyshairbraiding)." },
   { name: "Barbour's Towing & Truck Repair", category: "Towing", phone: "(919) 790-3827", address: "300 S Rogers Ln, Raleigh, NC 27610", fb: "https://www.facebook.com/BarboursTowingandTruckRepair/", opportunity: "No Website", status: "New", notes: "3rd generation family-owned. 50+ years serving the Triangle." },
   { name: "DOUGServices", category: "Handyman", phone: "(919) 602-0388", address: "5825 Holland Farms Way, Raleigh, NC 27603", fb: "https://www.facebook.com/dougservices/", opportunity: "No Website", status: "New", notes: "Lawn care + cleaning + handyman. In business 18+ years. Facebook primary, no modern website." },
+
+  // CONCRETE / MASONRY — FAYETTEVILLE AREA
+  { name: "Colvin's Concrete Creations", category: "Concrete", phone: "(910) 670-5878", address: "2410 Wagon Wheel Rd, Fayetteville, NC 28314", fb: "https://www.facebook.com/concrete910/", opportunity: "No Website", status: "New", notes: "Driveways, patios, sidewalks, building slabs. Facebook primary, also on Nextdoor. Email: colvinsconcrete@gmail.com" },
+  { name: "Cantu Concrete Construction LLC", category: "Concrete", phone: "(910) 494-2296", address: "1132 Windmill Rd, Fayetteville, NC 28312", fb: "https://www.facebook.com/cantuconcreteconstruction/", opportunity: "Bad Website - very basic/thin site", status: "New", notes: "Owner Hector Cantu. Residential and commercial flatwork. On Thumbtack." },
+  { name: "Martinez Concrete LLC", category: "Concrete", phone: "", address: "Fayetteville, NC 28348", fb: "https://www.facebook.com/p/Martinez-Concrete-LLC-61560807818040/", opportunity: "Bad Website - new minimal site", status: "New", notes: "Owner Miguel Martinez. Overlays, coloring, foundations, decorative concrete, driveways. Primarily Facebook operated." },
+  { name: "Custom Concrete Solutions", category: "Concrete", phone: "", address: "3002 Tarwick Ave, Fayetteville, NC 28304", fb: "https://www.facebook.com/p/Custom-Concrete-Solutions-100069168482514/", opportunity: "No Website", status: "New", notes: "Stamped, stained, polished, epoxy, decorative concrete. Facebook is primary contact. No phone publicly listed." },
+  { name: "United Concrete & Asphalt", category: "Concrete", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/United-Concrete-Asphalt-100090694924357/", opportunity: "No Website", status: "New", notes: "Owner Pernell Shoulars. Concrete, asphalt, land clearing, grading. Facebook primary." },
+  { name: "Harris Masonry", category: "Concrete", phone: "(910) 424-2976", address: "840 Zapata Ln, Fayetteville, NC 28314", fb: "https://www.facebook.com/pages/Harris-Masonry/854715307980961/", opportunity: "Bad Website - basic site", status: "New", notes: "Owner Conrad Harris. Concrete, brick masonry, paver stone, gravel. Facebook heavy presence." },
+  { name: "Sellers and Sons Concrete & Builders Inc", category: "Concrete", phone: "(910) 486-4506", address: "612 Fair St, Fayetteville, NC 28306", fb: "https://www.facebook.com/sellers44/", opportunity: "Bad Website - outdated site", status: "New", notes: "Residential and commercial concrete, home additions. Long-standing local operation. Email: sellersconcretenc@gmail.com" },
+  { name: "RG Concrete & Construction LLC", category: "Concrete", phone: "(910) 988-6048", address: "3380 Stanworth Dr, Fayetteville, NC 28312", fb: "", opportunity: "Bad Website - thin site", status: "New", notes: "Owner Reggie. Flat concrete, driveways, patios, floor slabs. On Thumbtack and HomeAdvisor." },
+  { name: "Unlimited Concrete LLC", category: "Concrete", phone: "", address: "Hope Mills, NC", fb: "https://www.facebook.com/people/Unlimited-concrete-llc/100064060421152/", opportunity: "No Website", status: "New", notes: "Facebook only, no phone publicly listed. Contact via Facebook Messenger." },
+  { name: "Henley's Concrete Finishing", category: "Concrete", phone: "", address: "6312 Rockfish Rd, Hope Mills, NC 28348", fb: "", opportunity: "No Website", status: "New", notes: "Family-owned, 17+ years in business, 35 years experience. Flatwork, brickwork, decorative concrete. Directory listings only." },
+  { name: "New Edition Concrete and Tree Removal", category: "Concrete", phone: "", address: "Hope Mills, NC 28348", fb: "", opportunity: "No Website", status: "New", notes: "Est. 2018. Concrete + tree removal. Listed on Houzz and Networx only. No website." },
+  { name: "Q & L Construction", category: "Concrete", phone: "(910) 583-4574", address: "Eastover, NC 28312", fb: "", opportunity: "Bad Website - basic site", status: "New", notes: "Veteran-owned, in business since 1960. Driveways, sidewalks, patios, pool decks, retaining walls, brick, stone. One of oldest in county." },
+  { name: "CCF Materials", category: "Concrete", phone: "(910) 848-0402", address: "570 Hobson Rd, Raeford, NC 28376", fb: "https://www.facebook.com/ccfmaterials/", opportunity: "No Website", status: "New", notes: "Active Facebook, no full website. Concrete contractor in Raeford." },
+  { name: "RLC Riverside Landscape & Concrete LLC", category: "Concrete", phone: "(910) 920-6672", address: "6168 Jake Rd, Stedman, NC 28391", fb: "https://www.facebook.com/RiversideLandscapeCO/", opportunity: "Bad Website - Facebook-first, basic site", status: "New", notes: "Serves Fayetteville, Hope Mills, Raeford, Spring Lake, Dunn. Landscaping, concrete, hardscape. Email: Riversidelandscape1@gmail.com" },
+  { name: "KBT Custom Masonry & Landscape Design", category: "Concrete", phone: "(910) 436-0712", address: "25 Purvis Lane, Cameron, NC 28308", fb: "", opportunity: "Bad Website - basic site", status: "New", notes: "Veteran-owned. Retaining walls, driveways, patios, walkways, pavers, block, stone, brick. Serves Cumberland and Harnett counties." },
 ];
 
 const statusColors = { New: "status-new", Contacted: "status-contacted", Closed: "status-closed", Dead: "status-dead" };
@@ -569,7 +588,7 @@ const categoryColors = {
   Photo: "badge-photo", Handyman: "badge-handyman", Moving: "badge-moving",
   Boutique: "badge-boutique", Repair: "badge-repair", DJ: "badge-dj",
   Trucking: "badge-trucking", Security: "badge-security", Tattoo: "badge-tattoo",
-  Lawn: "badge-lawn", Catering: "badge-catering"
+  Lawn: "badge-lawn", Catering: "badge-catering", Concrete: "badge-concrete"
 };
 
 let activeFilter = "all";
