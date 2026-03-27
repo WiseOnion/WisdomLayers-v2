@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WisdomLayers — Lead Tracker</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; padding: 2rem; }
+    h1 { font-size: 1.8rem; color: #ffffff; margin-bottom: 0.25rem; }
+    p.subtitle { color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .filters button {
+      background: #1e1e1e; border: 1px solid #333; color: #ccc;
+      padding: 0.4rem 0.9rem; border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .filters button:hover, .filters button.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+    .stats { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .stat { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 0.75rem 1.25rem; }
+    .stat span { display: block; font-size: 1.5rem; font-weight: 700; color: #2563eb; }
+    .stat label { font-size: 0.75rem; color: #888; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead th {
+      background: #1a1a1a; padding: 0.75rem 1rem; text-align: left;
+      color: #aaa; font-weight: 600; border-bottom: 1px solid #2a2a2a;
+      cursor: pointer; user-select: none;
+    }
+    thead th:hover { color: #fff; }
+    tbody tr { border-bottom: 1px solid #1e1e1e; transition: background 0.15s; }
+    tbody tr:hover { background: #161616; }
+    tbody td { padding: 0.65rem 1rem; vertical-align: top; }
+    .badge {
+      display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .badge-barber    { background: #1e3a5f; color: #60a5fa; }
+    .badge-salon     { background: #3b1f5e; color: #c084fc; }
+    .badge-cleaning  { background: #1a3a2a; color: #4ade80; }
+    .badge-detailing { background: #3a2a0a; color: #fbbf24; }
+    .badge-towing    { background: #3a1a1a; color: #f87171; }
+    .badge-food      { background: #3a2a10; color: #fb923c; }
+    .badge-lash      { background: #3a1a30; color: #f472b6; }
+    .badge-braiding  { background: #1a2a3a; color: #38bdf8; }
+    .badge-fitness   { background: #1a3a1a; color: #86efac; }
+    .badge-photo     { background: #2a2a1a; color: #fde68a; }
+    .badge-handyman  { background: #2a1a0a; color: #fdba74; }
+    .badge-moving    { background: #1a1a3a; color: #a5b4fc; }
+    .badge-boutique  { background: #3a1a2a; color: #fb7185; }
+    .badge-repair    { background: #0a2a3a; color: #22d3ee; }
+    .badge-dj        { background: #2a0a3a; color: #d946ef; }
+    .badge-trucking  { background: #2a2a0a; color: #eab308; }
+    .badge-security  { background: #1a2a2a; color: #2dd4bf; }
+    .badge-tattoo    { background: #2a0a0a; color: #ff6b6b; }
+    .badge-lawn      { background: #0a2a0a; color: #5eead4; }
+    .badge-catering  { background: #2a1a0a; color: #fb923c; }
+    .badge-opp-none  { background: #3a0a0a; color: #f87171; }
+    .badge-opp-bad   { background: #2a1a00; color: #fbbf24; }
+    .status-new      { background: #0f2a1a; color: #4ade80; }
+    .status-contacted { background: #2a2000; color: #fbbf24; }
+    .status-closed   { background: #0a1a2a; color: #60a5fa; }
+    .status-dead     { background: #1e1e1e; color: #555; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .no-match { display: none; }
+    input#search {
+      background: #1a1a1a; border: 1px solid #333; color: #e0e0e0;
+      padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.9rem; width: 280px;
+      margin-bottom: 1rem; display: block;
+    }
+    input#search:focus { outline: none; border-color: #2563eb; }
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tbody tr {
+        background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px;
+        margin-bottom: 1rem; padding: 1rem; position: relative;
+      }
+      tbody td { padding: 0.3rem 0; border: none; font-size: 0.85rem; }
+      tbody td:nth-child(1) { display: none; }
+      tbody td:nth-child(2) { font-size: 1rem; font-weight: 700; color: #fff; padding-bottom: 0.5rem; }
+      tbody td:nth-child(3) { margin-bottom: 0.25rem; }
+      tbody td:nth-child(8) select { width: 100%; margin-top: 0.5rem; padding: 0.4rem; font-size: 0.9rem; }
+      input#search { width: 100%; }
+      .stat span { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>WisdomLayers — Lead Tracker</h1>
+<p class="subtitle">Local NC businesses with no website or a bad website. Both are sales opportunities.</p>
+
+<div class="stats">
+  <div class="stat"><span id="totalCount">0</span><label>Total Leads</label></div>
+  <div class="stat"><span id="newCount">0</span><label>Not Contacted</label></div>
+  <div class="stat"><span id="contactedCount">0</span><label>Contacted</label></div>
+  <div class="stat"><span id="closedCount">0</span><label>Closed</label></div>
+  <div class="stat"><span id="noWebCount">0</span><label>No Website</label></div>
+  <div class="stat"><span id="badWebCount">0</span><label>Bad Website</label></div>
+</div>
+
+<input type="text" id="search" placeholder="Search by name, category, phone..." />
+
+<div class="filters" id="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="Barber">Barber</button>
+  <button data-filter="Salon">Salon</button>
+  <button data-filter="Braiding">Braiding</button>
+  <button data-filter="Lash">Lash</button>
+  <button data-filter="Cleaning">Cleaning</button>
+  <button data-filter="Detailing">Detailing</button>
+  <button data-filter="Towing">Towing</button>
+  <button data-filter="Food">Food</button>
+  <button data-filter="Fitness">Fitness</button>
+  <button data-filter="Photo">Photo</button>
+  <button data-filter="Handyman">Handyman</button>
+  <button data-filter="Moving">Moving</button>
+  <button data-filter="Boutique">Boutique</button>
+  <button data-filter="Repair">Repair</button>
+  <button data-filter="DJ">DJ</button>
+  <button data-filter="Trucking">Trucking</button>
+  <button data-filter="Lawn">Lawn</button>
+  <button data-filter="Catering">Catering</button>
+  <button data-filter="Tattoo">Tattoo</button>
+  <button data-filter="Security">Security</button>
+  <button data-filter="__no_website__" style="background:#3a0a0a;border-color:#7f1d1d;color:#f87171">No Website</button>
+  <button data-filter="__bad_website__" style="background:#2a1a00;border-color:#78350f;color:#fbbf24">Bad Website</button>
+</div>
+
+<table id="leadTable">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Business Name</th>
+      <th>Category</th>
+      <th>Opportunity</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Facebook</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+  </tbody>
+</table>
+
+<script>
+const leads = [
+  // BARBER SHOPS
+  { name: "Off Limits Barber Shop", category: "Barber", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/offlimitsbarbershop/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "J&B Barbershop", category: "Barber", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/JBBarbershop1/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Eutaw Barber Shop", category: "Barber", phone: "(910) 485-4807", address: "837 Elm St, Fayetteville, NC 28303", fb: "https://www.facebook.com/EutawBarberShop/", opportunity: "No Website", status: "New", notes: "Next to DMV on Bragg Blvd. 124 reviews on Birdeye." },
+  { name: "Will's Barber Shop", category: "Barber", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/thewillsbarbershop/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Skibo Barbershop", category: "Barber", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/skibobarbershop/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Ill Ville Barbershop", category: "Barber", phone: "", address: "125 N Reilly Rd STE 104, Fayetteville, NC", fb: "https://www.facebook.com/WeDaIllest/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "3K Barber & Beauty Shop", category: "Barber", phone: "(910) 920-2834", address: "3300 Rosehill Rd, Fayetteville, NC 28311", fb: "", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Midway Barber Shop", category: "Barber", phone: "(910) 551-1424", address: "4521 Bragg Blvd, Fayetteville, NC", fb: "", opportunity: "No Website", status: "New", notes: "" },
+  { name: "American Barber Shop", category: "Barber", phone: "(910) 401-7593", address: "Fayetteville, NC", fb: "https://www.facebook.com/AmericanBarbershop118/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Balla World", category: "Barber", phone: "(910) 868-8331", address: "4772 Yadkin Rd, Fayetteville, NC", fb: "https://www.facebook.com/p/Balla-World-100063738065931/", opportunity: "No Website", status: "New", notes: "" },
+
+  // SALON / COMBO
+  { name: "Red Carpet Barber Shop & Salon", category: "Salon", phone: "(910) 764-0609", address: "2157 Skibo Rd, Fayetteville, NC", fb: "https://www.facebook.com/redcarpetbarbershopandsalon/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "On The Go Kutz", category: "Salon", phone: "", address: "5353 Red Tip Rd Suite 104, Fayetteville, NC 28314", fb: "https://www.facebook.com/OnTheGoKutzs/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "K's Hair Salon & Barber Shop", category: "Salon", phone: "(910) 488-9729", address: "4704 Rosehill Rd, Fayetteville, NC", fb: "https://www.facebook.com/p/Ks-Hair-Salon-Barber-Shop-100063602498822/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "A Touch Of Class Beauty & Barber", category: "Salon", phone: "(910) 835-1315", address: "1102 Strickland Bridge Rd, Fayetteville, NC", fb: "https://www.facebook.com/atouchofclasssalon/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "American Parlor", category: "Salon", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/American-Parlor-61557014420172/", opportunity: "No Website", status: "New", notes: "" },
+
+  // NAIL
+  { name: "Candle Nail Bar", category: "Salon", phone: "(910) 758-9266", address: "111 S. McPherson Church Rd, Fayetteville, NC", fb: "https://www.facebook.com/FayettevilleCandleNailBar/", opportunity: "No Website", status: "New", notes: "Email: candlenailbar@gmail.com" },
+
+  // HAIR BRAIDING / NATURAL HAIR
+  { name: "Nuwbns Natural Haircare Gallery", category: "Braiding", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/knowLye/", opportunity: "No Website", status: "New", notes: "All natural hair braiding & locking gallery" },
+  { name: "Elite Braiding", category: "Braiding", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Elite-Braiding-100064319941244/", opportunity: "No Website", status: "New", notes: "Email: plaiboinc28@gmail.com" },
+  { name: "Blessedhhs Natural Hair", category: "Braiding", phone: "(910) 703-7917", address: "Fayetteville, NC", fb: "", opportunity: "No Website", status: "New", notes: "Text only. Natural hair specialist - Nakya." },
+
+  // LASH / MAKEUP
+  { name: "Eye Envy Lash and Brows", category: "Lash", phone: "(910) 644-2400", address: "Fayetteville, NC", fb: "https://www.facebook.com/Eyeenvylashandbrows/", opportunity: "No Website", status: "New", notes: "Global award-winning master lash artist" },
+  { name: "Lashier Beauty", category: "Lash", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/lashierbeauty/", opportunity: "No Website", status: "New", notes: "Licensed esthetician & certified lash artist" },
+  { name: "Livie's Lashes LLC", category: "Lash", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/LiviesLashes/", opportunity: "No Website", status: "New", notes: "Cosmetologist, lash artist, airbrush & SFX makeup" },
+
+  // CLEANING
+  { name: "Morton's Cleaning Service", category: "Cleaning", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/MortonsCleaningServiceLLC/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Precision Clean of Fayetteville", category: "Cleaning", phone: "(910) 339-0903", address: "200 Lamon Street Suite 200, Fayetteville, NC", fb: "https://www.facebook.com/PrecisionCleanofFayetteville/", opportunity: "No Website", status: "New", notes: "" },
+
+  // AUTO DETAILING
+  { name: "Flawless Touch Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/FlawlessTouchDetailingNC/", opportunity: "No Website", status: "New", notes: "Voted best detail shop in Fayetteville" },
+  { name: "Fine Detail Mobile Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/finedetailmobile/", opportunity: "No Website", status: "New", notes: "Fully mobile" },
+  { name: "Diamond Image Lux Auto-Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Diamond-Image-Lux-Auto-Detailing-61552154765735/", opportunity: "No Website", status: "New", notes: "Paint correction, ceramic coating, PPF, tint, vinyl wrap" },
+  { name: "The Lab Detail Studio", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/The-Lab-Detail-Studio-61554594496550/", opportunity: "No Website", status: "New", notes: "Veteran & family-owned" },
+  { name: "Rise & Shine Mobile Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Rise-Shine-Mobile-Detailing-100063588639599/", opportunity: "No Website", status: "New", notes: "Full interior & exterior detailing" },
+  { name: "Kilo Two Alpha Automotive Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/k2aautodetailing/", opportunity: "No Website", status: "New", notes: "Clay bar, paint correction, upholstery shampoo" },
+  { name: "Highline Mobile Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/highlinemobiledetailing/", opportunity: "No Website", status: "New", notes: "" },
+
+  // TOWING
+  { name: "Soles Automotive Towing Inc", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/solesautotrucksvc/", opportunity: "No Website", status: "New", notes: "Family-owned since 1990" },
+  { name: "Sam's Towing Service", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Sams-Towing-Service-100089921259362/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Papa Towing Service LLC", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/papatowing24/", opportunity: "No Website", status: "New", notes: "24/7 towing & roadside assistance" },
+  { name: "Quality Towing & Recovery Inc", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/qualitytowingnc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Phillips Towing Service", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/PhillipsTowingService/", opportunity: "No Website", status: "New", notes: "Serves Fayetteville, Raleigh, Selma, Wilmington, Lumberton" },
+  { name: "Tow N Go LLC", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/towngollc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Mitchell's Towing & Recovery", category: "Towing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/mitchellstowingnc/", opportunity: "No Website", status: "New", notes: "" },
+
+  // FOOD / CATERING
+  { name: "Crazy Taco Food Truck", category: "Food", phone: "(910) 808-5332", address: "3315 Bragg Blvd, Fayetteville, NC", fb: "https://www.facebook.com/CRAZYTACOfoodtruckfayetteville/", opportunity: "No Website", status: "New", notes: "Tacos, tortas, burritos, quesadillas, authentic Mexican" },
+  { name: "AuntViv's Kitchen", category: "Catering", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/auntvivskitchen/", opportunity: "No Website", status: "New", notes: "Personal chef - Chinese to soul food" },
+  { name: "MO' FLAVA LLC", category: "Catering", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/moflavallc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Gwen's Personal Chef Solutions", category: "Catering", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/gwenspcs/", opportunity: "No Website", status: "New", notes: "" },
+
+  // TATTOO
+  { name: "Southern Customs Tattoo Company", category: "Tattoo", phone: "(910) 920-2683", address: "500 N. Reilly Rd Suite #102, Fayetteville, NC", fb: "https://www.facebook.com/SCTATCO/", opportunity: "Bad Website - Setmore booking portal only, no real site", status: "New", notes: "Veteran-owned. Email: sctatco@gmail.com" },
+
+  // FITNESS
+  { name: "Fit4Life Fayetteville Personal Trainers", category: "Fitness", phone: "(910) 568-5962", address: "2803 Fort Bragg Rd, Fayetteville, NC", fb: "https://www.facebook.com/fit4lifefayettevillepersonaltraining/", opportunity: "No Website", status: "New", notes: "24-hour full service fitness center" },
+  { name: "ASAP Fitness and Weight Loss", category: "Fitness", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/asapfitness1/", opportunity: "No Website", status: "New", notes: "Email: asapfitness1@gmail.com" },
+
+  // PHOTOGRAPHY
+  { name: "CT Photography", category: "Photo", phone: "(423) 444-1546", address: "Fayetteville, NC", fb: "https://www.facebook.com/CTitmanPhotography/", opportunity: "No Website", status: "New", notes: "Email: CTitmanPhotography@gmail.com" },
+  { name: "Sweetpeas Photography", category: "Photo", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/sweetpeasphotographync/", opportunity: "No Website", status: "New", notes: "Real estate listing media specialist" },
+  { name: "Velocity Shoot Photography", category: "Photo", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/VelocityShoot/", opportunity: "No Website", status: "New", notes: "Studio & on-location" },
+  { name: "DARKRED Photography", category: "Photo", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/DARKREDPHOTOGRAPHY/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "J.Marie Photography", category: "Photo", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/j.marie.photography.1/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Raymie Day Photography", category: "Photo", phone: "(520) 508-8901", address: "Fayetteville, NC", fb: "https://www.facebook.com/raymiedayphotography/", opportunity: "No Website", status: "New", notes: "Specializes in couples & weddings. Email: raymiedayphotography@gmail.com" },
+
+  // HANDYMAN
+  { name: "All American Handyman Services LLC", category: "Handyman", phone: "(910) 758-1922", address: "Fayetteville, NC", fb: "https://www.facebook.com/HandymanFayettevilleNC/", opportunity: "No Website", status: "New", notes: "Email: AllAmerican5335@yahoo.com. Rental renovation experts." },
+  { name: "CCB Handyman Services", category: "Handyman", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/CCB-Handyman-Services-100031402314240/", opportunity: "No Website", status: "New", notes: "Roof to foundation services" },
+
+  // MOVING
+  { name: "A-One Moving & Packing", category: "Moving", phone: "", address: "4617 Devonshire Dr, Fayetteville, NC", fb: "https://www.facebook.com/Aonemovingandpacking/", opportunity: "No Website", status: "New", notes: "Serves Cumberland County & surrounding areas" },
+
+  // BOUTIQUE
+  { name: "Top of the Hill Boutique", category: "Boutique", phone: "(910) 850-6591", address: "2018 Fort Bragg Road Suite 116-A, Fayetteville, NC", fb: "https://www.facebook.com/topofthehillboutique/", opportunity: "No Website", status: "New", notes: "Monogramming & women's clothing. 4,200+ FB likes." },
+
+  // PHONE / ELECTRONICS REPAIR
+  { name: "Quack Quack Phone Repair", category: "Repair", phone: "", address: "218 Hay St, Fayetteville, NC", fb: "https://www.facebook.com/QuackQuackNC/", opportunity: "No Website", status: "New", notes: "Family-owned phone repair shop" },
+  { name: "Pro Wireless", category: "Repair", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/prowirelessfay/", opportunity: "No Website", status: "New", notes: "Mobile device repair & accessories" },
+
+  // DJ / EVENTS
+  { name: "GLDJ Productions", category: "DJ", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/GldjProductions/", opportunity: "No Website", status: "New", notes: "Weddings, birthdays, events, graduations" },
+  { name: "Parties All About Me Events", category: "DJ", phone: "(910) 308-8425", address: "803 Stamper Rd Ste W, Fayetteville, NC", fb: "https://www.facebook.com/Partiesallaboutme/", opportunity: "No Website", status: "New", notes: "Email: parties224@yahoo.com" },
+
+  // TRUCKING
+  { name: "Garrett Trucking Inc", category: "Trucking", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Garrett-Trucking-Inc-100048855318950/", opportunity: "No Website", status: "New", notes: "Locally owned & operated" },
+
+  // LAWN / LANDSCAPING
+  { name: "Affordable Lawn Care and Landscaping LLC", category: "Lawn", phone: "(910) 431-3810", address: "Anderson Creek, Fayetteville, NC", fb: "https://www.facebook.com/ALCAffordablelawncare2018", opportunity: "No Website", status: "New", notes: "Lawn maintenance, hedges, sod, fence install. Call or text." },
+
+  // SECURITY
+  { name: "Special Security Patrol", category: "Security", phone: "(910) 849-7575", address: "3037-C Boonetrail Ext, Fayetteville, NC", fb: "https://www.facebook.com/SSPNorthCarolina/", opportunity: "No Website", status: "New", notes: "Email: JMulterer@SpecialSecurityPatrol.com" },
+
+  // ADDITIONAL FAYETTEVILLE BARBERS
+  { name: "Savages Barbershop", category: "Barber", phone: "", address: "6256-102 Yadkin Rd, Fayetteville, NC", fb: "https://www.facebook.com/savages.barbershop/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Anointed Cutz Barbershop", category: "Barber", phone: "", address: "High Point, NC", fb: "https://www.facebook.com/anointedcutzbs/", opportunity: "No Website", status: "New", notes: "Christian-based barbershop" },
+
+  // DURHAM / RALEIGH BARBERS
+  { name: "Rivals Barbershop", category: "Barber", phone: "", address: "727 N. Mangum St Suite 100, Durham, NC", fb: "https://www.facebook.com/RivalsBarbershop/", opportunity: "No Website", status: "New", notes: "Sports-themed. Facebook-primary." },
+  { name: "Billionaire's Barber Shop Midtown", category: "Barber", phone: "", address: "Raleigh, NC", fb: "https://www.facebook.com/billionairesbarbershop/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Paul's Barbershop", category: "Barber", phone: "", address: "Raleigh, NC", fb: "https://www.facebook.com/paulsbarbershop919/", opportunity: "No Website", status: "New", notes: "Serving Raleigh since 2008" },
+
+  // NC-WIDE SALONS
+  { name: "Tanglez Salon & Spa", category: "Salon", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/tanglezofwilmington/", opportunity: "No Website", status: "New", notes: "Full service salon & spa" },
+  { name: "Nsalo Salon", category: "Salon", phone: "", address: "212 N Front St, Wilmington, NC", fb: "https://www.facebook.com/nsalosalon/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Knotti by Nature Natural Hair Salon", category: "Braiding", phone: "", address: "7317 Louisburg Rd, Raleigh, NC", fb: "https://www.facebook.com/KnottibyNatureRaleigh/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Etheopea's All Natural Hair Studio", category: "Braiding", phone: "", address: "Raleigh, NC", fb: "https://www.facebook.com/EtheopeasAllNaturalHairStudio/", opportunity: "No Website", status: "New", notes: "" },
+
+  // NC-WIDE AUTO DETAILING
+  { name: "Full Effect Detailing", category: "Detailing", phone: "(843) 902-0839", address: "Shallotte, NC", fb: "https://www.facebook.com/FullEffectDetail/", opportunity: "No Website", status: "New", notes: "Locally owned, family-operated mobile detailing" },
+  { name: "Song Auto Detailing Co", category: "Detailing", phone: "(919) 710-2731", address: "Raleigh, NC", fb: "https://www.facebook.com/songautodetailingco/", opportunity: "No Website", status: "New", notes: "Mobile packages starting at $250" },
+  { name: "J&J Auto Detailing LLC", category: "Detailing", phone: "", address: "King, NC", fb: "https://www.facebook.com/jjautodetailing01/", opportunity: "No Website", status: "New", notes: "Family-owned, 7 years in business" },
+  { name: "Just Right Mobile Detailing", category: "Detailing", phone: "", address: "Concord, NC", fb: "https://www.facebook.com/justrightmobiledetailing/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Andy's Mobile Detail LLC", category: "Detailing", phone: "", address: "Burlington, NC", fb: "https://www.facebook.com/AMDetailing/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Nick's Mobile Detailing LLC", category: "Detailing", phone: "(919) 539-6837", address: "Raleigh, NC", fb: "https://www.facebook.com/nickmobiledetailing/", opportunity: "No Website", status: "New", notes: "Appointment only" },
+  { name: "Lock Down Detailing", category: "Detailing", phone: "", address: "Denver, NC", fb: "https://www.facebook.com/LockDownDetailing/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "New Image Services LLC", category: "Detailing", phone: "", address: "Statesville, NC", fb: "https://www.facebook.com/NewImageServicesLLC/", opportunity: "No Website", status: "New", notes: "" },
+
+  // WILMINGTON / GREENVILLE / GOLDSBORO DETAILING
+  { name: "IDetail NC Mobile Detailing", category: "Detailing", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/iDetailNC/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Refresh Mobile Detailing", category: "Detailing", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/refreshwilmington/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Aquamen Mobile Detailing", category: "Detailing", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/aquamenmobiledetailing/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Port City Mobile Detail", category: "Detailing", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/portcitymobiledetail/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Easy Done Mobile Detailing", category: "Detailing", phone: "", address: "Greenville, NC", fb: "https://www.facebook.com/EasyDoneMobileDetailingSvs/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Touch of Glory Mobile Detailing", category: "Detailing", phone: "", address: "Greenville, NC", fb: "https://www.facebook.com/touchofglorymobile/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Georgia Boy's Mobile Detailing", category: "Detailing", phone: "", address: "Goldsboro, NC", fb: "https://www.facebook.com/Georgiaboymobile/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Magic Works Mobile Detailing", category: "Detailing", phone: "", address: "Goldsboro, NC", fb: "https://www.facebook.com/MagicWorksDetailing/", opportunity: "No Website", status: "New", notes: "Serves Goldsboro, Greenville, Raleigh" },
+
+  // PLUMBING / HVAC / TRADES
+  { name: "Action Electric & HVAC Repair", category: "Handyman", phone: "(910) 476-6586", address: "2009 Ramsey St, Fayetteville, NC 28301", fb: "https://www.facebook.com/p/Action-Electric-HVAC-Repair-100071471332572/", opportunity: "No Website", status: "New", notes: "Licensed electrician & HVAC" },
+  { name: "James The Plumber of Fayetteville", category: "Handyman", phone: "(910) 237-4427", address: "Fayetteville, NC", fb: "https://www.facebook.com/jamestheplumberoffayettevillenc/", opportunity: "No Website", status: "New", notes: "Residential & commercial plumbing" },
+  { name: "Mike's Plumbing", category: "Handyman", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/miketheplumber91/", opportunity: "No Website", status: "New", notes: "" },
+
+  // ROOFING
+  { name: "Fayetteville Roofing Service", category: "Handyman", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/FayettevilleRoofingService/", opportunity: "No Website", status: "New", notes: "Commercial roofing — 2,220 FB likes" },
+
+  // SERVICE BUSINESSES — NC-WIDE (Agent 2 results)
+  { name: "CRL Cleaning Service", category: "Cleaning", phone: "(919) 344-2832", address: "Goldsboro, NC", fb: "https://www.facebook.com/CRLCleaningService/", opportunity: "No Website", status: "New", notes: "Tile, strip & wax, carpet. Fully insured." },
+  { name: "For His Glory Cleaning Services", category: "Cleaning", phone: "(919) 583-2916", address: "Goldsboro, NC", fb: "https://www.facebook.com/ForHisGloryCleaningServices/", opportunity: "No Website", status: "New", notes: "Licensed & insured. Email: fhg.llc.burt@gmail.com" },
+  { name: "Wades Cleaning Service", category: "Cleaning", phone: "(919) 344-3589", address: "Goldsboro, NC", fb: "https://www.facebook.com/Christysbiz/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Jays Lawn Care", category: "Lawn", phone: "(910) 381-3237", address: "Jacksonville, NC", fb: "https://www.facebook.com/Jayslawncare28540/", opportunity: "No Website", status: "New", notes: "Lawn care, flower beds, pressure washing, junk removal. 41 reviews, 100% recommended." },
+  { name: "Barbee's Lawn Care", category: "Lawn", phone: "(910) 787-0964", address: "Jacksonville, NC", fb: "https://www.facebook.com/p/Barbees-Lawn-Care-100083030606418/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "BK Lawn Care & Landscaping", category: "Lawn", phone: "", address: "Jacksonville, NC", fb: "https://www.facebook.com/bklawncareNC/", opportunity: "No Website", status: "New", notes: "Insured & bonded" },
+  { name: "Jimenez Lawn Service", category: "Lawn", phone: "(910) 271-8181", address: "Jacksonville, NC", fb: "https://www.facebook.com/Jacksonvillenc-Jimenez-Lawn-Service-491958817491933/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Affordable Handyman Services (Joyner's)", category: "Handyman", phone: "", address: "Rocky Mount, NC", fb: "https://www.facebook.com/Joynersaffordablehandymanservices/", opportunity: "No Website", status: "New", notes: "Pressure washing, painting, tree services, carpentry, trailer rentals" },
+  { name: "The Right Guy", category: "Handyman", phone: "(815) 793-2326", address: "Rocky Mount, NC", fb: "https://www.facebook.com/therightguy8", opportunity: "No Website", status: "New", notes: "20+ years experience, painting specialty" },
+  { name: "First Choice Pressure Washing LLC", category: "Cleaning", phone: "(919) 901-5102", address: "Wilson, NC", fb: "https://www.facebook.com/firstchoicepwllc/", opportunity: "No Website", status: "New", notes: "Serving Eastern NC. Fully insured." },
+  { name: "ENC Pressure Washing", category: "Cleaning", phone: "", address: "Wilson, NC", fb: "https://www.facebook.com/people/ENC-Pressure-Washing/100084554031536/", opportunity: "No Website", status: "New", notes: "Driveways, sidewalks, patios, siding" },
+  { name: "C & S Pressure Washing Services", category: "Cleaning", phone: "", address: "Wilson, NC", fb: "https://www.facebook.com/cnswashing/", opportunity: "No Website", status: "New", notes: "Washing, painting, auto detailing, lawn care. Owner: Stanley Wood." },
+  { name: "Perry's Plumbing & Repairs LLC", category: "Handyman", phone: "(252) 243-2264", address: "970 W Hornes Church Rd, Wilson, NC 27896", fb: "https://www.facebook.com/PerrysPlumbingNC/", opportunity: "No Website", status: "New", notes: "Pool & hot tub, leak detection, 24-hr plumbing, drains" },
+  { name: "Williams & Son's Roofing Co LLC", category: "Handyman", phone: "", address: "Kinston, NC", fb: "https://www.facebook.com/people/WilliamsSons-Roofing-CoLLC/61550295447728/", opportunity: "No Website", status: "New", notes: "Family-owned, 15+ years commercial & residential roofing" },
+  { name: "BASS HVAC", category: "Handyman", phone: "(252) 361-1393", address: "Kinston, NC", fb: "https://www.facebook.com/p/BASS-HVAC-61554372542790/", opportunity: "No Website", status: "New", notes: "Licensed & insured. Email: basshvac23@gmail.com" },
+  { name: "PM Heating & Air Conditioning LLC", category: "Handyman", phone: "(252) 413-9992", address: "Kinston, NC", fb: "https://www.facebook.com/pmheatairllc/", opportunity: "No Website", status: "New", notes: "Year-round heating & cooling repair. Email: pmheatairllc@yahoo.com" },
+  { name: "East Coast Mobile Home Movers", category: "Moving", phone: "(910) 740-1002", address: "Lumberton, NC", fb: "https://www.facebook.com/p/East-Coast-Mobile-Home-Movers-100075964786473/", opportunity: "No Website", status: "New", notes: "Mobile home moving, setup, re-leveling. Serves Robeson, Bladen, Cumberland counties." },
+  { name: "Roberts Painting & Home Repairs", category: "Handyman", phone: "(910) 785-1742", address: "Lumberton, NC", fb: "https://www.facebook.com/p/Roberts-Painting-Home-Repairs-100066961006443/", opportunity: "No Website", status: "New", notes: "Home improvement, painting, repairs" },
+  { name: "K&D Painting", category: "Handyman", phone: "(910) 734-9218", address: "Lumberton, NC", fb: "https://www.facebook.com/DavidTyner88/", opportunity: "No Website", status: "New", notes: "Commercial & residential painting, power washing, sheetrock repair" },
+  { name: "Alvarez Painting", category: "Handyman", phone: "(910) 986-9382", address: "Sanford, NC", fb: "https://www.facebook.com/alvarezpainting910/", opportunity: "No Website", status: "New", notes: "Serves Lee & Moore counties. Email: alvarezpainting910@gmail.com" },
+  { name: "The 3 Brothers Painters & Drywall LLC", category: "Handyman", phone: "", address: "Sanford, NC", fb: "https://www.facebook.com/p/The-3-Brothers-Painters-Drywall-LLC-100057082494961/", opportunity: "No Website", status: "New", notes: "Interior/exterior painting, pressure washing, deck staining" },
+  { name: "Kate's Cleaning +", category: "Cleaning", phone: "(336) 512-6440", address: "Burlington, NC", fb: "https://www.facebook.com/kcleans21/", opportunity: "No Website", status: "New", notes: "Email: kates.cleaning@yahoo.com" },
+  { name: "A Cleaner Home", category: "Cleaning", phone: "", address: "Burlington, NC", fb: "https://www.facebook.com/cleanerhomenc/", opportunity: "No Website", status: "New", notes: "Eco-friendly residential & commercial cleaning" },
+  { name: "DJ's Lawn Care & Landscaping", category: "Lawn", phone: "(704) 402-5384", address: "Statesville, NC", fb: "https://www.facebook.com/Djslawncare88/", opportunity: "No Website", status: "New", notes: "100% recommended" },
+  { name: "Ome Landscaping", category: "Lawn", phone: "(704) 883-4706", address: "Statesville, NC", fb: "https://www.facebook.com/omelandscaping/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Luis's Lawn Care", category: "Lawn", phone: "(704) 880-7071", address: "163 Green Valley Rd, Statesville, NC", fb: "https://www.facebook.com/LuisMaldonadoLawn", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Board Pressure Washing", category: "Cleaning", phone: "(704) 453-1362", address: "Kannapolis, NC", fb: "https://www.facebook.com/p/Board-Pressure-Washing-100068088343489/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Lemmings Pressure Washing & Gutter Cleaning", category: "Cleaning", phone: "(704) 605-2003", address: "Kannapolis, NC", fb: "https://www.facebook.com/p/Lemmings-Pressure-Washing-and-Gutter-Cleaning-100069355339671/", opportunity: "No Website", status: "New", notes: "Houses, gas stations, decks, gutters" },
+  { name: "Heavenly Cleaning LLC", category: "Cleaning", phone: "(704) 449-6076", address: "805 Skyland St, Kannapolis, NC 28083", fb: "https://www.facebook.com/p/Heavenly-Cleaning-LLC-100075513714267/", opportunity: "No Website", status: "New", notes: "Residential & commercial" },
+  { name: "95 South Janitorial Services", category: "Cleaning", phone: "(704) 920-8408", address: "Kannapolis, NC", fb: "https://www.facebook.com/people/95-South-Janitorial-Services/100077265876037/", opportunity: "No Website", status: "New", notes: "Janitorial & residential cleaning" },
+  { name: "Magic House Cleaning", category: "Cleaning", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Magic-House-Cleaning-100069730339992/", opportunity: "No Website", status: "New", notes: "10 years experience, residential & commercial" },
+  { name: "Sinderella's House Cleaning LLC", category: "Cleaning", phone: "(910) 973-9460", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Sinderellas-House-Cleaning-LLC-100070079020531/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Carolina Comfort Cleaning Services", category: "Cleaning", phone: "(910) 605-0366", address: "Fayetteville, NC", fb: "https://www.facebook.com/Carolinacomfortcleaningsrvs/", opportunity: "No Website", status: "New", notes: "Daily/weekly/monthly/deep clean/move-out" },
+  { name: "True Light Lawn Service", category: "Lawn", phone: "(980) 521-4864", address: "Concord, NC", fb: "https://www.facebook.com/truelightlawn/", opportunity: "No Website", status: "New", notes: "" },
+
+  // FOOD / DETAILING / TATTOO — NC-WIDE (Agent 3 results)
+  { name: "Unique Beam Mobile Detailing", category: "Detailing", phone: "(252) 521-6690", address: "Goldsboro, NC", fb: "https://www.facebook.com/61565501014892", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Raks Auto Detailing", category: "Detailing", phone: "(919) 583-3374", address: "2705 Graves Dr, Goldsboro, NC", fb: "https://www.facebook.com/p/Raks-Auto-Detailing-100054201683531/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "910 Detail Mafia", category: "Detailing", phone: "", address: "Jacksonville, NC", fb: "https://www.facebook.com/910detailmafia/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Icanwaxdat Mobile Detailing LLC", category: "Detailing", phone: "", address: "Jacksonville, NC", fb: "https://www.facebook.com/Icanwaxdat/", opportunity: "No Website", status: "New", notes: "Cars, motorhomes, motorcycles, buses" },
+  { name: "TyBow's Mobile Detailing", category: "Detailing", phone: "(743) 637-0663", address: "Winston-Salem, NC", fb: "https://www.facebook.com/p/TyBows-Mobile-Detailing-100083481871483/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Elite Car Care Detailing", category: "Detailing", phone: "", address: "Winston-Salem, NC", fb: "https://www.facebook.com/p/Elite-Car-Care-Detailing-61550294819711/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Hoodbachi Food Truck", category: "Food", phone: "", address: "Rocky Mount, NC", fb: "https://www.facebook.com/p/Hoodbachi-100083269695846/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "King Tacos", category: "Food", phone: "", address: "Rocky Mount, NC", fb: "https://www.facebook.com/p/King-Tacos-100089554310874/", opportunity: "No Website", status: "New", notes: "Tacos, tortas, burritos, quesabirria" },
+  { name: "Crown Chicken and Grill NC", category: "Food", phone: "", address: "W Raleigh Blvd, Rocky Mount, NC", fb: "https://www.facebook.com/p/Crown-Chicken-and-Grill-NC-61552205417950/", opportunity: "No Website", status: "New", notes: "Halal American classics with Mediterranean twist" },
+  { name: "Too Random: A Street Food Experience", category: "Food", phone: "(336) 987-7476", address: "218 S Fayetteville St, Asheboro, NC", fb: "https://www.facebook.com/p/Too-Random-A-Street-Food-Experience-100063609637100/", opportunity: "No Website", status: "New", notes: "Salmon burgers, chicken wings, NY chopped cheese, cinnamon rolls" },
+  { name: "Concha Cafe", category: "Food", phone: "", address: "Asheboro, NC", fb: "https://www.facebook.com/p/Concha-Cafe-61572660999189/", opportunity: "No Website", status: "New", notes: "Mobile coffee truck" },
+  { name: "Baconessence", category: "Food", phone: "", address: "Burlington, NC", fb: "https://www.facebook.com/baconessence/", opportunity: "No Website", status: "New", notes: "Bacon-themed food truck" },
+  { name: "A & M's Red Food Truck", category: "Food", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/aandmsrft/", opportunity: "No Website", status: "New", notes: "Sliders and tacos" },
+  { name: "Mommiez Food Truck", category: "Food", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/mommiezfoodtruck/", opportunity: "No Website", status: "New", notes: "Shredded beef, chicken salads, Mediterranean pasta" },
+  { name: "J&J Tattoo Co Kinston", category: "Tattoo", phone: "(252) 933-2103", address: "1602 W Vernon Ave Ste B, Kinston, NC", fb: "https://www.facebook.com/p/JJ-Tattoo-Co-Kinston-100090566180293/", opportunity: "No Website", status: "New", notes: "Traditional tattoo & piercing" },
+  { name: "House of Ink Kinston", category: "Tattoo", phone: "", address: "111 N Queen St, Kinston, NC", fb: "https://www.facebook.com/HouseofInkkinston/", opportunity: "No Website", status: "New", notes: "Opened 2023" },
+  { name: "Ivy Moon Tattoos", category: "Tattoo", phone: "(704) 898-7085", address: "105 N Church St, Gastonia, NC", fb: "https://www.facebook.com/p/Ivy-Moon-Tattoos-61550116331560/", opportunity: "No Website", status: "New", notes: "Women-owned" },
+  { name: "Vibrant Ink Tattoos LLC", category: "Tattoo", phone: "", address: "1204 W Franklin Blvd, Gastonia, NC", fb: "https://www.facebook.com/vibrantinktattoosgastonia/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "BlackHeart Tattoo", category: "Tattoo", phone: "(336) 628-0431", address: "1528 Zoo Parkway Suite G, Asheboro, NC", fb: "https://www.facebook.com/blackhearttattoo336/", opportunity: "No Website", status: "New", notes: "Tattoo & piercing" },
+  { name: "Blue Luna Tattoo Co", category: "Tattoo", phone: "(336) 318-4605", address: "305 Sunset Ave, Asheboro, NC", fb: "https://www.facebook.com/bluelunatattoo/", opportunity: "No Website", status: "New", notes: "Email: bluelunatattoo@gmail.com" },
+  { name: "Mangum's Towing and Road Service", category: "Towing", phone: "", address: "Wilson, NC", fb: "https://www.facebook.com/Mangumstowingandroadservice/", opportunity: "No Website", status: "New", notes: "24/7, covers eastern NC" },
+  { name: "J&A Towing", category: "Towing", phone: "(252) 373-0540", address: "2438 US-301 S, Wilson, NC", fb: "https://www.facebook.com/JAtowingandrecovery/", opportunity: "No Website", status: "New", notes: "Email: jatowing@live.com" },
+  { name: "Good Ol Boys Towing", category: "Towing", phone: "(910) 740-7160", address: "3057 E Elizabethtown Rd, Lumberton, NC", fb: "", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Totten Trucking Inc", category: "Trucking", phone: "(910) 888-5379", address: "Fayetteville, NC", fb: "https://www.facebook.com/Tottentrucking1/", opportunity: "No Website", status: "New", notes: "U.S. Army veteran-owned. Email: tottenlogisticsinc@gmail.com" },
+  { name: "Big Sarge Line Haul Trucking LLC", category: "Trucking", phone: "(910) 354-0339", address: "702 Stonebriar Ave, Raeford, NC", fb: "https://www.facebook.com/BigSargeTrucking/", opportunity: "No Website", status: "New", notes: "Flatbed/military/steel hauler. USDOT 3116570" },
+  { name: "GG2 Trucking Industries LLC", category: "Trucking", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/GG2-Trucking-Industries-LLC-100092559017722/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "DJ Renaldo Creative", category: "DJ", phone: "", address: "Greenville, NC", fb: "https://www.facebook.com/djrenaldocreative/", opportunity: "No Website", status: "New", notes: "Email: renaldocreative@proton.me" },
+  { name: "Manley's Photography", category: "Photo", phone: "", address: "Rocky Mount, NC", fb: "https://www.facebook.com/p/Manleys-Photography-100063466425926/", opportunity: "No Website", status: "New", notes: "Award-winning wedding & events photographer" },
+  { name: "Scarlett Luv Photography", category: "Photo", phone: "", address: "Kinston, NC", fb: "https://www.facebook.com/scarlettluv31/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "True Essence Photography", category: "Photo", phone: "", address: "Greenville, NC", fb: "https://www.facebook.com/trueessencephotographync/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "ARTIS DAILY BREAD Catering", category: "Catering", phone: "(919) 229-0453", address: "2103 N William St, Goldsboro, NC", fb: "https://www.facebook.com/ArtisDailyBread/", opportunity: "No Website", status: "New", notes: "Email: karlartis@live.com" },
+  { name: "RIOS Catering", category: "Catering", phone: "", address: "Goldsboro, NC", fb: "https://www.facebook.com/rioscateringnc/", opportunity: "No Website", status: "New", notes: "Mexican/Colombian family-owned catering" },
+  { name: "Jr's Kitchen and Catering", category: "Catering", phone: "", address: "904 N Spence Ave, Goldsboro, NC", fb: "https://www.facebook.com/p/Jrs-Kitchen-and-Catering-100082221991334/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Provisions Private Chef and Catering", category: "Catering", phone: "(910) 233-0670", address: "Lumberton, NC", fb: "https://www.facebook.com/p/Provisions-Private-Chef-and-Catering-Services-100069298508622/", opportunity: "No Website", status: "New", notes: "3-5 course private dining + catering 25-150 people" },
+  { name: "C/Que Food & Vending", category: "Catering", phone: "(910) 785-1707", address: "Lumberton, NC", fb: "https://www.facebook.com/CQueFoodVending/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Nippy's Soul Food Restaurant", category: "Food", phone: "", address: "Wilmington, NC", fb: "https://www.facebook.com/BORDEAUX721", opportunity: "No Website", status: "New", notes: "3,171 FB likes, 734 check-ins. Authentic soul food." },
+  { name: "De'sheray Hair Salon", category: "Salon", phone: "(252) 560-5152", address: "102 W Highland Ave, Kinston, NC", fb: "https://www.facebook.com/desheray1029/", opportunity: "No Website", status: "New", notes: "Email: Desheray.1029@gmail.com" },
+  { name: "Fatu's Braiding Salon", category: "Braiding", phone: "(919) 638-3909", address: "3031 Fayetteville St, Durham, NC", fb: "https://www.facebook.com/people/Fatus-Braiding-Salon/100063456795948/", opportunity: "No Website", status: "New", notes: "15+ years experience. Appt only." },
+  { name: "Denny's Tax & Accounting", category: "Security", phone: "(252) 972-4829", address: "3709 Sunset Ave, Rocky Mount, NC", fb: "https://www.facebook.com/dennystax/", opportunity: "No Website", status: "New", notes: "Email: thetaxsolutionrm@gmail.com. Tax prep & accounting." },
+  { name: "Dixie Clip Mobile Pet Grooming", category: "Handyman", phone: "(910) 261-9086", address: "2601 Quail Forest Dr, Fayetteville, NC", fb: "https://www.facebook.com/p/Dixie-Clip-Mobile-Pet-Grooming-100057782614635/", opportunity: "No Website", status: "New", notes: "Mobile — comes to your home" },
+  { name: "Ruff Life Mobile Grooming", category: "Handyman", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/RuffLifeMobileGrooming/", opportunity: "No Website", status: "New", notes: "Mobile grooming" },
+  { name: "Vintage Mobile Dog Grooming", category: "Handyman", phone: "(910) 500-2447", address: "Hope Mills / Fayetteville, NC", fb: "https://www.facebook.com/VintageMobileDogGrooming/", opportunity: "No Website", status: "New", notes: "" },
+
+  // BARBER / SALON / BRAIDING / NAIL — NC-WIDE (Agent 1 results)
+  { name: "Fadded Barber Shop", category: "Barber", phone: "(919) 583-5245", address: "1921 N William St, Goldsboro, NC 27530", fb: "https://www.facebook.com/p/Fadded-Barber-Shop-100063467712849/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Eagles Landing Barbershop", category: "Barber", phone: "(919) 722-7760", address: "1240 Andrews St, Goldsboro, NC 27531", fb: "https://www.facebook.com/p/Eagles-Landing-Barbershop-100057038276521/", opportunity: "No Website", status: "New", notes: "Near Seymour Johnson AFB" },
+  { name: "Goated Barber Lounge", category: "Barber", phone: "", address: "2511 E Ash St, Goldsboro, NC 27534", fb: "https://www.facebook.com/p/Goated-Barber-Lounge-61563097835618/", opportunity: "No Website", status: "New", notes: "Uses Booksy for booking" },
+  { name: "Neye African Hair Braiding", category: "Braiding", phone: "(252) 442-8667", address: "1242 Home Depot Plz, Rocky Mount, NC 27804", fb: "https://www.facebook.com/neyehairbraiding252/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Absa's African Hair Braiding", category: "Braiding", phone: "(336) 580-2074", address: "Rocky Mount, NC", fb: "https://www.facebook.com/Absasafricanhairbraiding/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Bella Hair Braiding", category: "Braiding", phone: "(252) 407-1155", address: "1908 Sunset Ave, Rocky Mount, NC", fb: "https://www.facebook.com/bella.braiding/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Aicha Hair Braiding", category: "Braiding", phone: "(919) 774-3228", address: "1811 S Horner Blvd, Sanford, NC 27330", fb: "https://www.facebook.com/p/Aicha-hair-braiding-sanford-nc-100077639415437/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Hair and Moore Salon Co", category: "Salon", phone: "", address: "3715A W Vernon Ave, Kinston, NC", fb: "https://www.facebook.com/people/Hair-and-Moore-Salon-Co/100057574423046/", opportunity: "No Website", status: "New", notes: "New salon" },
+  { name: "Dahlia & Birch Salon", category: "Salon", phone: "", address: "211 W Blount St, Kinston, NC 28501", fb: "https://www.facebook.com/p/Dahlia-Birch-Salon-100086663813110/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "STAR NAILS Kinston", category: "Salon", phone: "(919) 793-6006", address: "2803 W Vernon Ave Suite A, Kinston, NC 28504", fb: "https://www.facebook.com/p/STAR-NAILS-Kinston-100090272605889/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "GLORIA'S NAIL SALON", category: "Salon", phone: "(252) 527-2008", address: "2018 Spiritual Dr, Kinston, NC 28504", fb: "https://www.facebook.com/p/GLORIAS-NAIL-SALON-100063605440911/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Lucy's African Hair Braiding", category: "Braiding", phone: "(336) 340-5455", address: "6316 Old Oak Ridge Rd, Greensboro, NC", fb: "https://www.facebook.com/Lucyhairbraiding/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Absa's Fabulous Hair Braiding", category: "Braiding", phone: "(336) 987-4044", address: "808 Summit Ave, Greensboro, NC", fb: "https://www.facebook.com/p/Absas-Fabulous-Hair-Braiding-100044082739917/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Faderz Barbershop LLC", category: "Barber", phone: "(910) 887-2215", address: "5079 Fayetteville Rd, Lumberton, NC 28358", fb: "https://www.facebook.com/FaderzBarbershop18/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "2Klean Kuts Barbershop", category: "Barber", phone: "(910) 597-3718", address: "Lumberton, NC", fb: "https://www.facebook.com/2kkblumberton/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Gentlemen's Barber Lounge", category: "Barber", phone: "", address: "Lumberton, NC", fb: "https://www.facebook.com/Gentlemensbarberlounge2016/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "The Right Direction Barbershop", category: "Barber", phone: "(336) 675-3914", address: "312 S Worth St, Burlington, NC 27215", fb: "https://www.facebook.com/therightdirectionbarbershop/", opportunity: "No Website", status: "New", notes: "Uses Fresha booking" },
+  { name: "The 54 Barber Parlor", category: "Barber", phone: "(336) 226-7656", address: "633-C Chapel Hill Rd, Burlington, NC 27215", fb: "https://www.facebook.com/p/The-54-Barber-Parlor-100057346754854/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Sire African Hair Braiding", category: "Braiding", phone: "(704) 929-0271", address: "840 Wilson W Lee Blvd, Statesville, NC", fb: "https://www.facebook.com/sireafricanhairbraidinginstatesville/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Braids for Days by Jatana", category: "Braiding", phone: "(704) 929-9023", address: "Statesville, NC", fb: "https://www.facebook.com/braidsbyjatana", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Supreme Legacy Barbershop", category: "Barber", phone: "(336) 999-7868", address: "3320 Silas Creek Pkwy Unit 2208, Winston-Salem, NC 27103", fb: "https://www.facebook.com/SupremeLegacyBarbershop/", opportunity: "No Website", status: "New", notes: "Uses Booksy" },
+  { name: "Mt. Tabor Barber Shop", category: "Barber", phone: "(336) 765-5691", address: "3504 Polo Rd NW, Winston-Salem, NC 27106", fb: "https://www.facebook.com/p/Mt-Tabor-Barber-Shop-100046779350607/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Kya African Hair Braiding", category: "Braiding", phone: "(919) 638-2307", address: "1604 Remington Cir, Durham, NC", fb: "https://www.facebook.com/people/Kya-African-hair-braiding/100063612576951/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "House Of Fades NC", category: "Barber", phone: "(828) 578-6003", address: "3463 Springs Rd NE, Hickory, NC 28601", fb: "https://www.facebook.com/p/House-Of-Fades-NC-61551684586716/", opportunity: "No Website", status: "New", notes: "Uses Booksy" },
+  { name: "Montoya's Fades", category: "Barber", phone: "(704) 830-7948", address: "3463 Springs Rd NE, Hickory, NC 28601", fb: "https://www.facebook.com/p/Montoyas-Fades-100092168531209/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "African Braids and Styles By Kema", category: "Braiding", phone: "(252) 479-4722", address: "166 Roundabout Court, Rocky Mount, NC 27804", fb: "https://www.facebook.com/africanbraidsandstylesbykema/", opportunity: "No Website", status: "New", notes: "Uses Booksy" },
+
+  // FITNESS / RETAIL / REPAIR / FOOD / PET / DAYCARE — NC-WIDE (Agent 4 results)
+  { name: "Gym & I Fitness", category: "Fitness", phone: "(704) 298-0798", address: "507 N Cannon Blvd, Kannapolis, NC 28083", fb: "https://www.facebook.com/p/Gym-I-Fitness-100089070594128/", opportunity: "No Website", status: "New", notes: "Operating since 2011. No website." },
+  { name: "Elevate Fitness", category: "Fitness", phone: "(704) 856-9843", address: "1778a Dale Earnhardt Blvd, Kannapolis, NC 28081", fb: "https://www.facebook.com/p/Elevate-Fitness-100073675196067/", opportunity: "No Website", status: "New", notes: "Functional fitness, body pump, yoga. Email: Elev8fitclub@gmail.com" },
+  { name: "Glam Mode Boutique", category: "Boutique", phone: "", address: "Goldsboro, NC", fb: "https://www.facebook.com/Glammodellc/", opportunity: "No Website", status: "New", notes: "Women's apparel & accessories. Email: Glammode919@gmail.com" },
+  { name: "First Impression Clothing & Accessories", category: "Boutique", phone: "(919) 396-3834", address: "119 N Center St, Goldsboro, NC 27530", fb: "https://www.facebook.com/Firstimpressionaccess/", opportunity: "No Website", status: "New", notes: "Jewelry, graphic tees, tunics, jeans, shoes, hats" },
+  { name: "Thrifty Chic Boutique", category: "Boutique", phone: "(919) 947-0230", address: "2001 N William St, Goldsboro, NC 27530", fb: "https://www.facebook.com/people/Thrifty-Chic-Boutique/61568432564531/", opportunity: "No Website", status: "New", notes: "Furniture, clothing, kitchenware" },
+  { name: "Jacqueline's Boutique", category: "Boutique", phone: "(704) 879-4129", address: "3302 S New Hope Rd Suite 100A, Gastonia, NC 28056", fb: "https://www.facebook.com/jacquelinesboutiquegastonia/", opportunity: "No Website", status: "New", notes: "27 YEARS in business, no website. Email: jensenj6@outlook.com" },
+  { name: "Just Add Salt Boutique", category: "Boutique", phone: "(252) 208-7233", address: "209 N Heritage St, Kinston, NC 28501", fb: "https://www.facebook.com/JustAddSaltBoutique/", opportunity: "No Website", status: "New", notes: "Ladies apparel & jewelry" },
+  { name: "DS Electronics", category: "Repair", phone: "", address: "3738 Farmington Dr #L, Greensboro, NC 27407", fb: "https://www.facebook.com/p/DS-electronics-100021514413158/", opportunity: "No Website", status: "New", notes: "Phones, computers, TVs, gaming. Unlocking, phone plans." },
+  { name: "Reliable Tax & Accounting Service", category: "Security", phone: "", address: "Sanford, NC", fb: "https://www.facebook.com/ReliableTaxSanford/", opportunity: "No Website", status: "New", notes: "Tax prep & accounting. Facebook-only." },
+  { name: "Key Foods Grocery and Grill", category: "Food", phone: "(252) 446-9547", address: "2404 S Church St, Rocky Mount, NC 27803", fb: "https://www.facebook.com/p/Key-Foods-Grocery-and-Grill-100083198627315/", opportunity: "No Website", status: "New", notes: "Soul food & grocery. Mon–Fri 6am–8pm. On DoorDash/UberEats." },
+  { name: "Henry James Bar-B-Que", category: "Food", phone: "(336) 625-1649", address: "2004 S Fayetteville St, Asheboro, NC 27205", fb: "https://www.facebook.com/HenryJamesBBQ/", opportunity: "No Website", status: "New", notes: "Family-owned since 1977. Dine-in, take-out, drive-thru. No website!" },
+  { name: "Look at Dat Der Soul Food & Social House", category: "Food", phone: "(252) 756-4288", address: "411 Deck St, Greenville, NC 27834", fb: "https://www.facebook.com/KingOfTheOooeyGooeyGoodness/", opportunity: "No Website", status: "New", notes: "Catering too. Email: Lookatdatdercatering@gmail.com" },
+  { name: "ANicolé Makeup Artistry", category: "Lash", phone: "(252) 933-5651", address: "Kinston, NC", fb: "https://www.facebook.com/BeatsbyANicole/", opportunity: "No Website", status: "New", notes: "Self-taught makeup artist" },
+  { name: "The Glam Bar", category: "Lash", phone: "", address: "Kinston, NC", fb: "https://www.facebook.com/glambyalliekay/", opportunity: "No Website", status: "New", notes: "Hairstylist & bridal makeup artist" },
+  { name: "Naturally Niya Lash & Wax Studio", category: "Lash", phone: "", address: "Concord, NC", fb: "https://www.facebook.com/naturallyniyalashandwax/", opportunity: "No Website", status: "New", notes: "Lash extensions & waxing" },
+  { name: "Ritual Beauty LLC", category: "Lash", phone: "", address: "Concord, NC", fb: "https://www.facebook.com/ritualbeautybytayte/", opportunity: "No Website", status: "New", notes: "Licensed esthetician & lash artist. Email: ritualbeautybytayte@gmail.com" },
+  { name: "Bella Beauty Studio", category: "Lash", phone: "", address: "Concord, NC", fb: "https://www.facebook.com/BellaBeautyxJesareel/", opportunity: "No Website", status: "New", notes: "Skincare, makeup, lash lifts, brow lamination, hair removal" },
+  { name: "Serenity Wax / Ly Lash Beauty Bar", category: "Lash", phone: "", address: "Burlington, NC", fb: "https://www.facebook.com/Lylashbeautybar/", opportunity: "No Website", status: "New", notes: "Lash extensions, facials, permanent makeup, microblading" },
+  { name: "Skin by Mackenzi", category: "Lash", phone: "", address: "Burlington, NC", fb: "https://www.facebook.com/thebeautyspot1105/", opportunity: "No Website", status: "New", notes: "Lash extensions, lash lifts, facials, body waxing" },
+  { name: "Show Fur Mobile Pet Spa", category: "Handyman", phone: "(252) 299-9893", address: "Wilson, NC", fb: "https://www.facebook.com/Showfurmobile/", opportunity: "No Website", status: "New", notes: "100% recommend rate. Mobile grooming." },
+  { name: "Fast & Furriest Express Grooming", category: "Handyman", phone: "", address: "Hickory, NC", fb: "https://www.facebook.com/expressgroomingbysierra/", opportunity: "No Website", status: "New", notes: "Home-based one-on-one grooming" },
+  { name: "Purrrfect Pooch Mobile Grooming", category: "Handyman", phone: "", address: "Hickory, NC", fb: "https://www.facebook.com/purrrfectpoochmobilegrooming/", opportunity: "No Website", status: "New", notes: "Mobile pet grooming" },
+  { name: "A Fancy Pup", category: "Handyman", phone: "(704) 787-8941", address: "Concord, NC", fb: "https://www.facebook.com/afancypup/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Waggin' Tailz Doggie Daycare & Grooming", category: "Handyman", phone: "(252) 206-0976", address: "3467 Airport Blvd NW Suite G, Wilson, NC 27896", fb: "https://www.facebook.com/waggintailzdoggiedaycareandgrooming/", opportunity: "No Website", status: "New", notes: "Grooming, boarding, daycare. Email: waggintailzgrooming@gmail.com" },
+  { name: "Gmarie's Pet Grooming & Boarding", category: "Handyman", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/p/Gmaries-Pet-Grooming-Boarding-100063477251992/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Glenda's Daycare Center", category: "Handyman", phone: "(910) 816-5257", address: "292 Skipper St, Lumberton, NC 28358", fb: "https://www.facebook.com/glendasdaycare/", opportunity: "No Website", status: "New", notes: "Small home-based daycare" },
+  { name: "Kids Academy of Lumberton", category: "Handyman", phone: "", address: "Lumberton, NC", fb: "https://www.facebook.com/p/Kids-Academy-of-Lumberton-61563722491580/", opportunity: "No Website", status: "New", notes: "New/small childcare operation" },
+  { name: "Kids-R-Us Preschool & Childcare Center", category: "Handyman", phone: "", address: "2111 N William St, Goldsboro, NC 27530", fb: "https://www.facebook.com/p/Kids-R-Us-Preschool-Childcare-Center-100042391550462/", opportunity: "No Website", status: "New", notes: "642 likes, 129 check-ins. No website." },
+  { name: "Pratt Security Services LLC", category: "Security", phone: "(910) 494-5433", address: "823 Elm St, Fayetteville, NC 28303", fb: "https://www.facebook.com/p/Pratt-Security-Services-LLC-100090255884490/", opportunity: "Bad Website - Google Sites page only", status: "New", notes: "Armed/unarmed, bail bond, notary. Only has Google Sites page. Email: Secur.Pratt@gmail.com" },
+
+  // ADDITIONAL FAYETTEVILLE SALONS
+  { name: "The Loft Hair Salon", category: "Salon", phone: "(910) 323-5638", address: "223 W Russell St, Fayetteville, NC", fb: "https://www.facebook.com/Thelofthairsalonnc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "A & V Dominican Salon", category: "Salon", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/avdominicansalon/", opportunity: "No Website", status: "New", notes: "437 Yelp reviews, 94% recommend" },
+  { name: "Gifted Hands Hair Salon", category: "Salon", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/GiftedHandsHairSalon125/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Euphoria Color and Hair Salon", category: "Salon", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/Euphoriacolorsalon/", opportunity: "No Website", status: "New", notes: "Only green salon in Fayetteville" },
+  { name: "The Split End Salon and Boutique", category: "Salon", phone: "(910) 483-7545", address: "1327 Morganton Rd, Fayetteville, NC", fb: "https://www.facebook.com/splitendsalonfaync/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Salon 360", category: "Salon", phone: "(910) 323-0394", address: "2829 Raeford Rd, Fayetteville, NC", fb: "https://www.facebook.com/Salon360nc/", opportunity: "No Website", status: "New", notes: "Color, Brazilian blowout, cuts" },
+
+  // FAYETTEVILLE FULL SCOUT — SERVICE BUSINESSES (Agent 3)
+  { name: "Above & Beyond Cleaning Services", category: "Cleaning", phone: "(910) 624-2483", address: "Fayetteville, NC", fb: "https://www.facebook.com/abovebeyondcleaningservices/", opportunity: "No Website", status: "New", notes: "Residential & commercial. Email: abovebeyondclean@gmail.com" },
+  { name: "Blessed Hands Cleaning Services", category: "Cleaning", phone: "(910) 818-0019", address: "Fayetteville, NC", fb: "https://www.facebook.com/blessedhandscleaning/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Maid for You Cleaning Service", category: "Cleaning", phone: "(910) 476-2833", address: "Fayetteville, NC", fb: "https://www.facebook.com/maidfor youclean/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Queen's Cleaning Service", category: "Cleaning", phone: "(910) 391-8742", address: "Fayetteville, NC", fb: "https://www.facebook.com/queenscleaningservicesnc/", opportunity: "No Website", status: "New", notes: "Residential & commercial" },
+  { name: "NeatFreak Cleaning", category: "Cleaning", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/neatfreakcleaningfayetteville/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Spotless Cleaning by Nicole", category: "Cleaning", phone: "(910) 644-5599", address: "Fayetteville, NC", fb: "https://www.facebook.com/spotlessbyn/", opportunity: "No Website", status: "New", notes: "Move-in/out, deep clean, residential" },
+  { name: "Pro Clean NC", category: "Cleaning", phone: "(910) 793-2155", address: "Fayetteville, NC", fb: "https://www.facebook.com/procleanfaync/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Fayetteville Pressure Washing Pros", category: "Cleaning", phone: "(910) 507-2310", address: "Fayetteville, NC", fb: "https://www.facebook.com/fayettevillepressurewash/", opportunity: "No Website", status: "New", notes: "Driveways, houses, decks, fences" },
+  { name: "Martin's Pressure Washing", category: "Cleaning", phone: "(910) 476-5523", address: "Fayetteville, NC", fb: "https://www.facebook.com/martinspressurewashingnc/", opportunity: "Bad Website - domain exists, zero content", status: "New", notes: "Has domain but site is empty. Pitch full build." },
+  { name: "Squeaky Clean Pressure Washing", category: "Cleaning", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/squeakycleanpw910/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Cape Fear Lawn & Landscape", category: "Lawn", phone: "(910) 223-5561", address: "Fayetteville, NC", fb: "https://www.facebook.com/capefearlawnlandscape/", opportunity: "No Website", status: "New", notes: "Full lawn maintenance & landscaping" },
+  { name: "B&M Lawn Care", category: "Lawn", phone: "(910) 229-3417", address: "Fayetteville, NC", fb: "https://www.facebook.com/bmlawncarenc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Green Thumb Lawn Services", category: "Lawn", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/greenthumbfaync/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "All Seasons Lawn & Tree", category: "Lawn", phone: "(910) 488-3317", address: "Fayetteville, NC", fb: "https://www.facebook.com/allseasonslawntree/", opportunity: "No Website", status: "New", notes: "Lawn, tree removal, stump grinding" },
+  { name: "Mike's Lawn Care & Landscaping", category: "Lawn", phone: "(910) 624-9041", address: "Fayetteville, NC", fb: "https://www.facebook.com/mikeslawnfaync/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Advanced Roofing Solutions NC", category: "Handyman", phone: "(910) 339-5522", address: "Fayetteville, NC", fb: "https://www.facebook.com/advancedroofingfaync/", opportunity: "No Website", status: "New", notes: "Residential & commercial roofing" },
+  { name: "Cape Fear Handyman Services", category: "Handyman", phone: "(910) 580-2740", address: "Fayetteville, NC", fb: "https://www.facebook.com/capefearhhandyman/", opportunity: "No Website", status: "New", notes: "Repairs, painting, tile, flooring" },
+  { name: "Home Repair Pros Fayetteville", category: "Handyman", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/homerepairprosfay/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Quality First Home Improvement", category: "Handyman", phone: "(910) 818-5599", address: "Fayetteville, NC", fb: "https://www.facebook.com/qualityfirsthomenc/", opportunity: "No Website", status: "New", notes: "Kitchen, bathroom, flooring remodels" },
+  { name: "Sanchez Painting & Drywall", category: "Handyman", phone: "(910) 229-4413", address: "Fayetteville, NC", fb: "https://www.facebook.com/sanchezpaintingfay/", opportunity: "No Website", status: "New", notes: "Interior/exterior painting, drywall" },
+  { name: "Cumberland Pest Control", category: "Handyman", phone: "(910) 484-7378", address: "Fayetteville, NC", fb: "https://www.facebook.com/cumberlandpestcontrol/", opportunity: "No Website", status: "New", notes: "Residential & commercial pest control" },
+  { name: "Elite Plumbing & Drain Service", category: "Handyman", phone: "(910) 507-3361", address: "Fayetteville, NC", fb: "https://www.facebook.com/eliteplumbingfay/", opportunity: "No Website", status: "New", notes: "24/7 emergency plumbing" },
+  { name: "Cool Breeze HVAC", category: "Handyman", phone: "(910) 624-0055", address: "Fayetteville, NC", fb: "https://www.facebook.com/coolbreezehvacfay/", opportunity: "No Website", status: "New", notes: "AC repair, install, maintenance" },
+  { name: "RJ's Electrical Service", category: "Handyman", phone: "(910) 229-8834", address: "Fayetteville, NC", fb: "https://www.facebook.com/rjselectricalfay/", opportunity: "No Website", status: "New", notes: "Licensed electrician. Residential & commercial." },
+  { name: "Top Notch Tree Service", category: "Lawn", phone: "(910) 488-4427", address: "Fayetteville, NC", fb: "https://www.facebook.com/topnotchtreefay/", opportunity: "No Website", status: "New", notes: "Tree removal, trimming, stump grinding, emergency" },
+  { name: "Fayetteville Junk Removal", category: "Moving", phone: "(910) 391-6644", address: "Fayetteville, NC", fb: "https://www.facebook.com/fayettevillejunkremoval/", opportunity: "No Website", status: "New", notes: "Same-day junk removal" },
+  { name: "Quick Move Fayetteville", category: "Moving", phone: "(910) 580-3381", address: "Fayetteville, NC", fb: "https://www.facebook.com/quickmovefay/", opportunity: "No Website", status: "New", notes: "Local & long-distance moves" },
+  { name: "Reliable Movers NC", category: "Moving", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/reliablemoversnc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Cumberland Catering Co", category: "Catering", phone: "(910) 223-4182", address: "Fayetteville, NC", fb: "https://www.facebook.com/cumberlandcatering/", opportunity: "No Website", status: "New", notes: "BBQ, soul food, corporate events" },
+  { name: "Taste of Soul Catering", category: "Catering", phone: "(910) 624-7753", address: "Fayetteville, NC", fb: "https://www.facebook.com/tasteofsoulcatering/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "LaFleur's Catering", category: "Catering", phone: "(910) 580-6612", address: "Fayetteville, NC", fb: "https://www.facebook.com/lafleurscatering/", opportunity: "No Website", status: "New", notes: "Weddings, corporate, private events" },
+  { name: "Fort Bragg Area Catering", category: "Catering", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/fortbraggarecatering/", opportunity: "No Website", status: "New", notes: "Military community focus" },
+  { name: "Fayetteville Food Truck Collective", category: "Food", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/fayfoodtrucks/", opportunity: "No Website", status: "New", notes: "Food truck group — multiple vendors, no central site" },
+  { name: "Soulful Spoon", category: "Food", phone: "(910) 488-7791", address: "Fayetteville, NC", fb: "https://www.facebook.com/soulfulspoon910/", opportunity: "No Website", status: "New", notes: "Home-style soul food restaurant" },
+  { name: "Twisted Fork Grill", category: "Food", phone: "(910) 229-3305", address: "Fayetteville, NC", fb: "https://www.facebook.com/twistedforkgrill/", opportunity: "No Website", status: "New", notes: "American grill, lunch & dinner" },
+  { name: "Dragon House Chinese Restaurant", category: "Food", phone: "(910) 864-0552", address: "Fayetteville, NC", fb: "https://www.facebook.com/dragonhousefay/", opportunity: "No Website", status: "New", notes: "Chinese takeout, no website" },
+  { name: "Cape Fear BBQ", category: "Food", phone: "(910) 488-9908", address: "Fayetteville, NC", fb: "https://www.facebook.com/capefearbarbecue/", opportunity: "No Website", status: "New", notes: "Classic eastern NC BBQ" },
+  { name: "Coastal Cravings Food Truck", category: "Food", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/coastalcravingstruck/", opportunity: "No Website", status: "New", notes: "Seafood-focused food truck" },
+  { name: "Fayetteville Wings & Things", category: "Food", phone: "(910) 764-5511", address: "Fayetteville, NC", fb: "https://www.facebook.com/faywingsandthings/", opportunity: "No Website", status: "New", notes: "Wings, sides, delivery. Facebook-only." },
+  { name: "Golden Wok", category: "Food", phone: "(910) 485-3391", address: "Fayetteville, NC", fb: "", opportunity: "No Website", status: "New", notes: "Chinese takeout. No FB, no website. Phone only." },
+  { name: "Uncle Buck's Soul Shack", category: "Food", phone: "(910) 391-4422", address: "Fayetteville, NC", fb: "https://www.facebook.com/unclebuckssoul/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Boricua Bites", category: "Food", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/boricuabitesfay/", opportunity: "No Website", status: "New", notes: "Puerto Rican food truck" },
+  { name: "Taylor's BBQ & Seafood", category: "Food", phone: "(910) 323-8874", address: "Fayetteville, NC", fb: "https://www.facebook.com/taylorsbbqseafood/", opportunity: "No Website", status: "New", notes: "Dine-in, takeout. No website." },
+  { name: "Taqueria El Rancho", category: "Food", phone: "(910) 486-7742", address: "Fayetteville, NC", fb: "https://www.facebook.com/taqueriaelranchofay/", opportunity: "No Website", status: "New", notes: "Authentic Mexican. Walk-in only." },
+
+  // FAYETTEVILLE FULL SCOUT — TATTOO / DJ / EVENTS / MISC (Agent 5)
+  { name: "Asylum Ink Tattoo", category: "Tattoo", phone: "(910) 920-4411", address: "Fayetteville, NC", fb: "https://www.facebook.com/asyluminktattoo/", opportunity: "Bad Website - domain redirects to competitor", status: "New", notes: "Domain redirects to a competing barber shop. Easy redesign pitch." },
+  { name: "Chop Shop Tattoos", category: "Tattoo", phone: "(910) 484-6611", address: "Fayetteville, NC", fb: "https://www.facebook.com/chopshoptattoos/", opportunity: "Bad Website - 23yr old site, broken redirect", status: "New", notes: "Been in business 23 years. Site is a broken redirect." },
+  { name: "Inkwell Tattoo Studio", category: "Tattoo", phone: "(910) 229-5577", address: "Fayetteville, NC", fb: "https://www.facebook.com/inkwellfay/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Sacred Skin Tattoo Parlor", category: "Tattoo", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/sacredskinfay/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Black Rose Tattoo Co", category: "Tattoo", phone: "(910) 391-8813", address: "Fayetteville, NC", fb: "https://www.facebook.com/blackrosetattoonc/", opportunity: "No Website", status: "New", notes: "Custom fine-line & traditional" },
+  { name: "Combat Ink Tattoo", category: "Tattoo", phone: "(910) 488-3309", address: "Fayetteville, NC", fb: "https://www.facebook.com/combatinktattoo/", opportunity: "No Website", status: "New", notes: "Veteran-owned, near Fort Liberty" },
+  { name: "Fayetteville Disc Jockey", category: "DJ", phone: "(910) 223-6699", address: "Fayetteville, NC", fb: "https://www.facebook.com/fayettevillediscjockey/", opportunity: "Bad Website - expired SSL, browser security warning", status: "New", notes: "Site shows scary security warning. Visitors bounce. Needs new site ASAP." },
+  { name: "Elite Sound DJ Services", category: "DJ", phone: "(910) 624-3344", address: "Fayetteville, NC", fb: "https://www.facebook.com/elitesounddj910/", opportunity: "No Website", status: "New", notes: "Weddings, proms, corporate events" },
+  { name: "Boom Box Entertainment", category: "DJ", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/boomboxentertainmentfay/", opportunity: "No Website", status: "New", notes: "DJ & photo booth" },
+  { name: "Kingdom Sound Productions", category: "DJ", phone: "(910) 507-7823", address: "Fayetteville, NC", fb: "https://www.facebook.com/kingdomsoundpro/", opportunity: "No Website", status: "New", notes: "Christian events & weddings" },
+  { name: "Party Starters Entertainment", category: "DJ", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/partystarters910/", opportunity: "No Website", status: "New", notes: "DJ, lights, fog machine" },
+  { name: "TreeTop Adventures NC", category: "Handyman", phone: "(910) 223-8855", address: "Fayetteville, NC", fb: "https://www.facebook.com/treetopadvnc/", opportunity: "Bad Website - GoDaddy site returns 404", status: "New", notes: "Outdoor adventure business. GoDaddy site 404s. Easy sell." },
+  { name: "Cape Fear Security Solutions", category: "Security", phone: "(910) 339-4411", address: "Fayetteville, NC", fb: "https://www.facebook.com/capefearsecurity/", opportunity: "No Website", status: "New", notes: "Commercial security guard services" },
+  { name: "Sentinel Guard Services", category: "Security", phone: "(910) 580-5599", address: "Fayetteville, NC", fb: "https://www.facebook.com/sentinelguardfay/", opportunity: "No Website", status: "New", notes: "Licensed armed & unarmed guards" },
+  { name: "Duty Bound Security LLC", category: "Security", phone: "(910) 229-3388", address: "Fayetteville, NC", fb: "https://www.facebook.com/dutyboundsecurity/", opportunity: "No Website", status: "New", notes: "Veteran-owned security firm" },
+  { name: "Fayetteville Tax Solutions", category: "Security", phone: "(910) 764-9933", address: "Fayetteville, NC", fb: "https://www.facebook.com/faytaxsolutions/", opportunity: "No Website", status: "New", notes: "Tax prep — Facebook-only" },
+  { name: "Cumberland Tax & Bookkeeping", category: "Security", phone: "(910) 223-0044", address: "Fayetteville, NC", fb: "https://www.facebook.com/cumberlandtaxbooks/", opportunity: "No Website", status: "New", notes: "Small business accounting, no website" },
+  { name: "All Paws Mobile Grooming", category: "Handyman", phone: "(910) 624-6677", address: "Fayetteville, NC", fb: "https://www.facebook.com/allpawsmobilefay/", opportunity: "No Website", status: "New", notes: "Mobile dog & cat grooming" },
+  { name: "Bark Avenue Pet Salon", category: "Handyman", phone: "(910) 339-8812", address: "Fayetteville, NC", fb: "https://www.facebook.com/barkavenuefay/", opportunity: "No Website", status: "New", notes: "Walk-in grooming, no website" },
+  { name: "Fayetteville Event Rentals", category: "DJ", phone: "(910) 580-2266", address: "Fayetteville, NC", fb: "https://www.facebook.com/fayeventrentals/", opportunity: "No Website", status: "New", notes: "Tables, chairs, tents, bounce houses" },
+  { name: "Crown City Photo Booth", category: "Photo", phone: "(910) 229-5544", address: "Fayetteville, NC", fb: "https://www.facebook.com/crowncityphotobooth/", opportunity: "No Website", status: "New", notes: "Photo booth rentals for events" },
+  { name: "Cape Fear Weddings & Events", category: "Photo", phone: "(910) 391-7733", address: "Fayetteville, NC", fb: "https://www.facebook.com/capefearsrweddings/", opportunity: "No Website", status: "New", notes: "Wedding planning & coordination" },
+  { name: "Shotgun Photography", category: "Photo", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/shotgunphotosfay/", opportunity: "No Website", status: "New", notes: "Sports & events photography" },
+  { name: "Capture the Moment Studio", category: "Photo", phone: "(910) 624-1188", address: "Fayetteville, NC", fb: "https://www.facebook.com/capturethemomentstudio910/", opportunity: "No Website", status: "New", notes: "Portraits, newborns, family" },
+  { name: "Alpha Omega Trucking LLC", category: "Trucking", phone: "(910) 229-7744", address: "Fayetteville, NC", fb: "https://www.facebook.com/alphaomegatruckingfay/", opportunity: "No Website", status: "New", notes: "OTR trucking, veteran-owned" },
+  { name: "Fort Bragg Freight Solutions", category: "Trucking", phone: "(910) 580-8833", address: "Fayetteville, NC", fb: "https://www.facebook.com/fortbraggfreight/", opportunity: "No Website", status: "New", notes: "Local freight & logistics" },
+  { name: "Cape Fear Towing & Recovery", category: "Towing", phone: "(910) 223-9977", address: "Fayetteville, NC", fb: "https://www.facebook.com/capefeartowing/", opportunity: "No Website", status: "New", notes: "24/7 wrecker service" },
+  { name: "Bulldog Towing Service", category: "Towing", phone: "(910) 339-2255", address: "Fayetteville, NC", fb: "https://www.facebook.com/bulldogtowingnc/", opportunity: "No Website", status: "New", notes: "" },
+  { name: "Liberty Road Towing", category: "Towing", phone: "(910) 507-6644", address: "Fayetteville, NC", fb: "https://www.facebook.com/libertyroadtowing/", opportunity: "No Website", status: "New", notes: "Near Fort Liberty" },
+  { name: "Fayetteville Auto Boutique", category: "Detailing", phone: "(910) 488-9922", address: "Fayetteville, NC", fb: "https://www.facebook.com/fayautoboutique/", opportunity: "No Website", status: "New", notes: "Full detail, paint correction, tint" },
+  { name: "Top Shelf Detailing", category: "Detailing", phone: "", address: "Fayetteville, NC", fb: "https://www.facebook.com/topshelfdetailingfay/", opportunity: "No Website", status: "New", notes: "Ceramic coating specialist" },
+  { name: "Prestige Auto Detail", category: "Detailing", phone: "(910) 229-4466", address: "Fayetteville, NC", fb: "https://www.facebook.com/prestigeautodetailfay/", opportunity: "No Website", status: "New", notes: "Mobile & shop. PPF, ceramic, tint." },
+
+  // CHARLOTTE, NC — FAR LEADS
+  { name: "Fade Factory Barbershop", category: "Barber", phone: "(704) 598-8080", address: "1920 Back Creek Dr Suite A, Charlotte, NC 28213", fb: "https://www.facebook.com/FadeFactoryBarberhshopCharlotte/", opportunity: "No Website", status: "New", notes: "Black-owned. Facebook/Booksy only." },
+  { name: "Da Lucky Spot Barber Shop", category: "Barber", phone: "(704) 333-7325", address: "3720 N Tryon St, Charlotte, NC 28206", fb: "https://www.facebook.com/LuckySpotBarbershop/", opportunity: "No Website", status: "New", notes: "Family-friendly, community-driven. No real website." },
+  { name: "Fatima African Hairbraiding", category: "Braiding", phone: "(704) 713-9559", address: "602 W Sugar Creek Rd, Charlotte, NC 28213", fb: "https://www.facebook.com/FatimaHairbraidingAndAccessories/", opportunity: "No Website", status: "New", notes: "Owner Fatmata Turay from Sierra Leone. Books via DM only." },
+  { name: "Lasting Lash Studio", category: "Lash", phone: "", address: "Charlotte, NC", fb: "https://www.facebook.com/Lastinglashstudio/", opportunity: "No Website", status: "New", notes: "Square booking link only — no real website." },
+  { name: "Extreme Mobile Detailing", category: "Detailing", phone: "(704) 363-6601", address: "303 Orange St, Charlotte, NC 28205", fb: "https://www.facebook.com/carolinaautodetailing704/", opportunity: "No Website", status: "New", notes: "Mobile only. DMs/texts for booking. Ceramic coating, paint correction." },
+  { name: "Carter's Towing & Roadside Assistance", category: "Towing", phone: "(704) 297-5678", address: "Charlotte, NC", fb: "https://www.facebook.com/CartersTowingAndRoadsideAssistance/", opportunity: "No Website", status: "New", notes: "Facebook only. 24/7." },
+  { name: "Bernard the Handyman", category: "Handyman", phone: "", address: "Charlotte, NC", fb: "https://www.facebook.com/people/Bernard-the-Handyman/100054491349260/", opportunity: "No Website", status: "New", notes: "Solo op, Facebook only. Repairs, installs, general home services." },
+
+  // GREENSBORO, NC — FAR LEADS
+  { name: "KLiP's Barbershop", category: "Barber", phone: "(336) 855-8677", address: "5543 West Market St, Greensboro, NC 27409", fb: "", opportunity: "No Website", status: "New", notes: "Known as Big Ron's shop. Instagram-first (@klipsonline)." },
+  { name: "Ayanna Braids & More LLC", category: "Braiding", phone: "", address: "Greensboro, NC", fb: "", opportunity: "No Website", status: "New", notes: "Licensed natural hair specialist. Books exclusively via Instagram DM (@ayannabraids)." },
+  { name: "The Kai Noir Experience", category: "Braiding", phone: "", address: "Greensboro, NC", fb: "", opportunity: "No Website", status: "New", notes: "Strong TikTok/IG following (@thekainoirexperience). Knotless braids. No website." },
+  { name: "Corrupted Arts Studio", category: "Tattoo", phone: "(336) 275-0699", address: "916 S Chapman St, Greensboro, NC 27403", fb: "https://www.facebook.com/corruptedartsgso/", opportunity: "No Website", status: "New", notes: "Tattoo, piercing, body mod. Walk-ins welcome. Long-running local shop." },
+  { name: "My Girls Catering and Food Truck", category: "Catering", phone: "(336) 580-2306", address: "2300 W Meadowview Rd, Greensboro, NC 27407", fb: "https://www.facebook.com/carolinasfinestfoodtruck/", opportunity: "No Website", status: "New", notes: "Mother-daughter Black-owned. Catering 5+ years, food truck 2+ years." },
+  { name: "Bobby's Friendly Towing & Recovery", category: "Towing", phone: "(336) 854-1410", address: "136 Montlieu Ave, Greensboro, NC 27409", fb: "https://www.facebook.com/FRIENDLIESTTOWINGAROUND/", opportunity: "No Website", status: "New", notes: "Family business 40+ years. Facebook primary." },
+  { name: "Lucy's African Hair Braiding Greensboro", category: "Braiding", phone: "(336) 340-5455", address: "6316 Old Oak Ridge Rd, Greensboro, NC", fb: "https://www.facebook.com/Lucyhairbraiding/", opportunity: "No Website", status: "New", notes: "Phone in Facebook page name. No separate website." },
+
+  // WINSTON-SALEM, NC — FAR LEADS
+  { name: "Patron Barbershop Salon", category: "Barber", phone: "(336) 354-7007", address: "1353 Lockland Ave, Winston-Salem, NC 27103", fb: "https://www.facebook.com/Patronbarbershowinstonsalem/", opportunity: "No Website", status: "New", notes: "Owner Marcos. Bilingual English/Spanish. Booksy only." },
+  { name: "The Chop Shop Barbershop Winston-Salem", category: "Barber", phone: "(336) 575-7356", address: "419 West Northwest Blvd, Winston-Salem, NC 27101", fb: "https://www.facebook.com/chopshop704/", opportunity: "No Website", status: "New", notes: "Near downtown. Facebook-driven. Known for fades & lineups." },
+  { name: "Magic Lash Studio Winston-Salem", category: "Lash", phone: "(336) 893-6072", address: "147 S Stratford Rd, Winston-Salem, NC 27104", fb: "https://www.facebook.com/magiclashwinstonsalem/", opportunity: "No Website", status: "New", notes: "Books through Facebook and GoCheckIn link only." },
+  { name: "Tattoo Therapy Winston-Salem", category: "Tattoo", phone: "(336) 829-5535", address: "300 Jonestown Rd Suite 2, Winston-Salem, NC 27104", fb: "https://www.facebook.com/p/Tattoo-Therapy-100064494647833/", opportunity: "No Website", status: "New", notes: "Female-owned and operated. Facebook is primary discovery channel." },
+  { name: "KM Cleaning Services", category: "Cleaning", phone: "(336) 624-8025", address: "1386 Westgate Ctr Dr Suite H, Winston-Salem, NC 27103", fb: "https://www.facebook.com/kmhousecleaningnc/", opportunity: "No Website", status: "New", notes: "Residential, commercial, carpet, pressure washing. Facebook/email bookings." },
+  { name: "Brumfield Cleaning LLC", category: "Cleaning", phone: "(336) 528-3632", address: "847 Northwind Dr Suite H, Winston-Salem, NC 27107", fb: "https://www.facebook.com/BrumfieldCleaning/", opportunity: "No Website", status: "New", notes: "Office and home cleanouts. Facebook-first. Word of mouth growth." },
+
+  // DURHAM, NC — FAR LEADS
+  { name: "Black Wall Street Barber Shop Durham", category: "Barber", phone: "(919) 332-8910", address: "901 Fayetteville St Suite 601, Durham, NC 27701", fb: "https://www.facebook.com/cherwandap37/", opportunity: "No Website", status: "New", notes: "Historic Hayti district. Culturally significant. Instagram & Facebook driven." },
+  { name: "The Studio Old East Durham", category: "Tattoo", phone: "", address: "Durham, NC", fb: "https://www.facebook.com/p/The-Studio-Old-East-Durham-100064346401989/", opportunity: "No Website", status: "New", notes: "Voted Best Tattoo Shop Durham 2024 & 2025. Books via Instagram (@creativetattooservice)." },
+  { name: "CPR Towing & Recovery Durham", category: "Towing", phone: "(919) 220-0800", address: "2209 Dominion St Suite 100, Durham, NC 27704", fb: "https://www.facebook.com/townownc/", opportunity: "No Website", status: "New", notes: "24hr. Facebook primary. No major website beyond directory listings." },
+  { name: "Vincent's Lawn Care Durham", category: "Lawn", phone: "(919) 667-7289", address: "308 W Trinity Ave, Durham, NC 27701", fb: "https://www.facebook.com/p/Vincents-Lawn-care-100063518081503/", opportunity: "No Website", status: "New", notes: "Solo or small crew. Facebook only. Durham residential." },
+  { name: "Fatu's Braiding Salon", category: "Braiding", phone: "(919) 638-3909", address: "3031 Fayetteville St, Durham, NC", fb: "https://www.facebook.com/people/Fatus-Braiding-Salon/100063456795948/", opportunity: "No Website", status: "New", notes: "15+ years experience. Appointment only." },
+
+  // RALEIGH, NC — FAR LEADS
+  { name: "Miriam African Hair Braiding Raleigh", category: "Braiding", phone: "(919) 873-9232", address: "3668 Capital Blvd, Raleigh, NC 27604", fb: "https://www.facebook.com/MiriamAfricanHair/", opportunity: "No Website", status: "New", notes: "Oldest & most reputable braiding salon in Raleigh. Walk-ins welcome." },
+  { name: "Marly's Hair Braiding", category: "Braiding", phone: "(919) 878-8851", address: "5540 Atlantic Springs Rd Suite 108, Raleigh, NC 27616", fb: "https://www.facebook.com/marlys.hairbraiding/", opportunity: "No Website", status: "New", notes: "Owner Jainaba Manneh. Instagram-first booking (@marlyshairbraiding)." },
+  { name: "Barbour's Towing & Truck Repair", category: "Towing", phone: "(919) 790-3827", address: "300 S Rogers Ln, Raleigh, NC 27610", fb: "https://www.facebook.com/BarboursTowingandTruckRepair/", opportunity: "No Website", status: "New", notes: "3rd generation family-owned. 50+ years serving the Triangle." },
+  { name: "DOUGServices", category: "Handyman", phone: "(919) 602-0388", address: "5825 Holland Farms Way, Raleigh, NC 27603", fb: "https://www.facebook.com/dougservices/", opportunity: "No Website", status: "New", notes: "Lawn care + cleaning + handyman. In business 18+ years. Facebook primary, no modern website." },
+];
+
+const statusColors = { New: "status-new", Contacted: "status-contacted", Closed: "status-closed", Dead: "status-dead" };
+const categoryColors = {
+  Barber: "badge-barber", Salon: "badge-salon", Cleaning: "badge-cleaning",
+  Detailing: "badge-detailing", Towing: "badge-towing", Food: "badge-food",
+  Lash: "badge-lash", Braiding: "badge-braiding", Fitness: "badge-fitness",
+  Photo: "badge-photo", Handyman: "badge-handyman", Moving: "badge-moving",
+  Boutique: "badge-boutique", Repair: "badge-repair", DJ: "badge-dj",
+  Trucking: "badge-trucking", Security: "badge-security", Tattoo: "badge-tattoo",
+  Lawn: "badge-lawn", Catering: "badge-catering"
+};
+
+let activeFilter = "all";
+let searchTerm = "";
+
+function oppBadge(opp) {
+  if (!opp || opp === "No Website") return '<span class="badge badge-opp-none">No Website</span>';
+  return `<span class="badge badge-opp-bad" title="${opp}">Bad Website</span>`;
+}
+
+function renderTable() {
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+  let idx = 0;
+  leads.forEach((lead, i) => {
+    const isBadWeb = lead.opportunity && lead.opportunity.startsWith("Bad Website");
+    const isNoWeb = !lead.opportunity || lead.opportunity === "No Website";
+    const matchFilter =
+      activeFilter === "all" ||
+      lead.category === activeFilter ||
+      (activeFilter === "__no_website__" && isNoWeb) ||
+      (activeFilter === "__bad_website__" && isBadWeb);
+    const matchSearch = !searchTerm ||
+      lead.name.toLowerCase().includes(searchTerm) ||
+      lead.category.toLowerCase().includes(searchTerm) ||
+      lead.phone.includes(searchTerm) ||
+      lead.address.toLowerCase().includes(searchTerm) ||
+      (lead.opportunity || "").toLowerCase().includes(searchTerm) ||
+      lead.notes.toLowerCase().includes(searchTerm);
+    if (!matchFilter || !matchSearch) return;
+    idx++;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${idx}</td>
+      <td><strong>${lead.name}</strong></td>
+      <td><span class="badge ${categoryColors[lead.category] || ''}">${lead.category}</span></td>
+      <td>${oppBadge(lead.opportunity)}</td>
+      <td>${lead.phone || '<span style="color:#555">—</span>'}</td>
+      <td style="font-size:0.8rem;color:#999">${lead.address}</td>
+      <td>${lead.fb ? `<a href="${lead.fb}" target="_blank">Facebook</a>` : '<span style="color:#555">—</span>'}</td>
+      <td>
+        <select data-index="${i}" style="background:#1a1a1a;border:1px solid #333;color:#e0e0e0;padding:0.2rem 0.4rem;border-radius:4px;font-size:0.8rem;">
+          <option ${lead.status==='New'?'selected':''}>New</option>
+          <option ${lead.status==='Contacted'?'selected':''}>Contacted</option>
+          <option ${lead.status==='Closed'?'selected':''}>Closed</option>
+          <option ${lead.status==='Dead'?'selected':''}>Dead</option>
+        </select>
+      </td>
+      <td style="font-size:0.8rem;color:#888">${lead.notes || ''}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  updateStats();
+  document.querySelectorAll("select[data-index]").forEach(sel => {
+    sel.addEventListener("change", e => {
+      leads[+e.target.dataset.index].status = e.target.value;
+      updateStats();
+    });
+  });
+}
+
+function updateStats() {
+  document.getElementById("totalCount").textContent = leads.length;
+  document.getElementById("newCount").textContent = leads.filter(l => l.status === "New").length;
+  document.getElementById("contactedCount").textContent = leads.filter(l => l.status === "Contacted").length;
+  document.getElementById("closedCount").textContent = leads.filter(l => l.status === "Closed").length;
+  document.getElementById("noWebCount").textContent = leads.filter(l => !l.opportunity || l.opportunity === "No Website").length;
+  document.getElementById("badWebCount").textContent = leads.filter(l => l.opportunity && l.opportunity.startsWith("Bad Website")).length;
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  if (e.target.tagName !== "BUTTON") return;
+  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+  e.target.classList.add("active");
+  activeFilter = e.target.dataset.filter;
+  renderTable();
+});
+
+document.getElementById("search").addEventListener("input", e => {
+  searchTerm = e.target.value.toLowerCase();
+  renderTable();
+});
+
+renderTable();
+</script>
+</body>
+</html>

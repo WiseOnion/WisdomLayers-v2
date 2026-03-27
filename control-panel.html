@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WisdomLayers Control Panel</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 1.5rem; min-height: 100vh; }
+    .header { margin-bottom: 2rem; }
+    .header h1 { font-size: 1.6rem; color: #fff; font-weight: 800; }
+    .header p { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+    .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #555; margin-bottom: 0.75rem; margin-top: 1.75rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; }
+    .card {
+      background: #161616; border: 1px solid #222; border-radius: 12px;
+      padding: 1.25rem 1rem; text-decoration: none; color: #e0e0e0;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: background 0.15s, border-color 0.15s; cursor: pointer;
+    }
+    .card:hover { background: #1e1e1e; border-color: #333; }
+    .card .icon { font-size: 1.6rem; }
+    .card .title { font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .card .desc { font-size: 0.75rem; color: #666; line-height: 1.4; }
+    .card.blue  { border-left: 3px solid #2563eb; }
+    .card.green { border-left: 3px solid #16a34a; }
+    .card.purple{ border-left: 3px solid #7c3aed; }
+    .card.orange{ border-left: 3px solid #ea580c; }
+    .card.pink  { border-left: 3px solid #db2777; }
+    .card.teal  { border-left: 3px solid #0d9488; }
+    .card.yellow{ border-left: 3px solid #ca8a04; }
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .header h1 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>WisdomLayers</h1>
+  <p>Control Panel</p>
+</div>
+
+<div class="section-label">Sales</div>
+<div class="grid">
+  <a class="card blue" href="/leads.html">
+    <div class="icon">📋</div>
+    <div class="title">Lead Tracker</div>
+    <div class="desc">All NC businesses. Filter, search, update status.</div>
+  </a>
+  <a class="card green" href="/drafts.html">
+    <div class="icon">✉️</div>
+    <div class="title">Email Drafts</div>
+    <div class="desc">17 personalized cold emails ready to copy and send.</div>
+  </a>
+  <a class="card orange" href="/route.html">
+    <div class="icon">🗺️</div>
+    <div class="title">Today's Route</div>
+    <div class="desc">Stops for in-person outreach with directions.</div>
+  </a>
+</div>
+
+<div class="section-label">Client Docs</div>
+<div class="grid">
+  <a class="card purple" href="/client-docs/01-welcome.html">
+    <div class="icon">👋</div>
+    <div class="title">Welcome Letter</div>
+    <div class="desc">Onboarding doc sent to new clients.</div>
+  </a>
+  <a class="card purple" href="/client-docs/02-agreement-summary.html">
+    <div class="icon">📄</div>
+    <div class="title">Agreement Summary</div>
+    <div class="desc">Plain-English project agreement overview.</div>
+  </a>
+  <a class="card purple" href="/client-docs/03-full-agreement.html">
+    <div class="icon">📑</div>
+    <div class="title">Full Agreement</div>
+    <div class="desc">Complete client contract.</div>
+  </a>
+  <a class="card purple" href="/client-docs/04-invoice.html">
+    <div class="icon">💰</div>
+    <div class="title">Invoice</div>
+    <div class="desc">Client invoice template.</div>
+  </a>
+  <a class="card purple" href="/client-docs/05-discovery-questionnaire.html">
+    <div class="icon">🔍</div>
+    <div class="title">Discovery</div>
+    <div class="desc">Client intake questionnaire.</div>
+  </a>
+  <a class="card purple" href="/client-docs/06-change-request.html">
+    <div class="icon">🔄</div>
+    <div class="title">Change Request</div>
+    <div class="desc">Scope change form.</div>
+  </a>
+  <a class="card purple" href="/client-docs/07-launch-approval.html">
+    <div class="icon">🚀</div>
+    <div class="title">Launch Approval</div>
+    <div class="desc">Sign-off before going live.</div>
+  </a>
+  <a class="card purple" href="/client-docs/08-pricing-update.html">
+    <div class="icon">💲</div>
+    <div class="title">Pricing Update</div>
+    <div class="desc">Price change notification doc.</div>
+  </a>
+  <a class="card purple" href="/client-docs/09-growth-plan.html">
+    <div class="icon">📈</div>
+    <div class="title">Growth Plan</div>
+    <div class="desc">Upsell and growth strategy doc.</div>
+  </a>
+</div>
+
+<div class="section-label">Print Materials</div>
+<div class="grid">
+  <a class="card teal" href="/print-materials/flyer.html">
+    <div class="icon">📰</div>
+    <div class="title">Flyer</div>
+    <div class="desc">Main outreach flyer for printing.</div>
+  </a>
+  <a class="card teal" href="/print-materials/flyer-card.html">
+    <div class="icon">🃏</div>
+    <div class="title">Flyer Card</div>
+    <div class="desc">Small card version of the flyer.</div>
+  </a>
+  <a class="card teal" href="/print-materials/postcard.html">
+    <div class="icon">📮</div>
+    <div class="title">Postcard</div>
+    <div class="desc">Mailer postcard design.</div>
+  </a>
+  <a class="card teal" href="/print-materials/door-hanger.html">
+    <div class="icon">🚪</div>
+    <div class="title">Door Hanger</div>
+    <div class="desc">Door hanger for neighborhood drops.</div>
+  </a>
+  <a class="card teal" href="/print-materials/tear-sheet.html">
+    <div class="icon">✂️</div>
+    <div class="title">Tear Sheet</div>
+    <div class="desc">Tear-off tab flyer for bulletin boards.</div>
+  </a>
+  <a class="card teal" href="/print-materials/pitch-script.html">
+    <div class="icon">🎤</div>
+    <div class="title">Pitch Script</div>
+    <div class="desc">In-person sales script.</div>
+  </a>
+</div>
+
+<div class="section-label">Site</div>
+<div class="grid">
+  <a class="card yellow" href="/">
+    <div class="icon">🌐</div>
+    <div class="title">Main Site</div>
+    <div class="desc">wisdomlayers.com homepage.</div>
+  </a>
+  <a class="card yellow" href="/html/projects.html">
+    <div class="icon">🖼️</div>
+    <div class="title">Projects</div>
+    <div class="desc">Portfolio page.</div>
+  </a>
+  <a class="card pink" href="/client-docs/">
+    <div class="icon">📂</div>
+    <div class="title">Client Portal</div>
+    <div class="desc">Client-facing docs hub.</div>
+  </a>
+</div>
+
+</body>
+</html>
