@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omni Cinemas 8 | Fayetteville, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f0b429;
+      --gold-dark: #c8911a;
+      --red: #c0392b;
+      --bg-dark: #0a0a0a;
+      --bg-card: #111111;
+      --bg-surface: #1a1a1a;
+      --bg-elevated: #222222;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --text-muted: #666666;
+      --border: #2a2a2a;
+      --green: #27ae60;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #000;
+    }
+
+    .nav-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .nav-logo-text span {
+      display: block;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.85rem;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: #000 !important;
+      font-weight: 700 !important;
+      padding: 0.5rem 1.25rem !important;
+      border-radius: 4px !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-dark) !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding-top: 70px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.95) 100%),
+        url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1920&q=80') center/cover no-repeat;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      padding: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.25rem;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.25rem;
+      border-radius: 4px;
+      border: 2px solid rgba(255,255,255,0.25);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-ticker {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--gold);
+      padding: 0.6rem 0;
+      overflow: hidden;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 3rem;
+      animation: ticker 40s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker-track span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* SECTION BASE */
+    section { padding: 5rem 2rem; }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-title span { color: var(--gold); }
+
+    .section-desc {
+      color: var(--text-secondary);
+      max-width: 580px;
+      font-size: 0.95rem;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* NOW SHOWING */
+    #movies { background: var(--bg-dark); }
+
+    .movies-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .movie-card {
+      background: var(--bg-card);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .movie-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+
+    .movie-poster {
+      width: 100%;
+      aspect-ratio: 2/3;
+      background: var(--bg-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .movie-poster-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem;
+    }
+
+    .movie-poster-icon {
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+
+    .movie-tag {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+    }
+
+    .movie-tag.coming-soon { background: var(--gold); color: #000; }
+
+    .movie-info { padding: 1rem; }
+
+    .movie-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .movie-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .movie-genre {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .movie-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-decoration: none;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      margin-top: 0.75rem;
+      width: 100%;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .movie-cta:hover { background: var(--gold-dark); }
+
+    /* TABS */
+    .movies-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* TICKET PRICING */
+    #tickets { background: var(--bg-surface); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .pricing-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    .pricing-card.featured {
+      border-color: var(--gold);
+      position: relative;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .pricing-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    .pricing-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .pricing-before {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-amount {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-after {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-note {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* TICKET SELECTOR */
+    .ticket-selector {
+      max-width: 560px;
+      margin: 3rem auto 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .ticket-selector h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .ticket-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ticket-row:last-of-type { border-bottom: none; }
+
+    .ticket-type {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .ticket-type small {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .ticket-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: none;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+      line-height: 1;
+    }
+
+    .qty-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .qty-display {
+      min-width: 24px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .ticket-price {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--gold);
+      min-width: 48px;
+      text-align: right;
+    }
+
+    .ticket-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .total-amount { color: var(--gold); font-size: 1.5rem; }
+
+    .showtimes-note {
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    .showtimes-note a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    /* ATTRACTIONS */
+    #attractions { background: var(--bg-dark); }
+
+    .attractions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .attraction-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .attraction-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+
+    .attraction-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      opacity: 0.4;
+    }
+
+    .attraction-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .attraction-body { padding: 1.75rem; }
+
+    .attraction-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .attraction-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .attraction-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .detail-chip {
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .detail-chip.highlight {
+      background: rgba(240, 180, 41, 0.15);
+      color: var(--gold);
+    }
+
+    /* PARTIES */
+    #parties { background: var(--bg-surface); }
+
+    .party-banner {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .party-price-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 4rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .party-price-tag small {
+      display: block;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .party-includes {
+      list-style: none;
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .party-includes li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .party-includes li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    /* POLICIES STRIP */
+    .policy-strip {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem;
+      margin: 0;
+    }
+
+    .policy-strip .container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .policy-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .policy-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(240,180,41,0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .policy-text { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+    .policy-text strong { display: block; color: var(--text-primary); font-size: 0.85rem; margin-bottom: 0.2rem; }
+
+    /* APP SECTION */
+    #app { background: var(--bg-dark); }
+
+    .app-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .app-phone-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      aspect-ratio: 9/16;
+      max-width: 280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 4rem;
+      opacity: 0.3;
+    }
+
+    .app-features {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .app-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-features li:last-child { border-bottom: none; }
+
+    .app-features li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .app-store-btns {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: border-color 0.2s;
+    }
+
+    .store-btn:hover { border-color: var(--gold); }
+
+    .store-btn-text { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; }
+    .store-btn-sub { font-size: 0.65rem; color: var(--text-muted); display: block; }
+
+    /* CONTACT */
+    #contact { background: var(--bg-surface); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .contact-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card p, .contact-card a {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+    }
+
+    .contact-card a:hover { color: var(--gold); }
+
+    .map-embed {
+      margin-top: 3rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 360px;
+    }
+
+    .map-embed iframe { width: 100%; height: 100%; border: none; }
+
+    /* FOOTER */
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .app-section { grid-template-columns: 1fr; }
+      .app-phone-visual { display: none; }
+      .party-banner { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      nav .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav.open .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: rgba(10,10,10,0.98);
+        padding: 1.5rem 2rem;
+        gap: 0.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links a { padding: 0.75rem 0.5rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .party-includes { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">OC</div>
+    <div class="nav-logo-text">Omni Cinemas <span>Fayetteville, NC</span></div>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#movies">Now Showing</a></li>
+    <li><a href="#tickets">Tickets</a></li>
+    <li><a href="#attractions">Attractions</a></li>
+    <li><a href="#parties">Parties</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.omnicinemas.com" target="_blank" rel="noopener" class="nav-cta">Buy Tickets</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Now Showing in Fayetteville, NC</div>
+    <h1>Where <span>Movies</span><br>Come Alive</h1>
+    <p class="hero-sub">8 screens. Blockbusters. Family fun. All in one place on Sycamore Dairy Road.</p>
+    <div class="hero-actions">
+      <a href="#movies" class="btn-primary">See What's Playing</a>
+      <a href="#tickets" class="btn-outline">View Pricing</a>
+    </div>
+  </div>
+  <div class="hero-ticker">
+    <div class="ticker-track" id="ticker">
+      <span>They Will Kill You</span><span>&bull;</span>
+      <span>Project Hail Mary</span><span>&bull;</span>
+      <span>Scream 7</span><span>&bull;</span>
+      <span>Ready or Not 2</span><span>&bull;</span>
+      <span>Reminders of Him</span><span>&bull;</span>
+      <span>Hoppers</span><span>&bull;</span>
+      <span>GOAT</span><span>&bull;</span>
+      <span>The Pout-Pout Fish</span><span>&bull;</span>
+      <span>Coming Soon: The Super Mario Galaxy Movie (April 1)</span><span>&bull;</span>
+      <span>Coming Soon: Beast (April 10)</span><span>&bull;</span>
+      <span>Coming Soon: Lee Cronin's The Mummy (April 17)</span><span>&bull;</span>
+      <span>Coming Soon: Michael (April 24)</span><span>&bull;</span>
+      <!-- duplicate for seamless loop -->
+      <span>They Will Kill You</span><span>&bull;</span>
+      <span>Project Hail Mary</span><span>&bull;</span>
+      <span>Scream 7</span><span>&bull;</span>
+      <span>Ready or Not 2</span><span>&bull;</span>
+      <span>Reminders of Him</span><span>&bull;</span>
+      <span>Hoppers</span><span>&bull;</span>
+      <span>GOAT</span><span>&bull;</span>
+      <span>The Pout-Pout Fish</span><span>&bull;</span>
+      <span>Coming Soon: The Super Mario Galaxy Movie (April 1)</span><span>&bull;</span>
+      <span>Coming Soon: Beast (April 10)</span><span>&bull;</span>
+      <span>Coming Soon: Lee Cronin's The Mummy (April 17)</span><span>&bull;</span>
+      <span>Coming Soon: Michael (April 24)</span><span>&bull;</span>
+    </div>
+  </div>
+</section>
+
+<!-- MOVIES -->
+<section id="movies">
+  <div class="container">
+    <div class="movies-header">
+      <div>
+        <p class="section-label">On the Big Screen</p>
+        <h2 class="section-title">Now Showing &amp; <span>Coming Soon</span></h2>
+      </div>
+      <a href="https://www.omnicinemas.com" target="_blank" rel="noopener" class="btn-primary">Get Tickets</a>
+    </div>
+
+    <div class="movies-tabs">
+      <button class="tab-btn active" data-tab="now-showing">Now Showing</button>
+      <button class="tab-btn" data-tab="coming-soon">Coming Soon</button>
+    </div>
+
+    <div class="tab-panel active" id="now-showing">
+      <div class="movies-grid">
+        <!-- Now Showing -->
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder">
+              <div class="movie-poster-icon">&#127909;</div>
+            </div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">They Will Kill You</h3>
+            <div class="movie-meta"><span class="movie-genre">Thriller</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Project Hail Mary</h3>
+            <div class="movie-meta"><span class="movie-genre">Sci-Fi</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">The Pout-Pout Fish</h3>
+            <div class="movie-meta"><span class="movie-genre">Family</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Ready or Not 2: Here I Come</h3>
+            <div class="movie-meta"><span class="movie-genre">Horror / Comedy</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Reminders of Him</h3>
+            <div class="movie-meta"><span class="movie-genre">Drama / Romance</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Hoppers</h3>
+            <div class="movie-meta"><span class="movie-genre">Action</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Scream 7</h3>
+            <div class="movie-meta"><span class="movie-genre">Horror</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag">Now Showing</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">GOAT</h3>
+            <div class="movie-meta"><span class="movie-genre">Drama</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Get Tickets</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="coming-soon">
+      <div class="movies-grid">
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 1</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">The Super Mario Galaxy Movie</h3>
+            <div class="movie-meta"><span class="movie-genre">Family / Animation</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 1</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 3</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">The Drama</h3>
+            <div class="movie-meta"><span class="movie-genre">Drama</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 3</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 10</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Beast</h3>
+            <div class="movie-meta"><span class="movie-genre">Thriller</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 10</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 10</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">You, Me &amp; Tuscany</h3>
+            <div class="movie-meta"><span class="movie-genre">Romance</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 10</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 10</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Exit 8</h3>
+            <div class="movie-meta"><span class="movie-genre">Thriller</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 10</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 17</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Lee Cronin's The Mummy</h3>
+            <div class="movie-meta"><span class="movie-genre">Horror / Action</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 17</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">Apr 24</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Michael</h3>
+            <div class="movie-meta"><span class="movie-genre">Drama / Biopic</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming April 24</a>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <div class="movie-poster-placeholder"><div class="movie-poster-icon">&#127909;</div></div>
+            <span class="movie-tag coming-soon">May 1</span>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Devil Wears Prada 2</h3>
+            <div class="movie-meta"><span class="movie-genre">Comedy / Drama</span></div>
+            <a href="https://www.omnicinemas.com" target="_blank" class="movie-cta">Coming May 1</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKET PRICING -->
+<section id="tickets">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Admission</p>
+      <h2 class="section-title">Ticket <span>Pricing</span></h2>
+      <p class="section-desc">Affordable movie-going for the whole family. Matinee prices before 5pm. Movie Mondays starting at $7.</p>
+    </div>
+
+    <div class="pricing-grid" style="margin-top:2.5rem;">
+      <div class="pricing-card featured reveal">
+        <span class="pricing-badge">Best Deal</span>
+        <div class="pricing-icon">&#127384;</div>
+        <div class="pricing-label">Movie Monday</div>
+        <div class="pricing-before">All Shows</div>
+        <div class="pricing-amount">$7</div>
+        <div class="pricing-after">Every Monday (excl. holidays)</div>
+        <p class="pricing-note">All seats, all times, every Monday at a special rate.</p>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-icon">&#128100;</div>
+        <div class="pricing-label">Adults</div>
+        <div class="pricing-before">Before 5pm</div>
+        <div class="pricing-amount">$8.50</div>
+        <div class="pricing-after">After 5pm: $11.00</div>
+        <p class="pricing-note">General admission for guests 13 and older.</p>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-icon">&#128102;</div>
+        <div class="pricing-label">Children 2-12</div>
+        <div class="pricing-before">Before 5pm</div>
+        <div class="pricing-amount">$7.50</div>
+        <div class="pricing-after">After 5pm: $8.50</div>
+        <p class="pricing-note">For children ages 2 through 12.</p>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-icon">&#127891;</div>
+        <div class="pricing-label">Seniors / Students / Military</div>
+        <div class="pricing-before">Before 5pm (with valid ID)</div>
+        <div class="pricing-amount">$8.00</div>
+        <div class="pricing-after">After 5pm: $9.50</div>
+        <p class="pricing-note">Seniors 55+, students, and active/veteran military with ID.</p>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-icon">&#128256;</div>
+        <div class="pricing-label">3D Upcharge</div>
+        <div class="pricing-before">Before 5pm</div>
+        <div class="pricing-amount">+$2</div>
+        <div class="pricing-after">After 5pm: +$3.00</div>
+        <p class="pricing-note">Added to base ticket price for 3D presentations.</p>
+      </div>
+    </div>
+
+    <!-- TICKET SELECTOR -->
+    <div class="ticket-selector reveal">
+      <h3>Build Your Order</h3>
+      <div class="ticket-row">
+        <div class="ticket-type">Adults <small>After 5pm</small></div>
+        <div class="ticket-controls">
+          <button class="qty-btn" data-action="dec" data-type="adult">&#8722;</button>
+          <span class="qty-display" id="qty-adult">0</span>
+          <button class="qty-btn" data-action="inc" data-type="adult">+</button>
+        </div>
+        <div class="ticket-price" data-price="11.00">$11.00</div>
+      </div>
+      <div class="ticket-row">
+        <div class="ticket-type">Adults <small>Before 5pm (Matinee)</small></div>
+        <div class="ticket-controls">
+          <button class="qty-btn" data-action="dec" data-type="adult-mat">&#8722;</button>
+          <span class="qty-display" id="qty-adult-mat">0</span>
+          <button class="qty-btn" data-action="inc" data-type="adult-mat">+</button>
+        </div>
+        <div class="ticket-price" data-price="8.50">$8.50</div>
+      </div>
+      <div class="ticket-row">
+        <div class="ticket-type">Children 2-12 <small>After 5pm</small></div>
+        <div class="ticket-controls">
+          <button class="qty-btn" data-action="dec" data-type="child">&#8722;</button>
+          <span class="qty-display" id="qty-child">0</span>
+          <button class="qty-btn" data-action="inc" data-type="child">+</button>
+        </div>
+        <div class="ticket-price" data-price="8.50">$8.50</div>
+      </div>
+      <div class="ticket-row">
+        <div class="ticket-type">Children 2-12 <small>Before 5pm (Matinee)</small></div>
+        <div class="ticket-controls">
+          <button class="qty-btn" data-action="dec" data-type="child-mat">&#8722;</button>
+          <span class="qty-display" id="qty-child-mat">0</span>
+          <button class="qty-btn" data-action="inc" data-type="child-mat">+</button>
+        </div>
+        <div class="ticket-price" data-price="7.50">$7.50</div>
+      </div>
+      <div class="ticket-row">
+        <div class="ticket-type">Senior / Student / Military <small>With valid ID — After 5pm</small></div>
+        <div class="ticket-controls">
+          <button class="qty-btn" data-action="dec" data-type="senior">&#8722;</button>
+          <span class="qty-display" id="qty-senior">0</span>
+          <button class="qty-btn" data-action="inc" data-type="senior">+</button>
+        </div>
+        <div class="ticket-price" data-price="9.50">$9.50</div>
+      </div>
+      <div class="ticket-total">
+        <span>Estimated Total</span>
+        <span class="total-amount" id="ticket-total">$0.00</span>
+      </div>
+      <a href="https://www.omnicinemas.com" target="_blank" rel="noopener" class="btn-primary" style="display:block;text-align:center;">Continue to Buy Tickets</a>
+      <p class="showtimes-note"><a href="https://www.omnicinemas.com" target="_blank">View full showtimes and select seats at omnicinemas.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY STRIP -->
+<div class="policy-strip">
+  <div class="container">
+    <div class="policy-item">
+      <div class="policy-icon">&#128274;</div>
+      <div class="policy-text">
+        <strong>Evening Minor Policy</strong>
+        No guests under 17 permitted on Omni Plaza properties after 4pm without adult supervision (21+). One adult required per 5 minors.
+      </div>
+    </div>
+    <div class="policy-item">
+      <div class="policy-icon">&#127869;</div>
+      <div class="policy-text">
+        <strong>No Outside Food or Drinks</strong>
+        Outside food and beverages are not permitted inside the theater.
+      </div>
+    </div>
+    <div class="policy-item">
+      <div class="policy-icon">&#127936;</div>
+      <div class="policy-text">
+        <strong>Rated R Films</strong>
+        Guests under 17 must be accompanied by a parent or guardian to attend R-rated films.
+      </div>
+    </div>
+    <div class="policy-item">
+      <div class="policy-icon">&#128092;</div>
+      <div class="policy-text">
+        <strong>Bag Policy</strong>
+        Backpacks and large bags are not permitted. Exceptions for diaper and medical bags.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ATTRACTIONS -->
+<section id="attractions">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">More Than Movies</p>
+      <h2 class="section-title">All the Fun at <span>Omni Plaza</span></h2>
+      <p class="section-desc">Beyond the big screen, Omni Plaza is Fayetteville's ultimate family entertainment destination.</p>
+    </div>
+    <div class="attractions-grid">
+      <div class="attraction-card reveal">
+        <div class="attraction-img-placeholder">&#127909;</div>
+        <div class="attraction-body">
+          <h3 class="attraction-name">Omni Cinemas 8</h3>
+          <p class="attraction-desc">Eight screens showing the latest blockbusters and family films. Comfortable seating, great sound, and the best movies in Fayetteville.</p>
+          <div class="attraction-details">
+            <span class="detail-chip">8 Screens</span>
+            <span class="detail-chip highlight">Now Showing</span>
+            <span class="detail-chip">910-487-5529</span>
+          </div>
+        </div>
+      </div>
+      <div class="attraction-card reveal">
+        <div class="attraction-img-placeholder">&#9971;</div>
+        <div class="attraction-body">
+          <h3 class="attraction-name">Mountasia Fantasy Golf &amp; Games</h3>
+          <p class="attraction-desc">Two challenging 18-hole miniature golf courses winding through caves, waterfalls, mountains, and bridges. Outdoor fun for the whole family.</p>
+          <div class="attraction-details">
+            <span class="detail-chip">2 x 18-Hole Courses</span>
+            <span class="detail-chip">Sat-Sun: 12pm - 8pm</span>
+            <span class="detail-chip highlight">Adults: $9 / 18 holes</span>
+            <span class="detail-chip highlight">Kids 12 &amp; under: $5</span>
+            <span class="detail-chip">36 Holes: $15 / $9</span>
+            <span class="detail-chip">910-487-6001</span>
+          </div>
+        </div>
+      </div>
+      <div class="attraction-card reveal">
+        <div class="attraction-img-placeholder">&#127918;</div>
+        <div class="attraction-body">
+          <h3 class="attraction-name">Omni Family Amusement Center</h3>
+          <p class="attraction-desc">The largest fun center in Cumberland County. Over 100 arcade games, a redemption prize counter, and a snack bar. Entertainment for all ages.</p>
+          <div class="attraction-details">
+            <span class="detail-chip">100+ Games</span>
+            <span class="detail-chip">Mon-Thu: 12:30pm - 9pm</span>
+            <span class="detail-chip">Fri: 12:30pm - 11pm</span>
+            <span class="detail-chip">Sat: 11am - 11pm</span>
+            <span class="detail-chip">Sun: 11am - 9pm</span>
+            <span class="detail-chip highlight">35 credits for $5</span>
+            <span class="detail-chip highlight">80 credits for $10</span>
+            <span class="detail-chip">910-864-1307</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTIES -->
+<section id="parties">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Celebrate With Us</p>
+      <h2 class="section-title">Birthday <span>Parties</span></h2>
+      <p class="section-desc">Make it a day to remember. Our all-inclusive party package has everything covered.</p>
+    </div>
+    <div class="party-banner reveal" style="margin-top:3rem;">
+      <div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:0.5rem;">Omni Plaza Birthday Package</h3>
+        <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:0.25rem;">For up to 10 children. Additional children $12 each. $100 non-refundable deposit required at booking.</p>
+        <ul class="party-includes">
+          <li>Birthday cake (feeds up to 10)</li>
+          <li>2 large 1-topping pizzas</li>
+          <li>25 game tokens per child</li>
+          <li>50 tokens for the birthday child</li>
+          <li>Beverage with one refill per child</li>
+          <li>1.5 hours in decorated party room</li>
+          <li>10 movie passes (cinema or golf)</li>
+          <li>Goodie bag per child</li>
+          <li>All paper supplies included</li>
+        </ul>
+        <div style="margin-top:1.75rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="tel:9108641307" class="btn-primary">Book Now: 910-864-1307</a>
+          <a href="tel:9104875529" class="btn-outline">Cinema: 910-487-5529</a>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div class="party-price-tag">$225<small>per party</small></div>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">Reschedule with 24hrs notice</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<section id="app">
+  <div class="container">
+    <div class="app-section">
+      <div class="app-phone-visual">
+        <div style="font-size:3rem;">&#128247;</div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;text-align:center;">Omni Cinemas App</div>
+      </div>
+      <div class="reveal">
+        <p class="section-label">Download the App</p>
+        <h2 class="section-title">Your Movies,<br><span>Your Way</span></h2>
+        <p class="section-desc">Browse showtimes, reserve seats, buy tickets instantly, and get alerts for upcoming releases — right from your phone.</p>
+        <ul class="app-features">
+          <li>Browse current and upcoming movies</li>
+          <li>Reserve seats in advance</li>
+          <li>Buy tickets instantly</li>
+          <li>Receive alerts for new releases</li>
+        </ul>
+        <div class="app-store-btns">
+          <a href="https://apps.apple.com/us/app/omni-cinemas/id" target="_blank" rel="noopener" class="store-btn">
+            <span style="font-size:1.5rem;">&#63743;</span>
+            <div>
+              <span class="store-btn-sub">Download on the</span>
+              <span class="store-btn-text">App Store</span>
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details" target="_blank" rel="noopener" class="store-btn">
+            <span style="font-size:1.5rem;">&#9654;</span>
+            <div>
+              <span class="store-btn-sub">Get it on</span>
+              <span class="store-btn-text">Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Location &amp; <span>Contact</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">&#128205;</div>
+        <h4>Address</h4>
+        <p>3729 Sycamore Dairy Road<br>Fayetteville, NC 28303</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">&#128222;</div>
+        <h4>Phone Numbers</h4>
+        <a href="tel:9104875529">Omni Cinemas 8: (910) 487-5529</a>
+        <a href="tel:9108641307">Fun Center: (910) 864-1307</a>
+        <a href="tel:9104876001">Mountasia Golf: (910) 487-6001</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">&#128336;</div>
+        <h4>Arcade Hours</h4>
+        <p>Mon-Thu: 12:30pm - 9:00pm<br>Friday: 12:30pm - 11:00pm<br>Saturday: 11:00am - 11:00pm<br>Sunday: 11:00am - 9:00pm</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">&#9971;</div>
+        <h4>Golf Hours</h4>
+        <p>Monday-Friday: Closed<br>(Open on school closures)<br>Saturday-Sunday: 12pm - 8pm<br>Weather permitting</p>
+      </div>
+    </div>
+    <div class="map-embed reveal">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.8!2d-78.9988!3d35.0344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ab4b0000000001%3A0x1!2s3729+Sycamore+Dairy+Rd%2C+Fayetteville%2C+NC+28303!5e0!3m2!1sen!2sus!4v1234567890"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Omni Cinemas Location">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">OC</div>
+        <div class="nav-logo-text">Omni Cinemas <span>Fayetteville, NC</span></div>
+      </div>
+      <p>Fayetteville's home for movies, miniature golf, and family fun. 8 screens. 2 golf courses. 100+ arcade games. All at Omni Plaza on Sycamore Dairy Road.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Movies</h5>
+      <ul>
+        <li><a href="#movies">Now Showing</a></li>
+        <li><a href="#movies">Coming Soon</a></li>
+        <li><a href="#tickets">Ticket Prices</a></li>
+        <li><a href="https://www.omnicinemas.com" target="_blank">Buy Tickets</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Attractions</h5>
+      <ul>
+        <li><a href="#attractions">Mountasia Golf</a></li>
+        <li><a href="#attractions">Arcade / Fun Center</a></li>
+        <li><a href="#parties">Birthday Parties</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Info</h5>
+      <ul>
+        <li><a href="#contact">Directions</a></li>
+        <li><a href="tel:9104875529">(910) 487-5529</a></li>
+        <li><a href="https://www.omnicinemas.com/policies/" target="_blank">Policies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Omni Cinemas &mdash; 3729 Sycamore Dairy Road, Fayetteville, NC 28303</p>
+    <p>Website by <a href="https://wisdomlayers.com" target="_blank">WisdomLayers</a></p>
+  </div>
+</footer>
+
+<script>
+  // NAV
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('main-nav');
+  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+
+  // TABS
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // TICKET CALCULATOR
+  const prices = { adult: 11.00, 'adult-mat': 8.50, child: 8.50, 'child-mat': 7.50, senior: 9.50 };
+  const quantities = { adult: 0, 'adult-mat': 0, child: 0, 'child-mat': 0, senior: 0 };
+
+  function updateTotal() {
+    let total = 0;
+    Object.keys(quantities).forEach(k => total += quantities[k] * prices[k]);
+    document.getElementById('ticket-total').textContent = '$' + total.toFixed(2);
+  }
+
+  document.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.type;
+      const action = btn.dataset.action;
+      if (action === 'inc') quantities[type]++;
+      else if (action === 'dec' && quantities[type] > 0) quantities[type]--;
+      document.getElementById('qty-' + type).textContent = quantities[type];
+      updateTotal();
+    });
+  });
+
+  // SCROLL REVEAL
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => io.observe(el));
+
+  // NAV scroll effect
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 50 ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.95)';
+  });
+</script>
+</body>
+</html>

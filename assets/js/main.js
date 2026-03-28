@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (carousel && carouselWrapper && prevBtn && nextBtn) {
         const CARD_COUNT = carousel.querySelectorAll('.pricing-card').length;
-        let realIndex = 1; // Start on Professional (Most Popular)
+        let realIndex = 2; // Start on Professional (Most Popular)
 
         function getVisibleCount() {
             return window.innerWidth < 768 ? 1 : 3;
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize
         setAllCardWidths();
-        snapTo(1); // Start on Professional
+        snapTo(2); // Start on Professional
     }
     
     // ===== FAQ ACCORDION =====
