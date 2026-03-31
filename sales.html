@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>WisdomLayers — Custom Websites for Local Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:'Inter',sans-serif; background:#fff; color:#111827; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; }
+img { display:block; max-width:100%; }
+a { text-decoration:none; }
+
+/* ── TOKENS ── */
+:root {
+  --teal:#0d9488; --teal-light:#14b8a6; --teal-dark:#0f766e;
+  --ink:#111827; --ink2:#374151; --muted:#6b7280; --subtle:#9ca3af;
+  --border:#e5e7eb; --surface:#f9fafb; --white:#ffffff;
+  --radius:20px; --radius-sm:12px; --radius-pill:100px;
+  --shadow-sm:0 1px 4px rgba(0,0,0,.06); --shadow:0 4px 24px rgba(0,0,0,.08); --shadow-lg:0 12px 48px rgba(0,0,0,.14);
+}
+
+/* ── SECTION SHELL ── */
+.section { padding: 72px 28px; }
+.section-inner { max-width:680px; margin:0 auto; }
+
+/* ── EYEBROW ── */
+.eyebrow { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; }
+
+/* ─────────────────────────────────────
+   SECTION 1  HERO
+───────────────────────────────────── */
+#hero {
+  min-height:100svh;
+  background: #0a0f1e;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center;
+  padding:60px 28px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* mesh gradient orbs */
+#hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 30%, rgba(13,148,136,.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(20,184,166,.2) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 60% 10%, rgba(6,182,212,.15) 0%, transparent 60%);
+  pointer-events:none;
+}
+
+.hero-logo {
+  margin:0 auto 32px;
+}
+.hero-logo img {
+  width:72px; height:72px; object-fit:contain;
+  mix-blend-mode:screen;
+}
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(13,148,136,.2);
+  border:1px solid rgba(20,184,166,.35);
+  color:#5eead4;
+  font-size:.78rem; font-weight:600; letter-spacing:.04em;
+  padding:7px 16px; border-radius:var(--radius-pill);
+  margin-bottom:24px;
+}
+.hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:#5eead4; flex-shrink:0; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+#hero h1 {
+  font-size:clamp(2.4rem,7vw,4rem);
+  font-weight:800; line-height:1.1;
+  color:#fff;
+  margin-bottom:20px;
+  position:relative;
+}
+#hero h1 em { font-style:normal; color:#5eead4; }
+
+#hero .sub {
+  font-size:clamp(1rem,2.5vw,1.15rem);
+  color:rgba(255,255,255,.65);
+  line-height:1.75;
+  max-width:420px;
+  margin:0 auto 40px;
+  position:relative;
+}
+
+.hero-cta-row {
+  display:flex; flex-direction:column; gap:14px;
+  width:100%; max-width:340px;
+  margin:0 auto 48px;
+  position:relative;
+}
+
+.btn-primary {
+  display:block; text-align:center;
+  background:#fff; color:var(--teal-dark);
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem;
+  padding:17px 32px; border-radius:var(--radius-pill);
+  box-shadow:0 8px 32px rgba(0,0,0,.25);
+  border:none; cursor:pointer;
+  transition:transform .15s, box-shadow .15s;
+}
+.btn-primary:active { transform:scale(.97); box-shadow:0 4px 16px rgba(0,0,0,.2); }
+
+.btn-ghost {
+  display:block; text-align:center;
+  background:transparent; color:rgba(255,255,255,.75);
+  font-family:'Poppins',sans-serif; font-weight:600; font-size:.95rem;
+  padding:15px 32px; border-radius:var(--radius-pill);
+  border:1.5px solid rgba(255,255,255,.2);
+  transition:border-color .15s, color .15s;
+}
+.btn-ghost:active { border-color:rgba(255,255,255,.5); color:#fff; }
+
+.hero-trust {
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+  position:relative;
+}
+.trust-chip {
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.7);
+  font-size:.8rem; font-weight:500;
+  padding:8px 16px; border-radius:var(--radius-pill);
+  backdrop-filter:blur(8px);
+}
+
+.scroll-arrow {
+  position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  color:rgba(255,255,255,.35); font-size:.72rem; letter-spacing:.05em;
+  animation:bob 2.5s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+
+/* ─────────────────────────────────────
+   SECTION 2  PROBLEM → SOLUTION
+───────────────────────────────────── */
+#problem { background:var(--surface); }
+
+#problem h2 {
+  font-size:clamp(1.7rem,5vw,2.4rem);
+  font-weight:800; line-height:1.2;
+  margin-bottom:16px; color:var(--ink);
+}
+#problem h2 em { font-style:normal; color:var(--teal); }
+
+#problem .lede {
+  font-size:1.05rem; color:var(--ink2); line-height:1.8; margin-bottom:32px;
+}
+
+.pain-list {
+  list-style:none;
+  display:flex; flex-direction:column; gap:12px;
+  margin-bottom:32px;
+}
+.pain-list li {
+  border-left:3px solid var(--teal);
+  background:#fff; border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:16px 18px;
+  box-shadow:var(--shadow-sm);
+  font-size:.92rem; color:var(--ink2); line-height:1.6;
+}
+
+.solution-callout {
+  background:linear-gradient(135deg, var(--teal-dark), var(--teal-light));
+  border-radius:var(--radius);
+  padding:28px 24px;
+  color:#fff;
+}
+.solution-callout h3 {
+  font-size:1.2rem; font-weight:700; margin-bottom:10px;
+}
+.solution-callout p {
+  font-size:.92rem; line-height:1.75; opacity:.9;
+}
+
+/* ─────────────────────────────────────
+   SECTION 3  WHO WE ARE
+───────────────────────────────────── */
+#story { background:#fff; }
+
+#story h2 {
+  font-size:clamp(1.7rem,5vw,2.4rem);
+  font-weight:800; line-height:1.2;
+  margin-bottom:16px; color:var(--ink);
+}
+#story h2 em { font-style:normal; color:var(--teal); }
+
+#story .lede {
+  font-size:1.05rem; color:var(--ink2); line-height:1.8; margin-bottom:16px;
+}
+
+.stat-row {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:12px; margin-bottom:28px;
+}
+.stat-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:20px 10px;
+  text-align:center;
+}
+.stat-card .n {
+  font-family:'Poppins',sans-serif; font-weight:800;
+  font-size:clamp(1.4rem,4vw,1.9rem); color:var(--teal); line-height:1; margin-bottom:6px;
+}
+.stat-card .l { font-size:.73rem; color:var(--muted); font-weight:500; line-height:1.35; }
+
+.differentiator-list {
+  list-style:none; display:flex; flex-direction:column; gap:12px;
+}
+.differentiator-list li {
+  display:flex; align-items:flex-start; gap:12px; font-size:.93rem; color:var(--ink2); line-height:1.6;
+}
+.diff-check {
+  width:22px; height:22px; border-radius:50%; background:var(--teal);
+  color:#fff; font-size:.7rem; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; margin-top:1px; font-weight:700;
+}
+
+/* ─────────────────────────────────────
+   SECTION 4  WORK / PORTFOLIO
+───────────────────────────────────── */
+#work { background:var(--surface); }
+
+#work h2 {
+  font-size:clamp(1.7rem,5vw,2.4rem);
+  font-weight:800; margin-bottom:6px; color:var(--ink);
+}
+#work .sub { font-size:.95rem; color:var(--muted); margin-bottom:28px; line-height:1.6; }
+
+.tab-bar {
+  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  padding-bottom:4px; margin-bottom:24px;
+  scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar { display:none; }
+
+.tab {
+  background:#fff; border:2px solid var(--border); color:var(--muted);
+  font-family:'Poppins',sans-serif; font-size:.82rem; font-weight:600;
+  padding:9px 20px; border-radius:var(--radius-pill);
+  white-space:nowrap; cursor:pointer;
+  transition:all .18s; flex-shrink:0;
+}
+.tab.on { background:var(--teal); border-color:var(--teal); color:#fff; }
+
+.panel { display:none; }
+.panel.on { display:block; }
+
+.project-card {
+  background:#fff; border:1px solid var(--border);
+  border-radius:var(--radius); overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.project-card img {
+  width:100%; height:210px; object-fit:cover; object-position:top;
+}
+.project-card-body { padding:22px 20px; }
+.project-tag {
+  font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--teal); margin-bottom:6px;
+}
+.project-card-body h3 { font-size:1.15rem; font-weight:700; margin-bottom:8px; color:var(--ink); }
+.project-card-body p { font-size:.88rem; color:var(--muted); line-height:1.65; margin-bottom:16px; }
+
+.chip-row { display:flex; flex-wrap:wrap; gap:7px; }
+.chip {
+  font-size:.73rem; font-weight:500; color:var(--muted);
+  background:var(--surface); border:1px solid var(--border);
+  padding:5px 12px; border-radius:var(--radius-pill);
+}
+.chip.live { background:#d1fae5; border-color:#6ee7b7; color:#065f46; font-weight:600; }
+.chip.wip  { background:#fef3c7; border-color:#fcd34d; color:#92400e; font-weight:600; }
+
+/* ─────────────────────────────────────
+   SECTION 5  PROCESS
+───────────────────────────────────── */
+#process { background:#0a0f1e; }
+
+#process .eyebrow { color:#5eead4; }
+#process h2 {
+  font-size:clamp(1.7rem,5vw,2.4rem);
+  font-weight:800; color:#fff; margin-bottom:6px;
+}
+#process .sub { font-size:.95rem; color:rgba(255,255,255,.5); margin-bottom:36px; line-height:1.6; }
+
+.timeline { display:flex; flex-direction:column; gap:0; }
+
+.t-step {
+  display:grid; grid-template-columns:48px 1fr;
+  gap:0 16px; position:relative;
+  padding-bottom:32px;
+}
+.t-step:last-child { padding-bottom:0; }
+
+.t-left { display:flex; flex-direction:column; align-items:center; }
+.t-num {
+  width:40px; height:40px; border-radius:50%;
+  background:var(--teal); color:#fff;
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:.95rem;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; z-index:1; position:relative;
+}
+.t-line {
+  width:2px; flex:1; margin-top:4px;
+  background:linear-gradient(to bottom, rgba(13,148,136,.6), transparent);
+}
+.t-step:last-child .t-line { display:none; }
+
+.t-right { padding-top:8px; }
+.t-right h4 { font-size:1rem; font-weight:700; color:#fff; margin-bottom:4px; }
+.t-right p { font-size:.88rem; color:rgba(255,255,255,.55); line-height:1.65; }
+
+.timeline-cta {
+  margin-top:36px;
+  background:rgba(13,148,136,.15);
+  border:1px solid rgba(13,148,136,.35);
+  border-radius:var(--radius-sm);
+  padding:20px 20px;
+}
+.timeline-cta p { font-size:.88rem; color:rgba(255,255,255,.7); line-height:1.6; }
+.timeline-cta p strong { color:#5eead4; font-weight:600; }
+
+/* ─────────────────────────────────────
+   SECTION 6  PRICING
+───────────────────────────────────── */
+#pricing { background:#fff; }
+
+#pricing h2 {
+  font-size:clamp(1.7rem,5vw,2.4rem);
+  font-weight:800; margin-bottom:6px; color:var(--ink);
+}
+#pricing .sub { font-size:.95rem; color:var(--muted); margin-bottom:32px; line-height:1.6; }
+
+.price-stack { display:flex; flex-direction:column; gap:14px; }
+
+.price-card {
+  border:2px solid var(--border); border-radius:var(--radius);
+  padding:22px 20px; position:relative; background:#fff;
+  transition:border-color .2s;
+}
+.price-card.featured { border-color:var(--teal); }
+
+.featured-label {
+  position:absolute; top:-11px; left:20px;
+  background:var(--teal); color:#fff;
+  font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  padding:4px 14px; border-radius:var(--radius-pill);
+}
+
+.pc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+.pc-name { font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem; color:var(--ink); }
+.pc-price {
+  font-family:'Poppins',sans-serif; font-weight:800;
+  font-size:1.35rem; color:var(--teal);
+}
+.pc-desc { font-size:.84rem; color:var(--muted); line-height:1.55; margin-bottom:14px; }
+.pc-items { display:flex; flex-wrap:wrap; gap:7px; }
+.pc-item {
+  font-size:.73rem; font-weight:500;
+  background:var(--surface); border:1px solid var(--border);
+  color:var(--ink2); padding:5px 11px; border-radius:var(--radius-pill);
+}
+.pc-item.hi { background:#ccfbf1; border-color:#99f6e4; color:var(--teal-dark); font-weight:600; }
+
+.pricing-note {
+  margin-top:20px; padding:16px 18px;
+  background:var(--surface); border-radius:var(--radius-sm);
+  font-size:.84rem; color:var(--muted); line-height:1.65;
+  border-left:3px solid var(--teal);
+}
+.pricing-note strong { color:var(--ink); }
+
+/* ─────────────────────────────────────
+   SECTION 7  TESTIMONIALS
+───────────────────────────────────── */
+#reviews { background:var(--surface); }
+
+#reviews h2 {
+  font-size:clamp(1.7rem,5vw,2.4rem);
+  font-weight:800; margin-bottom:28px; color:var(--ink);
+}
+
+.review-card {
+  background:#fff; border-radius:var(--radius);
+  padding:28px 22px; margin-bottom:16px;
+  box-shadow:var(--shadow); border:1px solid var(--border);
+}
+.review-card:last-of-type { margin-bottom:0; }
+
+.stars { color:#f59e0b; font-size:1rem; letter-spacing:2px; margin-bottom:14px; }
+
+.review-text {
+  font-size:.93rem; color:var(--ink2); line-height:1.8;
+  font-style:italic; margin-bottom:20px;
+}
+.review-text::before { content:'\201C'; }
+.review-text::after  { content:'\201D'; }
+
+.reviewer { display:flex; align-items:center; gap:12px; }
+.reviewer-av {
+  width:42px; height:42px; border-radius:50%;
+  background:var(--teal); color:#fff;
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:.95rem;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.reviewer-name { font-weight:700; font-size:.88rem; color:var(--ink); }
+.reviewer-role { font-size:.78rem; color:var(--subtle); }
+
+/* ─────────────────────────────────────
+   SECTION 8  FINAL CTA
+───────────────────────────────────── */
+#cta {
+  background:linear-gradient(160deg, #0a0f1e 0%, #0d4a44 50%, #0a0f1e 100%);
+  padding:80px 28px;
+  text-align:center;
+}
+#cta .section-inner { display:flex; flex-direction:column; align-items:center; }
+
+#cta .eyebrow { color:#5eead4; margin-bottom:14px; }
+#cta h2 {
+  font-size:clamp(2rem,6vw,3rem); font-weight:800; color:#fff;
+  line-height:1.15; margin-bottom:16px;
+}
+#cta h2 em { font-style:normal; color:#5eead4; }
+#cta p {
+  font-size:1rem; color:rgba(255,255,255,.65);
+  line-height:1.75; max-width:380px; margin:0 auto 40px;
+}
+
+.cta-card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);
+  padding:32px 24px;
+  width:100%; max-width:400px;
+  backdrop-filter:blur(8px);
+}
+.cta-card h3 {
+  font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:6px;
+}
+.cta-card .small { font-size:.85rem; color:rgba(255,255,255,.5); margin-bottom:24px; line-height:1.5; }
+
+.cta-card .btn-primary { margin-bottom:12px; }
+
+.cta-divider {
+  display:flex; align-items:center; gap:10px;
+  color:rgba(255,255,255,.25); font-size:.78rem; margin:4px 0 12px;
+}
+.cta-divider::before, .cta-divider::after {
+  content:''; flex:1; height:1px; background:rgba(255,255,255,.1);
+}
+
+.btn-outline-white {
+  display:block; text-align:center;
+  background:transparent; color:rgba(255,255,255,.7);
+  font-family:'Poppins',sans-serif; font-weight:600; font-size:.9rem;
+  padding:14px 28px; border-radius:var(--radius-pill);
+  border:1.5px solid rgba(255,255,255,.18);
+}
+
+.cta-contact {
+  margin-top:28px;
+  display:flex; flex-direction:column; gap:8px;
+  font-size:.85rem; color:rgba(255,255,255,.5);
+}
+.cta-contact a { color:#5eead4; font-weight:600; }
+
+/* ─────────────────────────────────────
+   FLOATING NAV DOTS
+───────────────────────────────────── */
+#dots {
+  position:fixed; right:14px; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:7px;
+  z-index:999;
+}
+.dot {
+  width:7px; height:7px; border-radius:50%; border:none;
+  background:rgba(0,0,0,.18); cursor:pointer;
+  transition:all .2s; padding:0;
+}
+.dot.on { background:var(--teal); transform:scale(1.5); }
+.dot.lite { background:rgba(255,255,255,.25); }
+.dot.lite.on { background:#fff; }
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav id="dots">
+  <button class="dot on lite" data-target="s0"      title="Intro"></button>
+  <button class="dot"         data-target="problem"  title="Problem"></button>
+  <button class="dot"         data-target="story"    title="About us"></button>
+  <button class="dot"         data-target="work"     title="Our Work"></button>
+  <button class="dot lite"    data-target="process"  title="Process"></button>
+  <button class="dot"         data-target="pricing"  title="Pricing"></button>
+  <button class="dot"         data-target="reviews"  title="Reviews"></button>
+  <button class="dot lite"    data-target="s7"       title="Get Started"></button>
+</nav>
+
+<!-- ══════════════════════════════════
+     1  HERO
+══════════════════════════════════ -->
+<section id="s0" data-dark="1">
+  <div id="hero">
+    <div class="hero-logo">
+      <img src="assets/images/Logo_Cropped.webp" alt="WisdomLayers">
+    </div>
+
+    <div class="hero-badge">Taking on new clients now</div>
+
+    <h1>
+      Your business deserves a website<br>
+      <em>that actually brings in customers.</em>
+    </h1>
+    <p class="sub">WisdomLayers builds custom, professional websites for local businesses — fast, mobile-ready, and designed to convert visitors into paying customers.</p>
+
+    <div class="hero-cta-row">
+      <a href="#pricing" class="btn-primary">See Our Pricing →</a>
+      <a href="#work" class="btn-ghost">View Our Work</a>
+    </div>
+
+    <div class="hero-trust">
+      <span class="trust-chip">Mobile-First Design</span>
+      <span class="trust-chip">Done in 2–3 Weeks</span>
+      <span class="trust-chip">Local Business Specialists</span>
+      <span class="trust-chip">Ongoing Support Included</span>
+    </div>
+
+    <div class="scroll-arrow">
+      <span>scroll</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     2  PROBLEM → SOLUTION
+══════════════════════════════════ -->
+<section id="problem" class="section" data-dark="0">
+  <div class="section-inner">
+    <div class="eyebrow">Sound familiar?</div>
+    <h2>Most small businesses<br>are <em>leaving money on the table.</em></h2>
+    <p class="lede">When someone hears about your business, the first thing they do is Google you. If your website looks old, loads slow, or doesn't exist at all — they move on to your competitor.</p>
+
+    <ul class="pain-list">
+      <li><strong>You're invisible online.</strong> Customers search for your service every day — and find someone else because you don't have a good web presence.</li>
+      <li><strong>Your current site looks broken on phones.</strong> Over 70% of searches happen on mobile. If your site doesn't work on phones, you're losing leads constantly.</li>
+      <li><strong>Big agencies charge too much.</strong> $5,000–$15,000 from an agency — for a local business, that's hard to justify.</li>
+      <li><strong>DIY tools look generic and take forever.</strong> Wix and Squarespace sites look like templates, and you're still on your own to make it work.</li>
+    </ul>
+
+    <div class="solution-callout">
+      <h3>There's a better way.</h3>
+      <p>WisdomLayers gives you a fully custom, professionally built website at a fraction of big-agency pricing — with a team that's fast, communicative, and invested in your success from day one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     3  WHO WE ARE
+══════════════════════════════════ -->
+<section id="story" class="section" data-dark="0">
+  <div class="section-inner">
+    <div class="eyebrow">Who We Are</div>
+    <h2>High school students<br><em>paying their way to college</em><br>one website at a time.</h2>
+    <p class="lede">We're not a faceless agency. We're WisdomLayers — a young, driven team based right here in your community. Every client matters to us personally because every project is part of how we're building our futures.</p>
+    <p class="lede">That means you get the hunger of a startup, the quality of a professional team, and someone who actually picks up the phone.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="n">5+</div>
+        <div class="l">Live &amp; In-Progress Sites</div>
+      </div>
+      <div class="stat-card">
+        <div class="n">100%</div>
+        <div class="l">Mobile Responsive</div>
+      </div>
+      <div class="stat-card">
+        <div class="n">2–3wk</div>
+        <div class="l">Average Launch Time</div>
+      </div>
+    </div>
+
+    <ul class="differentiator-list">
+      <li><span class="diff-check">✓</span><span><strong>Direct access to your developer</strong> — no account managers, no middlemen, no waiting on hold.</span></li>
+      <li><span class="diff-check">✓</span><span><strong>Custom design every time</strong> — your brand, your colors, your story. Never a generic template.</span></li>
+      <li><span class="diff-check">✓</span><span><strong>Built for your industry</strong> — we've built for service businesses, nonprofits, healthcare practices, and more.</span></li>
+      <li><span class="diff-check">✓</span><span><strong>Ongoing support</strong> — we don't disappear after launch. Updates, questions, changes — we've got you.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     4  WORK
+══════════════════════════════════ -->
+<section id="work" class="section" data-dark="0">
+  <div class="section-inner">
+    <div class="eyebrow">Our Work</div>
+    <h2>Built for real businesses.</h2>
+    <p class="sub">Tap through to see what we've built for clients just like you.</p>
+
+    <div class="tab-bar">
+      <button class="tab on" data-t="m2w">Miles2Wisdom</button>
+      <button class="tab" data-t="pj">PJ Pressure</button>
+      <button class="tab" data-t="tn">Triple Nickle</button>
+      <button class="tab" data-t="nc">NC RMP Assoc.</button>
+    </div>
+
+    <div class="panel on" id="p-m2w">
+      <div class="project-card">
+        <img src="assets/images/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Homepage">
+        <div class="project-card-body">
+          <div class="project-tag">Therapy Practice · Multi-Page Site</div>
+          <h3>Miles2Wisdom</h3>
+          <p>Full professional website for a therapy practice — online booking, services overview, team bios, intake forms, and a calming, trustworthy design that converts visitors into clients.</p>
+          <div class="chip-row">
+            <span class="chip live">✓ Live</span>
+            <span class="chip">Online Booking</span>
+            <span class="chip">Intake Forms</span>
+            <span class="chip">Team Page</span>
+            <span class="chip">4 Pages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-pj">
+      <div class="project-card">
+        <img src="assets/images/pjpressure/pj-home-desktop.webp" alt="PJ Pressure Homepage">
+        <div class="project-card-body">
+          <div class="project-tag">Pressure Washing · Service Business</div>
+          <h3>PJ Pressure</h3>
+          <p>A high-converting site for a local pressure washing company — before/after photo gallery, instant quote requests, service area coverage, and a design built to bring in local leads.</p>
+          <div class="chip-row">
+            <span class="chip live">✓ Live</span>
+            <span class="chip">Quote Request</span>
+            <span class="chip">Photo Gallery</span>
+            <span class="chip">Service Areas</span>
+            <span class="chip">4 Pages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-tn">
+      <div class="project-card">
+        <img src="assets/images/triplenickle/tn-home-desktop.webp" alt="Triple Nickle Homepage">
+        <div class="project-card-body">
+          <div class="project-tag">Historical Nonprofit · 8-Page Site</div>
+          <h3>Triple Nickle — 555th PIB Assoc.</h3>
+          <p>A full 8-page nonprofit website honoring America's first Black paratroopers — membership portal, events calendar, scholarship program, blog, donation page, and a rich custom design system.</p>
+          <div class="chip-row">
+            <span class="chip wip">In Progress</span>
+            <span class="chip">Membership</span>
+            <span class="chip">Events</span>
+            <span class="chip">Scholarship</span>
+            <span class="chip">Donate</span>
+            <span class="chip">Blog</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-nc">
+      <div class="project-card">
+        <img src="assets/images/ncrmpa1/ncrmpa-home-card.webp" alt="NC Retired Military Police Assoc.">
+        <div class="project-card-body">
+          <div class="project-tag">Military Veterans Nonprofit · Multi-Page</div>
+          <h3>NC Retired Military Police Assoc.</h3>
+          <p>A professional multi-page site for a military veterans' association — complete with membership info, events listings, organizational history, and a strong navy and gold visual identity.</p>
+          <div class="chip-row">
+            <span class="chip wip">In Progress</span>
+            <span class="chip">Membership</span>
+            <span class="chip">Events</span>
+            <span class="chip">History</span>
+            <span class="chip">Custom Branding</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     5  PROCESS
+══════════════════════════════════ -->
+<section id="process" class="section" data-dark="1">
+  <div class="section-inner">
+    <div class="eyebrow">How It Works</div>
+    <h2>From conversation<br>to live site in weeks.</h2>
+    <p class="sub">We handle everything — design, development, launch. You handle running your business.</p>
+
+    <div class="timeline">
+      <div class="t-step">
+        <div class="t-left"><div class="t-num">1</div><div class="t-line"></div></div>
+        <div class="t-right">
+          <h4>Discovery Call — 15–30 min</h4>
+          <p>We talk about your business, your goals, and what you need. You tell us your vision and we tell you exactly what we'd build for you.</p>
+        </div>
+      </div>
+      <div class="t-step">
+        <div class="t-left"><div class="t-num">2</div><div class="t-line"></div></div>
+        <div class="t-right">
+          <h4>Design &amp; Build</h4>
+          <p>We design your site from scratch — your brand colors, your content, fully mobile-responsive. You'll see the first draft within a few days.</p>
+        </div>
+      </div>
+      <div class="t-step">
+        <div class="t-left"><div class="t-num">3</div><div class="t-line"></div></div>
+        <div class="t-right">
+          <h4>Review &amp; Refine</h4>
+          <p>You review the site and give feedback. We make revisions until every detail is right. Your satisfaction is what gets us paid.</p>
+        </div>
+      </div>
+      <div class="t-step">
+        <div class="t-left"><div class="t-num">4</div><div class="t-line"></div></div>
+        <div class="t-right">
+          <h4>Launch &amp; Support</h4>
+          <p>We launch your site and stick around — updates, questions, new pages, ongoing changes. We don't disappear after launch.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-cta">
+      <p>Most clients go from <strong>first conversation to live site in 2–3 weeks</strong>. That's faster than most agencies take just to send you a proposal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     6  PRICING
+══════════════════════════════════ -->
+<section id="pricing" class="section" data-dark="0">
+  <div class="section-inner">
+    <div class="eyebrow">Pricing</div>
+    <h2>Transparent pricing.<br>No surprises, ever.</h2>
+    <p class="sub">Every package includes mobile-first design, hosting setup, and post-launch support. You'll always know exactly what you're paying and what you're getting.</p>
+
+    <div class="price-stack">
+
+      <div class="price-card">
+        <div class="pc-top">
+          <span class="pc-name">Landing Page</span>
+          <span class="pc-price">$599</span>
+        </div>
+        <p class="pc-desc">One powerful, focused page. Perfect for getting your business online quickly and capturing leads.</p>
+        <div class="pc-items">
+          <span class="pc-item">1 Page</span>
+          <span class="pc-item">Contact Form</span>
+          <span class="pc-item">Mobile Ready</span>
+          <span class="pc-item">SEO Basics</span>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="pc-top">
+          <span class="pc-name">Starter</span>
+          <span class="pc-price">$999</span>
+        </div>
+        <p class="pc-desc">3–4 pages to establish credibility — Home, About, Services, and Contact. Great starting point for most local businesses.</p>
+        <div class="pc-items">
+          <span class="pc-item">3–4 Pages</span>
+          <span class="pc-item">Photo Gallery</span>
+          <span class="pc-item">About + Contact</span>
+          <span class="pc-item">Mobile Ready</span>
+        </div>
+      </div>
+
+      <div class="price-card featured">
+        <span class="featured-label">Most Popular</span>
+        <div class="pc-top">
+          <span class="pc-name">Professional</span>
+          <span class="pc-price">$1,499</span>
+        </div>
+        <p class="pc-desc">The full package most businesses need — everything to look professional, compete locally, and convert visitors into customers.</p>
+        <div class="pc-items">
+          <span class="pc-item hi">5–7 Pages</span>
+          <span class="pc-item hi">Booking or Quote Form</span>
+          <span class="pc-item hi">SEO Setup</span>
+          <span class="pc-item">Blog Ready</span>
+          <span class="pc-item">Google Maps</span>
+          <span class="pc-item">Priority Support</span>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="pc-top">
+          <span class="pc-name">Premium</span>
+          <span class="pc-price">$2,199</span>
+        </div>
+        <p class="pc-desc">Advanced animations, richer features, and a truly premium custom design — for businesses ready to stand out completely.</p>
+        <div class="pc-items">
+          <span class="pc-item">8+ Pages</span>
+          <span class="pc-item">Custom Animations</span>
+          <span class="pc-item">Advanced SEO</span>
+          <span class="pc-item">Priority Support</span>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="pc-top">
+          <span class="pc-name">Custom / E-Commerce</span>
+          <span class="pc-price">$4,000+</span>
+        </div>
+        <p class="pc-desc">Online store, member portals, complex web apps — fully custom-scoped and built to scale with your business.</p>
+        <div class="pc-items">
+          <span class="pc-item">Online Store</span>
+          <span class="pc-item">Member Login</span>
+          <span class="pc-item">Custom Features</span>
+          <span class="pc-item">Fully Scoped</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pricing-note">
+      <strong>Not sure which package fits?</strong> That's what the discovery call is for. We'll tell you exactly what makes sense for your business — no upsells, no pressure.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     7  REVIEWS
+══════════════════════════════════ -->
+<section id="reviews" class="section" data-dark="0">
+  <div class="section-inner">
+    <div class="eyebrow">Client Reviews</div>
+    <h2>Don't take our word for it.</h2>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">WisdomLayers completely transformed our online presence. The site looks incredible and our clients actually comment on it when they book. The team was professional, responsive, and delivered exactly what they promised.</p>
+      <div class="reviewer">
+        <div class="reviewer-av">M</div>
+        <div>
+          <div class="reviewer-name">Miles2Wisdom Team</div>
+          <div class="reviewer-role">Therapy Practice</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">I was skeptical at first, but the website they built for my pressure washing business has been bringing in consistent leads. It looks way more professional than I expected for the price. Highly recommend.</p>
+      <div class="reviewer">
+        <div class="reviewer-av">P</div>
+        <div>
+          <div class="reviewer-name">PJ Pressure Team</div>
+          <div class="reviewer-role">Pressure Washing Service</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     8  FINAL CTA
+══════════════════════════════════ -->
+<section id="s7" class="section" data-dark="1" style="padding:0;">
+  <div id="cta">
+    <div class="section-inner">
+      <div class="eyebrow">Ready to get started?</div>
+      <h2>Let's build something<br><em>you're proud to show off.</em></h2>
+      <p>A 15-minute conversation is all it takes to know exactly what your site would look like and what it would cost. No commitment, no pressure.</p>
+
+      <div class="cta-card">
+        <h3>Start your project today</h3>
+        <p class="small">Fill out the quick form on our site and we'll reach out within 24 hours to schedule your free discovery call.</p>
+        <a href="https://wisdomlayers.com/#contact" class="btn-primary">Go to wisdomlayers.com →</a>
+        <div class="cta-divider">or</div>
+        <a href="https://wisdomlayers.com/html/projects.html" class="btn-outline-white">Browse Full Portfolio</a>
+      </div>
+
+      <div class="cta-contact">
+        <span>Website: <a href="https://wisdomlayers.com">wisdomlayers.com</a></span>
+        <span>Email: <a href="mailto:contact@wisdomlayers.com">contact@wisdomlayers.com</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── TABS ── */
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const t = btn.dataset.t;
+    btn.closest('.section-inner').querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+    btn.closest('.section-inner').querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('p-' + t).classList.add('on');
+  });
+});
+
+/* ── NAV DOTS ── */
+const dots = Array.from(document.querySelectorAll('.dot'));
+
+function syncDots() {
+  const mid = window.innerHeight / 2;
+  let curDot = dots[0];
+  let curDark = false;
+  dots.forEach(d => {
+    const el = document.getElementById(d.dataset.target);
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top <= mid) { curDot = d; curDark = el.dataset.dark === '1'; }
+  });
+  dots.forEach(d => {
+    d.classList.remove('on', 'lite');
+    if (curDark) d.classList.add('lite');
+    if (d === curDot) d.classList.add('on');
+  });
+}
+
+window.addEventListener('scroll', syncDots, { passive: true });
+syncDots();
+
+dots.forEach(d => {
+  d.addEventListener('click', () => {
+    const el = document.getElementById(d.dataset.target);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+/* ── SMOOTH INTERNAL LINKS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
