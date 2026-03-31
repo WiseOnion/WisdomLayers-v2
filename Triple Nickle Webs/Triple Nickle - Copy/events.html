@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Fundraising - Samuel Council Chapter 555th PIA</title>
+    <meta name="description" content="Join our fundraising extravaganzas and support the mission of the Samuel Council Chapter of the 555th Parachute Infantry Association.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo-text">555th PIA</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About & History</a>
+                <a href="membership.html">Membership</a>
+                <a href="events.html">Events</a>
+                <a href="donate.html">Donate</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Events & Fundraising</h1>
+            <p>Celebrating our heritage and supporting our mission</p>
+        </div>
+    </div>
+
+    <section id="fundraising" class="fundraising">
+        <div class="container">
+            <h2 class="section-title">Fundraising Extravaganzas</h2>
+            <p class="fundraising-intro">Join us at our signature fundraising events throughout the year. These celebrations honor the legacy of the Triple Nickles while supporting our mission of education, community engagement, and veteran support.</p>
+            
+            <div class="extravaganza-section">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide">
+                            <div class="carousel-caption">
+                                <h3>Annual Red & White Extravaganza</h3>
+                                <p>An elegant evening celebrating our heritage and raising funds for veteran programs</p>
+                                <a href="contact.html" class="btn btn-primary">RSVP Now</a>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-caption">
+                                <h3>Black & White Extravaganza</h3>
+                                <p>A sophisticated gala honoring the courage and legacy of the 555th</p>
+                                <a href="contact.html" class="btn btn-primary">RSVP Now</a>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-caption">
+                                <h3>Western Extravaganza</h3>
+                                <p>A spirited celebration with western flair supporting our scholarship fund</p>
+                                <a href="contact.html" class="btn btn-primary">RSVP Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)">‹</button>
+                    <button class="carousel-nav carousel-next" onclick="moveCarousel(1)">›</button>
+                </div>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="donate" class="donate">
+        <div class="container">
+            <h2 class="section-title">Support the Mission</h2>
+            <p class="donate-intro">Every donation helps us continue our mission to preserve history, support veterans, and educate communities about the 555th's extraordinary legacy.</p>
+            <div class="donate-content">
+                <div class="donation-impacts">
+                    <div class="impact-item">
+                        <span class="impact-amount">$25</span>
+                        <p>Helps fund educational materials</p>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-amount">$50</span>
+                        <p>Supports veteran outreach programs</p>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-amount">$100</span>
+                        <p>Preserves historical archives</p>
+                    </div>
+                </div>
+                <a href="donate.html" class="btn btn-primary btn-large">Donate Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="testimonial-container">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-slide">
+                        <p>"The 555th PIA has made a significant impact in our community through their dedication to preserving history and supporting veterans."</p>
+                        <p>- John Doe, Community Member</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p>"An outstanding organization that truly honors the legacy of the Triple Nickles with meaningful events and programs."</p>
+                        <p>- Jane Smith, Veteran</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p>"Their commitment to education and veteran support is inspiring. Highly recommend getting involved."</p>
+                        <p>- Bob Johnson, Supporter</p>
+                    </div>
+                </div>
+                <button class="testimonial-nav testimonial-prev" onclick="moveTestimonial(-1)">‹</button>
+                <button class="testimonial-nav testimonial-next" onclick="moveTestimonial(1)">›</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Samuel Council Chapter 555th Parachute Infantry Association. All Rights Reserved.</p>
+            <p class="footer-subtitle">"Triple Nickle" is a registered name honoring the 555th Parachute Infantry Battalion.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+    <script src="script.js"></script>
+</body>
+</html>

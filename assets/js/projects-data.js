@@ -117,6 +117,103 @@ const projectData = {
             }
         ]
     },
+    triplenickle: {
+        title: "Triple Nickle",
+        tagline: "Honoring America's First Black Paratroopers",
+        description: "A full multi-page website for the Samuel Council Chapter 555th of the Parachute Infantry Association — a historical and community organization based in Fayetteville, NC dedicated to honoring the legacy of America's first Black paratroopers. The site brings their story, events, scholarship programs, and membership together in one dignified, professional online presence.",
+        problem: "The organization had no central website to share their history, promote events, accept donations, or manage membership — making it hard to grow their community and honor their mission digitally.",
+        solution: "A full multi-page site with a rich historical timeline, event listings, scholarship and donation pages, membership sign-up, and a blog — built with a gold and navy color palette that reflects the dignity and legacy of the organization.",
+        features: [
+            "Full historical timeline with photos and animations",
+            "Events page with upcoming extravaganza listings",
+            "Scholarship program page",
+            "Online donation page",
+            "Membership sign-up page",
+            "Blog for news and updates",
+            "Fully responsive design"
+        ],
+        results: null,
+        testimonial: null,
+        tech: ["HTML/CSS", "JavaScript", "Responsive Design", "Animation System"],
+        link: null,
+        cardImage: `${assetsPath}/images/triplenickle/tn-home-card.webp`,
+        desktopVideo: null,
+        mobileVideo: null,
+        screenshots: [
+            {
+                title: "Home",
+                thumb: `${assetsPath}/images/triplenickle/tn-home-card.webp`,
+                desktop: `${assetsPath}/images/triplenickle/tn-home-desktop.webp`,
+                mobile: `${assetsPath}/images/triplenickle/tn-home-mobile.webp`
+            },
+            {
+                title: "About",
+                thumb: `${assetsPath}/images/triplenickle/tn-about-card.webp`,
+                desktop: `${assetsPath}/images/triplenickle/tn-about-desktop.webp`,
+                mobile: `${assetsPath}/images/triplenickle/tn-about-mobile.webp`
+            },
+            {
+                title: "Events",
+                thumb: `${assetsPath}/images/triplenickle/tn-events-card.webp`,
+                desktop: `${assetsPath}/images/triplenickle/tn-events-desktop.webp`,
+                mobile: `${assetsPath}/images/triplenickle/tn-events-mobile.webp`
+            },
+            {
+                title: "Membership",
+                thumb: `${assetsPath}/images/triplenickle/tn-membership-card.webp`,
+                desktop: `${assetsPath}/images/triplenickle/tn-membership-desktop.webp`,
+                mobile: `${assetsPath}/images/triplenickle/tn-membership-mobile.webp`
+            }
+        ]
+    },
+    ncrmpa1: {
+        title: "NC Retired Military Police",
+        tagline: "Chapter One — Service, Honor & Brotherhood",
+        description: "A professional multi-page website for the Retired Military Police Association Chapter One, based in Fayetteville, NC. The site unites retired military police in a shared online home — covering membership, events, and the organization's mission of continued service and brotherhood after active duty.",
+        problem: "The chapter had no dedicated website to represent their organization, communicate with members, or attract new ones — leaving a gap between the professionalism of the members and their digital presence.",
+        solution: "A full multi-page site with a strong military aesthetic — navy, gold, and clean typography — featuring membership sign-up, events listings, an about page, and a professional header system with dropdown navigation.",
+        features: [
+            "Full hero section with Ken Burns animation",
+            "Dropdown navigation with mobile hamburger menu",
+            "Membership sign-up page",
+            "Events page",
+            "About page",
+            "Fully responsive design"
+        ],
+        results: null,
+        testimonial: null,
+        tech: ["HTML/CSS", "JavaScript", "Responsive Design", "Animation System"],
+        link: null,
+        cardImage: `${assetsPath}/images/ncrmpa1/ncrmpa-home-card.webp`,
+        desktopVideo: null,
+        mobileVideo: null,
+        screenshots: [
+            {
+                title: "Home",
+                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-home-card.webp`,
+                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-home-desktop.webp`,
+                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-home-mobile.webp`
+            },
+            {
+                title: "About",
+                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-about-card.webp`,
+                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-about-desktop.webp`,
+                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-about-mobile.webp`
+            },
+            {
+                title: "Events",
+                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-events-card.webp`,
+                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-events-desktop.webp`,
+                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-events-mobile.webp`
+            },
+            {
+                title: "Membership",
+                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-membership-card.webp`,
+                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-membership-desktop.webp`,
+                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-membership-mobile.webp`
+            }
+        ]
+    },
     placeholder1: {
         title: "Coming Soon",
         tagline: "Exciting Project in Development",

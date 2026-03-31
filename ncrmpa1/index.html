@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RMPA — Chapter One | Fayetteville / Fort Bragg, NC</title>
+  <meta name="description" content="Retired Military Police Association, Chapter One — Fayetteville/Fort Bragg, NC. United in Service, Honor, and Brotherhood." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ================================================
+       DESIGN TOKENS
+    ================================================ */
+    :root {
+      --ink:        #0A1208;
+      --navy:       #111F0E;
+      --navy-2:     #1A2E14;
+      --navy-3:     #26431D;
+      --gold:       #C49A3C;
+      --gold-2:     #D4AF5C;
+      --gold-3:     #EDD68A;
+      --gold-pale:  #F7F0DC;
+      --white:      #FFFFFF;
+      --offwhite:   #F5F7F4;
+      --mist:       #E4EBE2;
+      --stone:      #8A96A8;
+      --border:     rgba(255,255,255,0.09);
+      --border-lt:  #D6DDD4;
+      --red:        #8B1A1A;
+      --ff-display: 'Bebas Neue', sans-serif;
+      --ff-sub:     'Oswald', sans-serif;
+      --ff-body:    'DM Sans', sans-serif;
+      --ease:       cubic-bezier(.25,.46,.45,.94);
+      --ease-out:   cubic-bezier(.16,1,.3,1);
+      --r:          3px;
+    }
+
+    /* ================================================
+       BASE
+    ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--ff-body);
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ================================================
+       NOISE TEXTURE
+    ================================================ */
+    .noise {
+      position: relative;
+    }
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ================================================
+       UTILITIES
+    ================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    /* Reveal animation system */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-left { transform: translateX(-40px); opacity: 0; transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+    .reveal-left.revealed { opacity: 1; transform: none; }
+    .reveal-right { transform: translateX(40px); opacity: 0; transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+    .reveal-right.revealed { opacity: 1; transform: none; }
+
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
+    .delay-4 { transition-delay: .4s; }
+    .delay-5 { transition-delay: .5s; }
+    .delay-6 { transition-delay: .6s; }
+
+    /* Eyebrow */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--ff-sub);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .eyebrow--white { color: var(--gold-3); }
+    .eyebrow--white::before { background: var(--gold-3); }
+
+    /* Section titles */
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(44px, 5.5vw, 78px);
+      letter-spacing: .03em;
+      color: var(--navy);
+      line-height: .95;
+      margin-bottom: 20px;
+    }
+    .section-title--white { color: var(--white); }
+    .section-title em { font-style: normal; color: var(--gold); }
+
+    .section-desc {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+    .section-desc--white { color: rgba(255,255,255,.55); }
+
+    /* Dividers */
+    .h-rule {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 20px 0 28px;
+      display: block;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--ff-sub);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: var(--r);
+      transition: all .3s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,.12);
+      transform: translateX(-100%) skewX(-15deg);
+      transition: transform .4s var(--ease);
+    }
+    .btn:hover::before { transform: translateX(120%) skewX(-15deg); }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--gold { background: var(--gold); color: var(--ink); font-weight: 600; }
+    .btn--gold:hover { background: var(--gold-2); }
+    .btn--navy { background: var(--navy); color: var(--white); }
+    .btn--navy:hover { background: var(--navy-2); }
+    .btn--ghost-white {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .btn--ghost-white:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
+    .btn--ghost-gold {
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid currentColor;
+    }
+    .btn--ghost-gold:hover { background: var(--gold); color: var(--ink); }
+
+    .btn svg { flex-shrink: 0; }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -60px; left: 0;
+      background: var(--gold); color: var(--ink);
+      font-family: var(--ff-sub); font-weight: 600; font-size: 13px;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 10px 20px; z-index: 9999;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ================================================
+       TOPBAR
+    ================================================ */
+    .topbar {
+      background: var(--ink);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .topbar__left {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .topbar__item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: rgba(255,255,255,.45);
+      padding: 0 14px;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar__item:last-child { border-right: none; }
+    .topbar__item a { color: rgba(255,255,255,.55); transition: color .2s; }
+    .topbar__item a:hover { color: var(--gold-3); }
+    .topbar__item svg { color: var(--gold); flex-shrink: 0; }
+    .topbar__right { display: flex; align-items: center; gap: 10px; }
+    .topbar__badge {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 5px 16px;
+      border-radius: 2px;
+      transition: background .2s;
+    }
+    .topbar__badge:hover { background: var(--gold-2); }
+    .topbar__fb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px; height: 30px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.45);
+      transition: all .2s;
+    }
+    .topbar__fb:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ================================================
+       HEADER
+    ================================================ */
+    .site-header {
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--mist);
+      box-shadow: 0 1px 24px rgba(17,31,14,.08);
+      transition: box-shadow .3s;
+    }
+    .site-header.scrolled {
+      box-shadow: 0 4px 40px rgba(17,31,14,.14);
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 16px;
+    }
+
+    /* Logo */
+    .logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .logo__seal {
+      width: 58px; height: 76px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .logo__lockup {}
+    .logo__name {
+      font-family: var(--ff-display);
+      font-size: 22px;
+      letter-spacing: .06em;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo__name span { color: var(--gold); }
+    .logo__chapter {
+      font-family: var(--ff-sub);
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-top: 4px;
+    }
+
+    /* Nav */
+    .main-nav { display: flex; align-items: center; }
+    .nav-list { display: flex; align-items: stretch; }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 16px;
+      height: 76px;
+      font-family: var(--ff-sub);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--stone);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s, background .2s;
+      cursor: pointer;
+    }
+    .nav-link:hover,
+    .nav-item:hover > .nav-link { color: var(--navy); border-bottom-color: var(--gold); background: var(--offwhite); }
+    .nav-link .chevron { font-size: 8px; opacity: .4; }
+
+    /* Dropdown */
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 1px);
+      left: 0;
+      background: var(--white);
+      border: 1px solid var(--mist);
+      border-top: 2px solid var(--gold);
+      box-shadow: 0 20px 60px rgba(17,31,14,.12);
+      min-width: 210px;
+      border-radius: 0 0 4px 4px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity .2s, transform .2s;
+      z-index: 100;
+    }
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown { opacity: 1; pointer-events: all; transform: none; }
+    .nav-dropdown a {
+      display: block;
+      padding: 11px 20px;
+      font-family: var(--ff-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--navy);
+      border-bottom: 1px solid var(--offwhite);
+      transition: background .15s, color .15s, padding-left .15s;
+    }
+    .nav-dropdown a:last-child { border-bottom: none; }
+    .nav-dropdown a:hover { background: var(--offwhite); color: var(--gold); padding-left: 26px; }
+
+    /* Join btn in nav */
+    .nav-join {
+      margin-left: 14px;
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      border-bottom-color: transparent !important;
+      border-radius: var(--r);
+      padding: 8px 26px !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: .12em !important;
+      text-transform: uppercase;
+      font-family: var(--ff-sub) !important;
+      box-shadow: 0 2px 12px rgba(196,154,60,.35);
+      transition: background .2s, box-shadow .2s, transform .2s;
+    }
+    .nav-join:hover { background: var(--gold-2) !important; color: var(--ink) !important; box-shadow: 0 4px 20px rgba(196,154,60,.5); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5.5px;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.8px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all .28s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7.3px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7.3px) rotate(-45deg); }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      z-index: 5000;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .mobile-nav__close {
+      font-size: 22px;
+      color: rgba(255,255,255,.5);
+      background: none; border: none;
+      line-height: 1;
+    }
+    .mobile-nav-links { flex: 1; padding: 16px 0; }
+    .mobile-nav-links a {
+      display: block;
+      padding: 17px 28px;
+      font-family: var(--ff-display);
+      font-size: 28px;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.7);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      transition: color .2s, padding-left .2s;
+    }
+    .mobile-nav-links a:hover { color: var(--gold-3); padding-left: 36px; }
+    .mobile-nav__foot {
+      padding: 24px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ================================================
+       HERO
+    ================================================ */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    /* Animated background grid */
+    .hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(196,154,60,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,154,60,.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/fbde44a1f0c14ea3868999ab8114d6a8.jpg');
+      background-size: cover;
+      background-position: center 25%;
+      opacity: .55;
+      transform: scale(1.05);
+      animation: heroKen 18s ease-in-out infinite alternate;
+    }
+    @keyframes heroKen {
+      from { transform: scale(1.05) translate(0, 0); }
+      to   { transform: scale(1.12) translate(-1%, 1%); }
+    }
+
+    .hero__vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(17,31,14,.0) 0%, rgba(10,18,8,.65) 80%),
+        linear-gradient(to bottom, rgba(10,18,8,.28) 0%, rgba(10,18,8,.0) 40%, rgba(10,18,8,.42) 100%);
+    }
+
+    /* Chapter badge / eyebrow */
+    .hero__body {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+      padding: 120px 0 200px;
+    }
+    .hero__body .container { position: relative; }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px 6px 10px;
+      border: 1px solid rgba(196,154,60,.3);
+      border-radius: 100px;
+      background: rgba(196,154,60,.07);
+      margin-bottom: 28px;
+      width: fit-content;
+      animation: fadeInDown .8s var(--ease-out) both;
+    }
+    .hero__badge-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(196,154,60,.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(196,154,60,.0); }
+    }
+    .hero__badge span {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold-3);
+    }
+
+    .hero__kicker {
+      font-family: var(--ff-sub);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 16px;
+      animation: fadeInDown .8s .1s var(--ease-out) both;
+    }
+
+    .hero__title {
+      font-family: var(--ff-display);
+      font-size: clamp(60px, 9vw, 120px);
+      letter-spacing: .02em;
+      color: var(--white);
+      line-height: .92;
+      margin-bottom: 32px;
+      animation: fadeInUp .9s .15s var(--ease-out) both;
+    }
+    .hero__title-gold { color: var(--gold); display: block; }
+    .hero__title-sub {
+      display: block;
+      font-size: clamp(18px, 2.5vw, 30px);
+      font-family: var(--ff-sub);
+      font-weight: 300;
+      letter-spacing: .18em;
+      color: rgba(255,255,255,.4);
+      margin-top: 8px;
+    }
+
+    .hero__desc {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,.6);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 40px;
+      animation: fadeInUp .9s .25s var(--ease-out) both;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeInUp .9s .35s var(--ease-out) both;
+    }
+
+    /* Scroll line */
+    .hero__scroll {
+      position: absolute;
+      bottom: 180px;
+      right: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+      animation: fadeIn 1.2s .8s both;
+    }
+    .hero__scroll span {
+      font-family: var(--ff-sub);
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      writing-mode: vertical-rl;
+    }
+    .hero__scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.0), rgba(196,154,60,.6));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%,100% { transform: scaleY(1); transform-origin: top; }
+      50% { transform: scaleY(.4); transform-origin: top; }
+    }
+
+    /* Stats ribbon */
+    .stats-ribbon {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      z-index: 3;
+      background: rgba(10,18,8,.85);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(196,154,60,.2);
+    }
+    .stats-ribbon .container { display: flex; }
+    .stat-item {
+      flex: 1;
+      padding: 24px 28px;
+      border-right: 1px solid rgba(255,255,255,.06);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 28px;
+      width: 24px; height: 2px;
+      background: var(--gold);
+    }
+    .stat-num {
+      font-family: var(--ff-display);
+      font-size: 22px;
+      letter-spacing: .04em;
+      color: var(--gold-3);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-family: var(--ff-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,.4);
+      line-height: 1.4;
+    }
+
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ================================================
+       MISSION PILLARS
+    ================================================ */
+    .pillars {
+      padding: 0;
+      background: var(--offwhite);
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .pillar {
+      padding: 60px 44px;
+      border-right: 1px solid var(--border-lt);
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar:hover { background: var(--white); }
+    .pillar__num {
+      font-family: var(--ff-display);
+      font-size: 90px;
+      letter-spacing: .02em;
+      color: var(--mist);
+      position: absolute;
+      bottom: -10px;
+      right: 20px;
+      line-height: 1;
+      user-select: none;
+      transition: color .3s;
+    }
+    .pillar:hover .pillar__num { color: var(--gold-pale); }
+    .pillar__icon {
+      width: 48px; height: 48px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      color: var(--gold);
+      transition: all .3s;
+    }
+    .pillar:hover .pillar__icon { background: var(--gold); color: var(--ink); }
+    .pillar h3 {
+      font-family: var(--ff-display);
+      font-size: 28px;
+      letter-spacing: .04em;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .pillar p { font-size: 15px; font-weight: 300; color: var(--stone); line-height: 1.75; position: relative; z-index: 1; }
+
+    /* ================================================
+       ABOUT
+    ================================================ */
+    .about { padding: 120px 0; }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+
+    /* Media side */
+    .about-media { position: relative; }
+    .about-photo-wrap {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .about-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(17,31,14,.6) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .about-photo-wrap img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform .6s var(--ease);
+    }
+    .about-photo-wrap:hover img { transform: scale(1.04); }
+
+    .about-accent {
+      position: absolute;
+      top: -24px;
+      left: -24px;
+      width: 160px;
+      height: 160px;
+      border: 2px solid rgba(196,154,60,.25);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: 28px;
+      right: -28px;
+      z-index: 2;
+      background: var(--navy);
+      padding: 22px 28px;
+      border-left: 3px solid var(--gold);
+      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }
+    .about-badge__big {
+      font-family: var(--ff-display);
+      font-size: 42px;
+      letter-spacing: .03em;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .about-badge__small {
+      font-family: var(--ff-sub);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-top: 6px;
+    }
+
+    /* Text side */
+    .about-text {}
+    .about-list {
+      margin: 32px 0 38px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .about-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--mist);
+    }
+    .about-list-item:first-child { border-top: 1px solid var(--mist); }
+    .about-list-marker {
+      width: 2px;
+      min-height: 52px;
+      background: var(--gold);
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .about-list-item h4 {
+      font-family: var(--ff-sub);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .about-list-item p { font-size: 14px; font-weight: 300; color: var(--stone); line-height: 1.65; }
+    .about-note {
+      font-size: 12px;
+      font-style: italic;
+      color: rgba(138,150,168,.7);
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--mist);
+    }
+
+    /* ================================================
+       CALLOUT STRIP
+    ================================================ */
+    .callout {
+      position: relative;
+      padding: 110px 0;
+      background: var(--ink);
+      overflow: hidden;
+    }
+    .callout__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/3854c2_2893308f22c14e06a74150d051355cd3~mv22.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: .15;
+      background-attachment: fixed;
+    }
+    .callout::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, rgba(10,18,8,.98) 45%, rgba(10,18,8,.80) 100%);
+    }
+
+    /* Big decorative text */
+    .callout__deco {
+      position: absolute;
+      bottom: -40px;
+      right: -20px;
+      font-family: var(--ff-display);
+      font-size: 200px;
+      letter-spacing: -.02em;
+      color: rgba(255,255,255,.015);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .callout-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .callout__heading {
+      font-family: var(--ff-display);
+      font-size: clamp(48px, 6vw, 82px);
+      letter-spacing: .02em;
+      color: var(--white);
+      line-height: .92;
+      margin-bottom: 24px;
+    }
+    .callout__heading em { color: var(--gold); font-style: normal; }
+    .callout__desc {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,.5);
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+    .callout-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .callout-stat {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 22px 28px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-left: 3px solid var(--gold);
+      transition: background .2s;
+    }
+    .callout-stat:hover { background: rgba(255,255,255,.06); }
+    .callout-stat__num {
+      font-family: var(--ff-display);
+      font-size: 44px;
+      letter-spacing: .02em;
+      color: var(--gold-3);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 80px;
+    }
+    .callout-stat__label {
+      font-family: var(--ff-sub);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+    }
+    .callout-stat__sub { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 3px; }
+
+    /* ================================================
+       ADMINISTRATION
+    ================================================ */
+    .admin { padding: 120px 0; background: var(--white); }
+
+    .officers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .officer-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--offwhite);
+      border: 1px solid var(--mist);
+      transition: all .35s var(--ease);
+      cursor: default;
+    }
+    .officer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(17,31,14,.14);
+      border-color: var(--gold);
+    }
+    .officer-card__photo {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+      background: var(--navy);
+    }
+    .officer-card__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: saturate(.8);
+      transition: transform .5s var(--ease), filter .3s;
+    }
+    .officer-card:hover .officer-card__photo img {
+      transform: scale(1.06);
+      filter: saturate(1);
+    }
+    .officer-card__photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(17,31,14,.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .officer-card:hover .officer-card__photo-overlay { opacity: 1; }
+    .officer-card__role-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-family: var(--ff-sub);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    .officer-card__body { padding: 20px; }
+    .officer-card__name {
+      font-family: var(--ff-display);
+      font-size: 22px;
+      letter-spacing: .04em;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+    .officer-card__rank {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 14px;
+    }
+    .officer-card__email {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--navy-3);
+      word-break: break-all;
+      transition: color .2s;
+    }
+    .officer-card__email:hover { color: var(--gold); }
+    .officer-card__email svg { flex-shrink: 0; }
+
+    /* ================================================
+       EVENTS
+    ================================================ */
+    .events { padding: 120px 0; background: var(--offwhite); }
+    .events-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Featured event */
+    .featured-event {
+      background: var(--white);
+      border: 1px solid var(--border-lt);
+      border-top: 3px solid var(--gold);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(17,31,14,.06);
+    }
+    .featured-event__img {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+    .featured-event__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+    .featured-event:hover .featured-event__img img { transform: scale(1.04); }
+    .featured-event__badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 5px 14px;
+      border-radius: 2px;
+    }
+    .featured-event__body { padding: 36px; }
+    .featured-event__title {
+      font-family: var(--ff-display);
+      font-size: 36px;
+      letter-spacing: .03em;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .featured-event__desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .event-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .event-meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--offwhite);
+      border-radius: var(--r);
+    }
+    .event-meta-item svg { color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+    .event-meta-item__label {
+      font-family: var(--ff-sub);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 2px;
+    }
+    .event-meta-item__val {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    /* Sidebar */
+    .event-sidebar {}
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border-lt);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(17,31,14,.05);
+    }
+    .sidebar-card__head {
+      background: var(--navy);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-card__head svg { color: var(--gold); }
+    .sidebar-card__head h4 {
+      font-family: var(--ff-sub);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .sidebar-date-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--offwhite);
+      transition: background .15s;
+    }
+    .sidebar-date-item:last-child { border-bottom: none; }
+    .sidebar-date-item:hover { background: var(--offwhite); }
+    .sidebar-cal {
+      flex-shrink: 0;
+      width: 50px;
+      text-align: center;
+      background: var(--navy);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .sidebar-cal__month {
+      background: var(--gold);
+      font-family: var(--ff-sub);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 3px 0;
+    }
+    .sidebar-cal__day {
+      font-family: var(--ff-display);
+      font-size: 26px;
+      letter-spacing: .02em;
+      color: var(--white);
+      padding: 4px 0 6px;
+      line-height: 1;
+    }
+    .sidebar-date-info h5 {
+      font-family: var(--ff-sub);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+    .sidebar-date-info p { font-size: 12px; color: var(--stone); }
+
+    /* ================================================
+       GALLERY
+    ================================================ */
+    .gallery { padding: 0; background: var(--ink); }
+    .gallery__header { padding: 80px 0 50px; text-align: center; }
+
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(3, 180px);
+      gap: 3px;
+    }
+    .gm-item { position: relative; overflow: hidden; background: var(--navy); }
+    .gm-item--a { grid-column: span 3; grid-row: span 2; }
+    .gm-item--b { grid-column: span 2; grid-row: span 1; }
+    .gm-item--c { grid-column: span 1; grid-row: span 1; }
+    .gm-item--d { grid-column: span 2; grid-row: span 1; }
+    .gm-item--e { grid-column: span 1; grid-row: span 1; }
+    .gm-item--f { grid-column: span 3; grid-row: span 1; }
+    .gm-item--g { grid-column: span 2; grid-row: span 1; }
+    .gm-item--h { grid-column: span 1; grid-row: span 1; }
+    .gm-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.85) saturate(.7);
+      transition: transform .6s var(--ease), filter .4s;
+    }
+    .gm-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1) saturate(1);
+    }
+    .gm-item__overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,18,8,0);
+      transition: background .3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gm-item:hover .gm-item__overlay { background: rgba(10,18,8,.25); }
+    .gm-item__zoom {
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(255,255,255,.7);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      opacity: 0; transform: scale(.7);
+      transition: all .3s;
+    }
+    .gm-item:hover .gm-item__zoom { opacity: 1; transform: scale(1); }
+    .gm-item { cursor: pointer; }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.92);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox__img {
+      max-width: 90vw; max-height: 88vh;
+      object-fit: contain;
+      border-radius: 2px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      transform: scale(.96);
+      transition: transform .3s;
+    }
+    .lightbox.open .lightbox__img { transform: scale(1); }
+    .lightbox__close {
+      position: absolute; top: 20px; right: 24px;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.1);
+      border: 1.5px solid rgba(255,255,255,.25);
+      border-radius: 50%;
+      color: #fff; font-size: 22px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s;
+    }
+    .lightbox__close:hover { background: rgba(255,255,255,.2); }
+    .lightbox__prev, .lightbox__next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,.1);
+      border: 1.5px solid rgba(255,255,255,.25);
+      border-radius: 50%;
+      color: #fff; font-size: 22px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s;
+      user-select: none;
+    }
+    .lightbox__prev:hover, .lightbox__next:hover { background: rgba(255,255,255,.22); }
+    .lightbox__prev { left: 20px; }
+    .lightbox__next { right: 20px; }
+    .lightbox__counter {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      font-family: var(--ff-sub); font-size: 13px; letter-spacing: .1em;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ================================================
+       JOIN / MEMBERSHIP
+    ================================================ */
+    .join { padding: 120px 0; background: var(--white); }
+    .join-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .join-perks { margin: 32px 0; }
+    .join-perk {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--mist);
+    }
+    .join-perk:first-child { border-top: 1px solid var(--mist); }
+    .join-perk__marker {
+      width: 3px;
+      min-height: 56px;
+      background: linear-gradient(to bottom, var(--gold), rgba(196,154,60,.3));
+      flex-shrink: 0;
+      align-self: stretch;
+      border-radius: 2px;
+    }
+    .join-perk h4 {
+      font-family: var(--ff-sub);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+    .join-perk p { font-size: 14px; font-weight: 300; color: var(--stone); line-height: 1.65; }
+
+    /* Form */
+    .membership-form {
+      background: var(--offwhite);
+      border: 1px solid var(--border-lt);
+      border-top: 3px solid var(--gold);
+      padding: 40px;
+      border-radius: 0 0 4px 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .membership-form::before {
+      content: 'JOIN';
+      position: absolute;
+      bottom: -30px;
+      right: -10px;
+      font-family: var(--ff-display);
+      font-size: 100px;
+      color: rgba(17,31,14,.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .membership-form h3 {
+      font-family: var(--ff-display);
+      font-size: 32px;
+      letter-spacing: .04em;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .membership-form p {
+      font-size: 14px; font-weight: 300; color: var(--stone);
+      margin-bottom: 28px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .form-group label .req { color: var(--red); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--navy);
+      background: var(--white);
+      border: 1.5px solid var(--border-lt);
+      border-radius: var(--r);
+      padding: 12px 16px;
+      width: 100%;
+      transition: border-color .2s, box-shadow .2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(196,154,60,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      font-family: var(--ff-sub);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 16px;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: all .25s var(--ease);
+      margin-top: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .form-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-100%);
+      transition: transform .3s var(--ease);
+    }
+    .form-submit:hover { color: var(--ink); }
+    .form-submit:hover::before { transform: none; }
+    .form-submit span { position: relative; z-index: 1; }
+
+    /* ================================================
+       CONTACT
+    ================================================ */
+    .contact { padding: 100px 0; background: var(--navy); position: relative; overflow: hidden; }
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(196,154,60,.08) 0%, transparent 70%);
+    }
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .contact-card {
+      padding: 36px 32px;
+      background: rgba(255,255,255,.03);
+      border-right: 1px solid rgba(255,255,255,.05);
+      transition: background .2s;
+    }
+    .contact-card:last-child { border-right: none; }
+    .contact-card:hover { background: rgba(255,255,255,.06); }
+    .contact-card__icon {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(196,154,60,.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .contact-card__label {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .contact-card__value {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,.6);
+      line-height: 1.75;
+    }
+    .contact-card__value a { color: rgba(255,255,255,.7); transition: color .2s; }
+    .contact-card__value a:hover { color: var(--gold-3); }
+    .contact-card__value strong { color: var(--white); font-weight: 500; }
+
+    .contact-map-cta {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .contact-divider { width: 1px; height: 40px; background: rgba(255,255,255,.1); }
+
+    /* ================================================
+       FOOTER
+    ================================================ */
+    .footer { background: var(--ink); }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      padding: 64px 0 48px;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .footer-brand {}
+    .footer-logo { display: flex; align-items: center; gap: 20px; margin-bottom: 18px; }
+    .footer-logo img { width: 100px; height: 132px; object-fit: contain; }
+    .footer-logo__name {
+      font-family: var(--ff-display);
+      font-size: 20px;
+      letter-spacing: .06em;
+      color: var(--white);
+    }
+    .footer-logo__name span { color: var(--gold); }
+    .footer-tagline {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .footer-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,.35);
+      line-height: 1.8;
+      max-width: 300px;
+      margin-bottom: 24px;
+    }
+    .footer-social { display: flex; gap: 8px; }
+    .footer-social-btn {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.4);
+      transition: all .2s;
+    }
+    .footer-social-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+    .footer-col {}
+    .footer-col h5 {
+      font-family: var(--ff-sub);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(196,154,60,.3);
+    }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,.38);
+      transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--gold-3); }
+    .footer__bottom {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer__bottom p { font-size: 12px; color: rgba(255,255,255,.22); }
+    .footer__bottom a { font-size: 12px; color: rgba(255,255,255,.22); transition: color .2s; }
+    .footer__bottom a:hover { color: var(--gold); }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 1080px) {
+      .officers-grid { grid-template-columns: repeat(2, 1fr); }
+      .callout-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 960px) {
+      .main-nav { display: none; }
+      .hamburger { display: flex; }
+      .about-inner,
+      .join-inner,
+      .events-layout { grid-template-columns: 1fr; }
+      .about-badge { right: 16px; bottom: 16px; }
+      .about-accent { display: none; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar { border-right: none; border-bottom: 1px solid var(--border-lt); }
+      .pillar:last-child { border-bottom: none; }
+      .footer__top { grid-template-columns: 1fr 1fr; }
+      .contact-cards { grid-template-columns: 1fr; }
+      .contact-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.05); }
+      .contact-card:last-child { border-bottom: none; }
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+      .gm-item--a,
+      .gm-item--b,
+      .gm-item--c,
+      .gm-item--d,
+      .gm-item--e,
+      .gm-item--f,
+      .gm-item--g,
+      .gm-item--h {
+        grid-column: span 1;
+        grid-row: span 1;
+        height: 180px;
+      }
+      .hero__scroll { display: none; }
+    }
+    @media (max-width: 640px) {
+      .hero__title { font-size: clamp(52px, 13vw, 72px); }
+      .topbar { display: none; }
+      .stats-ribbon .container { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+      .stat-item:last-child { border-bottom: none; }
+      .officers-grid { grid-template-columns: 1fr; }
+      .footer__top { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .event-meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- TOPBAR -->
+<div class="topbar" role="banner">
+  <div class="container">
+    <div class="topbar__left">
+      <div class="topbar__item">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.23 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        <a href="tel:9108186569">910-818-6569</a>
+      </div>
+      <div class="topbar__item">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:rmpachapter1@gmail.com">rmpachapter1@gmail.com</a>
+      </div>
+      <div class="topbar__item">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Meets 1st Saturday Monthly &mdash; 9:00 AM
+      </div>
+    </div>
+    <div class="topbar__right">
+      <a href="https://www.facebook.com" class="topbar__fb" aria-label="Facebook">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a href="#join" class="topbar__badge">Join Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a href="#" class="logo" aria-label="RMPA Chapter One — Home">
+      <img class="logo__seal" src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="RMPA Chapter One seal" />
+      <div class="logo__lockup">
+        <div class="logo__name"><span>RMPA</span> Chapter 1</div>
+        <div class="logo__chapter">Fayetteville / Fort Bragg, NC</div>
+      </div>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+            About <span class="chevron">&#9660;</span>
+          </span>
+          <div class="nav-dropdown" role="menu">
+            <a href="#about" role="menuitem">Our Mission</a>
+            <a href="#admin" role="menuitem">Administration</a>
+            <a href="#about" role="menuitem">Inclusivity Policy</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="#admin" class="nav-link">Leadership</a></li>
+        <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li class="nav-item"><a href="#events" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="#join" class="nav-link nav-join">Join</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="mobile-nav__head">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="" width="30" height="40" style="object-fit:contain;" />
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:white;"><span style="color:var(--gold);">RMPA</span> Chapter 1</span>
+    </div>
+    <button class="mobile-nav__close" id="closeNav" aria-label="Close menu">&#x2715;</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="#">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#admin">Leadership</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#events">Events</a>
+    <a href="#join">Join</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="mobile-nav__foot">
+    <a href="#join" class="btn btn--gold" style="justify-content:center;">Join the Association</a>
+    <a href="tel:9108186569" class="btn btn--ghost-gold" style="justify-content:center;">910-818-6569</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+<!-- ================================ HERO ================================ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__bg" role="img" aria-label="RMPA Chapter One members"></div>
+  <div class="hero__vignette" aria-hidden="true"></div>
+
+  <div class="hero__body">
+    <div class="container">
+      <div class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        <span>Fayetteville / Fort Bragg &mdash; North Carolina Chapter One</span>
+      </div>
+
+      <p class="hero__kicker">Retired Military Police Association</p>
+
+      <h1 class="hero__title" id="hero-title">
+        Of the Troops,
+        <span class="hero__title-gold">For the Troops.</span>
+        <span class="hero__title-sub">United in Service, Honor &amp; Brotherhood</span>
+      </h1>
+
+      <p class="hero__desc">
+        Supporting active, honorably discharged, and retired Military Police. A community built
+        on shared sacrifice and lifelong commitment to one another and to the Corps.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#join" class="btn btn--gold">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          Become a Member
+        </a>
+        <a href="#about" class="btn btn--ghost-white">Our Mission</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <div class="hero__scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
+  <div class="stats-ribbon" role="region" aria-label="Chapter at a glance">
+    <div class="container">
+      <div class="stat-item">
+        <div class="stat-num">Chapter 1</div>
+        <div class="stat-label">North Carolina</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1st Saturday</div>
+        <div class="stat-label">Monthly Meeting — 9:00 AM</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">John D. Fuller Sr.</div>
+        <div class="stat-label">6627 Old Bunce Rd, Fayetteville</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Open Membership</div>
+        <div class="stat-label">Active, Discharged &amp; Retired MP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ MISSION PILLARS ================================ -->
+<section class="pillars" aria-labelledby="pillars-heading">
+  <div class="sr-only" id="pillars-heading">Our Core Mission</div>
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <span class="pillar__num" aria-hidden="true">01</span>
+      <div class="pillar__icon" aria-hidden="true">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Resources</h3>
+      <p>Member-exclusive tools, contacts, and information tailored for the Retired Military Police community to support your transition and continued service.</p>
+    </div>
+    <div class="pillar reveal delay-2">
+      <span class="pillar__num" aria-hidden="true">02</span>
+      <div class="pillar__icon" aria-hidden="true">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>Mission</h3>
+      <p>Strengthen connections among Military Police past and present. Promote friendship, respect, and mutual support across every branch, rank, and era of service.</p>
+    </div>
+    <div class="pillar reveal delay-4">
+      <span class="pillar__num" aria-hidden="true">03</span>
+      <div class="pillar__icon" aria-hidden="true">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Community</h3>
+      <p>Engage with a network of Retired Military Police Corps veterans. Share your experience, find your footing, and forge connections that last a lifetime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ ABOUT ================================ -->
+<section class="about" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-media reveal-left">
+        <div class="about-accent" aria-hidden="true"></div>
+        <div class="about-photo-wrap">
+          <img
+            src="images/3854c2_91539279192b42329c8ff5e1e5e4455e~mv2.jpg"
+            alt="RMPA Chapter One members — Fayetteville, NC"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-badge" aria-label="Chapter One, North Carolina">
+          <div class="about-badge__big">CH.1</div>
+          <div class="about-badge__small">North Carolina</div>
+        </div>
+      </div>
+
+      <div class="about-text reveal-right">
+        <div class="eyebrow">About the Association</div>
+        <h2 class="section-title" id="about-heading">Who<br>We Are</h2>
+        <span class="h-rule"></span>
+        <p class="section-desc">
+          The Retired Military Police Association (RMPA), North Carolina Chapter One, is dedicated
+          to fostering unity among active, honorably discharged, and retired Military Police. Our
+          goal is to build a strong community rooted in camaraderie, support, and shared purpose.
+          We welcome all individuals who share our mission, regardless of race, color, sex, religion,
+          age, disability, or national origin.
+        </p>
+        <div class="about-list" role="list">
+          <div class="about-list-item" role="listitem">
+            <div class="about-list-marker" aria-hidden="true"></div>
+            <div>
+              <h4>Strengthen Connections</h4>
+              <p>Build lasting bonds among Military Police members, past and present, across every era of service.</p>
+            </div>
+          </div>
+          <div class="about-list-item" role="listitem">
+            <div class="about-list-marker" aria-hidden="true"></div>
+            <div>
+              <h4>Promote Friendship &amp; Respect</h4>
+              <p>A culture of mutual support, dignity, and brotherhood across all backgrounds and service branches.</p>
+            </div>
+          </div>
+          <div class="about-list-item" role="listitem">
+            <div class="about-list-marker" aria-hidden="true"></div>
+            <div>
+              <h4>Support Law Enforcement</h4>
+              <p>Standing behind active and retired Military Police and the broader Civilian Law Enforcement community.</p>
+            </div>
+          </div>
+          <div class="about-list-item" role="listitem">
+            <div class="about-list-marker" aria-hidden="true"></div>
+            <div>
+              <h4>Honor the Legacy</h4>
+              <p>Enhancing the recognition and reputation of the Military Police Corps and those who served with distinction.</p>
+            </div>
+          </div>
+        </div>
+        <a href="#join" class="btn btn--navy">Join the Association</a>
+        <p class="about-note">Note: "He" is used throughout our materials in a general sense and represents all individuals regardless of gender.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ CALLOUT ================================ -->
+<div class="callout" role="region" aria-label="Chapter One — Fayetteville Strong">
+  <div class="callout__bg" aria-hidden="true"></div>
+  <div class="callout__deco" aria-hidden="true">RMPA</div>
+  <div class="container">
+    <div class="callout-inner">
+      <div class="reveal-left">
+        <div class="eyebrow eyebrow--white">Chapter One</div>
+        <h2 class="callout__heading">
+          Fayetteville<br><em>Strong.</em>
+        </h2>
+        <p class="callout__desc">
+          Rooted in the heart of Fort Bragg country, RMPA Chapter One has been a pillar of
+          the Military Police community in Fayetteville and across North Carolina. Together, we
+          honor those who served, support those who serve, and never forget the bond that defines the Corps.
+        </p>
+        <a href="#join" class="btn btn--gold">Join Our Community</a>
+      </div>
+      <div class="callout-stats reveal-right" role="list">
+        <div class="callout-stat" role="listitem">
+          <div class="callout-stat__num" data-count="500">0+</div>
+          <div>
+            <div class="callout-stat__label">Active Members</div>
+            <div class="callout-stat__sub">Across North Carolina and beyond</div>
+          </div>
+        </div>
+        <div class="callout-stat" role="listitem">
+          <div class="callout-stat__num">12</div>
+          <div>
+            <div class="callout-stat__label">Meetings Per Year</div>
+            <div class="callout-stat__sub">1st Saturday of every month</div>
+          </div>
+        </div>
+        <div class="callout-stat" role="listitem">
+          <div class="callout-stat__num">8</div>
+          <div>
+            <div class="callout-stat__label">Chapter Officers</div>
+            <div class="callout-stat__sub">Dedicated leadership serving you</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ ADMINISTRATION ================================ -->
+<section class="admin" id="admin" aria-labelledby="admin-heading">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div class="eyebrow reveal">Leadership</div>
+        <h2 class="section-title reveal delay-1" id="admin-heading">Our<br><em>Administration</em></h2>
+        <span class="h-rule reveal delay-2"></span>
+      </div>
+      <p class="section-desc reveal delay-2" style="max-width:380px;">Veterans dedicated to keeping the brotherhood strong and Chapter One thriving.</p>
+    </div>
+
+    <div class="officers-grid" role="list">
+
+      <div class="officer-card reveal" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_878a790ce6cf4d449a4ff04dcb17de9c~mv2.jpg" alt="1SG (Ret) Earnest Powell — President" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">President</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Earnest Powell</div>
+          <div class="officer-card__rank">1SG (Ret)</div>
+          <a href="mailto:epotal49@gmail.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            epotal49@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-1" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_c756f94b34d047d584204fbb6c44a747~mv2.jpg" alt="SSG (Ret) George W. Mitchell — Vice President" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Vice President</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">George W. Mitchell</div>
+          <div class="officer-card__rank">SSG (Ret)</div>
+          <a href="mailto:george.mitchell50@gmail.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            george.mitchell50@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-2" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_c474c8a1969b4c468cd40d57037112da~mv2.jpg" alt="SSG (Ret) Kathleen Ruppert — Secretary" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Secretary</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Kathleen Ruppert</div>
+          <div class="officer-card__rank">SSG (Ret)</div>
+          <a href="mailto:Kathy.Ruppert@gmail.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Kathy.Ruppert@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-3" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_6ab29e0741b24d71a1a3200dcb4eb2f3~mv2.png" alt="MSG (Ret) Jeffrey Zack — Treasurer" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Treasurer</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Jeffrey Zack</div>
+          <div class="officer-card__rank">MSG (Ret)</div>
+          <a href="mailto:zackj@faytechcc.edu" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            zackj@faytechcc.edu
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-1" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_d609250024644aa69a7843e4ca8e6c57~mv2.jpg" alt="1SG (Ret) Napolean McCormick — Sergeant-At-Arms" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Sergeant-At-Arms</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Napolean McCormick</div>
+          <div class="officer-card__rank">1SG (Ret)</div>
+          <a href="mailto:wrpanthers@aol.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            wrpanthers@aol.com
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-2" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_bb2d12a396bf4644b88ffea31497f8e4~mv2.jpg" alt="SGT (Ret) Lester Lowe — Chaplain" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Chaplain</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Lester Lowe</div>
+          <div class="officer-card__rank">SGT (Ret)</div>
+          <a href="mailto:piratelowe@aol.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            piratelowe@aol.com
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-3" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_8ba0b2befeab44f3b89a783ef530eaf8~mv2.png" alt="CSM (Ret) Sam Chapman — Past President" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Past President</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Sam Chapman</div>
+          <div class="officer-card__rank">CSM (Ret)</div>
+          <a href="mailto:Chapmansf3@aol.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Chapmansf3@aol.com
+          </a>
+        </div>
+      </div>
+
+      <div class="officer-card reveal delay-4" role="listitem">
+        <div class="officer-card__photo">
+          <img src="images/3854c2_740a934ee3c74107a0e9ff2305c5d540~mv2.jpg" alt="SSG(P) (Ret) Reginald Harvey — Parliamentarian & Webmaster" loading="lazy" />
+          <div class="officer-card__photo-overlay"></div>
+          <span class="officer-card__role-tag">Parliamentarian</span>
+        </div>
+        <div class="officer-card__body">
+          <div class="officer-card__name">Reginald Harvey</div>
+          <div class="officer-card__rank">SSG(P) (Ret)</div>
+          <a href="mailto:rharvey903@gmail.com" class="officer-card__email">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            rharvey903@gmail.com
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================ EVENTS ================================ -->
+<section class="events" id="events" aria-labelledby="events-heading">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div class="eyebrow reveal">Chapter Calendar</div>
+        <h2 class="section-title reveal delay-1" id="events-heading">Events &amp;<br><em>Meetings</em></h2>
+        <span class="h-rule reveal delay-2"></span>
+      </div>
+      <p class="section-desc reveal delay-2" style="max-width:340px;">We meet the 1st Saturday of every month at 9:00 AM. Stay connected.</p>
+    </div>
+    <div class="events-layout">
+      <div class="featured-event reveal">
+        <div class="featured-event__img">
+          <img src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="RMPA Chapter One monthly meeting" loading="lazy" />
+          <span class="featured-event__badge">Monthly Meeting</span>
+        </div>
+        <div class="featured-event__body">
+          <h3 class="featured-event__title">Chapter One Monthly Meeting</h3>
+          <p class="featured-event__desc">
+            All members are invited to attend our monthly chapter meeting. Open to all active,
+            honorably discharged, and retired Military Police. New members always welcome.
+          </p>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <div>
+                <div class="event-meta-item__label">Frequency</div>
+                <div class="event-meta-item__val">1st Saturday Monthly</div>
+              </div>
+            </div>
+            <div class="event-meta-item">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div>
+                <div class="event-meta-item__label">Time</div>
+                <div class="event-meta-item__val">9:00 AM</div>
+              </div>
+            </div>
+            <div class="event-meta-item" style="grid-column:span 2;">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <div class="event-meta-item__label">Location</div>
+                <div class="event-meta-item__val">John D. Fuller Sr. Recreational/Athletic Complex &mdash; 6627 Old Bunce Rd, Fayetteville</div>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn--navy">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Get Directions
+          </a>
+        </div>
+      </div>
+
+      <aside class="event-sidebar reveal delay-2" aria-label="Upcoming meeting dates">
+        <div class="sidebar-card">
+          <div class="sidebar-card__head">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <h4>Upcoming Dates</h4>
+          </div>
+          <div role="list">
+            <div class="sidebar-date-item" role="listitem">
+              <div class="sidebar-cal"><div class="sidebar-cal__month">Apr</div><div class="sidebar-cal__day">5</div></div>
+              <div class="sidebar-date-info">
+                <h5>Monthly Chapter Meeting</h5>
+                <p>9:00 AM &middot; John D. Fuller Sr. Complex</p>
+              </div>
+            </div>
+            <div class="sidebar-date-item" role="listitem">
+              <div class="sidebar-cal"><div class="sidebar-cal__month">May</div><div class="sidebar-cal__day">3</div></div>
+              <div class="sidebar-date-info">
+                <h5>Monthly Chapter Meeting</h5>
+                <p>9:00 AM &middot; John D. Fuller Sr. Complex</p>
+              </div>
+            </div>
+            <div class="sidebar-date-item" role="listitem">
+              <div class="sidebar-cal"><div class="sidebar-cal__month">Jun</div><div class="sidebar-cal__day">7</div></div>
+              <div class="sidebar-date-info">
+                <h5>Monthly Chapter Meeting</h5>
+                <p>9:00 AM &middot; John D. Fuller Sr. Complex</p>
+              </div>
+            </div>
+            <div class="sidebar-date-item" role="listitem">
+              <div class="sidebar-cal"><div class="sidebar-cal__month">Jul</div><div class="sidebar-cal__day">5</div></div>
+              <div class="sidebar-date-info">
+                <h5>Monthly Chapter Meeting</h5>
+                <p>9:00 AM &middot; John D. Fuller Sr. Complex</p>
+              </div>
+            </div>
+            <div class="sidebar-date-item" role="listitem">
+              <div class="sidebar-cal"><div class="sidebar-cal__month">Aug</div><div class="sidebar-cal__day">2</div></div>
+              <div class="sidebar-date-info">
+                <h5>Monthly Chapter Meeting</h5>
+                <p>9:00 AM &middot; John D. Fuller Sr. Complex</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ GALLERY ================================ -->
+<section class="gallery" id="gallery" aria-labelledby="gallery-heading">
+  <div class="gallery__header">
+    <div class="container" style="text-align:center;">
+      <div class="eyebrow eyebrow--white reveal" style="justify-content:center;">Photo Gallery</div>
+      <h2 class="section-title section-title--white reveal delay-1" id="gallery-heading">Our Community<br><em>In Action</em></h2>
+      <span class="h-rule reveal delay-2" style="margin:0 auto 0;"></span>
+    </div>
+  </div>
+  <div class="gallery-mosaic reveal" role="list" aria-label="RMPA photo gallery">
+    <div class="gm-item gm-item--a" role="listitem">
+      <img src="images/3854c2_042b3514a17c4ac1a2f3d81e90b4a997~mv2.jpg" alt="RMPA Chapter One event" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--b" role="listitem">
+      <img src="images/3854c2_59b39ed9b02b4b12ab116d212193c200~mv2.jpg" alt="Chapter gathering" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--c" role="listitem">
+      <img src="images/3854c2_38437eca6d0c49d2b1c0474430d93254~mv2.jpg" alt="RMPA brotherhood" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--d" role="listitem">
+      <img src="images/3854c2_83d9ad772eb14c9481bce5709889d61c~mv2.jpg" alt="RMPA members at event" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--e" role="listitem">
+      <img src="images/3854c2_be2fd335be164e799335a287c2ccf8fa~mv2.jpg" alt="Chapter ceremony" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--f" role="listitem">
+      <img src="images/3854c2_91539279192b42329c8ff5e1e5e4455e~mv2.jpg" alt="RMPA members" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--g" role="listitem">
+      <img src="images/3854c2_ee9c66be0a8e4b9cb11962bb6f0db0d3~mv2.jpg" alt="RMPA Fayetteville" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+    <div class="gm-item gm-item--h" role="listitem">
+      <img src="images/3854c2_f18d91b3b3864ba9a41621d6e114ff82~mv2.jpg" alt="Military Police veterans" loading="lazy" />
+      <div class="gm-item__overlay" aria-hidden="true"><div class="gm-item__zoom"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ JOIN ================================ -->
+<section class="join" id="join" aria-labelledby="join-heading">
+  <div class="container">
+    <div class="join-inner">
+      <div class="reveal-left">
+        <div class="eyebrow">Membership</div>
+        <h2 class="section-title" id="join-heading">Join Our<br><em>Community</em></h2>
+        <span class="h-rule"></span>
+        <p class="section-desc">
+          Membership is open to all active, honorably discharged, and retired Military Police
+          regardless of race, color, sex, religion, age, disability, or national origin.
+        </p>
+        <div class="join-perks" role="list">
+          <div class="join-perk" role="listitem">
+            <div class="join-perk__marker" aria-hidden="true"></div>
+            <div>
+              <h4>Brotherhood &amp; Camaraderie</h4>
+              <p>Connect with active, discharged, and retired Military Police across North Carolina and beyond.</p>
+            </div>
+          </div>
+          <div class="join-perk" role="listitem">
+            <div class="join-perk__marker" aria-hidden="true"></div>
+            <div>
+              <h4>Member-Exclusive Resources</h4>
+              <p>Access tools, contacts, and information tailored for the Retired Military Police community.</p>
+            </div>
+          </div>
+          <div class="join-perk" role="listitem">
+            <div class="join-perk__marker" aria-hidden="true"></div>
+            <div>
+              <h4>Monthly Meetings &amp; Events</h4>
+              <p>Participate in monthly chapter meetings and community events at the John D. Fuller Sr. Complex.</p>
+            </div>
+          </div>
+          <div class="join-perk" role="listitem">
+            <div class="join-perk__marker" aria-hidden="true"></div>
+            <div>
+              <h4>Open to All</h4>
+              <p>If you served or support those who served in Military Police, you belong here. No barriers to entry.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="membership-form">
+          <h3>Get Started</h3>
+          <p>Fill out the form and we'll be in touch shortly.</p>
+          <form name="membership" method="POST" aria-label="Membership interest form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name <span class="req">*</span></label>
+                <input type="text" id="fname" name="first_name" required autocomplete="given-name" placeholder="John" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name <span class="req">*</span></label>
+                <input type="text" id="lname" name="last_name" required autocomplete="family-name" placeholder="Smith" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(910) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label for="interest">I am interested in… <span class="req">*</span></label>
+              <select id="interest" name="interest" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="yes">Joining the association</option>
+                <option value="info">Getting more information</option>
+                <option value="existing">I'm already a member</option>
+                <option value="question">I have a question</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Leave us a message..."></textarea>
+            </div>
+            <button type="submit" class="form-submit"><span>Submit Your Interest</span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ CONTACT ================================ -->
+<section class="contact" id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="eyebrow eyebrow--white reveal" style="justify-content:center;">Reach Us</div>
+      <h2 class="section-title section-title--white reveal delay-1" id="contact-heading">Contact <em>Us</em></h2>
+      <span class="h-rule reveal delay-2" style="margin:0 auto;"></span>
+    </div>
+    <div class="contact-cards reveal">
+      <div class="contact-card">
+        <div class="contact-card__icon" aria-hidden="true">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="contact-card__label">Mailing Address</div>
+        <div class="contact-card__value">
+          Retired Military Police Association<br>
+          North Carolina Chapter One<br>
+          P.O. Box 27587<br>
+          Fayetteville, NC 28314
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon" aria-hidden="true">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.23 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        </div>
+        <div class="contact-card__label">Phone &amp; Email</div>
+        <div class="contact-card__value">
+          <a href="tel:9108186569"><strong>910-818-6569</strong></a><br>
+          <a href="mailto:rmpachapter1@gmail.com">rmpachapter1@gmail.com</a><br><br>
+          <a href="https://www.facebook.com" style="color:var(--gold-3); display:inline-flex; align-items:center; gap:6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook Page
+          </a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon" aria-hidden="true">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="contact-card__label">Meeting Location</div>
+        <div class="contact-card__value">
+          <strong>John D. Fuller Sr.</strong><br>
+          Recreational/Athletic Complex<br>
+          6627 Old Bunce Road<br>
+          Fayetteville, NC 28314<br><br>
+          <strong style="color:var(--gold-3);">1st Saturday Monthly — 9:00 AM</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================================ FOOTER ================================ -->
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox__close" id="lbClose" aria-label="Close">&#x2715;</button>
+  <button class="lightbox__prev" id="lbPrev" aria-label="Previous">&#8592;</button>
+  <img class="lightbox__img" id="lbImg" src="" alt="" />
+  <button class="lightbox__next" id="lbNext" aria-label="Next">&#8594;</button>
+  <div class="lightbox__counter" id="lbCounter"></div>
+</div>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="RMPA seal" />
+          <div>
+            <div class="footer-logo__name"><span>RMPA</span> Chapter 1</div>
+            <div style="font-family:var(--ff-sub);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:3px;">Fayetteville / Fort Bragg, NC</div>
+          </div>
+        </div>
+        <div class="footer-tagline">United in Service, Honor, and Brotherhood</div>
+        <p class="footer-desc">The Retired Military Police Association, North Carolina Chapter One. Supporting active, honorably discharged, and retired Military Police since our founding.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com" class="footer-social-btn" aria-label="Facebook">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#admin">Leadership</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#join">Join</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:9108186569">910-818-6569</a></li>
+          <li><a href="mailto:rmpachapter1@gmail.com">rmpachapter1@gmail.com</a></li>
+          <li><a href="#">P.O. Box 27587, Fayetteville NC 28314</a></li>
+        </ul>
+        <div style="margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);">
+          <div style="font-family:var(--ff-sub);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Meetings</div>
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7;">1st Saturday Monthly<br>9:00 AM<br>John D. Fuller Sr. Complex<br>6627 Old Bunce Rd, Fayetteville</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>Copyright &copy; 2025 Retired Military Police Association, NC Chapter One. All rights reserved.</p>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ── Scroll-triggered header
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Intersection Observer for reveal animations
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  // ── Mobile nav
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const closeBtn  = document.getElementById('closeNav');
+
+  function openMenu() {
+    mobileNav.classList.add('open');
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-nav-links a, .mobile-nav__foot a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // ── Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const id = this.getAttribute('href');
+      if (id === '#') return;
+      const el = document.querySelector(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Keyboard dropdown support
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const trigger = item.querySelector('.nav-link[tabindex]');
+    const drop    = item.querySelector('.nav-dropdown');
+    if (!trigger || !drop) return;
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const open = drop.style.opacity === '1';
+        drop.style.opacity      = open ? '' : '1';
+        drop.style.pointerEvents = open ? '' : 'all';
+        drop.style.transform    = open ? '' : 'none';
+        trigger.setAttribute('aria-expanded', String(!open));
+      }
+      if (e.key === 'Escape') {
+        drop.style.opacity = '';
+        drop.style.pointerEvents = '';
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // ── Gallery lightbox
+  const galleryItems = Array.from(document.querySelectorAll('.gm-item'));
+  const lightbox     = document.getElementById('lightbox');
+  const lbImg        = document.getElementById('lbImg');
+  const lbCounter    = document.getElementById('lbCounter');
+  let lbIndex = 0;
+
+  function lbOpen(idx) {
+    lbIndex = idx;
+    const src = galleryItems[idx].querySelector('img').src;
+    const alt = galleryItems[idx].querySelector('img').alt;
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lbCounter.textContent = (idx + 1) + ' / ' + galleryItems.length;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbPrev() { lbOpen((lbIndex - 1 + galleryItems.length) % galleryItems.length); }
+  function lbNext() { lbOpen((lbIndex + 1) % galleryItems.length); }
+
+  galleryItems.forEach((item, i) => item.addEventListener('click', () => lbOpen(i)));
+  document.getElementById('lbClose').addEventListener('click', lbClose);
+  document.getElementById('lbPrev').addEventListener('click', lbPrev);
+  document.getElementById('lbNext').addEventListener('click', lbNext);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lbClose(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') lbPrev();
+    if (e.key === 'ArrowRight') lbNext();
+  });
+
+  // ── Form submit feedback
+  const form = document.querySelector('form[name="membership"]');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit span');
+      btn.textContent = '✓ Submitted — We\'ll be in touch!';
+      this.querySelector('.form-submit').style.background = 'var(--gold)';
+      this.querySelector('.form-submit').style.color = 'var(--ink)';
+      this.querySelector('.form-submit').disabled = true;
+    });
+  }
+})();
+</script>
+</body>
+</html>

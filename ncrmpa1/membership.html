@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join — RMPA Chapter One | Membership</title>
+  <meta name="description" content="Join the Retired Military Police Association, NC Chapter One. Membership open to all active, honorably discharged, and retired Military Police." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:#0A1208;--navy:#111F0E;--navy-2:#1A2E14;--navy-3:#26431D;
+      --gold:#C49A3C;--gold-2:#D4AF5C;--gold-3:#EDD68A;--gold-pale:#F7F0DC;
+      --white:#FFFFFF;--offwhite:#F5F7F4;--mist:#E4EBE2;--stone:#8A96A8;
+      --border:rgba(255,255,255,0.09);--border-lt:#D6DDD4;--red:#8B1A1A;
+      --ff-display:'Bebas Neue',sans-serif;--ff-sub:'Oswald',sans-serif;
+      --ff-body:'DM Sans',sans-serif;
+      --ease:cubic-bezier(.25,.46,.45,.94);--ease-out:cubic-bezier(.16,1,.3,1);--r:3px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:var(--ff-body);color:var(--navy);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;display:block}a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;font-family:inherit}
+
+    .noise{position:relative}
+    .noise::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");opacity:.04;pointer-events:none;z-index:1}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 32px}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+    .reveal.revealed{opacity:1;transform:none}
+    .reveal-left{transform:translateX(-40px);opacity:0;transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+    .reveal-left.revealed{opacity:1;transform:none}
+    .reveal-right{transform:translateX(40px);opacity:0;transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+    .reveal-right.revealed{opacity:1;transform:none}
+    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}
+
+    .eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--ff-sub);font-size:12px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+    .eyebrow::before{content:'';display:block;width:28px;height:1.5px;background:var(--gold);flex-shrink:0}
+    .eyebrow--white{color:var(--gold-3)}.eyebrow--white::before{background:var(--gold-3)}
+    .section-title{font-family:var(--ff-display);font-size:clamp(44px,5.5vw,78px);letter-spacing:.03em;color:var(--navy);line-height:.95;margin-bottom:20px}
+    .section-title--white{color:var(--white)}.section-title em{font-style:normal;color:var(--gold)}
+    .section-desc{font-size:17px;font-weight:300;color:var(--stone);line-height:1.8;max-width:560px}
+    .h-rule{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:20px 0 28px;display:block}
+    .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-sub);font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:14px 30px;border-radius:var(--r);transition:all .3s var(--ease);position:relative;overflow:hidden}
+    .btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:translateX(-100%) skewX(-15deg);transition:transform .4s var(--ease)}
+    .btn:hover::before{transform:translateX(120%) skewX(-15deg)}.btn:hover{transform:translateY(-2px)}
+    .btn--gold{background:var(--gold);color:var(--ink);font-weight:600}.btn--gold:hover{background:var(--gold-2)}
+    .btn--navy{background:var(--navy);color:var(--white)}.btn--navy:hover{background:var(--navy-2)}
+    .btn--ghost-white{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35)}
+    .btn--ghost-white:hover{border-color:var(--white);background:rgba(255,255,255,.06)}
+    .skip-link{position:absolute;top:-60px;left:0;background:var(--gold);color:var(--ink);font-family:var(--ff-sub);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;z-index:9999;transition:top .2s}
+    .skip-link:focus{top:0}
+
+    /* TOPBAR */
+    .topbar{background:var(--ink);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .topbar .container{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .topbar__left{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+    .topbar__item{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.45);padding:0 14px;border-right:1px solid rgba(255,255,255,.08)}
+    .topbar__item:last-child{border-right:none}
+    .topbar__item a{color:rgba(255,255,255,.55);transition:color .2s}.topbar__item a:hover{color:var(--gold-3)}
+    .topbar__item svg{color:var(--gold);flex-shrink:0}
+    .topbar__right{display:flex;align-items:center;gap:10px}
+    .topbar__badge{font-family:var(--ff-sub);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:5px 16px;border-radius:2px;transition:background .2s}
+    .topbar__badge:hover{background:var(--gold-2)}
+    .topbar__fb{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:3px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);transition:all .2s}
+    .topbar__fb:hover{border-color:var(--gold);color:var(--gold)}
+
+    /* HEADER */
+    .site-header{background:var(--white);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--mist);box-shadow:0 1px 24px rgba(17,31,14,.08);transition:box-shadow .3s}
+    .site-header.scrolled{box-shadow:0 4px 40px rgba(17,31,14,.14)}
+    .site-header .container{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
+    .logo{display:flex;align-items:center;gap:14px;flex-shrink:0}
+    .logo__seal{width:58px;height:76px;object-fit:contain;flex-shrink:0}
+    .logo__name{font-family:var(--ff-display);font-size:22px;letter-spacing:.06em;color:var(--navy);line-height:1}
+    .logo__name span{color:var(--gold)}
+    .logo__chapter{font-family:var(--ff-sub);font-size:10.5px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-top:4px}
+    .main-nav{display:flex;align-items:center}
+    .nav-list{display:flex;align-items:stretch}
+    .nav-item{position:relative}
+    .nav-link{display:flex;align-items:center;gap:5px;padding:0 16px;height:76px;font-family:var(--ff-sub);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .2s,border-color .2s,background .2s;cursor:pointer}
+    .nav-link:hover,.nav-item:hover>.nav-link{color:var(--navy);border-bottom-color:var(--gold);background:var(--offwhite)}
+    .nav-link--active{color:var(--navy)!important;border-bottom-color:var(--gold)!important}
+    .nav-link .chevron{font-size:8px;opacity:.4}
+    .nav-dropdown{position:absolute;top:calc(100% + 1px);left:0;background:var(--white);border:1px solid var(--mist);border-top:2px solid var(--gold);box-shadow:0 20px 60px rgba(17,31,14,.12);min-width:210px;border-radius:0 0 4px 4px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .2s,transform .2s;z-index:100}
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{opacity:1;pointer-events:all;transform:none}
+    .nav-dropdown a{display:block;padding:11px 20px;font-family:var(--ff-body);font-size:14px;font-weight:400;color:var(--navy);border-bottom:1px solid var(--offwhite);transition:background .15s,color .15s,padding-left .15s}
+    .nav-dropdown a:last-child{border-bottom:none}.nav-dropdown a:hover{background:var(--offwhite);color:var(--gold);padding-left:26px}
+    .nav-join{margin-left:14px;background:var(--gold)!important;color:var(--ink)!important;border-bottom-color:transparent!important;border-radius:var(--r);padding:8px 26px!important;font-size:13px!important;font-weight:700!important;letter-spacing:.12em!important;text-transform:uppercase;font-family:var(--ff-sub)!important;box-shadow:0 2px 12px rgba(196,154,60,.35);transition:background .2s,box-shadow .2s,transform .2s}
+    .nav-join:hover{background:var(--gold-2)!important;box-shadow:0 4px 20px rgba(196,154,60,.5);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5.5px;padding:8px;background:none;border:none}
+    .hamburger span{display:block;width:24px;height:1.8px;background:var(--navy);border-radius:2px;transition:all .28s}
+    .hamburger.active span:nth-child(1){transform:translateY(7.3px) rotate(45deg)}
+    .hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .hamburger.active span:nth-child(3){transform:translateY(-7.3px) rotate(-45deg)}
+    .mobile-nav{display:none;position:fixed;inset:0;background:var(--ink);z-index:5000;flex-direction:column;overflow-y:auto}
+    .mobile-nav.open{display:flex}
+    .mobile-nav__head{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .mobile-nav__close{font-size:22px;color:rgba(255,255,255,.5);background:none;border:none;line-height:1}
+    .mobile-nav-links{flex:1;padding:16px 0}
+    .mobile-nav-links a{display:block;padding:17px 28px;font-family:var(--ff-display);font-size:28px;letter-spacing:.04em;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.05);transition:color .2s,padding-left .2s}
+    .mobile-nav-links a:hover{color:var(--gold-3);padding-left:36px}
+    .mobile-nav__foot{padding:24px 28px 32px;display:flex;flex-direction:column;gap:12px}
+
+    /* PAGE BANNER */
+    .page-banner{position:relative;background:var(--ink);padding:100px 0 80px;overflow:hidden}
+    .page-banner__bg{position:absolute;inset:0;background-image:url('images/fbde44a1f0c14ea3868999ab8114d6a8.jpg');background-size:cover;background-position:center 30%;opacity:.18}
+    .page-banner__content{position:relative;z-index:2}
+    .page-banner__title{font-family:var(--ff-display);font-size:clamp(52px,7vw,100px);color:var(--white);letter-spacing:.03em;line-height:.95;margin:12px 0}
+    .page-banner__sub{font-family:var(--ff-sub);font-size:15px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:16px}
+
+    /* ELIGIBILITY */
+    .eligibility{padding:100px 0;background:var(--white)}
+    .elig-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .elig-check-list{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+    .elig-check{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:var(--offwhite);border:1px solid var(--border-lt);border-radius:4px;transition:border-color .2s}
+    .elig-check:hover{border-color:var(--gold)}
+    .elig-check__icon{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+    .elig-check h4{font-family:var(--ff-sub);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin-bottom:4px}
+    .elig-check p{font-size:13px;font-weight:300;color:var(--stone);line-height:1.6}
+    .elig-img-wrap{position:relative;border-radius:4px;overflow:hidden}
+    .elig-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(17,31,14,.5) 0%,transparent 60%);z-index:1}
+    .elig-img-wrap img{width:100%;height:480px;object-fit:cover;object-position:center;display:block;transition:transform .6s var(--ease)}
+    .elig-img-wrap:hover img{transform:scale(1.04)}
+
+    /* BENEFITS */
+    .benefits{padding:100px 0;background:var(--offwhite)}
+    .benefits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px}
+    .benefit-card{background:var(--white);padding:44px 32px;border:1px solid var(--border-lt);position:relative;overflow:hidden;transition:all .3s var(--ease)}
+    .benefit-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(17,31,14,.1);border-color:var(--gold)}
+    .benefit-card__num{font-family:var(--ff-display);font-size:80px;letter-spacing:.02em;color:var(--mist);position:absolute;bottom:-10px;right:16px;line-height:1;user-select:none;transition:color .3s}
+    .benefit-card:hover .benefit-card__num{color:var(--gold-pale)}
+    .benefit-card__icon{width:48px;height:48px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--gold);transition:all .3s}
+    .benefit-card:hover .benefit-card__icon{background:var(--gold);color:var(--ink)}
+    .benefit-card h3{font-family:var(--ff-display);font-size:26px;letter-spacing:.04em;color:var(--navy);margin-bottom:12px}
+    .benefit-card p{font-size:15px;font-weight:300;color:var(--stone);line-height:1.75;position:relative;z-index:1}
+
+    /* APPLICATION FORM */
+    .application{padding:100px 0;background:var(--white)}
+    .application-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
+    .app-info{}
+    .dues-box{margin-top:40px;background:var(--navy);padding:36px;border-radius:4px;border-left:4px solid var(--gold)}
+    .dues-box h4{font-family:var(--ff-display);font-size:28px;letter-spacing:.04em;color:var(--gold-3);margin-bottom:16px}
+    .dues-box p{font-size:14px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.8}
+    .dues-box strong{color:var(--gold-3)}
+    .membership-form{background:var(--offwhite);border:1px solid var(--border-lt);border-top:3px solid var(--gold);padding:44px;border-radius:0 0 4px 4px;position:relative;overflow:hidden}
+    .membership-form::before{content:'JOIN';position:absolute;bottom:-30px;right:-10px;font-family:var(--ff-display);font-size:100px;color:rgba(17,31,14,.04);line-height:1;pointer-events:none;user-select:none}
+    .membership-form h3{font-family:var(--ff-display);font-size:32px;letter-spacing:.04em;color:var(--navy);margin-bottom:6px}
+    .membership-form>p{font-size:14px;font-weight:300;color:var(--stone);margin-bottom:28px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+    .form-group label{font-family:var(--ff-sub);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--navy)}
+    .form-group label .req{color:var(--red)}
+    .form-group input,.form-group select,.form-group textarea{font-family:var(--ff-body);font-size:15px;font-weight:400;color:var(--navy);background:var(--white);border:1.5px solid var(--border-lt);border-radius:var(--r);padding:12px 16px;width:100%;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,154,60,.12)}
+    .form-group textarea{resize:vertical;min-height:90px}
+    .form-submit{width:100%;background:var(--navy);color:var(--white);border:none;font-family:var(--ff-sub);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:16px;border-radius:var(--r);cursor:pointer;transition:all .25s var(--ease);margin-top:4px;position:relative;overflow:hidden}
+    .form-submit::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform .3s var(--ease)}
+    .form-submit:hover{color:var(--ink)}.form-submit:hover::before{transform:none}
+    .form-submit span{position:relative;z-index:1}
+
+    /* TESTIMONIALS */
+    .testimonials{padding:100px 0;background:var(--ink);position:relative;overflow:hidden}
+    .testimonials::before{content:'';position:absolute;top:0;left:0;width:300px;height:300px;background:radial-gradient(circle,rgba(196,154,60,.08) 0%,transparent 70%)}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .testimonial-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-top:3px solid var(--gold);padding:36px;border-radius:0 0 4px 4px;transition:background .2s}
+    .testimonial-card:hover{background:rgba(255,255,255,.07)}
+    .testimonial-card__quote{font-size:36px;color:var(--gold);line-height:1;margin-bottom:16px;font-family:Georgia,serif}
+    .testimonial-card p{font-size:15px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.8;font-style:italic;margin-bottom:28px}
+    .testimonial-card__author{display:flex;align-items:center;gap:14px}
+    .testimonial-card__avatar{width:44px;height:44px;border-radius:50%;background:var(--navy-2);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:18px;color:var(--gold);flex-shrink:0}
+    .testimonial-card__name{font-family:var(--ff-sub);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--white);margin-bottom:2px}
+    .testimonial-card__rank{font-size:12px;font-weight:300;color:rgba(255,255,255,.35)}
+
+    /* FAQ */
+    .faq{padding:100px 0;background:var(--offwhite)}
+    .faq-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+    .faq-list{margin-top:40px;display:flex;flex-direction:column;gap:2px}
+    .faq-item{background:var(--white);border:1px solid var(--border-lt);border-radius:4px;overflow:hidden}
+    .faq-item__q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;background:none;border:none;font-family:var(--ff-sub);font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);text-align:left;cursor:pointer;transition:color .2s,background .2s}
+    .faq-item__q:hover{background:var(--offwhite);color:var(--gold)}
+    .faq-item__q svg{flex-shrink:0;transition:transform .3s;color:var(--gold)}
+    .faq-item.open .faq-item__q svg{transform:rotate(45deg)}
+    .faq-item__a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+    .faq-item.open .faq-item__a{max-height:300px}
+    .faq-item__a p{padding:0 24px 24px;font-size:15px;font-weight:300;color:var(--stone);line-height:1.8}
+
+    /* FOOTER */
+    .footer{background:var(--ink)}
+    .footer__top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;padding:64px 0 48px;border-bottom:1px solid rgba(255,255,255,.05)}
+    .footer-logo{display:flex;align-items:center;gap:20px;margin-bottom:18px}
+    .footer-logo img{width:100px;height:132px;object-fit:contain}
+    .footer-logo__name{font-family:var(--ff-display);font-size:20px;letter-spacing:.06em;color:var(--white)}
+    .footer-logo__name span{color:var(--gold)}
+    .footer-tagline{font-family:var(--ff-sub);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+    .footer-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;max-width:300px;margin-bottom:24px}
+    .footer-social{display:flex;gap:8px}
+    .footer-social-btn{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:all .2s}
+    .footer-social-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+    .footer-col h5{font-family:var(--ff-sub);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(196,154,60,.3)}
+    .footer-col li{margin-bottom:10px}
+    .footer-col a{font-size:14px;font-weight:300;color:rgba(255,255,255,.38);transition:color .2s}
+    .footer-col a:hover{color:var(--gold-3)}
+    .footer__bottom{padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .footer__bottom p{font-size:12px;color:rgba(255,255,255,.22)}
+    .footer__bottom a{font-size:12px;color:rgba(255,255,255,.22);transition:color .2s}
+    .footer__bottom a:hover{color:var(--gold)}
+
+    @media(max-width:1080px){.benefits-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:960px){.main-nav{display:none}.hamburger{display:flex}.elig-grid,.application-inner,.faq-inner{grid-template-columns:1fr}.testimonials-grid{grid-template-columns:1fr}.footer__top{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.topbar{display:none}.benefits-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.footer__top{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- TOPBAR -->
+<div class="topbar" role="banner">
+  <div class="container">
+    <div class="topbar__left">
+      <div class="topbar__item"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.23 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg><a href="tel:9108186569">910-818-6569</a></div>
+      <div class="topbar__item"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:rmpachapter1@gmail.com">rmpachapter1@gmail.com</a></div>
+      <div class="topbar__item"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meets 1st Saturday Monthly &mdash; 9:00 AM</div>
+    </div>
+    <div class="topbar__right">
+      <a href="https://www.facebook.com" class="topbar__fb" aria-label="Facebook"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="membership.html" class="topbar__badge">Join Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a href="index.html" class="logo" aria-label="RMPA Chapter One — Home">
+      <img class="logo__seal" src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="RMPA Chapter One seal" />
+      <div class="logo__lockup"><div class="logo__name"><span>RMPA</span> Chapter 1</div><div class="logo__chapter">Fayetteville / Fort Bragg, NC</div></div>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <span class="nav-link" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">About <span class="chevron">&#9660;</span></span>
+          <div class="nav-dropdown" role="menu">
+            <a href="about.html#mission" role="menuitem">Our Mission</a>
+            <a href="about.html#administration" role="menuitem">Administration</a>
+            <a href="about.html#mission" role="menuitem">Inclusivity Policy</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="membership.html" class="nav-link nav-join nav-link--active">Join</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="mobile-nav__head">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="" width="30" height="40" style="object-fit:contain;" />
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:white;"><span style="color:var(--gold);">RMPA</span> Chapter 1</span>
+    </div>
+    <button class="mobile-nav__close" id="closeNav" aria-label="Close menu">&#x2715;</button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="about.html#administration">Leadership</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="events.html">Events</a>
+    <a href="membership.html">Join</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="mobile-nav__foot">
+    <a href="membership.html" class="btn btn--gold" style="justify-content:center;">Join the Association</a>
+    <a href="tel:9108186569" class="btn btn--ghost-white" style="justify-content:center;">910-818-6569</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- PAGE BANNER -->
+<section class="page-banner noise" aria-labelledby="banner-title">
+  <div class="page-banner__bg" aria-hidden="true"></div>
+  <div class="page-banner__content container">
+    <div class="eyebrow eyebrow--white">RMPA Chapter One</div>
+    <h1 class="page-banner__title" id="banner-title">Join Our<br>Community</h1>
+    <p class="page-banner__sub">Membership Open to All Military Police — Active, Discharged &amp; Retired</p>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section class="eligibility" id="eligibility" aria-labelledby="elig-heading">
+  <div class="container">
+    <div class="elig-grid">
+      <div class="reveal-left">
+        <div class="eyebrow">Who Can Join</div>
+        <h2 class="section-title" id="elig-heading">Open to <em>All Who Served</em></h2>
+        <span class="h-rule"></span>
+        <p class="section-desc">
+          RMPA Chapter One welcomes all individuals who have served honorably in the Military Police Corps.
+          We believe that every person who wore the MP brassard deserves a community that understands their
+          sacrifice, their service, and their ongoing commitment to honor and brotherhood.
+        </p>
+        <div class="elig-check-list" role="list">
+          <div class="elig-check" role="listitem">
+            <div class="elig-check__icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><h4>Active Duty Military Police</h4><p>Currently serving MPs are welcome to join and build connections ahead of transition.</p></div>
+          </div>
+          <div class="elig-check" role="listitem">
+            <div class="elig-check__icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div><h4>Honorably Discharged Veterans</h4><p>All veterans who received an honorable discharge from Military Police duty are eligible.</p></div>
+          </div>
+          <div class="elig-check" role="listitem">
+            <div class="elig-check__icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><h4>Retired Military Police</h4><p>All retired MP personnel of any rank, branch, or era of service are proudly welcomed.</p></div>
+          </div>
+          <div class="elig-check" role="listitem">
+            <div class="elig-check__icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div><h4>No Barriers, No Exceptions</h4><p>Open regardless of race, color, sex, religion, age, disability, or national origin.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="elig-img-wrap">
+          <img src="images/3854c2_042b3514a17c4ac1a2f3d81e90b4a997~mv2.jpg" alt="RMPA Chapter One members" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" aria-labelledby="benefits-heading">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="eyebrow reveal" style="justify-content:center;">Why Join</div>
+      <h2 class="section-title reveal delay-1" id="benefits-heading">Member <em>Benefits</em></h2>
+      <span class="h-rule reveal delay-2" style="margin:0 auto;"></span>
+      <p class="section-desc reveal delay-2" style="max-width:520px;margin:0 auto;">Everything you gain by becoming part of RMPA Chapter One — a community built on shared service.</p>
+    </div>
+    <div class="benefits-grid" role="list">
+      <div class="benefit-card reveal" role="listitem">
+        <span class="benefit-card__num" aria-hidden="true">01</span>
+        <div class="benefit-card__icon" aria-hidden="true"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Brotherhood</h3>
+        <p>Connect with hundreds of active, discharged, and retired Military Police across North Carolina and the nation. The bond forged in uniform lasts a lifetime.</p>
+      </div>
+      <div class="benefit-card reveal delay-1" role="listitem">
+        <span class="benefit-card__num" aria-hidden="true">02</span>
+        <div class="benefit-card__icon" aria-hidden="true"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Resources</h3>
+        <p>Access member-exclusive information on VA benefits, veteran services, legal resources, career transition support, and more — curated for the MP community.</p>
+      </div>
+      <div class="benefit-card reveal delay-2" role="listitem">
+        <span class="benefit-card__num" aria-hidden="true">03</span>
+        <div class="benefit-card__icon" aria-hidden="true"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Monthly Meetings</h3>
+        <p>Participate in monthly chapter meetings at the John D. Fuller Sr. Complex — every 1st Saturday at 9:00 AM. Stay informed, engaged, and connected year-round.</p>
+      </div>
+      <div class="benefit-card reveal delay-3" role="listitem">
+        <span class="benefit-card__num" aria-hidden="true">04</span>
+        <div class="benefit-card__icon" aria-hidden="true"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h3>Veteran Support</h3>
+        <p>Tap into a network that advocates for your veteran benefits, supports peer mental health, and ensures no former Military Police soldier goes without community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section class="application" id="apply" aria-labelledby="apply-heading">
+  <div class="container">
+    <div class="application-inner">
+      <div class="reveal-left">
+        <div class="eyebrow">Get Started</div>
+        <h2 class="section-title" id="apply-heading">Apply for <em>Membership</em></h2>
+        <span class="h-rule"></span>
+        <p class="section-desc">
+          Completing the form on the right submits your membership interest to Chapter One officers.
+          We'll review your application and reach out personally to welcome you into the brotherhood.
+        </p>
+        <div class="dues-box">
+          <h4>Annual Dues</h4>
+          <p>
+            Chapter One membership is sustained by annual dues assessed during the January meeting each year.
+            Dues amounts are established by the chapter and communicated to all members at the annual business
+            meeting.<br><br>
+            Checks should be made payable to: <strong>RMPA Chapter 1</strong><br><br>
+            Dues may also be addressed at any monthly meeting. Contact the Treasurer, MSG (Ret) Jeffrey Zack,
+            for current dues structure and payment options at <strong>zackj@faytechcc.edu</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="membership-form">
+          <h3>Membership Application</h3>
+          <p>Fill out this form and we'll be in touch shortly.</p>
+          <form name="membership-application" method="POST" aria-label="Membership application form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name <span class="req">*</span></label>
+                <input type="text" id="fname" name="first_name" required autocomplete="given-name" placeholder="John" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name <span class="req">*</span></label>
+                <input type="text" id="lname" name="last_name" required autocomplete="family-name" placeholder="Smith" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(910) 000-0000" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="branch">Branch of Service <span class="req">*</span></label>
+                <select id="branch" name="branch" required>
+                  <option value="" disabled selected>Select branch</option>
+                  <option>Army</option>
+                  <option>Army Reserve</option>
+                  <option>Army National Guard</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="status">Status <span class="req">*</span></label>
+                <select id="status" name="status" required>
+                  <option value="" disabled selected>Select status</option>
+                  <option value="active">Active Duty</option>
+                  <option value="retired">Retired</option>
+                  <option value="discharged">Honorably Discharged</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rank">Rank / Grade</label>
+                <input type="text" id="rank" name="rank" placeholder="e.g. SSG, MSG, 1SG" />
+              </div>
+              <div class="form-group">
+                <label for="years">Years of Service</label>
+                <input type="number" id="years" name="years_of_service" min="1" max="40" placeholder="e.g. 20" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="reason">Why do you want to join? <span class="req">*</span></label>
+              <textarea id="reason" name="reason" required placeholder="Share what brings you to RMPA Chapter One..."></textarea>
+            </div>
+            <button type="submit" class="form-submit"><span>Submit Application</span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" aria-labelledby="testimonials-heading">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="eyebrow eyebrow--white reveal" style="justify-content:center;">Member Voices</div>
+      <h2 class="section-title section-title--white reveal delay-1" id="testimonials-heading">What Members <em>Say</em></h2>
+      <span class="h-rule reveal delay-2" style="margin:0 auto;"></span>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-card__quote">"</div>
+        <p>Joining RMPA Chapter One was one of the best decisions I made after retirement. I found
+        a group of brothers and sisters who truly understand what it means to have served in the
+        MP Corps. The camaraderie here is unlike anything I've experienced since leaving uniform.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">R</div>
+          <div>
+            <div class="testimonial-card__name">Ret. SSG — Fayetteville, NC</div>
+            <div class="testimonial-card__rank">Member since 2008</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-1">
+        <div class="testimonial-card__quote">"</div>
+        <p>The monthly meetings keep me grounded and connected to something bigger than myself.
+        After 22 years in the Army, you need a community that gets it — that understands the
+        sacrifice, the discipline, and the pride of serving in Military Police. This is that community.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">T</div>
+          <div>
+            <div class="testimonial-card__name">Ret. 1SG — Hope Mills, NC</div>
+            <div class="testimonial-card__rank">Member since 2011</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-2">
+        <div class="testimonial-card__quote">"</div>
+        <p>I was hesitant at first, not knowing if I'd fit in. But within minutes of my first
+        meeting I felt at home. Chapter One has helped me navigate VA benefits, stay connected
+        to Fort Liberty, and — most importantly — feel that brotherhood I missed so much.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">M</div>
+          <div>
+            <div class="testimonial-card__name">Ret. MSG — Cumberland County, NC</div>
+            <div class="testimonial-card__rank">Member since 2019</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="reveal-left">
+        <div class="eyebrow">Have Questions?</div>
+        <h2 class="section-title" id="faq-heading">Frequently <em>Asked</em></h2>
+        <span class="h-rule"></span>
+        <p class="section-desc">
+          Find answers to common questions about joining RMPA Chapter One below. Still have questions?
+          Don't hesitate to contact us directly.
+        </p>
+        <div style="margin-top:36px;">
+          <a href="contact.html" class="btn btn--navy">Contact Us</a>
+        </div>
+      </div>
+      <div class="faq-list reveal-right" role="list">
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__q" aria-expanded="false">
+            Do I have to be retired to join?
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__a"><p>No. Membership is open to active duty, honorably discharged, and retired Military Police. You do not need to be retired to join Chapter One.</p></div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__q" aria-expanded="false">
+            How much are annual dues?
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__a"><p>Annual dues are established by the chapter membership each January. Contact Treasurer MSG (Ret) Jeffrey Zack at zackj@faytechcc.edu for the current dues amount. Checks are made payable to RMPA Chapter 1.</p></div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__q" aria-expanded="false">
+            When and where do you meet?
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__a"><p>We meet the 1st Saturday of every month at 9:00 AM at the John D. Fuller Sr. Recreational/Athletic Complex, 6627 Old Bunce Rd, Fayetteville, NC 28306. All members and prospective members are welcome to attend.</p></div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__q" aria-expanded="false">
+            Can I attend a meeting before joining?
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__a"><p>Absolutely. We encourage prospective members to attend a meeting before committing. Come see the brotherhood in action — you'll know right away whether Chapter One is right for you. Just show up on the 1st Saturday at 9:00 AM.</p></div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__q" aria-expanded="false">
+            What if I live outside of Fayetteville?
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__a"><p>Members from across North Carolina and beyond are welcome in Chapter One. Many members travel to attend monthly meetings. We also welcome those who may participate remotely when possible. Contact us to discuss your situation.</p></div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__q" aria-expanded="false">
+            How do I get more involved?
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__a"><p>Show up consistently, participate in meetings and events, volunteer for community service activities, and consider running for a chapter officer position when they become available. The brotherhood grows stronger through your involvement.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="images/3854c2_90a6f6ad9ab6440e857a3d463234085a~mv2.png" alt="RMPA seal" /><div><div class="footer-logo__name"><span>RMPA</span> Chapter 1</div><div style="font-family:var(--ff-sub);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:3px;">Fayetteville / Fort Bragg, NC</div></div></div>
+        <div class="footer-tagline">United in Service, Honor, and Brotherhood</div>
+        <p class="footer-desc">The Retired Military Police Association, North Carolina Chapter One. Supporting active, honorably discharged, and retired Military Police since 1995.</p>
+        <div class="footer-social"><a href="https://www.facebook.com" class="footer-social-btn" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a></div>
+      </div>
+      <div class="footer-col"><h5>Navigate</h5><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="about.html#administration">Leadership</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="events.html">Events</a></li><li><a href="membership.html">Join</a></li><li><a href="resources.html">Resources</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:9108186569">910-818-6569</a></li><li><a href="mailto:rmpachapter1@gmail.com">rmpachapter1@gmail.com</a></li><li><a href="#">P.O. Box 27587, Fayetteville NC 28314</a></li></ul><div style="margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);"><div style="font-family:var(--ff-sub);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Meetings</div><div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7;">1st Saturday Monthly<br>9:00 AM<br>John D. Fuller Sr. Complex<br>6627 Old Bunce Rd, Fayetteville</div></div></div>
+    </div>
+    <div class="footer__bottom">
+      <p>Copyright &copy; 2025 Retired Military Police Association, NC Chapter One. All rights reserved.</p>
+      <div style="display:flex;gap:20px;"><a href="#">Privacy Policy</a><a href="#">Accessibility</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); obs.unobserve(entry.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const closeBtn  = document.getElementById('closeNav');
+  function openMenu() { mobileNav.classList.add('open'); hamburger.classList.add('active'); hamburger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileNav.classList.remove('open'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-nav-links a, .mobile-nav__foot a').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const trigger = item.querySelector('.nav-link[tabindex]');
+    const drop = item.querySelector('.nav-dropdown');
+    if (!trigger || !drop) return;
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const open = drop.style.opacity === '1'; drop.style.opacity = open ? '' : '1'; drop.style.pointerEvents = open ? '' : 'all'; drop.style.transform = open ? '' : 'none'; trigger.setAttribute('aria-expanded', String(!open)); }
+      if (e.key === 'Escape') { drop.style.opacity = ''; drop.style.pointerEvents = ''; trigger.setAttribute('aria-expanded', 'false'); }
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item__q').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const item = this.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-item__q').setAttribute('aria-expanded', 'false'); });
+      if (!isOpen) { item.classList.add('open'); this.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // Form submit feedback
+  const form = document.querySelector('form[name="membership-application"]');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit span');
+      btn.textContent = '✓ Application Submitted — We\'ll be in touch!';
+      this.querySelector('.form-submit').style.background = 'var(--gold)';
+      this.querySelector('.form-submit').style.color = 'var(--ink)';
+      this.querySelector('.form-submit').disabled = true;
+    });
+  }
+})();
+</script>
+</body>
+</html>
