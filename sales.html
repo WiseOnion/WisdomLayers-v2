@@ -1472,321 +1472,466 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 /* ── DEMO MODAL JS ── */
-const demos = {
-  landing: {
-    label: 'Landing Page',
-    sub: '$599 · 1 page · Single scroll',
-    url: 'wisdomlayers.com/demo/landing',
-    html: `
-      <nav class="demo-nav" style="background:#0d9488">
-        <span class="demo-nav-logo" style="color:#fff">Fresh Cuts Barbershop</span>
-        <ul class="demo-nav-links"><li><a href="#" style="color:rgba(255,255,255,.8)">Book Now</a></li></ul>
-      </nav>
-      <div class="demo-hero" style="background:#0d9488;color:#fff">
-        <h1>The Best Fade<br>in Fayetteville.</h1>
-        <p style="color:rgba(255,255,255,.75)">Walk-ins welcome. Expert cuts, lineups, and beards. Open 7 days a week.</p>
-        <button class="demo-btn" style="background:#fff;color:#0d9488">Book an Appointment</button>
+
+function demoSwitch(btn, key) {
+  const nav = btn.closest('nav');
+  const active = nav.dataset.active || '#0d9488';
+  nav.querySelectorAll('button').forEach(b => {
+    b.style.background = 'transparent';
+    b.style.color = 'rgba(255,255,255,.55)';
+  });
+  btn.style.background = active;
+  btn.style.color = '#fff';
+  const pages = window._currentPages;
+  btn.closest('#dsite').querySelector('#dpage').innerHTML = pages[key] || '';
+  document.getElementById('demo-scroll').scrollTop = 0;
+}
+
+const STAMP = `<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-family:'Poppins',sans-serif;font-weight:900;font-size:5rem;color:rgba(255,0,0,.1);border:6px solid rgba(255,0,0,.1);padding:8px 28px;border-radius:8px;pointer-events:none;z-index:9999;white-space:nowrap;letter-spacing:.2em">DEMO</div>`;
+
+function buildNav(pages, active, navBg, logoText) {
+  const keys = Object.keys(pages);
+  const links = keys.map((k,i) =>
+    `<button data-page="${k}" onclick="demoSwitch(this,'${k}')" style="background:${i===0?active:'transparent'};color:${i===0?'#fff':'rgba(255,255,255,.5)'};border:none;padding:8px 14px;border-radius:20px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;white-space:nowrap">${k}</button>`
+  ).join('');
+  return `<nav data-active="${active}" style="background:${navBg};display:flex;align-items:center;padding:0 16px;height:54px;position:sticky;top:0;z-index:50;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none">
+    <span style="font-family:'Poppins',sans-serif;font-weight:800;color:#fff;font-size:.9rem;white-space:nowrap;margin-right:10px">${logoText||'Demo Business'}</span>
+    ${links}
+  </nav>`;
+}
+
+const FOOTER = (bg) => `<div style="background:${bg};padding:22px 24px;color:rgba(255,255,255,.35)"><p style="color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:3px">Demo Business</p><p style="font-size:.72rem">Built by WisdomLayers · wisdomlayers.com</p></div>`;
+
+/* =================================================
+   TIER 1 — LANDING PAGE  ($599 · 1 page scroll)
+================================================= */
+function buildLanding() {
+  return `
+<div id="dsite" style="font-family:'Inter',sans-serif;background:#fff;position:relative">
+  ${STAMP}
+
+  <div style="background:#fff;padding:72px 24px 56px;text-align:center;border-bottom:1px solid #e5e7eb">
+    <h1 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2.2rem;line-height:1.15;color:#111827;margin-bottom:14px">Your Business.<br><span style="color:#0d9488">Online. Professional.</span></h1>
+    <p style="color:#6b7280;max-width:360px;margin:0 auto 28px;line-height:1.75;font-size:.93rem">A clean, modern web presence that helps customers find you, trust you, and reach out.</p>
+    <button style="background:#0d9488;color:#fff;border:none;padding:15px 36px;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer">Get in Touch</button>
+  </div>
+
+  <div style="background:#f9fafb;padding:52px 24px">
+    <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.3rem;color:#111827;margin-bottom:20px">What We Offer</h2>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${[
+        ['Service One','A clear description of what this service includes','$99'],
+        ['Service Two','What the client gets and why it matters','$149'],
+        ['Service Three','Specific outcome or deliverable for this option','$199'],
+        ['Service Four','Value-focused description of this offering','$249'],
+      ].map(([s,d,p])=>`
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div><p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;color:#111827;margin-bottom:3px">${s}</p><p style="font-size:.78rem;color:#6b7280;line-height:1.5">${d}</p></div>
+        <span style="background:#0d9488;color:#fff;padding:5px 13px;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.78rem;white-space:nowrap;flex-shrink:0">${p}</span>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <div style="background:#fff;padding:52px 24px">
+    <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.3rem;color:#111827;margin-bottom:20px">Contact Us</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:420px">
+      <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#f9fafb;color:#374151" placeholder="Your name" readonly>
+      <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#f9fafb;color:#374151" placeholder="Phone number" readonly>
+      <textarea style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#f9fafb;color:#374151;height:90px;resize:none" placeholder="Your message" readonly></textarea>
+      <button style="background:#0d9488;color:#fff;border:none;border-radius:8px;padding:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer">Send Message</button>
+    </div>
+  </div>
+
+  ${FOOTER('#111827')}
+</div>`;
+}
+
+/* =================================================
+   TIER 2 — STARTER  ($999 · 4 nav tabs)
+================================================= */
+function buildStarter() {
+  const pages = {
+    Home: `
+      <div style="background:#fff;padding:56px 24px 44px;text-align:center;border-bottom:1px solid #e5e7eb">
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2rem;line-height:1.15;color:#111827;margin-bottom:12px">Demo Business</h1>
+        <p style="color:#6b7280;max-width:340px;margin:0 auto 24px;line-height:1.75;font-size:.9rem">Quality services. Reliable team. Here to help your business grow.</p>
+        <button onclick="demoSwitch(document.querySelector('[data-page=Contact]'),'Contact')" style="background:#0d9488;color:#fff;border:none;padding:12px 28px;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer">Contact Us</button>
       </div>
-      <div class="demo-section" style="background:#f8fafc">
-        <h2>Why Choose Us</h2>
-        <div class="demo-grid-3">
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:48px;background:#ccfbf1;color:#0d9488">10+ Yrs</div>
-            <h3>Experience</h3>
-            <p style="color:#6b7280">Over a decade cutting hair in Fayetteville.</p>
-          </div>
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:48px;background:#ccfbf1;color:#0d9488">5 Stars</div>
-            <h3>Top Rated</h3>
-            <p style="color:#6b7280">Hundreds of 5-star reviews on Google.</p>
-          </div>
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:48px;background:#ccfbf1;color:#0d9488">Walk-in</div>
-            <h3>Always Open</h3>
-            <p style="color:#6b7280">Mon–Sun 9am–8pm. No appointment needed.</p>
-          </div>
+      <div style="background:#f9fafb;padding:36px 24px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center">
+          ${[['5+','Years Open'],['200+','Clients Served'],['4.9','Avg Rating']].map(([n,l])=>`<div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px"><p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#0d9488">${n}</p><p style="font-size:.72rem;color:#9ca3af;margin-top:3px">${l}</p></div>`).join('')}
         </div>
       </div>
-      <div class="demo-section" style="background:#fff">
-        <h2>Get in Touch</h2>
-        <div class="demo-form">
-          <input class="demo-input" style="border:1.5px solid #e5e7eb;background:#f9fafb" placeholder="Your name" readonly>
-          <input class="demo-input" style="border:1.5px solid #e5e7eb;background:#f9fafb" placeholder="Phone number" readonly>
-          <textarea class="demo-input" style="border:1.5px solid #e5e7eb;background:#f9fafb;height:80px;resize:none" placeholder="Message..." readonly></textarea>
-          <button class="demo-btn" style="background:#0d9488;color:#fff;width:100%">Send Message</button>
+      <div style="background:#fff;padding:36px 24px">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.2rem;color:#111827;margin-bottom:14px">About Us</h2>
+        <p style="font-size:.88rem;color:#374151;line-height:1.8">We have been serving clients since 2019 with a focus on quality and clear communication. Every project gets our full attention from start to finish.</p>
+      </div>`,
+    Services: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:20px">Services</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${[['Service One','$99'],['Service Two','$149'],['Service Three','$199'],['Service Four','$249'],['Service Five','$299'],['Service Six','$349'],['Bundle Package','$499']].map(([s,p])=>`
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:.9rem;color:#111827">${s}</span>
+            <span style="background:#0d9488;color:#fff;padding:5px 13px;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.78rem">${p}</span>
+          </div>`).join('')}
         </div>
-      </div>
-      <div class="demo-footer" style="background:#0a0f1e;color:rgba(255,255,255,.5)">
-        <p style="color:#fff;font-weight:700;font-family:'Poppins',sans-serif">Fresh Cuts Barbershop</p>
-        <p>123 Bragg Blvd, Fayetteville NC</p>
-        <p style="margin-top:12px;font-size:.7rem">Built by WisdomLayers · wisdomlayers.com</p>
+      </div>`,
+    Gallery: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:20px">Gallery</h2>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          ${[['#d1fae5',110],['#a7f3d0',90],['#6ee7b7',110],['#34d399',85],['#0d9488',100],['#0f766e',120]].map(([bg,h])=>`
+          <div style="background:${bg};height:${h}px;border-radius:10px;display:flex;align-items:center;justify-content:center">
+            <span style="color:rgba(0,0,0,.2);font-size:.65rem;font-weight:700;letter-spacing:.1em">PHOTO</span>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Contact: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:6px">Get in Touch</h2>
+        <p style="color:#9ca3af;font-size:.85rem;margin-bottom:20px">We will respond within one business day.</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151" placeholder="Your name" readonly>
+          <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151" placeholder="Phone number" readonly>
+          <textarea style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151;height:90px;resize:none" placeholder="Your message" readonly></textarea>
+          <button style="background:#0d9488;color:#fff;border:none;border-radius:8px;padding:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer">Send Message</button>
+        </div>
+        <div style="margin-top:24px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px">
+          <p style="font-family:'Poppins',sans-serif;font-weight:700;color:#111827;margin-bottom:10px;font-size:.9rem">Hours</p>
+          ${[['Mon – Fri','9am – 6pm'],['Saturday','10am – 4pm'],['Sunday','Closed']].map(([d,h])=>`<div style="display:flex;justify-content:space-between;font-size:.83rem;padding:6px 0;border-bottom:1px solid #f3f4f6"><span style="color:#6b7280">${d}</span><span style="color:#111827;font-weight:600">${h}</span></div>`).join('')}
+        </div>
       </div>`
-  },
-  starter: {
-    label: 'Starter',
-    sub: '$999 · 3–4 pages · Nav + gallery',
-    url: 'wisdomlayers.com/demo/starter',
-    html: `
-      <nav class="demo-nav" style="background:#1e293b">
-        <span class="demo-nav-logo" style="color:#fff">PJ Pressure Washing</span>
-        <ul class="demo-nav-links">
-          <li><a href="#" style="color:rgba(255,255,255,.6)">Services</a></li>
-          <li><a href="#" style="color:#5eead4;border-bottom:2px solid #5eead4;padding-bottom:2px">Home</a></li>
-          <li><a href="#" style="color:rgba(255,255,255,.6)">Gallery</a></li>
-          <li><a href="#" style="color:rgba(255,255,255,.6)">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="demo-hero" style="background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff">
-        <h1>Your Property,<br>Spotless.</h1>
-        <p style="color:rgba(255,255,255,.7)">Professional pressure washing for homes, driveways, and businesses across Fayetteville.</p>
-        <button class="demo-btn" style="background:#0d9488;color:#fff">Get a Free Quote</button>
-      </div>
-      <div class="demo-section" style="background:#f8fafc">
-        <h2>Our Services</h2>
-        <div class="demo-grid-3">
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:60px;background:#dbeafe;color:#1d4ed8;border-radius:8px">House Wash</div>
-            <h3>Residential</h3>
-            <p style="color:#6b7280">Full exterior cleaning for homes of all sizes.</p>
-          </div>
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:60px;background:#dbeafe;color:#1d4ed8;border-radius:8px">Driveway</div>
-            <h3>Concrete</h3>
-            <p style="color:#6b7280">Driveways, walkways, and patios.</p>
-          </div>
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:60px;background:#dbeafe;color:#1d4ed8;border-radius:8px">Commercial</div>
-            <h3>Business</h3>
-            <p style="color:#6b7280">Storefronts, parking lots, and more.</p>
+  };
+  window._currentPages = pages;
+  return `<div id="dsite" style="font-family:'Inter',sans-serif;background:#fff;position:relative">
+    ${STAMP}
+    ${buildNav(pages, '#0d9488', '#111827')}
+    <div id="dpage">${pages.Home}</div>
+    ${FOOTER('#111827')}
+  </div>`;
+}
+
+/* =================================================
+   TIER 3 — PROFESSIONAL  ($1,499 · 6 nav tabs)
+================================================= */
+function buildProfessional() {
+  const pages = {
+    Home: `
+      <div style="display:grid;grid-template-columns:1fr 220px;background:#0d9488;min-height:200px">
+        <div style="padding:44px 24px;color:#fff">
+          <div style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:5px 12px;border-radius:20px;margin-bottom:14px">Now Accepting Clients</div>
+          <h1 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.9rem;line-height:1.15;margin-bottom:10px">Demo Business</h1>
+          <p style="color:rgba(255,255,255,.75);font-size:.85rem;line-height:1.7;margin-bottom:20px">Professional services tailored to your needs. Reliable, on time, and built to last.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button onclick="demoSwitch(document.querySelector('[data-page=Book]'),'Book')" style="background:#fff;color:#0d9488;border:none;padding:10px 20px;border-radius:24px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer">Book Now</button>
+            <button onclick="demoSwitch(document.querySelector('[data-page=Services]'),'Services')" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.3);padding:10px 20px;border-radius:24px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer">Services</button>
           </div>
         </div>
-      </div>
-      <div class="demo-section" style="background:#fff">
-        <h2>Before &amp; After</h2>
-        <div class="demo-grid-2" style="gap:8px">
-          <div class="demo-img-placeholder" style="height:110px;background:#94a3b8;color:#fff;border-radius:10px;font-size:.8rem">Before</div>
-          <div class="demo-img-placeholder" style="height:110px;background:#0d9488;color:#fff;border-radius:10px;font-size:.8rem">After</div>
-          <div class="demo-img-placeholder" style="height:110px;background:#94a3b8;color:#fff;border-radius:10px;font-size:.8rem">Before</div>
-          <div class="demo-img-placeholder" style="height:110px;background:#0d9488;color:#fff;border-radius:10px;font-size:.8rem">After</div>
+        <div style="background:rgba(0,0,0,.15);border-left:1px solid rgba(255,255,255,.15);padding:20px;display:flex;flex-direction:column;gap:8px">
+          <p style="font-family:'Poppins',sans-serif;font-weight:700;color:#fff;font-size:.85rem;margin-bottom:4px">Quick Book</p>
+          <input style="padding:10px 12px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.1);color:#fff;font-size:.82rem" placeholder="Your name" readonly>
+          <select style="padding:10px 12px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:.82rem"><option>Choose service</option><option>Service One</option><option>Service Two</option><option>Service Three</option></select>
+          <select style="padding:10px 12px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:.82rem"><option>Choose staff</option><option>Alex R.</option><option>Jordan T.</option><option>Any available</option></select>
+          <button style="background:#fff;color:#0d9488;border:none;border-radius:8px;padding:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer">Book Appointment</button>
         </div>
       </div>
-      <div class="demo-footer" style="background:#1e293b;color:rgba(255,255,255,.5)">
-        <p style="color:#fff;font-weight:700;font-family:'Poppins',sans-serif">PJ Pressure Washing</p>
-        <p>Serving Fayetteville &amp; Cumberland County</p>
-        <p style="margin-top:12px;font-size:.7rem">Built by WisdomLayers · wisdomlayers.com</p>
+      <div style="background:#f9fafb;padding:36px 24px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center">
+          ${[['5yr','In Business'],['400+','Clients'],['3','Team Members'],['4.9','Rating']].map(([n,l])=>`<div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px"><p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.3rem;color:#0d9488">${n}</p><p style="font-size:.68rem;color:#9ca3af;margin-top:2px">${l}</p></div>`).join('')}
+        </div>
+      </div>
+      <div style="background:#fff;padding:36px 24px">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.2rem;color:#111827;margin-bottom:16px">What Clients Say</h2>
+        ${[['Excellent work and very responsive. Would definitely recommend.','— J. Morris'],['Completed everything on time and within budget.','— T. Brooks']].map(([q,a])=>`
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px">
+          <p style="color:#f59e0b;margin-bottom:8px">★★★★★</p>
+          <p style="font-size:.85rem;color:#374151;line-height:1.7;font-style:italic;margin-bottom:8px">"${q}"</p>
+          <p style="font-size:.78rem;color:#9ca3af;font-weight:600">${a}</p>
+        </div>`).join('')}
+      </div>`,
+    Services: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:20px">Services</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${[['Service One','Standard offering — good fit for most clients','$99'],['Service Two','Enhanced version with additional deliverables','$149'],['Service Three','Full-scope engagement for larger needs','$199'],['Service Four','Specialty option for specific requirements','$249'],['Service Five','Premium tier with priority handling','$299'],['Service Six','Top-tier package with all add-ons included','$349'],['Bundle Package','Everything combined at a discounted rate','$499']].map(([s,d,p])=>`
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
+            <div style="flex:1"><p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;color:#111827;margin-bottom:3px">${s}</p><p style="font-size:.78rem;color:#6b7280;line-height:1.5">${d}</p></div>
+            <span style="background:#0d9488;color:#fff;padding:5px 13px;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.78rem;white-space:nowrap;flex-shrink:0">${p}</span>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Team: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:20px">Meet the Team</h2>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          ${[['Alex R.','Lead — 10 years experience in the field','#0d9488'],['Jordan T.','Senior Specialist — client-facing and detail oriented','#0f766e'],['Casey M.','Coordinator — keeps every project on track','#14b8a6']].map(([n,r,bg])=>`
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
+            <div style="width:52px;height:52px;border-radius:50%;background:${bg};flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;color:#fff;font-size:1rem">${n.split(' ').map(w=>w[0]).join('')}</div>
+            <div><p style="font-family:'Poppins',sans-serif;font-weight:700;color:#111827;font-size:.92rem">${n}</p><p style="font-size:.78rem;color:#6b7280;margin-top:3px;line-height:1.5">${r}</p></div>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Gallery: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:20px">Gallery</h2>
+        <div style="columns:2;gap:8px">
+          ${[['#d1fae5',120],['#a7f3d0',90],['#6ee7b7',110],['#34d399',85],['#0d9488',100],['#0f766e',125],['#14b8a6',95],['#5eead4',110]].map(([bg,h])=>`
+          <div style="background:${bg};height:${h}px;border-radius:10px;margin-bottom:8px;break-inside:avoid;display:flex;align-items:center;justify-content:center">
+            <span style="color:rgba(0,0,0,.18);font-size:.65rem;font-weight:700;letter-spacing:.1em">PHOTO</span>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Blog: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:20px">Blog</h2>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          ${[['How to Get the Most from Your Service','March 2025'],['What to Expect on Your First Visit','February 2025'],['Behind the Scenes: How We Work','January 2025'],['Top Tips for Maintaining Your Results','December 2024']].map(([t,d])=>`
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;display:flex">
+            <div style="width:6px;background:#0d9488;flex-shrink:0"></div>
+            <div style="padding:14px"><p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;color:#111827;line-height:1.4;margin-bottom:5px">${t}</p><p style="font-size:.73rem;color:#9ca3af">${d}</p></div>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Book: `
+      <div style="padding:40px 24px;background:#f9fafb">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#111827;margin-bottom:6px">Book an Appointment</h2>
+        <p style="color:#9ca3af;font-size:.85rem;margin-bottom:22px">We confirm within one business day.</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151" placeholder="Your name" readonly>
+          <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151" placeholder="Phone number" readonly>
+          <select style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151"><option>Select a service</option><option>Service One</option><option>Service Two</option><option>Service Three</option><option>Bundle Package</option></select>
+          <select style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151"><option>Choose staff member</option><option>Alex R.</option><option>Jordan T.</option><option>Casey M.</option><option>Any available</option></select>
+          <input style="padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:#374151" placeholder="Preferred date" readonly>
+          <button style="background:#0d9488;color:#fff;border:none;border-radius:8px;padding:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer">Confirm Booking</button>
+        </div>
       </div>`
-  },
-  professional: {
-    label: 'Professional',
-    sub: '$1,499 · 5–7 pages · Booking + Maps + Blog',
-    url: 'wisdomlayers.com/demo/professional',
-    html: `
-      <nav class="demo-nav" style="background:#0d9488">
-        <span class="demo-nav-logo" style="color:#fff">Miles2Wisdom Therapy</span>
-        <ul class="demo-nav-links">
-          <li><a href="#" style="color:rgba(255,255,255,.7)">About</a></li>
-          <li><a href="#" style="color:rgba(255,255,255,.7)">Services</a></li>
-          <li><a href="#" style="color:rgba(255,255,255,.7)">Team</a></li>
-          <li><a href="#" style="color:rgba(255,255,255,.7)">Blog</a></li>
-          <li><a href="#" style="color:#fff;font-weight:700;background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px">Book Now</a></li>
-        </ul>
-      </nav>
-      <div style="display:grid;grid-template-columns:1fr 280px;background:#0a1628;min-height:240px">
-        <div class="demo-hero" style="padding:48px 24px;color:#fff">
-          <h1 style="font-size:1.9rem">Healing starts<br>with one call.</h1>
-          <p style="color:rgba(255,255,255,.65);font-size:.9rem">Licensed therapists helping you find clarity, calm, and connection.</p>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <button class="demo-btn" style="background:#0d9488;color:#fff;padding:12px 22px;font-size:.85rem">Book a Session</button>
-            <button class="demo-btn" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);padding:12px 22px;font-size:.85rem">Our Services</button>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,.05);border-left:1px solid rgba(255,255,255,.1);padding:24px 20px;display:flex;flex-direction:column;gap:10px">
-          <p style="font-family:'Poppins',sans-serif;font-weight:700;color:#fff;font-size:.9rem">Book a Session</p>
-          <input class="demo-input" style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-size:.8rem" placeholder="Your name" readonly>
-          <input class="demo-input" style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-size:.8rem" placeholder="Service type" readonly>
-          <input class="demo-input" style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-size:.8rem" placeholder="Preferred date" readonly>
-          <button class="demo-btn" style="background:#0d9488;color:#fff;width:100%;font-size:.82rem;padding:10px">Request Appointment</button>
-        </div>
-      </div>
-      <div class="demo-section" style="background:#f8fafc">
-        <h2>Our Services</h2>
-        <div class="demo-grid-3">
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:48px;background:#ccfbf1;color:#0d9488;border-radius:8px">Individual</div>
-            <h3>Individual Therapy</h3><p style="color:#6b7280;font-size:.78rem">One-on-one sessions tailored to you.</p>
-          </div>
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:48px;background:#ccfbf1;color:#0d9488;border-radius:8px">Couples</div>
-            <h3>Couples Therapy</h3><p style="color:#6b7280;font-size:.78rem">Strengthen your relationship together.</p>
-          </div>
-          <div class="demo-card" style="background:#fff;border:1px solid #e5e7eb">
-            <div class="demo-img-placeholder" style="height:48px;background:#ccfbf1;color:#0d9488;border-radius:8px">Family</div>
-            <h3>Family Sessions</h3><p style="color:#6b7280;font-size:.78rem">Navigate challenges as a family.</p>
-          </div>
-        </div>
-      </div>
-      <div class="demo-section" style="background:#fff">
-        <h2>Latest from the Blog</h2>
-        <div class="demo-grid-3">
-          <div class="demo-card" style="background:#f8fafc;border:1px solid #e5e7eb;padding:0;overflow:hidden;border-radius:12px">
-            <div class="demo-img-placeholder" style="height:80px;background:#0d9488;color:#fff;border-radius:0;font-size:.75rem">Mental Health</div>
-            <div style="padding:14px"><h3 style="font-size:.82rem">5 Signs You Might Benefit from Therapy</h3></div>
-          </div>
-          <div class="demo-card" style="background:#f8fafc;border:1px solid #e5e7eb;padding:0;overflow:hidden;border-radius:12px">
-            <div class="demo-img-placeholder" style="height:80px;background:#0f766e;color:#fff;border-radius:0;font-size:.75rem">Relationships</div>
-            <div style="padding:14px"><h3 style="font-size:.82rem">How to Communicate Better with Your Partner</h3></div>
-          </div>
-          <div class="demo-card" style="background:#f8fafc;border:1px solid #e5e7eb;padding:0;overflow:hidden;border-radius:12px">
-            <div class="demo-img-placeholder" style="height:80px;background:#134e4a;color:#fff;border-radius:0;font-size:.75rem">Self-Care</div>
-            <div style="padding:14px"><h3 style="font-size:.82rem">Building a Daily Self-Care Routine That Works</h3></div>
-          </div>
-        </div>
-      </div>
-      <div class="demo-section" style="background:#f8fafc;padding:24px">
-        <div style="background:#1a2744;border-radius:12px;height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,1fr)">
-            ${Array(24).fill('<div style="border:1px solid rgba(255,255,255,.05)"></div>').join('')}
-          </div>
-          <div style="position:relative;background:#0d9488;width:18px;height:24px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:flex;align-items:center;justify-content:center">
-            <div style="width:6px;height:6px;border-radius:50%;background:#fff"></div>
-          </div>
-          <div style="position:absolute;top:12px;right:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 14px">
-            <p style="color:#fff;font-weight:700;font-size:.8rem;font-family:'Poppins',sans-serif">Miles2Wisdom</p>
-            <p style="color:rgba(255,255,255,.5);font-size:.7rem">Fayetteville, NC · (910) 555-0182</p>
-          </div>
-        </div>
-      </div>
-      <div class="demo-footer" style="background:#0a0f1e;color:rgba(255,255,255,.5);display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:32px 24px">
-        <div><p style="color:#fff;font-weight:700;font-family:'Poppins',sans-serif;margin-bottom:8px">Miles2Wisdom</p><p style="font-size:.78rem">Therapy &amp; counseling for individuals, couples, and families.</p></div>
-        <div><p style="color:rgba(255,255,255,.7);font-weight:600;font-size:.8rem;margin-bottom:8px">Quick Links</p><p style="font-size:.75rem">About · Services · Team · Blog · Book</p></div>
-        <div style="grid-column:1/-1;border-top:1px solid rgba(255,255,255,.08);padding-top:16px"><p style="font-size:.7rem">Built by WisdomLayers · wisdomlayers.com</p></div>
-      </div>`
-  },
-  premium: {
-    label: 'Premium',
-    sub: '$2,199 · 8+ pages · Animations + Advanced SEO',
-    url: 'wisdomlayers.com/demo/premium',
-    html: `
-      <div style="background:#08080f;min-height:100%">
-        <nav class="demo-nav" style="background:rgba(8,8,15,.92);border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0">
-          <span class="demo-nav-logo" style="color:#fff">TripleNickle</span>
-          <ul class="demo-nav-links">
-            <li><a href="#" style="color:rgba(255,255,255,.5)">History</a></li>
-            <li><a href="#" style="color:rgba(255,255,255,.5)">Members</a></li>
-            <li><a href="#" style="color:rgba(255,255,255,.5)">Events</a></li>
-            <li><a href="#" style="color:rgba(255,255,255,.5)">Scholarship</a></li>
-            <li><a href="#" style="color:rgba(255,255,255,.5)">Blog</a></li>
-            <li><a href="#" style="color:rgba(255,255,255,.5)">Gallery</a></li>
-            <li><a href="#" style="color:rgba(255,255,255,.5)">Contact</a></li>
-            <li><a href="#" style="color:#fff;background:#0d9488;padding:7px 16px;border-radius:20px;font-weight:700">Donate</a></li>
-          </ul>
-        </nav>
-        <div style="position:relative;overflow:hidden;padding:80px 24px 64px;text-align:center">
-          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(13,148,136,.3),transparent 70%)"></div>
+  };
+  window._currentPages = pages;
+  return `<div id="dsite" style="font-family:'Inter',sans-serif;background:#fff;position:relative">
+    ${STAMP}
+    ${buildNav(pages, '#0d9488', '#0d9488')}
+    <div id="dpage">${pages.Home}</div>
+    ${FOOTER('#111827')}
+  </div>`;
+}
+
+/* =================================================
+   TIER 4 — PREMIUM  ($2,199 · 8 tabs · dark + gold)
+================================================= */
+function buildPremium() {
+  const pages = {
+    Home: `
+      <div style="background:#0a0a0a;padding:0 0 40px">
+        <div style="position:relative;overflow:hidden;padding:64px 24px 52px;text-align:center">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,.15),transparent 70%)"></div>
           <div style="position:relative">
-            <div style="display:inline-block;background:rgba(13,148,136,.15);border:1px solid rgba(13,148,136,.3);color:#5eead4;font-size:.72rem;font-weight:700;letter-spacing:.1em;padding:6px 16px;border-radius:20px;margin-bottom:20px">America's First Black Paratroopers</div>
-            <h1 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(2rem,6vw,3.2rem);color:#fff;line-height:1.1;margin-bottom:16px">555th Parachute<br>Infantry Battalion</h1>
-            <p style="color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 32px;font-size:.95rem;line-height:1.7">Honoring the legacy of the Triple Nickles — the trailblazers who broke barriers and served with distinction.</p>
+            <div style="display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:#c9a84c;font-size:.68rem;font-weight:700;letter-spacing:.12em;padding:5px 14px;border-radius:20px;margin-bottom:16px;text-transform:uppercase">Premium Service Experience</div>
+            <h1 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2.2rem;color:#fff;line-height:1.1;margin-bottom:12px">Demo Business.<br><span style="color:#c9a84c">Elevated.</span></h1>
+            <p style="color:rgba(255,255,255,.55);max-width:380px;margin:0 auto 28px;line-height:1.7;font-size:.9rem">Top-tier service. Expert team. A standard that speaks for itself.</p>
             <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-              <button class="demo-btn" style="background:#0d9488;color:#fff">Our History</button>
-              <button class="demo-btn" style="background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.15)">Become a Member</button>
+              <button onclick="demoSwitch(document.querySelector('[data-page=Book]'),'Book')" style="background:#c9a84c;color:#fff;border:none;padding:12px 26px;border-radius:30px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer">Book Now</button>
+              <button onclick="demoSwitch(document.querySelector('[data-page=Gallery]'),'Gallery')" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.12);padding:12px 26px;border-radius:30px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer">View Gallery</button>
             </div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 24px 48px">
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;text-align:center">
-            <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.6rem;color:#5eead4">1944</p>
-            <p style="color:rgba(255,255,255,.4);font-size:.72rem">Year Founded</p>
-          </div>
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;text-align:center">
-            <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.6rem;color:#a78bfa">1,800+</p>
-            <p style="color:rgba(255,255,255,.4);font-size:.72rem">Members Served</p>
-          </div>
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;text-align:center">
-            <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.6rem;color:#0d9488">12+</p>
-            <p style="color:rgba(255,255,255,.4);font-size:.72rem">Annual Events</p>
-          </div>
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;text-align:center">
-            <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.6rem;color:#f59e0b">$50k+</p>
-            <p style="color:rgba(255,255,255,.4);font-size:.72rem">Scholarships Given</p>
-          </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px">
+          ${[['5yr','Running'],['3','Team Members'],['400+','Clients'],['4.9','Rating']].map(([n,l])=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px;text-align:center"><p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.3rem;color:#c9a84c">${n}</p><p style="font-size:.68rem;color:rgba(255,255,255,.35);margin-top:2px">${l}</p></div>`).join('')}
         </div>
-        <div style="padding:0 24px 48px">
-          <h2 style="font-family:'Poppins',sans-serif;font-weight:800;color:#fff;font-size:1.5rem;margin-bottom:20px">Latest News &amp; Events</h2>
-          <div class="demo-grid-3">
-            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-              <div style="height:90px;background:linear-gradient(135deg,#0d9488,#134e4a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.75rem">Annual Reunion 2025</div>
-              <div style="padding:14px"><p style="color:#fff;font-weight:600;font-size:.82rem;font-family:'Poppins',sans-serif">2025 Annual Reunion Registration Open</p><p style="color:rgba(255,255,255,.4);font-size:.72rem;margin-top:4px">July 18–20 · Fayetteville, NC</p></div>
-            </div>
-            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-              <div style="height:90px;background:linear-gradient(135deg,#7c3aed,#4c1d95);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.75rem">Scholarship</div>
-              <div style="padding:14px"><p style="color:#fff;font-weight:600;font-size:.82rem;font-family:'Poppins',sans-serif">2025 Scholarship Applications Now Open</p><p style="color:rgba(255,255,255,.4);font-size:.72rem;margin-top:4px">Deadline: May 1, 2025</p></div>
-            </div>
-            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-              <div style="height:90px;background:linear-gradient(135deg,#0f766e,#0a0f1e);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.75rem">History</div>
-              <div style="padding:14px"><p style="color:#fff;font-weight:600;font-size:.82rem;font-family:'Poppins',sans-serif">New Archive: WWII Mission Records</p><p style="color:rgba(255,255,255,.4);font-size:.72rem;margin-top:4px">Explore the full collection</p></div>
-            </div>
-          </div>
+      </div>`,
+    Services: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:20px">Services</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${[['Service One','$99'],['Service Two','$149'],['Service Three','$199'],['Service Four','$249'],['Service Five','$299'],['Service Six','$349'],['Bundle Package','$499'],['Add-On','$49']].map(([s,p])=>`
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-family:'Poppins',sans-serif;font-weight:600;color:#fff;font-size:.88rem">${s}</span>
+            <span style="background:rgba(201,168,76,.15);color:#c9a84c;padding:5px 12px;border-radius:20px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.78rem">${p}</span>
+          </div>`).join('')}
         </div>
-        <div style="background:rgba(0,0,0,.4);border-top:1px solid rgba(255,255,255,.06);padding:32px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
-          <div><p style="color:#fff;font-weight:700;font-family:'Poppins',sans-serif;margin-bottom:8px">Triple Nickle</p><p style="color:rgba(255,255,255,.4);font-size:.75rem">Preserving the legacy of the 555th PIB.</p></div>
-          <div><p style="color:rgba(255,255,255,.6);font-weight:600;font-size:.8rem;margin-bottom:8px">Pages</p><p style="color:rgba(255,255,255,.35);font-size:.75rem;line-height:1.8">History · Members · Events<br>Scholarship · Blog · Gallery<br>Donate · Contact</p></div>
-          <div><p style="color:rgba(255,255,255,.6);font-weight:600;font-size:.8rem;margin-bottom:8px">Contact</p><p style="color:rgba(255,255,255,.35);font-size:.75rem;line-height:1.8">info@triplenickle.org<br>(910) 555-0199</p></div>
-          <div style="grid-column:1/-1;border-top:1px solid rgba(255,255,255,.06);padding-top:16px"><p style="font-size:.7rem;color:rgba(255,255,255,.25)">Built by WisdomLayers · wisdomlayers.com</p></div>
+      </div>`,
+    Team: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:20px">The Team</h2>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          ${[['Alex R.','Lead · 10yr · Senior specialist'],['Jordan T.','Senior · 7yr · Client relations'],['Casey M.','Coordinator · 4yr · Project management']].map(([n,r])=>`
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(201,168,76,.2);border:2px solid rgba(201,168,76,.4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;color:#c9a84c">${n.split(' ').map(w=>w[0]).join('')}</div>
+            <div><p style="font-family:'Poppins',sans-serif;font-weight:700;color:#fff;font-size:.9rem">${n}</p><p style="font-size:.77rem;color:rgba(255,255,255,.45);margin-top:2px">${r}</p></div>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Gallery: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:20px">Gallery</h2>
+        <div style="columns:2;gap:8px">
+          ${[['#1a1a1a',120],['#c9a84c',88],['#2d2d2d',110],['#3d3d3d',95],['#c9a84c',100],['#1a1a1a',120],['#2d2d2d',90],['#4a4a4a',115]].map(([bg,h])=>`
+          <div style="background:${bg};height:${h}px;border-radius:10px;margin-bottom:8px;break-inside:avoid;display:flex;align-items:center;justify-content:center">
+            <span style="color:rgba(255,255,255,.1);font-size:.65rem;font-weight:700;letter-spacing:.1em">PHOTO</span>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Blog: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:20px">Blog</h2>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          ${[['How to Get the Most from Your Service','March 2025'],['What to Expect on Your First Visit','February 2025'],['Behind the Scenes: How We Work','January 2025'],['Top Tips for Maintaining Your Results','December 2024']].map(([t,d])=>`
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;display:flex">
+            <div style="width:6px;background:#c9a84c;flex-shrink:0"></div>
+            <div style="padding:14px"><p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;color:#fff;line-height:1.4;margin-bottom:5px">${t}</p><p style="font-size:.73rem;color:rgba(255,255,255,.35)">${d}</p></div>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Reviews: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:20px">Client Reviews</h2>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          ${[['Exceeded every expectation. Will be back.','Morgan K.'],['Professional from start to finish. Highly recommend.','Devon L.'],['Quick, thorough, and fairly priced. Great experience.','Riley S.'],['The best in town. No question about it.','Taylor W.']].map(([q,n])=>`
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px">
+            <p style="color:#c9a84c;margin-bottom:8px;letter-spacing:2px">★★★★★</p>
+            <p style="font-size:.85rem;color:rgba(255,255,255,.65);font-style:italic;line-height:1.7;margin-bottom:10px">"${q}"</p>
+            <p style="font-size:.78rem;color:#c9a84c;font-weight:600">— ${n}</p>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Membership: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:6px">Membership Plans</h2>
+        <p style="color:rgba(255,255,255,.4);font-size:.85rem;margin-bottom:24px">Save more. Get more.</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          ${[['Basic','$39/mo','2 sessions per month + 10% off add-ons',false],['Gold','$65/mo','4 sessions/mo + priority scheduling + free add-on',true],['Crown','$99/mo','Unlimited sessions + all services + exclusive perks',false]].map(([n,p,d,feat])=>`
+          <div style="background:${feat?'rgba(201,168,76,.1)':'rgba(255,255,255,.04)'};border:${feat?'1px solid rgba(201,168,76,.35)':'1px solid rgba(255,255,255,.07)'};border-radius:14px;padding:20px">
+            ${feat?'<div style="display:inline-block;background:#c9a84c;color:#fff;font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:10px;letter-spacing:.06em">MOST POPULAR</div>':''}
+            <p style="font-family:\'Poppins\',sans-serif;font-weight:700;color:#fff;font-size:1rem">${n}</p>
+            <p style="color:#c9a84c;font-weight:700;font-size:.95rem;margin:4px 0 10px">${p}</p>
+            <p style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.6">${d}</p>
+          </div>`).join('')}
+        </div>
+      </div>`,
+    Book: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:6px">Book a Session</h2>
+        <p style="color:rgba(255,255,255,.4);font-size:.85rem;margin-bottom:24px">Confirmed within one business day.</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <input style="padding:12px 16px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.05);color:#fff;font-size:.88rem" placeholder="Your name" readonly>
+          <input style="padding:12px 16px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.05);color:#fff;font-size:.88rem" placeholder="Phone number" readonly>
+          <select style="padding:12px 16px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);font-size:.88rem"><option>Choose staff member</option><option>Alex R.</option><option>Jordan T.</option><option>Casey M.</option></select>
+          <select style="padding:12px 16px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);font-size:.88rem"><option>Select service</option><option>Service One</option><option>Service Two</option><option>Bundle Package</option><option>Add-On</option></select>
+          <input style="padding:12px 16px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.05);color:#fff;font-size:.88rem" placeholder="Preferred date" readonly>
+          <button style="background:#c9a84c;color:#fff;border:none;border-radius:8px;padding:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer">Confirm Booking</button>
         </div>
       </div>`
-  },
-  ecommerce: {
-    label: 'E-Commerce',
-    sub: '$4k+ · Online store · Checkout + Member login',
-    url: 'wisdomlayers.com/demo/ecommerce',
-    html: `
-      <nav class="demo-nav" style="background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0">
-        <span class="demo-nav-logo" style="color:#1e293b">Grind &amp; Glow</span>
-        <ul class="demo-nav-links">
-          <li><a href="#" style="color:#6b7280">Shop</a></li>
-          <li><a href="#" style="color:#6b7280">About</a></li>
-          <li><a href="#" style="color:#6b7280">Log In</a></li>
-          <li><a href="#" style="background:#0d9488;color:#fff;padding:8px 18px;border-radius:20px;font-weight:700">Cart (3)</a></li>
-        </ul>
-      </nav>
-      <div style="background:#f0fdf9;padding:12px 24px;display:flex;align-items:center;gap:10px">
-        <input style="flex:1;padding:10px 16px;border-radius:8px;border:1.5px solid #d1fae5;background:#fff;font-size:.85rem;outline:none" placeholder="Search products..." readonly>
-        <select style="padding:10px 14px;border-radius:8px;border:1.5px solid #d1fae5;background:#fff;font-size:.82rem;color:#374151;outline:none"><option>All Categories</option></select>
-        <button style="padding:10px 20px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.85rem">Search</button>
-      </div>
-      <div class="demo-section" style="background:#fff;padding-top:24px">
-        <h2>Featured Products</h2>
-        <div class="demo-grid-3" style="gap:14px">
+  };
+  window._currentPages = pages;
+  return `<div id="dsite" style="font-family:'Inter',sans-serif;background:#0a0a0a;position:relative">
+    ${STAMP}
+    ${buildNav(pages, '#c9a84c', '#0a0a0a')}
+    <div id="dpage">${pages.Home}</div>
+    <div style="background:#050505;padding:22px 24px;border-top:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.3)"><p style="color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:3px">Demo Business</p><p style="font-size:.72rem">Built by WisdomLayers · wisdomlayers.com</p></div>
+  </div>`;
+}
+
+/* =================================================
+   TIER 5 — E-COMMERCE  ($4k+ · Shop + cart)
+================================================= */
+function buildEcommerce() {
+  const pages = {
+    Shop: `
+      <div style="background:#0a0a0a;padding:20px 20px 100px">
+        <div style="display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px">
+          ${['All','Category 1','Category 2','Category 3'].map((c,i)=>`<button style="background:${i===0?'#c9a84c':'rgba(255,255,255,.07)'};color:${i===0?'#fff':'rgba(255,255,255,.6)'};border:1px solid ${i===0?'#c9a84c':'rgba(255,255,255,.1)'};padding:7px 16px;border-radius:20px;font-size:.78rem;font-weight:600;white-space:nowrap;flex-shrink:0;cursor:pointer">${c}</button>`).join('')}
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
           ${[
-            ['Lemon Scrub','$24.99','#fef9c3'],
-            ['Charcoal Mask','$31.00','#1e293b'],
-            ['Rose Toner','$19.99','#fce7f3'],
-            ['Vitamin C Serum','$44.99','#d1fae5'],
-            ['Glow Moisturizer','$28.50','#e0f2fe'],
-            ['Night Repair Oil','$52.00','#1e1e2e']
-          ].map(([name,price,bg]) => `
-          <div style="border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff">
-            <div style="height:100px;background:${bg};display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:${bg==='#1e293b'||bg==='#1e1e2e'?'rgba(255,255,255,.6)':'#374151'}">${name}</div>
+            ['Product One','Category 1','$18.99','#1a1a1a'],
+            ['Product Two','Category 2','$22.50','#2d2d2d'],
+            ['Product Three','Category 1','$14.99','#3d3d3d'],
+            ['Product Four','Category 3','$19.99','#c9a84c'],
+            ['Product Five','Category 2','$29.00','#1a1a1a'],
+            ['Product Six','Category 3','$89.99','#2d2d2d'],
+          ].map(([n,cat,price,bg],i)=>`
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
+            <div style="background:${bg};height:100px;display:flex;align-items:center;justify-content:center">
+              <span style="color:rgba(255,255,255,.2);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-align:center;padding:0 8px">PHOTO</span>
+            </div>
             <div style="padding:12px">
-              <p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.82rem;color:#1e293b;margin-bottom:4px">${name}</p>
+              <p style="font-size:.62rem;color:rgba(255,255,255,.35);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em">${cat}</p>
+              <p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.82rem;color:#fff;margin-bottom:8px;line-height:1.3">${n}</p>
               <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="color:#0d9488;font-weight:800;font-size:.9rem">${price}</span>
-                <button style="background:#0d9488;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:.7rem;font-weight:700">Add to Cart</button>
+                <span style="font-family:'Poppins',sans-serif;font-weight:800;color:#c9a84c">${price}</span>
+                <button id="cart-btn-${i}" onclick="window._shopAdd(${i},'${n}',${price.replace('$','')})" style="background:#c9a84c;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:.72rem;font-weight:700;cursor:pointer">Add to Cart</button>
               </div>
             </div>
           </div>`).join('')}
         </div>
-      </div>
-      <div style="position:sticky;bottom:0;background:#0d9488;padding:14px 24px;display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <p style="color:#fff;font-weight:700;font-family:'Poppins',sans-serif;font-size:.9rem">3 items in cart</p>
-          <p style="color:rgba(255,255,255,.7);font-size:.75rem">$75.98 total</p>
+      </div>`,
+    About: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:16px;padding:28px;margin-bottom:24px">
+          <p style="font-size:.7rem;font-weight:700;letter-spacing:.12em;color:#c9a84c;margin-bottom:8px;text-transform:uppercase">Our Story</p>
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;line-height:1.3;margin-bottom:12px">More than a transaction. A relationship.</h2>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7">Founded in 2019 with one goal: make great products accessible. Today we ship nationwide and stand behind every order.</p>
         </div>
-        <button style="background:#fff;color:#0d9488;border:none;border-radius:20px;padding:10px 24px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem">Checkout →</button>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center">
+          ${[['5yr','In Business'],['3','Team Members'],['400+','Customers']].map(([n,l])=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px"><p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.3rem;color:#c9a84c">${n}</p><p style="font-size:.68rem;color:rgba(255,255,255,.35);margin-top:2px">${l}</p></div>`).join('')}
+        </div>
+      </div>`,
+    Account: `
+      <div style="padding:40px 24px;background:#0a0a0a">
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:20px">My Account</h2>
+        <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:#c9a84c;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;color:#fff">JD</div>
+          <div><p style="font-family:'Poppins',sans-serif;font-weight:700;color:#fff">Jordan Davis</p><p style="font-size:.78rem;color:rgba(255,255,255,.4)">Gold Member · Since 2022</p></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${[['Order History','3 recent orders'],['Saved Addresses','2 saved'],['Membership','Gold Plan · Active'],['Upcoming Appointment','Alex R. · This Saturday 2pm']].map(([t,d])=>`
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center">
+            <div><p style="font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;color:#fff">${t}</p><p style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:2px">${d}</p></div>
+            <span style="color:rgba(255,255,255,.25)">›</span>
+          </div>`).join('')}
+        </div>
       </div>`
-  }
+  };
+  window._currentPages = pages;
+  window._shopCart = [];
+  window._shopAdd = function(i, name, price) {
+    window._shopCart.push({name, price});
+    const bar = document.getElementById('shop-cart-bar');
+    const cnt = document.getElementById('shop-cart-count');
+    const tot = document.getElementById('shop-cart-total');
+    if (bar) bar.style.display = 'flex';
+    if (cnt) cnt.textContent = window._shopCart.length + ' item' + (window._shopCart.length > 1 ? 's' : '');
+    if (tot) tot.textContent = '$' + window._shopCart.reduce((s,x)=>s+x.price,0).toFixed(2);
+    const btn = document.getElementById('cart-btn-' + i);
+    if (btn) { btn.textContent = 'Added!'; btn.style.background = '#15803d'; setTimeout(()=>{btn.textContent='Add to Cart';btn.style.background='#c9a84c';},1200); }
+  };
+  const navKeys = Object.keys(pages);
+  const links = navKeys.map((k,i)=>
+    `<button data-page="${k}" onclick="demoSwitch(this,'${k}')" style="background:${i===0?'#c9a84c':'transparent'};color:${i===0?'#fff':'rgba(255,255,255,.5)'};border:none;padding:8px 14px;border-radius:20px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;white-space:nowrap">${k}</button>`
+  ).join('');
+  return `<div id="dsite" style="font-family:'Inter',sans-serif;background:#0a0a0a;position:relative">
+    ${STAMP}
+    <nav data-active="#c9a84c" style="background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 16px;height:54px;position:sticky;top:0;z-index:50;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none">
+      <span style="font-family:'Poppins',sans-serif;font-weight:800;color:#fff;font-size:.9rem;white-space:nowrap;margin-right:10px">Demo Store</span>
+      ${links}
+    </nav>
+    <div id="dpage">${pages.Shop}</div>
+    <div id="shop-cart-bar" style="display:none;position:sticky;bottom:0;background:#c9a84c;padding:14px 20px;align-items:center;justify-content:space-between;z-index:50">
+      <div><p id="shop-cart-count" style="color:#fff;font-family:'Poppins',sans-serif;font-weight:700;font-size:.9rem">0 items</p><p id="shop-cart-total" style="color:rgba(255,255,255,.75);font-size:.75rem">$0.00</p></div>
+      <button style="background:#fff;color:#c9a84c;border:none;padding:10px 22px;border-radius:20px;font-family:'Poppins',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer">Checkout</button>
+    </div>
+    <div style="background:#050505;padding:22px 24px;border-top:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.3)"><p style="color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:3px">Demo Store</p><p style="font-size:.72rem">Built by WisdomLayers · wisdomlayers.com</p></div>
+  </div>`;
+}
+
+const demos = {
+  landing:      { label:'Landing Page',  sub:'$599 · 1 page · Single scroll',              url:'demobusiness.com', html: () => buildLanding() },
+  starter:      { label:'Starter',       sub:'$999 · 4 pages · Nav + gallery',              url:'demobusiness.com', html: () => buildStarter() },
+  professional: { label:'Professional',  sub:'$1,499 · 6 pages · Booking + blog + team',    url:'demobusiness.com', html: () => buildProfessional() },
+  premium:      { label:'Premium',       sub:'$2,199 · 8 pages · Dark theme + membership',  url:'demobusiness.com', html: () => buildPremium() },
+  ecommerce:    { label:'E-Commerce',    sub:'$4k+ · Full store + member accounts + cart',  url:'demostore.com',    html: () => buildEcommerce() },
 };
+
 
 /* ── DEMO MODAL OPEN/CLOSE ── */
 const overlay = document.getElementById('demo-overlay');
@@ -1800,7 +1945,7 @@ document.querySelectorAll('.pt-preview-btn').forEach(btn => {
     document.getElementById('demo-tier-label').textContent = d.label;
     document.getElementById('demo-tier-sub').textContent = d.sub;
     document.getElementById('demo-url-text').textContent = d.url;
-    demoScroll.innerHTML = d.html;
+    demoScroll.innerHTML = d.html();
     demoScroll.scrollTop = 0;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
