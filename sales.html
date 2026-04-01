@@ -641,10 +641,8 @@ a { text-decoration:none; }
   font-size:.7rem; color:#6b7280;
 }
 .demo-url-bar svg { flex-shrink:0; }
-#demo-scroll {
-  flex:1; overflow-y:auto; overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  background:#fff;
+#demo-frame {
+  flex:1; width:100%; border:none; background:#fff; display:block;
 }
 
 /* tap-to-preview button on each tier */
@@ -823,7 +821,7 @@ a { text-decoration:none; }
         <span id="demo-url-text" style="color:#9ca3af"></span>
       </div>
     </div>
-    <div id="demo-scroll"></div>
+    <iframe id="demo-frame" style="flex:1;width:100%;border:none;background:#fff"></iframe>
   </div>
 </div>
 
@@ -845,7 +843,7 @@ a { text-decoration:none; }
 <section id="s0" data-dark="1">
   <div id="hero">
     <div class="hero-logo">
-      <img src="assets/images/Logo_Cropped.webp" alt="WisdomLayers">
+      <img src="assets/images/brand/Logo_Cropped.webp" alt="WisdomLayers">
     </div>
 
     <div class="hero-badge">Taking on new clients now</div>
@@ -945,7 +943,7 @@ a { text-decoration:none; }
 
     <div class="panel on" id="p-m2w">
       <div class="project-card">
-        <img src="assets/images/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Homepage">
+        <img src="assets/images/portfolio/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Homepage">
         <div class="project-card-body">
           <div class="project-tag">Therapy Practice · Multi-Page Site</div>
           <h3>Miles2Wisdom</h3>
@@ -963,7 +961,7 @@ a { text-decoration:none; }
 
     <div class="panel" id="p-pj">
       <div class="project-card">
-        <img src="assets/images/pjpressure/pj-home-desktop.webp" alt="PJ Pressure Homepage">
+        <img src="assets/images/portfolio/pjpressure/pj-home-desktop.webp" alt="PJ Pressure Homepage">
         <div class="project-card-body">
           <div class="project-tag">Pressure Washing · Service Business</div>
           <h3>PJ Pressure</h3>
@@ -981,7 +979,7 @@ a { text-decoration:none; }
 
     <div class="panel" id="p-tn">
       <div class="project-card">
-        <img src="assets/images/triplenickle/tn-home-desktop.webp" alt="Triple Nickle Homepage">
+        <img src="assets/images/portfolio/triplenickle/tn-home-desktop.webp" alt="Triple Nickle Homepage">
         <div class="project-card-body">
           <div class="project-tag">Historical Nonprofit · 8-Page Site</div>
           <h3>Triple Nickle — 555th PIB Assoc.</h3>
@@ -1000,7 +998,7 @@ a { text-decoration:none; }
 
     <div class="panel" id="p-nc">
       <div class="project-card">
-        <img src="assets/images/ncrmpa1/ncrmpa-home-card.webp" alt="NC Retired Military Police Assoc.">
+        <img src="assets/images/portfolio/ncrmpa/ncrmpa-home-card.webp" alt="NC Retired Military Police Assoc.">
         <div class="project-card-body">
           <div class="project-tag">Military Veterans Nonprofit · Multi-Page</div>
           <h3>NC Retired Military Police Assoc.</h3>
@@ -1364,7 +1362,7 @@ a { text-decoration:none; }
     <h2 class="reveal" style="transition-delay:.08s">Don't take our word for it.</h2>
 
     <div class="review-card">
-      <img class="review-img" src="assets/images/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Website">
+      <img class="review-img" src="assets/images/portfolio/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Website">
       <div class="review-body">
         <div class="stars">★★★★★</div>
         <p class="review-text">WisdomLayers completely transformed our online presence. The site looks incredible and our clients actually comment on it when they book.</p>
@@ -1379,7 +1377,7 @@ a { text-decoration:none; }
     </div>
 
     <div class="review-card">
-      <img class="review-img" src="assets/images/pjpressure/pj-home-desktop.webp" alt="PJ Pressure Website">
+      <img class="review-img" src="assets/images/portfolio/pjpressure/pj-home-desktop.webp" alt="PJ Pressure Website">
       <div class="review-body">
         <div class="stars">★★★★★</div>
         <p class="review-text">The website they built for my pressure washing business has been bringing in consistent leads. It looks way more professional than I expected for the price.</p>
@@ -1410,7 +1408,7 @@ a { text-decoration:none; }
         <p class="small">We'll reach out within 24 hours.</p>
         <a href="https://wisdomlayers.com/#contact" class="btn-primary">Go to wisdomlayers.com →</a>
         <div class="cta-divider">or</div>
-        <a href="https://wisdomlayers.com/html/projects.html" class="btn-outline-white">Browse Full Portfolio</a>
+        <a href="https://wisdomlayers.com/pages/projects.html" class="btn-outline-white">Browse Full Portfolio</a>
       </div>
 
       <div class="cta-contact">
@@ -1935,18 +1933,26 @@ const demos = {
 
 /* ── DEMO MODAL OPEN/CLOSE ── */
 const overlay = document.getElementById('demo-overlay');
-const demoScroll = document.getElementById('demo-scroll');
+const demoFrame = document.getElementById('demo-frame');
+
+const demoFiles = {
+  landing:      { label:'Landing Page',  sub:'$599 · 1 page · Single scroll',              url:'demo/landing.html' },
+  starter:      { label:'Starter',       sub:'$999 · 4 pages · Nav + gallery',              url:'demo/starter.html' },
+  professional: { label:'Professional',  sub:'$1,499 · 6 pages · Booking + blog + team',   url:'demo/professional.html' },
+  premium:      { label:'Premium',       sub:'$2,199 · 8 pages · Membership + reviews',    url:'demo/premium.html' },
+  ecommerce:    { label:'E-Commerce',    sub:'$4k+ · Full store · Cart + accounts',         url:'demo/ecommerce.html' },
+};
+
 document.querySelectorAll('.pt-preview-btn').forEach(btn => {
   btn.addEventListener('click', e => {
     e.stopPropagation();
     const key = btn.dataset.demo;
-    const d = demos[key];
+    const d = demoFiles[key];
     if (!d) return;
     document.getElementById('demo-tier-label').textContent = d.label;
     document.getElementById('demo-tier-sub').textContent = d.sub;
     document.getElementById('demo-url-text').textContent = d.url;
-    demoScroll.innerHTML = d.html();
-    demoScroll.scrollTop = 0;
+    demoFrame.src = d.url;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   });
@@ -1954,11 +1960,13 @@ document.querySelectorAll('.pt-preview-btn').forEach(btn => {
 document.getElementById('demo-close').addEventListener('click', () => {
   overlay.classList.remove('open');
   document.body.style.overflow = '';
+  demoFrame.src = '';
 });
 overlay.addEventListener('click', e => {
   if (e.target === overlay) {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
+    demoFrame.src = '';
   }
 });
 

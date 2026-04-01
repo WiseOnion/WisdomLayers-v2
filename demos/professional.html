@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--gold:#b8942e;--gold-light:#d4b254;--gold-pale:#f0e4b4;--ink:#08080d;--ink2:#111118;--surface:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--text:#e8e4da;--muted:rgba(232,228,218,.45)}
+body{font-family:'Syne',sans-serif;background:var(--ink);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+.stamp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:5rem;color:rgba(255,255,255,.03);border:5px solid rgba(255,255,255,.03);padding:8px 28px;border-radius:6px;pointer-events:none;z-index:9999;letter-spacing:.2em;white-space:nowrap}
+
+/* NAV */
+nav{background:rgba(8,8,13,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;gap:2px;position:sticky;top:0;z-index:20;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1rem;color:#fff;white-space:nowrap;margin-right:14px;flex-shrink:0;letter-spacing:.04em}
+.nav-link{padding:7px 14px;border-radius:6px;font-size:.72rem;font-weight:700;color:var(--muted);border:none;background:transparent;cursor:pointer;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;flex-shrink:0}
+.nav-link.active{background:var(--gold);color:var(--ink)}
+.nav-link:hover:not(.active){color:var(--gold-pale)}
+
+.page{display:none}
+.page.active{display:block}
+.tag{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;line-height:1.15;color:#fff;letter-spacing:-.01em}
+h2 em{font-style:italic;color:var(--gold-light)}
+.inner{max-width:620px;margin:0 auto;padding:52px 24px}
+input,textarea,select{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:9px;font-size:.86rem;font-family:'Syne',sans-serif;background:var(--surface);outline:none;color:#fff;margin-bottom:10px;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+select option{background:#111;color:#fff}
+textarea{height:90px;resize:none}
+.submit{width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:9px;padding:14px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;letter-spacing:.04em;text-transform:uppercase;transition:opacity .2s}
+.submit:hover{opacity:.88}
+
+/* HOME */
+.home-hero{position:relative;overflow:hidden;min-height:280px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 20% 40%,rgba(184,148,46,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 60%,rgba(184,148,46,.06) 0%,transparent 60%);pointer-events:none}
+.hero-content{position:relative;padding:60px 28px 48px;display:grid;grid-template-columns:1fr 220px;gap:0;align-items:center}
+@media(max-width:560px){.hero-content{grid-template-columns:1fr}}
+.hero-text .eyebrow{display:inline-block;background:rgba(184,148,46,.12);border:1px solid rgba(184,148,46,.25);color:var(--gold-light);font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:6px 14px;border-radius:4px;margin-bottom:18px;text-transform:uppercase}
+.hero-text h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5.5vw,3rem);font-weight:700;line-height:1.08;letter-spacing:-.01em;margin-bottom:16px;color:#fff}
+.hero-text h1 em{font-style:italic;color:var(--gold-light)}
+.hero-text p{color:var(--muted);font-size:.9rem;line-height:1.8;max-width:360px;margin-bottom:24px;font-weight:400}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--ink);border:none;padding:12px 24px;border-radius:7px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:opacity .2s}
+.btn-gold:hover{opacity:.88}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.6);border:1px solid var(--border);padding:11px 22px;border-radius:7px;font-family:'Syne',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;letter-spacing:.04em;transition:all .2s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-light)}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.hero-card h3{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:#fff;margin-bottom:4px;letter-spacing:.02em}
+.hero-card-submit{background:var(--gold);color:var(--ink);border:none;border-radius:7px;padding:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 24px 40px;max-width:620px;margin:0 auto}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.stat .n{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.6rem;color:var(--gold-light);margin-bottom:4px;line-height:1}
+.stat .l{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+
+/* SERVICES */
+.srow{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border);gap:16px}
+.srow:last-child{border:none}
+.sname{font-weight:600;font-size:.9rem;color:#fff;margin-bottom:3px}
+.sdesc{font-size:.79rem;color:var(--muted);line-height:1.55}
+.sprice{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--gold-light);font-size:1rem;flex-shrink:0}
+
+/* TEAM */
+.team-grid{display:flex;flex-direction:column;gap:12px}
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px}
+.avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,rgba(184,148,46,.3),rgba(212,178,84,.1));border:1px solid rgba(184,148,46,.3);color:var(--gold-light);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:.04em}
+.team-name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:.95rem;color:#fff;margin-bottom:2px}
+.team-role{font-size:.77rem;color:var(--muted)}
+
+/* GALLERY */
+.gallery-grid{columns:2;gap:10px}
+.photo{border-radius:10px;margin-bottom:10px;break-inside:avoid;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.1)}
+
+/* BLOG */
+.blog-list{display:flex;flex-direction:column;gap:12px}
+.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex}
+.blog-bar{width:3px;background:linear-gradient(to bottom,var(--gold),transparent);flex-shrink:0}
+.blog-body{padding:15px 17px}
+.blog-cat{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.blog-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:#fff;line-height:1.4;margin-bottom:5px}
+.blog-date{font-size:.72rem;color:var(--muted)}
+
+/* REVIEWS */
+.review{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:12px}
+.stars{color:var(--gold);font-size:.88rem;margin-bottom:10px;letter-spacing:2px}
+.review q{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.75);line-height:1.75;display:block;margin-bottom:14px;font-style:italic}
+.reviewer{font-size:.77rem;font-weight:600;color:var(--gold-light);letter-spacing:.04em}
+
+/* MEMBERSHIP */
+.plan{border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:14px;position:relative;background:var(--surface)}
+.plan.featured{border-color:var(--gold);background:rgba(184,148,46,.07)}
+.plan-badge{position:absolute;top:-12px;left:24px;background:var(--gold);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:4px;text-transform:uppercase;white-space:nowrap}
+.plan-name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.2rem;color:#fff;margin-bottom:6px}
+.plan-price{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.8rem;color:var(--gold-light);margin-bottom:14px;line-height:1}
+.plan-price span{font-size:.85rem;font-weight:400;color:var(--muted);font-family:'Syne',sans-serif}
+.plan-feature{font-size:.82rem;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.plan-feature:last-child{border:none}
+.check{width:16px;height:16px;border-radius:50%;background:rgba(184,148,46,.2);color:var(--gold);font-size:.65rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+.plan.featured .plan-feature{color:rgba(255,255,255,.65)}
+
+/* MAP */
+.map-ph{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;height:130px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;letter-spacing:.1em;color:var(--muted);margin-bottom:22px;text-transform:uppercase}
+
+footer{padding:22px 24px;text-align:center;font-size:.74rem;color:var(--muted);border-top:1px solid var(--border)}
+footer span{color:var(--gold);font-weight:700}
+</style>
+</head>
+<body>
+<div class="stamp">DEMO</div>
+
+<nav>
+  <span class="logo">Your Business</span>
+  <button class="nav-link active" onclick="show('home',this)">Home</button>
+  <button class="nav-link" onclick="show('services',this)">Services</button>
+  <button class="nav-link" onclick="show('team',this)">Team</button>
+  <button class="nav-link" onclick="show('gallery',this)">Gallery</button>
+  <button class="nav-link" onclick="show('blog',this)">Blog</button>
+  <button class="nav-link" onclick="show('reviews',this)">Reviews</button>
+  <button class="nav-link" onclick="show('membership',this)">Membership</button>
+  <button class="nav-link" onclick="show('book',this)">Book</button>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="home-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="eyebrow">Now Accepting New Clients</div>
+        <h1>Your Business.<br><em>At Its Finest.</em></h1>
+        <p>Premium service, experienced team, and a standard that speaks for itself. Booking is simple — we handle the rest.</p>
+        <div class="hero-btns">
+          <button class="btn-gold" onclick="show('book',document.querySelectorAll('.nav-link')[7])">Book Now</button>
+          <button class="btn-ghost" onclick="show('membership',document.querySelectorAll('.nav-link')[6])">See Membership</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Quick Reserve</h3>
+        <select style="margin-bottom:0"><option>Select service</option><option>Service One</option><option>Service Two</option><option>Service Three</option></select>
+        <select style="margin-bottom:0"><option>Choose member</option><option>Alex R.</option><option>Jordan T.</option><option>Casey M.</option></select>
+        <input placeholder="Your name" style="margin-bottom:0">
+        <input placeholder="Preferred date" style="margin-bottom:0">
+        <button class="hero-card-submit">Reserve →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="n" data-count="10">0</div><div class="l">Years Running</div></div>
+    <div class="stat"><div class="n" data-count="1200">0</div><div class="l">Clients Served</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Team Members</div></div>
+    <div class="stat"><div class="n">5★</div><div class="l">Avg Rating</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="page" id="services">
+  <div class="inner">
+    <div class="tag">What We Offer</div>
+    <h2 style="margin-bottom:28px">Services</h2>
+    <div class="srow"><div><div class="sname">Service One</div><div class="sdesc">Everything included, start to finish.</div></div><div class="sprice">$99+</div></div>
+    <div class="srow"><div><div class="sname">Service Two</div><div class="sdesc">Enhanced with additional deliverables.</div></div><div class="sprice">$149+</div></div>
+    <div class="srow"><div><div class="sname">Service Three</div><div class="sdesc">Full-scope for larger projects.</div></div><div class="sprice">$199+</div></div>
+    <div class="srow"><div><div class="sname">Service Four</div><div class="sdesc">Specialty option for specific needs.</div></div><div class="sprice">$249+</div></div>
+    <div class="srow"><div><div class="sname">Service Five</div><div class="sdesc">Premium tier, priority scheduling.</div></div><div class="sprice">$299+</div></div>
+    <div class="srow"><div><div class="sname">Service Six</div><div class="sdesc">Everything included at the top level.</div></div><div class="sprice">$349+</div></div>
+    <div class="srow"><div><div class="sname">Add-On Premium</div><div class="sdesc">Exclusive add-on for top-tier clients.</div></div><div class="sprice">$99+</div></div>
+    <div class="srow"><div><div class="sname">Bundle Package</div><div class="sdesc">Maximum value — all services combined.</div></div><div class="sprice">$599+</div></div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div class="page" id="team">
+  <div class="inner">
+    <div class="tag">The People</div>
+    <h2 style="margin-bottom:24px">Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card"><div class="avatar">AR</div><div><div class="team-name">Alex R.</div><div class="team-role">Lead Specialist · 10 years experience</div></div></div>
+      <div class="team-card"><div class="avatar">JT</div><div><div class="team-name">Jordan T.</div><div class="team-role">Senior Technician · 7 years experience</div></div></div>
+      <div class="team-card"><div class="avatar">CM</div><div><div class="team-name">Casey M.</div><div class="team-role">Coordinator · 5 years experience</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="page" id="gallery">
+  <div class="inner">
+    <div class="tag">Our Work</div>
+    <h2 style="margin-bottom:24px">Gallery</h2>
+    <div class="gallery-grid">
+      <div class="photo" style="height:160px;background:linear-gradient(135deg,#1a1208,#3d2e0a)">PHOTO</div>
+      <div class="photo" style="height:110px;background:linear-gradient(135deg,#b8942e,#d4b254)">PHOTO</div>
+      <div class="photo" style="height:134px;background:linear-gradient(135deg,#0d0d0d,#1a1a1a)">PHOTO</div>
+      <div class="photo" style="height:150px;background:linear-gradient(135deg,#2a1f06,#4a3510)">PHOTO</div>
+      <div class="photo" style="height:120px;background:linear-gradient(135deg,#3d2e0a,#b8942e)">PHOTO</div>
+      <div class="photo" style="height:144px;background:linear-gradient(135deg,#111108,#2d2510)">PHOTO</div>
+      <div class="photo" style="height:110px;background:linear-gradient(135deg,#d4b254,#f0e4b4)">PHOTO</div>
+      <div class="photo" style="height:160px;background:linear-gradient(135deg,#1a1208,#0d0d0d)">PHOTO</div>
+      <div class="photo" style="height:130px;background:linear-gradient(135deg,#b8942e,#2a1f06)">PHOTO</div>
+      <div class="photo" style="height:110px;background:linear-gradient(135deg,#0d0d0d,#3d2e0a)">PHOTO</div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG -->
+<div class="page" id="blog">
+  <div class="inner">
+    <div class="tag">Tips &amp; Updates</div>
+    <h2 style="margin-bottom:24px">Blog</h2>
+    <div class="blog-list">
+      <div class="blog-card"><div class="blog-bar"></div><div class="blog-body"><div class="blog-cat">Getting Started</div><div class="blog-title">5 Things to Know Before Your First Appointment</div><div class="blog-date">March 2025</div></div></div>
+      <div class="blog-card"><div class="blog-bar"></div><div class="blog-body"><div class="blog-cat">Tips</div><div class="blog-title">How to Get the Most Out of Your Service</div><div class="blog-date">February 2025</div></div></div>
+      <div class="blog-card"><div class="blog-bar"></div><div class="blog-body"><div class="blog-cat">Value</div><div class="blog-title">Why Regular Maintenance Saves You Money</div><div class="blog-date">January 2025</div></div></div>
+      <div class="blog-card"><div class="blog-bar"></div><div class="blog-body"><div class="blog-cat">Industry</div><div class="blog-title">What Sets a Great Provider Apart</div><div class="blog-date">December 2024</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="page" id="reviews">
+  <div class="inner">
+    <div class="tag">What Clients Say</div>
+    <h2 style="margin-bottom:24px">Reviews</h2>
+    <div class="review"><div class="stars">★★★★★</div><q>Best experience I've had. Professional, on time, and results were exactly what I wanted.</q><div class="reviewer">— Sarah M.</div></div>
+    <div class="review"><div class="stars">★★★★★</div><q>Booked online, showed up, everything was handled flawlessly. Will be back every time.</q><div class="reviewer">— James R.</div></div>
+    <div class="review"><div class="stars">★★★★★</div><q>Incredibly knowledgeable team. They explained everything and delivered beyond expectations.</q><div class="reviewer">— Andre B.</div></div>
+    <div class="review"><div class="stars">★★★★★</div><q>I've tried other places but nobody comes close. This is the only spot I trust.</q><div class="reviewer">— Tamara W.</div></div>
+  </div>
+</div>
+
+<!-- MEMBERSHIP -->
+<div class="page" id="membership">
+  <div class="inner">
+    <div class="tag">Save More, Come More</div>
+    <h2 style="margin-bottom:8px">Membership Plans</h2>
+    <p style="color:var(--muted);font-size:.87rem;margin-bottom:28px;font-weight:400">Join a plan and save on every visit.</p>
+
+    <div class="plan">
+      <div class="plan-name">Essential</div>
+      <div class="plan-price">$39<span>/mo</span></div>
+      <div class="plan-feature"><div class="check">✓</div>2 services per month</div>
+      <div class="plan-feature"><div class="check">✓</div>10% off all add-ons</div>
+      <div class="plan-feature"><div class="check">✓</div>Priority scheduling</div>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Gold</div>
+      <div class="plan-price">$65<span>/mo</span></div>
+      <div class="plan-feature"><div class="check">✓</div>4 services per month</div>
+      <div class="plan-feature"><div class="check">✓</div>20% off all add-ons</div>
+      <div class="plan-feature"><div class="check">✓</div>Priority scheduling</div>
+      <div class="plan-feature"><div class="check">✓</div>Free upgrade once a month</div>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Prestige</div>
+      <div class="plan-price">$99<span>/mo</span></div>
+      <div class="plan-feature"><div class="check">✓</div>Unlimited services</div>
+      <div class="plan-feature"><div class="check">✓</div>30% off all add-ons</div>
+      <div class="plan-feature"><div class="check">✓</div>Same-day booking guaranteed</div>
+      <div class="plan-feature"><div class="check">✓</div>Free upgrades anytime</div>
+      <div class="plan-feature"><div class="check">✓</div>Dedicated team member</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK -->
+<div class="page" id="book">
+  <div class="inner">
+    <div class="tag">Reserve Your Appointment</div>
+    <h2 style="margin-bottom:8px">Book a Session</h2>
+    <p style="color:var(--muted);font-size:.87rem;margin-bottom:28px">Confirmed within a few hours.</p>
+    <div class="map-ph">MAP — 123 Your Street, Your City</div>
+    <input placeholder="Your full name">
+    <input placeholder="Phone number">
+    <select><option>Select team member</option><option>Alex R.</option><option>Jordan T.</option><option>Casey M.</option><option>Any available</option></select>
+    <select><option>Select a service</option><option>Service One — $99+</option><option>Service Two — $149+</option><option>Service Three — $199+</option></select>
+    <input placeholder="Preferred date &amp; time">
+    <textarea placeholder="Any notes or special requests?"></textarea>
+    <button class="submit">Confirm Reservation →</button>
+  </div>
+</div>
+
+<footer>Built by <span>WisdomLayers</span> · wisdomlayers.com</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn && btn.classList) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = +el.dataset.count;
+    let cur = 0;
+    const step = target / 40;
+    const iv = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      const rounded = Math.round(cur);
+      el.textContent = rounded + (target >= 1000 ? '+' : target > 10 ? '+' : '');
+      if (cur >= target) clearInterval(iv);
+    }, 20);
+  });
+}
+animateCounters();
+</script>
+</body>
+</html>

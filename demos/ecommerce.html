@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — E-Commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0c0c10;--surface:#14141a;--surface2:#1c1c24;--border:rgba(255,255,255,.07);--accent:#4ade80;--accent2:#22c55e;--text:#f0f0f0;--muted:rgba(240,240,240,.45);--radius:12px}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+.stamp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(255,255,255,.03);border:5px solid rgba(255,255,255,.03);padding:8px 28px;border-radius:6px;pointer-events:none;z-index:9998;letter-spacing:.3em;white-space:nowrap}
+
+/* NAV */
+nav{background:rgba(12,12,16,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;gap:4px;position:sticky;top:0;z-index:20;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#fff;white-space:nowrap;margin-right:auto;flex-shrink:0;letter-spacing:.1em}
+.nav-link{padding:7px 13px;border-radius:7px;font-size:.79rem;font-weight:600;color:var(--muted);border:none;background:transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .2s;flex-shrink:0}
+.nav-link.active{background:var(--accent);color:#000}
+.cart-btn{background:var(--surface2);color:#fff;border:1px solid var(--border);padding:8px 16px;border-radius:7px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.79rem;cursor:pointer;white-space:nowrap;flex-shrink:0;letter-spacing:.02em;transition:all .2s}
+.cart-btn.has-items{background:var(--accent);color:#000;border-color:var(--accent)}
+
+.page{display:none}
+.page.active{display:block}
+.tag{font-size:.67rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;color:#fff;letter-spacing:.06em}
+
+/* SHOP — SEARCH + FILTERS */
+.shop-top{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:56px;z-index:15}
+.search-row{display:flex;gap:8px;margin-bottom:10px}
+.search-input{flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:.84rem;font-family:'Space Grotesk',sans-serif;background:var(--bg);color:#fff;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--accent)}
+.search-input::placeholder{color:var(--muted)}
+.filter-row{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-btn{padding:7px 15px;border-radius:20px;font-size:.76rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0;letter-spacing:.02em;transition:all .2s}
+.filter-btn.on{background:var(--accent);color:#000;border-color:var(--accent)}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px 20px 120px}
+.product-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,transform .2s}
+.product-card:hover{border-color:rgba(74,222,128,.2);transform:translateY(-1px)}
+.product-img{height:110px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.12);position:relative;overflow:hidden}
+.product-img .category-dot{position:absolute;top:8px;left:8px;background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);color:var(--accent);font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.04em}
+.product-body{padding:12px}
+.product-cat{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.product-name{font-weight:700;font-size:.84rem;color:#fff;margin-bottom:10px;line-height:1.3}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--accent);letter-spacing:.06em}
+.add-btn{background:var(--surface2);color:#fff;border:1px solid var(--border);padding:6px 14px;border-radius:6px;font-size:.73rem;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:all .2s}
+.add-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+.add-btn.added{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+/* CART BAR */
+#cart-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:14px 20px;display:none;align-items:center;justify-content:space-between;z-index:100;gap:12px;backdrop-filter:blur(12px)}
+.cart-info .count{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:1rem;letter-spacing:.08em;margin-bottom:1px}
+.cart-info .total{font-size:.76rem;color:var(--muted)}
+.checkout-btn{background:var(--accent);color:#000;border:none;padding:12px 24px;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;flex-shrink:0;letter-spacing:.02em;transition:opacity .2s}
+.checkout-btn:hover{opacity:.88}
+
+/* ABOUT */
+.about-hero{background:var(--surface);border-bottom:1px solid var(--border);padding:52px 24px}
+.about-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,7vw,3rem);line-height:1.05;letter-spacing:.08em;color:#fff;margin-bottom:12px}
+.about-hero h1 em{font-style:normal;color:var(--accent)}
+.about-hero p{color:var(--muted);font-size:.9rem;line-height:1.8;max-width:480px;font-weight:300}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:28px 20px;max-width:580px;margin:0 auto}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center}
+.stat .n{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--accent);letter-spacing:.08em;margin-bottom:4px}
+.stat .l{font-size:.7rem;color:var(--muted);font-weight:500}
+.about-body{padding:0 20px 52px;max-width:580px;margin:0 auto}
+.about-body p{font-size:.88rem;color:rgba(240,240,240,.65);line-height:1.85;font-weight:300}
+
+/* ACCOUNT */
+.acct-inner{padding:40px 20px;max-width:560px;margin:0 auto}
+.acct-profile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.acct-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#000;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.acct-name{font-weight:700;font-size:.95rem;color:#fff;margin-bottom:2px}
+.acct-sub{font-size:.76rem;color:var(--muted)}
+.section-head{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.1em;color:var(--muted);margin:20px 0 12px;text-transform:uppercase}
+.acct-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;transition:border-color .2s}
+.acct-row:hover{border-color:rgba(74,222,128,.2)}
+.acct-label{font-weight:700;font-size:.87rem;color:#fff;margin-bottom:2px}
+.acct-val{font-size:.76rem;color:var(--muted)}
+.acct-arrow{color:var(--muted);font-size:1rem}
+.order-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.order-id{font-weight:700;font-size:.85rem;color:#fff;margin-bottom:2px}
+.order-date{font-size:.74rem;color:var(--muted)}
+.order-status{font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.04em}
+.order-status.delivered{background:rgba(74,222,128,.1);color:var(--accent);border:1px solid rgba(74,222,128,.2)}
+.order-status.processing{background:rgba(251,191,36,.08);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+
+footer{padding:22px 20px;text-align:center;font-size:.74rem;color:var(--muted);border-top:1px solid var(--border)}
+footer span{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<div class="stamp">DEMO</div>
+
+<nav>
+  <span class="logo">Your Store</span>
+  <button class="nav-link active" onclick="show('shop',this)">Shop</button>
+  <button class="nav-link" onclick="show('about',this)">About</button>
+  <button class="nav-link" onclick="show('account',this)">Account</button>
+  <button class="cart-btn" id="nav-cart" onclick="show('shop',document.querySelectorAll('.nav-link')[0])">Cart (0)</button>
+</nav>
+
+<!-- SHOP -->
+<div class="page active" id="shop">
+  <div class="shop-top">
+    <div class="search-row">
+      <input class="search-input" placeholder="Search products…">
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn on" onclick="filterProducts('all',this)">All</button>
+      <button class="filter-btn" onclick="filterProducts('cat1',this)">Category 1</button>
+      <button class="filter-btn" onclick="filterProducts('cat2',this)">Category 2</button>
+      <button class="filter-btn" onclick="filterProducts('cat3',this)">Category 3</button>
+    </div>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="about">
+  <div class="about-hero">
+    <div class="tag">Our Story</div>
+    <h1>Quality Products.<br><em>Shipped Fast.</em></h1>
+    <p style="margin-top:12px">We started this store because we couldn't find what we needed anywhere else. Now we make it ourselves and ship directly to customers who care about quality.</p>
+  </div>
+  <div class="about-stats">
+    <div class="stat"><div class="n">5yr</div><div class="l">In Business</div></div>
+    <div class="stat"><div class="n">2.4k+</div><div class="l">Orders Shipped</div></div>
+    <div class="stat"><div class="n">5★</div><div class="l">Avg Review</div></div>
+  </div>
+  <div class="about-body">
+    <div class="tag">Why Us</div>
+    <p>Every product we sell is something we'd use ourselves. We don't list anything we don't stand behind. If you're not happy, we'll make it right — no questions asked.</p>
+  </div>
+</div>
+
+<!-- ACCOUNT -->
+<div class="page" id="account">
+  <div class="acct-inner">
+    <div class="tag">Welcome Back</div>
+    <div class="acct-profile">
+      <div class="acct-avatar">JD</div>
+      <div>
+        <div class="acct-name">Jordan Davis</div>
+        <div class="acct-sub">Member since 2023 · Gold Plan</div>
+      </div>
+    </div>
+
+    <div class="section-head">Recent Orders</div>
+    <div class="order-card"><div><div class="order-id">Order #4821</div><div class="order-date">March 28, 2025 · $47.98</div></div><span class="order-status delivered">Delivered</span></div>
+    <div class="order-card"><div><div class="order-id">Order #4790</div><div class="order-date">March 12, 2025 · $29.99</div></div><span class="order-status delivered">Delivered</span></div>
+    <div class="order-card"><div><div class="order-id">Order #4755</div><div class="order-date">February 28, 2025 · $62.50</div></div><span class="order-status processing">Processing</span></div>
+
+    <div class="section-head">Account</div>
+    <div class="acct-row"><div><div class="acct-label">Saved Addresses</div><div class="acct-val">2 addresses saved</div></div><span class="acct-arrow">›</span></div>
+    <div class="acct-row"><div><div class="acct-label">Payment Methods</div><div class="acct-val">Visa ending in 4242</div></div><span class="acct-arrow">›</span></div>
+    <div class="acct-row"><div><div class="acct-label">Wishlist</div><div class="acct-val">3 items saved</div></div><span class="acct-arrow">›</span></div>
+    <div class="acct-row"><div><div class="acct-label">Membership</div><div class="acct-val">Gold Plan · Renews April 15</div></div><span class="acct-arrow">›</span></div>
+  </div>
+</div>
+
+<div id="cart-bar">
+  <div class="cart-info">
+    <div class="count" id="cart-count">0 Items</div>
+    <div class="total" id="cart-total">$0.00</div>
+  </div>
+  <button class="checkout-btn">Checkout →</button>
+</div>
+
+<footer>Built by <span>WisdomLayers</span> · wisdomlayers.com</footer>
+
+<script>
+const PRODUCTS = [
+  {id:1,name:'Product One',cat:'cat1',label:'Category 1',price:24.99,bg:'linear-gradient(135deg,#1a2f1a,#2d4a2d)'},
+  {id:2,name:'Product Two',cat:'cat1',label:'Category 1',price:18.99,bg:'linear-gradient(135deg,#4ade80,#22c55e)'},
+  {id:3,name:'Product Three',cat:'cat2',label:'Category 2',price:34.99,bg:'linear-gradient(135deg,#16213e,#0f3460)'},
+  {id:4,name:'Product Four',cat:'cat2',label:'Category 2',price:29.99,bg:'linear-gradient(135deg,#1c2541,#3a506b)'},
+  {id:5,name:'Product Five',cat:'cat3',label:'Category 3',price:44.99,bg:'linear-gradient(135deg,#2d1b69,#5b2d8e)'},
+  {id:6,name:'Product Six',cat:'cat3',label:'Category 3',price:52.00,bg:'linear-gradient(135deg,#1a1a2e,#16213e)'},
+];
+let cart = [];
+let currentFilter = 'all';
+
+function renderProducts(filter) {
+  const grid = document.getElementById('product-grid');
+  const filtered = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card">
+      <div class="product-img" style="background:${p.bg}">
+        <span class="category-dot">${p.label}</span>
+        PHOTO
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.label}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-footer">
+          <span class="product-price">$${p.price.toFixed(2)}</span>
+          <button class="add-btn" id="btn-${p.id}" onclick="addToCart(${p.id})">Add +</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderProducts(cat);
+}
+
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  cart.push(p);
+  updateCart();
+  const btn = document.getElementById('btn-' + id);
+  if (btn) {
+    btn.textContent = '✓ Added';
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = 'Add +'; btn.classList.remove('added'); }, 1400);
+  }
+}
+
+function updateCart() {
+  const total = cart.reduce((s,p) => s+p.price, 0);
+  document.getElementById('cart-count').textContent = cart.length + (cart.length === 1 ? ' Item' : ' Items');
+  document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+  const navCart = document.getElementById('nav-cart');
+  navCart.textContent = 'Cart (' + cart.length + ')';
+  navCart.classList.toggle('has-items', cart.length > 0);
+  document.getElementById('cart-bar').style.display = 'flex';
+}
+
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn && btn.classList) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderProducts('all');
+</script>
+</body>
+</html>

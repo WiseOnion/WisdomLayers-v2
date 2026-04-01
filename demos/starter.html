@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — Starter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f7f4;color:#1a1a1a;-webkit-font-smoothing:antialiased}
+.stamp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-family:'Instrument Serif',serif;font-weight:400;font-size:5rem;color:rgba(0,0,0,.05);border:5px solid rgba(0,0,0,.05);padding:8px 28px;border-radius:6px;pointer-events:none;z-index:9999;letter-spacing:.2em;white-space:nowrap}
+
+/* NAV */
+nav{background:#fff;border-bottom:1px solid #ede9e2;padding:0 24px;height:58px;display:flex;align-items:center;gap:2px;position:sticky;top:0;z-index:10;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.logo{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#1a1a1a;white-space:nowrap;margin-right:16px;flex-shrink:0}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;color:#888;border:none;background:transparent;cursor:pointer;white-space:nowrap;letter-spacing:.01em;transition:all .2s}
+.nav-link.active{background:#1a1a1a;color:#fff}
+.nav-link:hover:not(.active){background:#f5f3ef;color:#1a1a1a}
+.page{display:none}
+.page.active{display:block}
+.section-tag{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c2773e;margin-bottom:8px}
+h2{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,5vw,2.4rem);font-weight:400;line-height:1.2;color:#1a1a1a;letter-spacing:-.01em}
+
+/* HOME */
+.home-hero{padding:64px 28px 48px;background:#fff;border-bottom:1px solid #ede9e2;position:relative;overflow:hidden}
+.home-hero::after{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(194,119,62,.08) 0%,transparent 70%);pointer-events:none}
+.home-hero .section-tag{margin-bottom:14px}
+.home-hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2rem,6vw,3rem);line-height:1.1;color:#1a1a1a;margin-bottom:16px;letter-spacing:-.02em}
+.home-hero h1 em{font-style:italic;color:#c2773e}
+.home-hero p{color:#6b6b6b;font-size:.95rem;line-height:1.8;max-width:380px;margin-bottom:28px;font-weight:300}
+.btn{display:inline-block;padding:13px 26px;border-radius:10px;font-weight:700;font-size:.88rem;border:none;cursor:pointer;letter-spacing:.01em;transition:all .2s}
+.btn-dark{background:#1a1a1a;color:#fff}
+.btn-dark:hover{opacity:.85}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:32px 28px;max-width:560px;margin:0 auto}
+.stat-card{background:#fff;border:1px solid #ede9e2;border-radius:14px;padding:20px 16px;text-align:center}
+.stat-card .n{font-family:'Instrument Serif',serif;font-size:1.9rem;color:#1a1a1a;line-height:1;margin-bottom:6px}
+.stat-card .n em{font-style:italic;color:#c2773e}
+.stat-card .l{font-size:.73rem;color:#999;font-weight:500;line-height:1.35}
+.about-strip{padding:0 28px 60px;max-width:560px;margin:0 auto}
+.about-strip p{font-size:.9rem;color:#555;line-height:1.85;font-weight:300}
+
+/* SERVICES */
+.services-page{padding:52px 28px;max-width:580px;margin:0 auto}
+.services-page h2{margin-bottom:28px}
+.srow{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 0;border-bottom:1px solid #ede9e2;gap:16px}
+.srow:last-child{border:none}
+.snum{width:28px;height:28px;background:#f5f3ef;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#c2773e;flex-shrink:0;margin-top:2px}
+.sname{font-weight:600;font-size:.93rem;color:#1a1a1a;margin-bottom:3px}
+.sdesc{font-size:.8rem;color:#999;line-height:1.55;font-weight:300}
+.sprice{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#c2773e;flex-shrink:0;white-space:nowrap}
+
+/* GALLERY */
+.gallery-page{padding:52px 28px;max-width:580px;margin:0 auto}
+.gallery-page h2{margin-bottom:24px}
+.gallery-grid{columns:2;gap:10px}
+.photo{border-radius:12px;margin-bottom:10px;break-inside:avoid;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.photo::after{content:'PHOTO';position:absolute;font-size:.65rem;font-weight:600;letter-spacing:.1em;opacity:.4}
+.gallery-caption{font-size:.78rem;color:#999;margin-top:6px;margin-bottom:20px;font-weight:300}
+
+/* CONTACT */
+.contact-page{padding:52px 28px;max-width:520px;margin:0 auto}
+.contact-page h2{margin-bottom:8px}
+.contact-page .sub{color:#6b6b6b;font-size:.88rem;margin-bottom:28px;font-weight:300;line-height:1.6}
+.hours-card{background:#fff;border:1px solid #ede9e2;border-radius:14px;padding:22px;margin-bottom:22px}
+.hours-card h3{font-family:'Instrument Serif',serif;font-size:1.05rem;color:#1a1a1a;margin-bottom:14px}
+.hour-row{display:flex;justify-content:space-between;font-size:.84rem;padding:8px 0;border-bottom:1px solid #f5f3ef}
+.hour-row:last-child{border:none}
+.hour-row span:first-child{color:#888;font-weight:300}
+.hour-row span:last-child{font-weight:600;color:#1a1a1a}
+.map-ph{background:#ede9e2;border-radius:12px;height:120px;display:flex;align-items:center;justify-content:center;font-size:.73rem;font-weight:600;letter-spacing:.1em;color:#aaa;margin-bottom:22px}
+input,textarea,select{width:100%;padding:13px 16px;border:1.5px solid #ede9e2;border-radius:10px;font-size:.88rem;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;outline:none;color:#1a1a1a;margin-bottom:10px;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:#c2773e}
+input::placeholder,textarea::placeholder{color:#bbb;font-weight:300}
+textarea{height:95px;resize:none}
+.submit{width:100%;background:#1a1a1a;color:#fff;border:none;border-radius:10px;padding:14px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.93rem;cursor:pointer;letter-spacing:.01em;transition:opacity .2s}
+.submit:hover{opacity:.85}
+
+footer{padding:24px 28px;display:flex;align-items:center;justify-content:space-between;font-size:.77rem;color:#bbb;border-top:1px solid #ede9e2;background:#fff;flex-wrap:wrap;gap:10px}
+footer span{color:#c2773e;font-weight:700}
+</style>
+</head>
+<body>
+<div class="stamp">DEMO</div>
+
+<nav>
+  <span class="logo">Your Business</span>
+  <button class="nav-link active" onclick="show('home',this)">Home</button>
+  <button class="nav-link" onclick="show('services',this)">Services</button>
+  <button class="nav-link" onclick="show('gallery',this)">Gallery</button>
+  <button class="nav-link" onclick="show('contact',this)">Contact</button>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="home-hero">
+    <div class="section-tag">Welcome</div>
+    <h1>Your Business.<br><em>Done Right.</em></h1>
+    <p>Serving your community with quality, care, and consistency since 2016. Let's get to work.</p>
+    <button class="btn btn-dark" onclick="show('contact',document.querySelectorAll('.nav-link')[3])">Get in Touch →</button>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="n"><em>8</em>+</div><div class="l">Years in<br>Business</div></div>
+    <div class="stat-card"><div class="n">500<em>+</em></div><div class="l">Happy<br>Clients</div></div>
+    <div class="stat-card"><div class="n">5<em>★</em></div><div class="l">Google<br>Rating</div></div>
+  </div>
+  <div class="about-strip">
+    <div class="section-tag">About Us</div>
+    <p>We've been serving this community since 2016. Every job we take on gets our full attention — no shortcuts, no excuses. We show up, we do the work, and we make sure you're happy with the result. That's a promise.</p>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="page" id="services">
+  <div class="services-page">
+    <div class="section-tag">What We Offer</div>
+    <h2>Services &amp;<br>Pricing</h2>
+    <div class="srow"><div class="snum">1</div><div style="flex:1"><div class="sname">Service One</div><div class="sdesc">A clear description of what this service includes and what to expect.</div></div><div class="sprice">$99+</div></div>
+    <div class="srow"><div class="snum">2</div><div style="flex:1"><div class="sname">Service Two</div><div class="sdesc">Enhanced option with additional deliverables or faster turnaround.</div></div><div class="sprice">$149+</div></div>
+    <div class="srow"><div class="snum">3</div><div style="flex:1"><div class="sname">Service Three</div><div class="sdesc">Full-scope engagement for more complex or larger projects.</div></div><div class="sprice">$199+</div></div>
+    <div class="srow"><div class="snum">4</div><div style="flex:1"><div class="sname">Service Four</div><div class="sdesc">Specialty option tailored to specific client requirements.</div></div><div class="sprice">$249+</div></div>
+    <div class="srow"><div class="snum">5</div><div style="flex:1"><div class="sname">Service Five</div><div class="sdesc">Premium level with white-glove handling from start to finish.</div></div><div class="sprice">$299+</div></div>
+    <div class="srow"><div class="snum">6</div><div style="flex:1"><div class="sname">Bundle Package</div><div class="sdesc">Everything combined at a reduced rate — best value option.</div></div><div class="sprice">$499+</div></div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="page" id="gallery">
+  <div class="gallery-page">
+    <div class="section-tag">Our Work</div>
+    <h2>Recent<br>Projects</h2>
+    <p class="gallery-caption">Photos of completed work across all service areas.</p>
+    <div class="gallery-grid">
+      <div class="photo" style="height:148px;background:#c2773e"></div>
+      <div class="photo" style="height:112px;background:#8b5e3c"></div>
+      <div class="photo" style="height:124px;background:#d4956a"></div>
+      <div class="photo" style="height:156px;background:#6b4226"></div>
+      <div class="photo" style="height:116px;background:#e8c5a0"></div>
+      <div class="photo" style="height:136px;background:#a0724e"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="contact">
+  <div class="contact-page">
+    <div class="section-tag">Get in Touch</div>
+    <h2>Let's Talk<br>About Your Project</h2>
+    <div class="sub">Fill out the form and we'll respond within a few hours.</div>
+
+    <div class="map-ph">MAP — 123 Your Street, Your City</div>
+
+    <div class="hours-card">
+      <h3>Business Hours</h3>
+      <div class="hour-row"><span>Monday – Friday</span><span>9:00am – 6:00pm</span></div>
+      <div class="hour-row"><span>Saturday</span><span>9:00am – 4:00pm</span></div>
+      <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
+    </div>
+
+    <input placeholder="Your name">
+    <input placeholder="Phone number">
+    <select><option value="">What do you need help with?</option><option>Service One</option><option>Service Two</option><option>Service Three</option><option>Something else</option></select>
+    <textarea placeholder="Any details or questions?"></textarea>
+    <button class="submit">Send Message →</button>
+  </div>
+</div>
+
+<footer>
+  <span style="color:#1a1a1a;font-size:.9rem;font-family:'Instrument Serif',serif;font-weight:400">Your Business</span>
+  <div>Built by <span>WisdomLayers</span> · wisdomlayers.com</div>
+</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn && btn.classList) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
