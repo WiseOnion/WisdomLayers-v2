@@ -28,6 +28,32 @@ a { text-decoration:none; }
 .section { padding: 72px 28px; }
 .section-inner { max-width:680px; margin:0 auto; }
 
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity:0; transform:translateY(32px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.reveal.in { opacity:1; transform:none; }
+.reveal-left {
+  opacity:0; transform:translateX(-32px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.reveal-left.in { opacity:1; transform:none; }
+.reveal-right {
+  opacity:0; transform:translateX(32px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.reveal-right.in { opacity:1; transform:none; }
+.stagger > * {
+  opacity:0; transform:translateY(24px);
+  transition:opacity .45s ease, transform .45s ease;
+}
+.stagger.in > *:nth-child(1) { opacity:1; transform:none; transition-delay:.05s; }
+.stagger.in > *:nth-child(2) { opacity:1; transform:none; transition-delay:.15s; }
+.stagger.in > *:nth-child(3) { opacity:1; transform:none; transition-delay:.25s; }
+.stagger.in > *:nth-child(4) { opacity:1; transform:none; transition-delay:.35s; }
+.stagger.in > *:nth-child(5) { opacity:1; transform:none; transition-delay:.45s; }
+
 /* ── EYEBROW ── */
 .eyebrow { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; }
 
@@ -55,8 +81,12 @@ a { text-decoration:none; }
   pointer-events:none;
 }
 
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
 .hero-logo {
   margin:0 auto 32px;
+  animation:fadeIn .6s ease both;
 }
 .hero-logo img {
   width:72px; height:72px; object-fit:contain;
@@ -71,6 +101,7 @@ a { text-decoration:none; }
   font-size:.78rem; font-weight:600; letter-spacing:.04em;
   padding:7px 16px; border-radius:var(--radius-pill);
   margin-bottom:24px;
+  animation:fadeUp .6s .15s ease both;
 }
 .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:#5eead4; flex-shrink:0; animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
@@ -81,6 +112,7 @@ a { text-decoration:none; }
   color:#fff;
   margin-bottom:20px;
   position:relative;
+  animation:fadeUp .7s .3s ease both;
 }
 #hero h1 em { font-style:normal; color:#5eead4; }
 
@@ -91,6 +123,7 @@ a { text-decoration:none; }
   max-width:420px;
   margin:0 auto 40px;
   position:relative;
+  animation:fadeUp .7s .5s ease both;
 }
 
 .hero-cta-row {
@@ -98,6 +131,7 @@ a { text-decoration:none; }
   width:100%; max-width:340px;
   margin:0 auto 48px;
   position:relative;
+  animation:fadeUp .7s .65s ease both;
 }
 
 .btn-primary {
@@ -124,6 +158,7 @@ a { text-decoration:none; }
 .hero-trust {
   display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
   position:relative;
+  animation:fadeUp .7s .8s ease both;
 }
 .trust-chip {
   background:rgba(255,255,255,.07);
@@ -601,7 +636,7 @@ a { text-decoration:none; }
 
     <div class="hero-badge">Taking on new clients now</div>
 
-    <h1>
+    <h1 id="hero-h1">
       Your business deserves a website<br>
       <em>that actually brings in customers.</em>
     </h1>
@@ -631,20 +666,19 @@ a { text-decoration:none; }
 ══════════════════════════════════ -->
 <section id="problem" class="section" data-dark="0">
   <div class="section-inner">
-    <div class="eyebrow">Sound familiar?</div>
-    <h2>Most small businesses<br>are <em>leaving money on the table.</em></h2>
-    <p class="lede">When someone hears about your business, the first thing they do is Google you. If your website looks old, loads slow, or doesn't exist at all — they move on to your competitor.</p>
+    <div class="eyebrow reveal">The Problem</div>
+    <h2 class="reveal" style="transition-delay:.08s">When customers Google you,<br><em>what do they find?</em></h2>
 
-    <ul class="pain-list">
-      <li><strong>You're invisible online.</strong> Customers search for your service every day — and find someone else because you don't have a good web presence.</li>
-      <li><strong>Your current site looks broken on phones.</strong> Over 70% of searches happen on mobile. If your site doesn't work on phones, you're losing leads constantly.</li>
-      <li><strong>Big agencies charge too much.</strong> $5,000–$15,000 from an agency — for a local business, that's hard to justify.</li>
-      <li><strong>DIY tools look generic and take forever.</strong> Wix and Squarespace sites look like templates, and you're still on your own to make it work.</li>
+    <ul class="pain-list stagger" style="margin-top:28px">
+      <li>No website — or one that looks outdated</li>
+      <li>Broken on phones (70% of searches are mobile)</li>
+      <li>Agencies want $5k–$15k just to start</li>
+      <li>Wix &amp; Squarespace look like everyone else</li>
     </ul>
 
-    <div class="solution-callout">
+    <div class="solution-callout reveal" style="transition-delay:.2s;margin-top:28px">
       <h3>There's a better way.</h3>
-      <p>WisdomLayers gives you a fully custom, professionally built website at a fraction of big-agency pricing — with a team that's fast, communicative, and invested in your success from day one.</p>
+      <p>Custom. Fast. Fraction of agency pricing.</p>
     </div>
   </div>
 </section>
@@ -654,31 +688,28 @@ a { text-decoration:none; }
 ══════════════════════════════════ -->
 <section id="story" class="section" data-dark="0">
   <div class="section-inner">
-    <div class="eyebrow">Who We Are</div>
-    <h2>A student-run studio building <em>real websites for real businesses.</em></h2>
-    <p class="lede">Real work. Real results. Real stakes. We're WisdomLayers — a young, driven team based right here in your community. We're not a big agency with big overhead. Every project matters to us personally.</p>
-    <p class="lede">That means you get the hunger of a startup, the quality of a professional team, and someone who actually picks up the phone.</p>
+    <div class="eyebrow reveal">Who We Are</div>
+    <h2 class="reveal" style="transition-delay:.08s">A student-run studio.<br><em>Real work. Real results.</em></h2>
 
-    <div class="stat-row">
+    <div class="stat-row stagger" style="margin-top:28px;margin-bottom:28px">
       <div class="stat-card">
         <div class="n">5+</div>
-        <div class="l">Live &amp; In-Progress Sites</div>
+        <div class="l">Live Sites</div>
       </div>
       <div class="stat-card">
         <div class="n">100%</div>
-        <div class="l">Mobile Responsive</div>
+        <div class="l">Mobile-Ready</div>
       </div>
       <div class="stat-card">
         <div class="n">2–3wk</div>
-        <div class="l">Average Launch Time</div>
+        <div class="l">Launch Time</div>
       </div>
     </div>
 
-    <ul class="differentiator-list">
-      <li><span class="diff-check">✓</span><span><strong>Direct access to your developer</strong> — no account managers, no middlemen, no waiting on hold.</span></li>
-      <li><span class="diff-check">✓</span><span><strong>Custom design every time</strong> — your brand, your colors, your story. Never a generic template.</span></li>
-      <li><span class="diff-check">✓</span><span><strong>Built for your industry</strong> — we've built for service businesses, nonprofits, healthcare practices, and more.</span></li>
-      <li><span class="diff-check">✓</span><span><strong>Ongoing support</strong> — we don't disappear after launch. Updates, questions, changes — we've got you.</span></li>
+    <ul class="differentiator-list stagger">
+      <li><span class="diff-check">✓</span><span>Direct access to your developer — no middlemen</span></li>
+      <li><span class="diff-check">✓</span><span>Custom design every time — never a template</span></li>
+      <li><span class="diff-check">✓</span><span>We stay after launch — updates included</span></li>
     </ul>
   </div>
 </section>
@@ -688,9 +719,8 @@ a { text-decoration:none; }
 ══════════════════════════════════ -->
 <section id="work" class="section" data-dark="0">
   <div class="section-inner">
-    <div class="eyebrow">Our Work</div>
-    <h2>Built for real businesses.</h2>
-    <p class="sub">Tap through to see what we've built for clients just like you.</p>
+    <div class="eyebrow reveal">Our Work</div>
+    <h2 class="reveal" style="transition-delay:.08s">Built for real businesses.</h2>
 
     <div class="tab-bar">
       <button class="tab on" data-t="m2w">Miles2Wisdom</button>
@@ -779,43 +809,30 @@ a { text-decoration:none; }
 ══════════════════════════════════ -->
 <section id="process" class="section" data-dark="1">
   <div class="section-inner">
-    <div class="eyebrow">How It Works</div>
-    <h2>From conversation<br>to live site in weeks.</h2>
-    <p class="sub">We handle everything — design, development, launch. You handle running your business.</p>
+    <div class="eyebrow reveal">How It Works</div>
+    <h2 class="reveal" style="transition-delay:.08s">From conversation<br>to live site in <em>weeks.</em></h2>
 
-    <div class="timeline">
+    <div class="timeline stagger" style="margin-top:32px">
       <div class="t-step">
         <div class="t-left"><div class="t-num">1</div><div class="t-line"></div></div>
-        <div class="t-right">
-          <h4>Discovery Call — 15–30 min</h4>
-          <p>We talk about your business, your goals, and what you need. You tell us your vision and we tell you exactly what we'd build for you.</p>
-        </div>
+        <div class="t-right"><h4>Free 15-min call</h4></div>
       </div>
       <div class="t-step">
         <div class="t-left"><div class="t-num">2</div><div class="t-line"></div></div>
-        <div class="t-right">
-          <h4>Design &amp; Build</h4>
-          <p>We design your site from scratch — your brand colors, your content, fully mobile-responsive. You'll see the first draft within a few days.</p>
-        </div>
+        <div class="t-right"><h4>We design &amp; build</h4></div>
       </div>
       <div class="t-step">
         <div class="t-left"><div class="t-num">3</div><div class="t-line"></div></div>
-        <div class="t-right">
-          <h4>Review &amp; Refine</h4>
-          <p>You review the site and give feedback. We make revisions until every detail is right. Your satisfaction is what gets us paid.</p>
-        </div>
+        <div class="t-right"><h4>You review &amp; approve</h4></div>
       </div>
       <div class="t-step">
         <div class="t-left"><div class="t-num">4</div><div class="t-line"></div></div>
-        <div class="t-right">
-          <h4>Launch &amp; Support</h4>
-          <p>We launch your site and stick around — updates, questions, new pages, ongoing changes. We don't disappear after launch.</p>
-        </div>
+        <div class="t-right"><h4>Live — we stay on support</h4></div>
       </div>
     </div>
 
-    <div class="timeline-cta">
-      <p>Most clients go from <strong>first conversation to live site in 2–3 weeks</strong>. That's faster than most agencies take just to send you a proposal.</p>
+    <div class="timeline-cta reveal" style="transition-delay:.3s">
+      <p><strong>2–3 weeks start to launch.</strong> Faster than most agencies take to send a proposal.</p>
     </div>
   </div>
 </section>
@@ -825,9 +842,9 @@ a { text-decoration:none; }
 ══════════════════════════════════ -->
 <section id="pricing" class="section" data-dark="0">
   <div class="section-inner">
-    <div class="eyebrow">Pricing</div>
-    <h2>Transparent pricing.<br>No surprises, ever.</h2>
-    <p class="sub">Swipe to compare. Every package includes mobile-first design, hosting setup, and support.</p>
+    <div class="eyebrow reveal">Pricing</div>
+    <h2 class="reveal" style="transition-delay:.08s">Transparent pricing.<br><em>No surprises.</em></h2>
+    <p class="sub reveal" style="transition-delay:.16s;font-size:.9rem">Swipe to compare.</p>
 
     <div class="price-carousel-wrap">
       <div class="price-carousel">
@@ -1254,8 +1271,8 @@ a { text-decoration:none; }
 ══════════════════════════════════ -->
 <section id="reviews" class="section" data-dark="0">
   <div class="section-inner">
-    <div class="eyebrow">Client Reviews</div>
-    <h2>Don't take our word for it.</h2>
+    <div class="eyebrow reveal">Client Reviews</div>
+    <h2 class="reveal" style="transition-delay:.08s">Don't take our word for it.</h2>
 
     <div class="review-card">
       <img class="review-img" src="assets/images/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Website">
@@ -1295,13 +1312,13 @@ a { text-decoration:none; }
 <section id="s7" class="section" data-dark="1" style="padding:0;">
   <div id="cta">
     <div class="section-inner">
-      <div class="eyebrow">Ready to get started?</div>
-      <h2>Let's build something<br><em>you're proud to show off.</em></h2>
-      <p>A 15-minute conversation is all it takes to know exactly what your site would look like and what it would cost. No commitment, no pressure.</p>
+      <div class="eyebrow reveal">Ready?</div>
+      <h2 class="reveal" style="transition-delay:.08s">Let's build something<br><em>you're proud to show off.</em></h2>
+      <p class="reveal" style="transition-delay:.16s;color:rgba(255,255,255,.6);max-width:320px;margin:0 auto 36px;font-size:.95rem">15-minute call. Free. No pressure.</p>
 
-      <div class="cta-card">
+      <div class="cta-card reveal" style="transition-delay:.24s">
         <h3>Start your project today</h3>
-        <p class="small">Fill out the quick form on our site and we'll reach out within 24 hours to schedule your free discovery call.</p>
+        <p class="small">We'll reach out within 24 hours.</p>
         <a href="https://wisdomlayers.com/#contact" class="btn-primary">Go to wisdomlayers.com →</a>
         <div class="cta-divider">or</div>
         <a href="https://wisdomlayers.com/html/projects.html" class="btn-outline-white">Browse Full Portfolio</a>
@@ -1364,6 +1381,44 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+
+/* ── STAT COUNTER ── */
+function animateCount(el) {
+  const raw = el.textContent.trim();
+  const num = parseFloat(raw);
+  if (isNaN(num)) return;
+  const suffix = raw.replace(/[\d.]/g, '');
+  const dur = 900, steps = 40;
+  let i = 0;
+  const iv = setInterval(() => {
+    i++;
+    const progress = i / steps;
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = (num * ease % 1 === 0 ? Math.round(num * ease) : (num * ease).toFixed(0)) + suffix;
+    if (i >= steps) { el.textContent = raw; clearInterval(iv); }
+  }, dur / steps);
+}
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.stat-card .n').forEach(animateCount);
+      statObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.stat-row').forEach(r => statObs.observe(r));
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
