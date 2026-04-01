@@ -342,44 +342,108 @@ a { text-decoration:none; }
 }
 #pricing .sub { font-size:.95rem; color:var(--muted); margin-bottom:32px; line-height:1.6; }
 
-.price-stack { display:flex; flex-direction:column; gap:14px; }
+/* ── PRICING CAROUSEL ── */
+.price-carousel-wrap {
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  margin:0 -28px; padding:0 28px 16px;
+  scrollbar-width:none;
+}
+.price-carousel-wrap::-webkit-scrollbar { display:none; }
+
+.price-carousel {
+  display:flex; gap:14px;
+  width:max-content;
+}
 
 .price-card {
+  width:220px; flex-shrink:0;
   border:2px solid var(--border); border-radius:var(--radius);
-  padding:22px 20px; position:relative; background:#fff;
-  transition:border-color .2s;
+  background:#fff; position:relative;
+  overflow:hidden;
+  display:flex; flex-direction:column;
 }
 .price-card.featured { border-color:var(--teal); }
 
 .featured-label {
-  position:absolute; top:-11px; left:20px;
+  position:absolute; top:10px; right:10px;
   background:var(--teal); color:#fff;
-  font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-  padding:4px 14px; border-radius:var(--radius-pill);
+  font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  padding:3px 10px; border-radius:var(--radius-pill);
+  z-index:2;
 }
 
-.pc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
-.pc-name { font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem; color:var(--ink); }
+.pc-preview {
+  width:100%; height:120px;
+  object-fit:cover; object-position:top;
+  display:block; background:var(--surface);
+}
+.pc-preview-placeholder {
+  width:100%; height:120px;
+  background:linear-gradient(135deg, #f0fdf4, #ccfbf1);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.7rem; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--teal);
+}
+
+.pc-body { padding:16px 14px; flex:1; display:flex; flex-direction:column; gap:10px; }
+
+.pc-top { display:flex; justify-content:space-between; align-items:baseline; }
+.pc-name { font-family:'Poppins',sans-serif; font-weight:700; font-size:.88rem; color:var(--ink); }
 .pc-price {
   font-family:'Poppins',sans-serif; font-weight:800;
-  font-size:1.35rem; color:var(--teal);
+  font-size:1.15rem; color:var(--teal);
 }
-.pc-desc { font-size:.84rem; color:var(--muted); line-height:1.55; margin-bottom:14px; }
-.pc-items { display:flex; flex-wrap:wrap; gap:7px; }
+
+.pc-items { display:flex; flex-direction:column; gap:6px; flex:1; }
 .pc-item {
-  font-size:.73rem; font-weight:500;
-  background:var(--surface); border:1px solid var(--border);
-  color:var(--ink2); padding:5px 11px; border-radius:var(--radius-pill);
+  font-size:.75rem; font-weight:500; color:var(--ink2);
+  display:flex; align-items:center; gap:6px;
 }
-.pc-item.hi { background:#ccfbf1; border-color:#99f6e4; color:var(--teal-dark); font-weight:600; }
+.pc-item::before {
+  content:''; width:5px; height:5px; border-radius:50%;
+  background:var(--teal); flex-shrink:0;
+}
+.pc-item.hi { color:var(--teal-dark); font-weight:600; }
+.pc-item.hi::before { background:var(--teal); width:6px; height:6px; }
 
 .pricing-note {
-  margin-top:20px; padding:16px 18px;
+  margin-top:16px; padding:14px 16px;
   background:var(--surface); border-radius:var(--radius-sm);
-  font-size:.84rem; color:var(--muted); line-height:1.65;
+  font-size:.82rem; color:var(--muted); line-height:1.65;
   border-left:3px solid var(--teal);
 }
 .pricing-note strong { color:var(--ink); }
+
+/* ── REVIEWS WITH IMAGE ── */
+.review-card {
+  background:#fff; border-radius:var(--radius);
+  margin-bottom:16px;
+  box-shadow:var(--shadow); border:1px solid var(--border);
+  overflow:hidden;
+}
+.review-card:last-of-type { margin-bottom:0; }
+.review-img {
+  width:100%; height:160px;
+  object-fit:cover; object-position:top;
+  display:block;
+}
+.review-body { padding:20px 20px; }
+.stars { color:#f59e0b; font-size:1rem; letter-spacing:2px; margin-bottom:10px; }
+.review-text {
+  font-size:.88rem; color:var(--ink2); line-height:1.75;
+  font-style:italic; margin-bottom:14px;
+}
+.review-text::before { content:'\201C'; }
+.review-text::after  { content:'\201D'; }
+.reviewer { display:flex; align-items:center; gap:10px; }
+.reviewer-av {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--teal); color:#fff;
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:.85rem;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.reviewer-name { font-weight:700; font-size:.85rem; color:var(--ink); }
+.reviewer-role { font-size:.75rem; color:var(--subtle); }
 
 /* ─────────────────────────────────────
    SECTION 7  TESTIMONIALS
@@ -746,87 +810,104 @@ a { text-decoration:none; }
   <div class="section-inner">
     <div class="eyebrow">Pricing</div>
     <h2>Transparent pricing.<br>No surprises, ever.</h2>
-    <p class="sub">Every package includes mobile-first design, hosting setup, and post-launch support. You'll always know exactly what you're paying and what you're getting.</p>
+    <p class="sub">Swipe to compare. Every package includes mobile-first design, hosting setup, and support.</p>
 
-    <div class="price-stack">
+    <div class="price-carousel-wrap">
+      <div class="price-carousel">
 
-      <div class="price-card">
-        <div class="pc-top">
-          <span class="pc-name">Landing Page</span>
-          <span class="pc-price">$599</span>
+        <!-- Landing Page -->
+        <div class="price-card">
+          <img class="pc-preview" src="assets/images/pjpressure/pj-home-card.webp" alt="Landing Page example">
+          <div class="pc-body">
+            <div class="pc-top">
+              <span class="pc-name">Landing Page</span>
+              <span class="pc-price">$599</span>
+            </div>
+            <div class="pc-items">
+              <span class="pc-item">1 Page</span>
+              <span class="pc-item">Contact Form</span>
+              <span class="pc-item">Mobile Ready</span>
+              <span class="pc-item">SEO Basics</span>
+            </div>
+          </div>
         </div>
-        <p class="pc-desc">One powerful, focused page. Perfect for getting your business online quickly and capturing leads.</p>
-        <div class="pc-items">
-          <span class="pc-item">1 Page</span>
-          <span class="pc-item">Contact Form</span>
-          <span class="pc-item">Mobile Ready</span>
-          <span class="pc-item">SEO Basics</span>
+
+        <!-- Starter -->
+        <div class="price-card">
+          <img class="pc-preview" src="assets/images/miles2wisdom/m2w-home-card.webp" alt="Starter example">
+          <div class="pc-body">
+            <div class="pc-top">
+              <span class="pc-name">Starter</span>
+              <span class="pc-price">$999</span>
+            </div>
+            <div class="pc-items">
+              <span class="pc-item">3–4 Pages</span>
+              <span class="pc-item">Photo Gallery</span>
+              <span class="pc-item">About + Contact</span>
+              <span class="pc-item">Mobile Ready</span>
+            </div>
+          </div>
         </div>
+
+        <!-- Professional -->
+        <div class="price-card featured">
+          <span class="featured-label">Most Popular</span>
+          <img class="pc-preview" src="assets/images/ncrmpa1/ncrmpa-home-card.webp" alt="Professional example">
+          <div class="pc-body">
+            <div class="pc-top">
+              <span class="pc-name">Professional</span>
+              <span class="pc-price">$1,499</span>
+            </div>
+            <div class="pc-items">
+              <span class="pc-item hi">5–7 Pages</span>
+              <span class="pc-item hi">Booking / Quote Form</span>
+              <span class="pc-item hi">SEO Setup</span>
+              <span class="pc-item">Blog Ready</span>
+              <span class="pc-item">Google Maps</span>
+              <span class="pc-item">Priority Support</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium -->
+        <div class="price-card">
+          <img class="pc-preview" src="assets/images/triplenickle/tn-home-card.webp" alt="Premium example">
+          <div class="pc-body">
+            <div class="pc-top">
+              <span class="pc-name">Premium</span>
+              <span class="pc-price">$2,199</span>
+            </div>
+            <div class="pc-items">
+              <span class="pc-item">8+ Pages</span>
+              <span class="pc-item">Custom Animations</span>
+              <span class="pc-item">Advanced SEO</span>
+              <span class="pc-item">Priority Support</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom -->
+        <div class="price-card">
+          <div class="pc-preview-placeholder">Custom Build</div>
+          <div class="pc-body">
+            <div class="pc-top">
+              <span class="pc-name">Custom / E-Commerce</span>
+              <span class="pc-price">$4k+</span>
+            </div>
+            <div class="pc-items">
+              <span class="pc-item">Online Store</span>
+              <span class="pc-item">Member Login</span>
+              <span class="pc-item">Custom Features</span>
+              <span class="pc-item">Fully Scoped</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <div class="price-card">
-        <div class="pc-top">
-          <span class="pc-name">Starter</span>
-          <span class="pc-price">$999</span>
-        </div>
-        <p class="pc-desc">3–4 pages to establish credibility — Home, About, Services, and Contact. Great starting point for most local businesses.</p>
-        <div class="pc-items">
-          <span class="pc-item">3–4 Pages</span>
-          <span class="pc-item">Photo Gallery</span>
-          <span class="pc-item">About + Contact</span>
-          <span class="pc-item">Mobile Ready</span>
-        </div>
-      </div>
-
-      <div class="price-card featured">
-        <span class="featured-label">Most Popular</span>
-        <div class="pc-top">
-          <span class="pc-name">Professional</span>
-          <span class="pc-price">$1,499</span>
-        </div>
-        <p class="pc-desc">The full package most businesses need — everything to look professional, compete locally, and convert visitors into customers.</p>
-        <div class="pc-items">
-          <span class="pc-item hi">5–7 Pages</span>
-          <span class="pc-item hi">Booking or Quote Form</span>
-          <span class="pc-item hi">SEO Setup</span>
-          <span class="pc-item">Blog Ready</span>
-          <span class="pc-item">Google Maps</span>
-          <span class="pc-item">Priority Support</span>
-        </div>
-      </div>
-
-      <div class="price-card">
-        <div class="pc-top">
-          <span class="pc-name">Premium</span>
-          <span class="pc-price">$2,199</span>
-        </div>
-        <p class="pc-desc">Advanced animations, richer features, and a truly premium custom design — for businesses ready to stand out completely.</p>
-        <div class="pc-items">
-          <span class="pc-item">8+ Pages</span>
-          <span class="pc-item">Custom Animations</span>
-          <span class="pc-item">Advanced SEO</span>
-          <span class="pc-item">Priority Support</span>
-        </div>
-      </div>
-
-      <div class="price-card">
-        <div class="pc-top">
-          <span class="pc-name">Custom / E-Commerce</span>
-          <span class="pc-price">$4,000+</span>
-        </div>
-        <p class="pc-desc">Online store, member portals, complex web apps — fully custom-scoped and built to scale with your business.</p>
-        <div class="pc-items">
-          <span class="pc-item">Online Store</span>
-          <span class="pc-item">Member Login</span>
-          <span class="pc-item">Custom Features</span>
-          <span class="pc-item">Fully Scoped</span>
-        </div>
-      </div>
-
     </div>
 
     <div class="pricing-note">
-      <strong>Not sure which package fits?</strong> That's what the discovery call is for. We'll tell you exactly what makes sense for your business — no upsells, no pressure.
+      <strong>Not sure which fits?</strong> The discovery call is free. We'll tell you exactly what makes sense — no pressure.
     </div>
   </div>
 </section>
@@ -840,25 +921,31 @@ a { text-decoration:none; }
     <h2>Don't take our word for it.</h2>
 
     <div class="review-card">
-      <div class="stars">★★★★★</div>
-      <p class="review-text">WisdomLayers completely transformed our online presence. The site looks incredible and our clients actually comment on it when they book. The team was professional, responsive, and delivered exactly what they promised.</p>
-      <div class="reviewer">
-        <div class="reviewer-av">M</div>
-        <div>
-          <div class="reviewer-name">Miles2Wisdom Team</div>
-          <div class="reviewer-role">Therapy Practice</div>
+      <img class="review-img" src="assets/images/miles2wisdom/m2w-home-desktop.webp" alt="Miles2Wisdom Website">
+      <div class="review-body">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">WisdomLayers completely transformed our online presence. The site looks incredible and our clients actually comment on it when they book.</p>
+        <div class="reviewer">
+          <div class="reviewer-av">M</div>
+          <div>
+            <div class="reviewer-name">Miles2Wisdom Team</div>
+            <div class="reviewer-role">Therapy Practice</div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="review-card">
-      <div class="stars">★★★★★</div>
-      <p class="review-text">I was skeptical at first, but the website they built for my pressure washing business has been bringing in consistent leads. It looks way more professional than I expected for the price. Highly recommend.</p>
-      <div class="reviewer">
-        <div class="reviewer-av">P</div>
-        <div>
-          <div class="reviewer-name">PJ Pressure Team</div>
-          <div class="reviewer-role">Pressure Washing Service</div>
+      <img class="review-img" src="assets/images/pjpressure/pj-home-desktop.webp" alt="PJ Pressure Website">
+      <div class="review-body">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">The website they built for my pressure washing business has been bringing in consistent leads. It looks way more professional than I expected for the price.</p>
+        <div class="reviewer">
+          <div class="reviewer-av">P</div>
+          <div>
+            <div class="reviewer-name">PJ Pressure Team</div>
+            <div class="reviewer-role">Pressure Washing Service</div>
+          </div>
         </div>
       </div>
     </div>
