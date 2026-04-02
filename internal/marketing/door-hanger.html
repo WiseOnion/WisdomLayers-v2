@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WisdomLayers — Door Hanger</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    @page { size: 4.25in 11in portrait; margin: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #d1d5db;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 32px 0 48px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .hanger {
+      width: 4.25in;
+      height: 11in;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+    }
+
+    /* HOLE */
+    .hole-area {
+      height: 1.05in;
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0; overflow: hidden;
+    }
+    .hole-area::before { content: ''; position: absolute; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.07); top: -60px; right: -40px; }
+    .hole {
+      width: 0.9in; height: 0.9in; border-radius: 50%;
+      background: #d1d5db; border: 3px dashed #9ca3af;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .hole span { font-size: 8px; color: #9ca3af; text-align: center; line-height: 1.4; font-weight: 600; }
+    .hole-label { position: absolute; bottom: 8px; font-size: 9px; color: rgba(255,255,255,0.65); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+
+    /* BRAND */
+    .brand-section {
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      padding: 0.18in 0.28in 0.24in;
+      text-align: center; flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .brand-section::after { content: ''; position: absolute; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.07); top: -50px; right: -30px; }
+    .brand-section img { width: 38px; height: 38px; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 5px; position: relative; z-index: 1; display: block; margin-left: auto; margin-right: auto; }
+    .brand-name { font-family: 'Poppins', sans-serif; font-size: 21px; font-weight: 900; color: #fff; letter-spacing: -0.4px; position: relative; z-index: 1; }
+    .brand-tag { font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 2px; position: relative; z-index: 1; }
+
+    /* BODY */
+    .hbody { flex: 1; padding: 0.2in 0.26in; display: flex; flex-direction: column; gap: 0.16in; overflow: hidden; }
+
+    .story-box { background: #f0fdfa; border: 1px solid #ccfbf1; border-radius: 8px; padding: 10px 12px; font-size: 11.5px; color: #134e4a; line-height: 1.55; text-align: center; }
+    .story-box strong { color: #0d9488; font-weight: 700; }
+
+    .headline { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 900; color: #111827; line-height: 1.2; text-align: center; letter-spacing: -0.3px; }
+    .headline span { background: linear-gradient(135deg, #0d9488, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .outcomes { display: flex; flex-direction: column; gap: 6px; }
+    .oi { display: flex; align-items: center; gap: 8px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 10px; }
+    .oid { width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #0d9488, #14b8a6); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .oid svg { width: 11px; height: 11px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .oit { font-size: 11.5px; color: #374151; font-weight: 500; }
+
+    /* CTA */
+    .hcta { background: linear-gradient(135deg, #0d9488, #14b8a6); padding: 0.18in 0.26in; text-align: center; flex-shrink: 0; }
+    .hcta .cq { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .hcta .ce { font-size: 11px; font-weight: 700; color: #fff; }
+    .hcta .cw { font-size: 10px; color: rgba(255,255,255,0.72); margin-top: 2px; }
+
+    @media print {
+      body { background: none; padding: 0; }
+      .hanger { border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="hanger">
+
+  <div class="hole-area">
+    <div class="hole"><span>Cut<br/>Here</span></div>
+    <div class="hole-label">Hang on door handle</div>
+  </div>
+
+  <div class="brand-section">
+    <img src="../assets/images/brand/logo.webp" alt="WisdomLayers" />
+    <div class="brand-name">WisdomLayers</div>
+    <div class="brand-tag">Layered thinking. Clear design.</div>
+  </div>
+
+  <div class="hbody">
+
+    <div class="story-box">
+      <strong>We're high school students</strong> building websites to pay our way through college.
+      Every project funds our future — so we put everything into the work.
+    </div>
+
+    <div class="headline">Does Your Website<br /><span>Win You Business?</span></div>
+
+    <div class="outcomes">
+      <div class="oi"><div class="oid"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="oit">Custom, professional design</div></div>
+      <div class="oi"><div class="oid"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="oit">Show up on Google searches</div></div>
+      <div class="oi"><div class="oid"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div><div class="oit">Fast &amp; mobile-friendly</div></div>
+      <div class="oi"><div class="oid"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="oit">Booking &amp; contact systems</div></div>
+      <div class="oi"><div class="oid"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="oit">You own everything — always</div></div>
+    </div>
+
+  </div>
+
+  <div class="hcta">
+    <div class="cq">Let's talk — free consultation</div>
+    <div class="ce">contact@wisdomlayer.com</div>
+    <div class="cw">wisdomlayers.com</div>
+  </div>
+
+</div>
+</body>
+</html>

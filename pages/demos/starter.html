@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — Starter</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased}
+.stamp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:4.5rem;font-weight:800;color:rgba(0,0,0,.04);border:4px solid rgba(0,0,0,.04);padding:8px 28px;border-radius:6px;pointer-events:none;z-index:9999;letter-spacing:.2em;white-space:nowrap}
+
+nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 16px;height:52px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:10}
+.logo{font-weight:700;font-size:.95rem;color:#111;margin-right:auto}
+.nav-link{padding:8px 14px;font-size:.8rem;font-weight:600;color:#6b7280;border:none;background:transparent;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;height:52px;display:flex;align-items:center;transition:all .15s;flex-shrink:0}
+.nav-link.active{color:#111;border-bottom-color:#111}
+
+.page{display:none}.page.active{display:block}
+.label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px}
+h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+h3{font-size:1rem;font-weight:700}
+.inner{max-width:560px;margin:0 auto;padding:40px 20px}
+
+/* HOME — scrollable sections */
+.hero{padding:56px 20px 40px;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.hero h1{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em}
+.hero p{color:#6b7280;font-size:.9rem;line-height:1.7;max-width:340px;margin-bottom:22px}
+.btn{display:inline-block;background:#111;color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;font-size:.84rem;border:none;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:24px 20px;max-width:560px;margin:0 auto}
+.stat{border:1px solid #e5e7eb;border-radius:10px;padding:16px 12px;text-align:center}
+.stat .n{font-size:1.5rem;font-weight:800;margin-bottom:3px}
+.stat .l{font-size:.7rem;color:#9ca3af}
+.about{padding:24px 20px 48px;max-width:560px;margin:0 auto}
+.about p{font-size:.88rem;color:#6b7280;line-height:1.8}
+
+/* SERVICES */
+.srow{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 0;border-bottom:1px solid #f3f4f6;gap:12px}
+.srow:last-child{border:none}
+.snum{width:24px;height:24px;background:#f3f4f6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:#6b7280;flex-shrink:0;margin-top:1px}
+.sname{font-weight:600;font-size:.88rem}
+.sdesc{font-size:.76rem;color:#9ca3af;margin-top:2px}
+.sprice{font-weight:700;font-size:.88rem;flex-shrink:0}
+
+/* GALLERY */
+.grid2{columns:2;gap:8px;margin-top:20px}
+.photo{border-radius:8px;margin-bottom:8px;break-inside:avoid;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;letter-spacing:.1em;color:#9ca3af}
+
+/* CONTACT */
+.map-ph{background:#f3f4f6;border-radius:8px;height:100px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:600;letter-spacing:.08em;color:#9ca3af;margin-bottom:16px}
+.hours{border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:16px}
+.hr{display:flex;justify-content:space-between;font-size:.82rem;padding:6px 0;border-bottom:1px solid #f3f4f6}
+.hr:last-child{border:none}
+.hr span:first-child{color:#9ca3af}
+.hr span:last-child{font-weight:600}
+input,textarea,select{width:100%;padding:11px 13px;border:1px solid #e5e7eb;border-radius:8px;font-size:.84rem;font-family:inherit;background:#fafafa;outline:none;color:#111;margin-bottom:8px}
+textarea{height:88px;resize:none}
+.submit{width:100%;background:#111;color:#fff;border:none;border-radius:8px;padding:13px;font-weight:700;font-size:.86rem;cursor:pointer}
+
+footer{padding:20px;text-align:center;font-size:.74rem;color:#9ca3af;border-top:1px solid #f3f4f6}
+footer b{color:#111}
+</style>
+</head>
+<body>
+<div class="stamp">DEMO</div>
+
+<nav>
+  <span class="logo">Your Business</span>
+  <button class="nav-link active" onclick="show('home',this)">Home</button>
+  <button class="nav-link" onclick="show('services',this)">Services</button>
+  <button class="nav-link" onclick="show('gallery',this)">Gallery</button>
+  <button class="nav-link" onclick="show('contact',this)">Contact</button>
+</nav>
+
+<!-- HOME — multiple sections inside one page -->
+<div class="page active" id="home">
+  <div class="hero">
+    <div class="label">Welcome</div>
+    <h1>Your Business.<br>Done Right.</h1>
+    <p>Serving your community with quality and care.</p>
+    <button class="btn">Get in Touch →</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">8+</div><div class="l">Years</div></div>
+    <div class="stat"><div class="n">500+</div><div class="l">Clients</div></div>
+    <div class="stat"><div class="n">5★</div><div class="l">Rating</div></div>
+  </div>
+  <div class="about">
+    <div class="label">About Us</div>
+    <p>We've been serving this community since 2016. Every job gets our full attention — no shortcuts, no excuses. We show up, we do the work, we make sure you're happy.</p>
+  </div>
+</div>
+
+<!-- SERVICES — header + list -->
+<div class="page" id="services">
+  <div class="inner">
+    <div class="label">What We Offer</div>
+    <h2 style="margin-bottom:24px">Services & Pricing</h2>
+    <div class="srow"><div class="snum">1</div><div style="flex:1"><div class="sname">Service One</div><div class="sdesc">Full start-to-finish handling.</div></div><div class="sprice">$99+</div></div>
+    <div class="srow"><div class="snum">2</div><div style="flex:1"><div class="sname">Service Two</div><div class="sdesc">Enhanced with priority scheduling.</div></div><div class="sprice">$149+</div></div>
+    <div class="srow"><div class="snum">3</div><div style="flex:1"><div class="sname">Service Three</div><div class="sdesc">Full-scope for larger projects.</div></div><div class="sprice">$199+</div></div>
+    <div class="srow"><div class="snum">4</div><div style="flex:1"><div class="sname">Service Four</div><div class="sdesc">Specialty option.</div></div><div class="sprice">$249+</div></div>
+    <div class="srow"><div class="snum">5</div><div style="flex:1"><div class="sname">Service Five</div><div class="sdesc">Premium white-glove handling.</div></div><div class="sprice">$299+</div></div>
+    <div class="srow"><div class="snum">6</div><div style="flex:1"><div class="sname">Bundle Package</div><div class="sdesc">Everything combined — best value.</div></div><div class="sprice">$499+</div></div>
+  </div>
+</div>
+
+<!-- GALLERY — header + grid of photos -->
+<div class="page" id="gallery">
+  <div class="inner">
+    <div class="label">Our Work</div>
+    <h2>Recent Projects</h2>
+    <div class="grid2">
+      <div class="photo" style="height:140px">PHOTO</div>
+      <div class="photo" style="height:110px">PHOTO</div>
+      <div class="photo" style="height:120px">PHOTO</div>
+      <div class="photo" style="height:150px">PHOTO</div>
+      <div class="photo" style="height:110px">PHOTO</div>
+      <div class="photo" style="height:130px">PHOTO</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT — map + hours + form -->
+<div class="page" id="contact">
+  <div class="inner">
+    <div class="label">Get in Touch</div>
+    <h2 style="margin-bottom:20px">Let's Talk</h2>
+    <div class="map-ph">MAP — 123 Your Street, Your City</div>
+    <div class="hours">
+      <h3 style="margin-bottom:12px;font-size:.88rem">Hours</h3>
+      <div class="hr"><span>Mon – Fri</span><span>9am – 6pm</span></div>
+      <div class="hr"><span>Saturday</span><span>9am – 4pm</span></div>
+      <div class="hr"><span>Sunday</span><span>Closed</span></div>
+    </div>
+    <input placeholder="Your name">
+    <input placeholder="Phone number">
+    <select><option>What do you need help with?</option><option>Service One</option><option>Service Two</option><option>Service Three</option></select>
+    <textarea placeholder="Any details?"></textarea>
+    <button class="submit">Send Message →</button>
+  </div>
+</div>
+
+<footer>Built by <b>WisdomLayers</b> · wisdomlayers.com</footer>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn&&btn.classList)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /assets/favicon_io/
+Disallow: /assets/favicons/
 
 Sitemap: https://wisdomlayers.com/sitemap.xml

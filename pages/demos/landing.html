@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — Landing Page</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased}
+.stamp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:4.5rem;font-weight:800;color:rgba(0,0,0,.04);border:4px solid rgba(0,0,0,.04);padding:8px 28px;border-radius:6px;pointer-events:none;z-index:9999;letter-spacing:.2em;white-space:nowrap}
+
+nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 24px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:10}
+.logo{font-weight:700;font-size:1rem;color:#111}
+.nav-cta{margin-left:auto;background:#111;color:#fff;padding:9px 20px;border-radius:8px;font-weight:600;font-size:.82rem;border:none;cursor:pointer}
+
+.hero{padding:80px 24px 72px;text-align:center;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.hero h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-.02em}
+.hero p{color:#6b7280;font-size:.95rem;line-height:1.7;max-width:380px;margin:0 auto 32px}
+.btn{background:#111;color:#fff;padding:14px 30px;border-radius:9px;font-weight:700;font-size:.9rem;border:none;cursor:pointer}
+
+.services{padding:64px 24px;max-width:580px;margin:0 auto}
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px}
+h2{font-size:1.6rem;font-weight:800;margin-bottom:28px;letter-spacing:-.01em}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #f3f4f6}
+.srow:last-child{border:none}
+.sname{font-weight:600;font-size:.9rem}
+.sdesc{font-size:.78rem;color:#9ca3af;margin-top:2px}
+.sprice{font-weight:700;font-size:.95rem;color:#111;flex-shrink:0}
+
+.contact{padding:0 24px 72px;max-width:520px;margin:0 auto}
+.contact-box{border:1px solid #e5e7eb;border-radius:16px;padding:36px}
+.contact-box h2{margin-bottom:6px}
+.contact-box p{color:#6b7280;font-size:.85rem;margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+input,textarea{width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:9px;font-size:.86rem;font-family:inherit;background:#fafafa;outline:none;color:#111;margin-bottom:10px}
+textarea{height:100px;resize:none;margin-bottom:10px}
+.submit{width:100%;background:#111;color:#fff;border:none;border-radius:9px;padding:14px;font-weight:700;font-size:.9rem;cursor:pointer}
+
+footer{padding:24px;text-align:center;font-size:.78rem;color:#9ca3af;border-top:1px solid #f3f4f6}
+footer b{color:#111}
+</style>
+</head>
+<body>
+<div class="stamp">DEMO</div>
+
+<nav>
+  <span class="logo">Your Business</span>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+</nav>
+
+<section class="hero">
+  <h1>Your Business.<br>Done Right.</h1>
+  <p>Quality work, fair pricing, and fast turnaround. Book a free consultation today.</p>
+  <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Free Quote →</button>
+</section>
+
+<section class="services">
+  <div class="section-label">What We Offer</div>
+  <h2>Services & Pricing</h2>
+  <div class="srow"><div><div class="sname">Service One</div><div class="sdesc">Full start-to-finish handling.</div></div><div class="sprice">$99+</div></div>
+  <div class="srow"><div><div class="sname">Service Two</div><div class="sdesc">Enhanced with priority scheduling.</div></div><div class="sprice">$149+</div></div>
+  <div class="srow"><div><div class="sname">Service Three</div><div class="sdesc">Full-scope for larger projects.</div></div><div class="sprice">$199+</div></div>
+  <div class="srow"><div><div class="sname">Service Four</div><div class="sdesc">Premium — everything included.</div></div><div class="sprice">$249+</div></div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-box">
+    <div class="section-label">Get Started</div>
+    <h2>Request a Quote</h2>
+    <p>We'll get back to you within 24 hours.</p>
+    <div class="form-row">
+      <input placeholder="Your name">
+      <input placeholder="Phone number">
+    </div>
+    <input placeholder="What service are you looking for?">
+    <textarea placeholder="Tell us about your project..."></textarea>
+    <button class="submit">Send Request →</button>
+  </div>
+</section>
+
+<footer>Built by <b>WisdomLayers</b> · wisdomlayers.com</footer>
+</body>
+</html>

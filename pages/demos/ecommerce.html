@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — E-Commerce</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased}
+.stamp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:4.5rem;font-weight:800;color:rgba(0,0,0,.04);border:4px solid rgba(0,0,0,.04);padding:8px 28px;border-radius:6px;pointer-events:none;z-index:9998;letter-spacing:.2em;white-space:nowrap}
+
+nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 16px;height:52px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:10}
+.logo{font-weight:800;font-size:.95rem;color:#111;margin-right:auto}
+.nav-link{padding:8px 12px;font-size:.8rem;font-weight:600;color:#6b7280;border:none;background:transparent;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;height:52px;display:flex;align-items:center;transition:all .15s;flex-shrink:0}
+.nav-link.active{color:#111;border-bottom-color:#111}
+.cart-btn{padding:8px 14px;font-size:.8rem;font-weight:700;border:1px solid #e5e7eb;border-radius:7px;background:#f9fafb;color:#111;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:inherit}
+.cart-btn.has-items{background:#111;color:#fff;border-color:#111}
+
+.page{display:none}.page.active{display:block}
+.label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px}
+h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.inner{max-width:560px;margin:0 auto;padding:36px 20px}
+.back-btn{background:none;border:none;font-size:.82rem;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;margin-bottom:20px;font-family:inherit;font-weight:600}
+
+/* SHOP */
+.shop-filters{background:#fff;border-bottom:1px solid #e5e7eb;padding:10px 16px;position:sticky;top:52px;z-index:9}
+.search{width:100%;padding:9px 13px;border:1px solid #e5e7eb;border-radius:8px;font-size:.84rem;font-family:inherit;background:#fafafa;outline:none;color:#111;margin-bottom:8px}
+.filter-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-btn{padding:6px 14px;border-radius:20px;font-size:.74rem;font-weight:600;border:1px solid #e5e7eb;background:transparent;color:#6b7280;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s;font-family:inherit}
+.filter-btn.on{background:#111;color:#fff;border-color:#111}
+
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px 16px 100px}
+.product-card{border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.product-card:hover{border-color:#d1d5db}
+.product-img{height:100px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;letter-spacing:.1em;color:#9ca3af}
+.product-body{padding:10px 12px}
+.product-cat{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af;margin-bottom:2px}
+.product-name{font-weight:700;font-size:.84rem;margin-bottom:8px;line-height:1.3}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{font-size:.95rem;font-weight:800}
+.add-btn{background:#f3f4f6;color:#111;border:1px solid #e5e7eb;padding:5px 12px;border-radius:6px;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit}
+.add-btn:hover,.add-btn.added{background:#111;color:#fff;border-color:#111}
+
+/* PRODUCT DETAIL (subpage) */
+.product-detail-img{background:#f3f4f6;height:180px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:#9ca3af;font-weight:700;letter-spacing:.1em;margin-bottom:18px}
+.detail-cat{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:5px}
+.detail-name{font-size:1.3rem;font-weight:800;margin-bottom:6px}
+.detail-price{font-size:1.6rem;font-weight:800;margin-bottom:14px}
+.detail-desc{font-size:.88rem;color:#6b7280;line-height:1.8;margin-bottom:20px}
+.detail-row{display:flex;justify-content:space-between;font-size:.84rem;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.detail-row:last-child{border:none}
+.detail-row span:first-child{color:#9ca3af}
+.detail-row span:last-child{font-weight:600}
+.add-full{width:100%;background:#111;color:#fff;border:none;border-radius:8px;padding:14px;font-weight:700;font-size:.9rem;cursor:pointer;margin-top:16px;font-family:inherit}
+
+/* CART BAR */
+#cart-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;padding:13px 20px;display:none;align-items:center;justify-content:space-between;z-index:100}
+.cart-count{font-weight:800;font-size:.88rem}
+.cart-total{font-size:.74rem;color:#9ca3af;margin-top:1px}
+.checkout-btn{background:#111;color:#fff;border:none;padding:11px 22px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.86rem;cursor:pointer;flex-shrink:0}
+
+/* ABOUT */
+.about-hero{background:#f9fafb;border-bottom:1px solid #e5e7eb;padding:48px 20px}
+.about-hero h1{font-size:clamp(1.7rem,5vw,2.3rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em}
+.about-hero p{color:#6b7280;font-size:.9rem;line-height:1.7;max-width:400px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:20px;max-width:560px;margin:0 auto}
+.stat{border:1px solid #e5e7eb;border-radius:10px;padding:14px;text-align:center}
+.stat .n{font-size:1.4rem;font-weight:800;margin-bottom:3px}
+.stat .l{font-size:.7rem;color:#9ca3af}
+
+/* ACCOUNT */
+.acct-profile{border:1px solid #e5e7eb;border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer}
+.acct-av{width:46px;height:46px;border-radius:50%;background:#f3f4f6;color:#6b7280;font-weight:700;font-size:.88rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.acct-name{font-weight:700;font-size:.9rem}
+.acct-sub{font-size:.74rem;color:#9ca3af;margin-top:2px}
+.sh{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin:16px 0 10px}
+.order-card{border:1px solid #e5e7eb;border-radius:10px;padding:13px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;cursor:pointer}
+.order-card:hover{border-color:#d1d5db}
+.order-id{font-weight:700;font-size:.85rem}
+.order-date{font-size:.73px;color:#9ca3af;margin-top:2px}
+.badge{font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:20px}
+.badge.delivered{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.badge.processing{background:#fefce8;color:#ca8a04;border:1px solid #fef08a}
+.acct-row{border:1px solid #e5e7eb;border-radius:10px;padding:13px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;cursor:pointer}
+.acct-row:hover{border-color:#d1d5db}
+.acct-label{font-weight:700;font-size:.86rem}
+.acct-val{font-size:.74rem;color:#9ca3af;margin-top:2px}
+
+/* ORDER DETAIL subpage */
+.order-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f3f4f6}
+.order-item:last-child{border:none}
+.item-img{width:48px;height:48px;background:#f3f4f6;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#9ca3af;font-weight:700;flex-shrink:0}
+.item-name{font-weight:600;font-size:.86rem}
+.item-price{font-size:.8rem;color:#9ca3af;margin-top:2px}
+
+footer{padding:20px;text-align:center;font-size:.74rem;color:#9ca3af;border-top:1px solid #f3f4f6}
+footer b{color:#111}
+</style>
+</head>
+<body>
+<div class="stamp">DEMO</div>
+
+<nav>
+  <span class="logo">Your Store</span>
+  <button class="nav-link active" onclick="show('shop',this)">Shop</button>
+  <button class="nav-link" onclick="show('about',this)">About</button>
+  <button class="nav-link" onclick="show('account',this)">Account</button>
+  <button class="cart-btn" id="nav-cart">Cart (0)</button>
+</nav>
+
+<!-- SHOP -->
+<div class="page active" id="shop">
+  <div class="shop-filters">
+    <input class="search" placeholder="Search products…">
+    <div class="filter-row">
+      <button class="filter-btn on" onclick="filterProducts('all',this)">All</button>
+      <button class="filter-btn" onclick="filterProducts('cat1',this)">Category 1</button>
+      <button class="filter-btn" onclick="filterProducts('cat2',this)">Category 2</button>
+      <button class="filter-btn" onclick="filterProducts('cat3',this)">Category 3</button>
+    </div>
+  </div>
+  <div id="shop-grid" class="product-grid"></div>
+  <!-- PRODUCT DETAIL (subpage inside shop) -->
+  <div id="product-detail" style="display:none">
+    <div class="inner">
+      <button class="back-btn" onclick="hideProduct()">← Back to Shop</button>
+      <div class="product-detail-img">PHOTO</div>
+      <div class="detail-cat" id="d-cat"></div>
+      <div class="detail-name" id="d-name"></div>
+      <div class="detail-price" id="d-price"></div>
+      <div class="detail-desc" id="d-desc"></div>
+      <div class="detail-row"><span>Category</span><span id="d-cat2"></span></div>
+      <div class="detail-row"><span>Ships In</span><span>2–4 business days</span></div>
+      <div class="detail-row"><span>Returns</span><span>30-day hassle-free</span></div>
+      <button class="add-full" id="d-add-btn">Add to Cart →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="about">
+  <div class="about-hero">
+    <div class="label">Our Story</div>
+    <h1>Quality Products.<br>Shipped Fast.</h1>
+    <p style="margin-top:10px">We started because we couldn't find what we needed anywhere else. Now we make it ourselves and ship directly to you.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">5yr</div><div class="l">In Business</div></div>
+    <div class="stat"><div class="n">2.4k+</div><div class="l">Orders</div></div>
+    <div class="stat"><div class="n">5★</div><div class="l">Reviews</div></div>
+  </div>
+  <div class="inner" style="padding-top:0">
+    <div class="label">Why Us</div>
+    <p style="font-size:.88rem;color:#6b7280;line-height:1.8">Every product we sell is something we'd use ourselves. If you're not happy, we'll make it right — no questions asked.</p>
+  </div>
+</div>
+
+<!-- ACCOUNT -->
+<div class="page" id="account">
+  <div class="inner" id="acct-main">
+    <div class="label">Welcome Back</div>
+    <div class="acct-profile">
+      <div class="acct-av">JD</div>
+      <div><div class="acct-name">Jordan Davis</div><div class="acct-sub">Member since 2023 · Gold Plan</div></div>
+    </div>
+    <div class="sh">Recent Orders</div>
+    <div class="order-card" onclick="showOrder(0)"><div><div class="order-id">Order #4821</div><div class="order-date">March 28 · $47.98</div></div><span class="badge delivered">Delivered</span></div>
+    <div class="order-card" onclick="showOrder(1)"><div><div class="order-id">Order #4790</div><div class="order-date">March 12 · $29.99</div></div><span class="badge delivered">Delivered</span></div>
+    <div class="order-card" onclick="showOrder(2)"><div><div class="order-id">Order #4755</div><div class="order-date">Feb 28 · $62.50</div></div><span class="badge processing">Processing</span></div>
+    <div class="sh">Account</div>
+    <div class="acct-row"><div><div class="acct-label">Saved Addresses</div><div class="acct-val">2 saved</div></div><span style="color:#d1d5db">›</span></div>
+    <div class="acct-row"><div><div class="acct-label">Payment Methods</div><div class="acct-val">Visa ending in 4242</div></div><span style="color:#d1d5db">›</span></div>
+    <div class="acct-row"><div><div class="acct-label">Membership</div><div class="acct-val">Gold Plan · Renews April 15</div></div><span style="color:#d1d5db">›</span></div>
+  </div>
+  <!-- ORDER DETAIL subpage -->
+  <div class="inner" id="order-detail" style="display:none">
+    <button class="back-btn" onclick="hideOrder()">← Back to Account</button>
+    <div class="label" id="od-status"></div>
+    <h2 id="od-id" style="margin-bottom:4px"></h2>
+    <p style="font-size:.78rem;color:#9ca3af;margin-bottom:20px" id="od-date"></p>
+    <div id="od-items"></div>
+    <div style="border-top:1px solid #e5e7eb;padding-top:14px;margin-top:4px">
+      <div style="display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:6px"><span style="color:#9ca3af">Subtotal</span><span id="od-sub"></span></div>
+      <div style="display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:6px"><span style="color:#9ca3af">Shipping</span><span>$4.99</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:800"><span>Total</span><span id="od-total"></span></div>
+    </div>
+  </div>
+</div>
+
+<div id="cart-bar">
+  <div><div class="cart-count" id="cart-count">0 Items</div><div class="cart-total" id="cart-total">$0.00</div></div>
+  <button class="checkout-btn">Checkout →</button>
+</div>
+
+<footer>Built by <b>WisdomLayers</b> · wisdomlayers.com</footer>
+
+<script>
+const PRODUCTS=[
+  {id:1,name:'Product One',cat:'cat1',label:'Category 1',price:24.99,desc:'A solid, well-made product built to last. Great for everyday use and easy to maintain.'},
+  {id:2,name:'Product Two',cat:'cat1',label:'Category 1',price:18.99,desc:'A reliable everyday option. Simple, clean, and does exactly what it should.'},
+  {id:3,name:'Product Three',cat:'cat2',label:'Category 2',price:34.99,desc:'Our most versatile item in this category. Works across a wide range of use cases.'},
+  {id:4,name:'Product Four',cat:'cat2',label:'Category 2',price:29.99,desc:'A crowd favorite — consistently our top-rated product for quality and value.'},
+  {id:5,name:'Product Five',cat:'cat3',label:'Category 3',price:44.99,desc:'Premium build, premium feel. Designed for those who want the best experience.'},
+  {id:6,name:'Product Six',cat:'cat3',label:'Category 3',price:52.00,desc:'Our flagship item. Full-featured, beautifully made, and built to impress.'},
+];
+let cart=[];
+let currentProduct=null;
+
+function renderGrid(filter){
+  const list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  document.getElementById('shop-grid').innerHTML=list.map(p=>`
+    <div class="product-card" onclick="showProduct(${p.id})">
+      <div class="product-img">PHOTO</div>
+      <div class="product-body">
+        <div class="product-cat">${p.label}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-footer">
+          <span class="product-price">$${p.price.toFixed(2)}</span>
+          <button class="add-btn" id="ab-${p.id}" onclick="event.stopPropagation();addToCart(${p.id})">Add +</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  hideProduct();
+  renderGrid(cat);
+}
+
+function showProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p)return;
+  currentProduct=p;
+  document.getElementById('d-cat').textContent=p.label;
+  document.getElementById('d-cat2').textContent=p.label;
+  document.getElementById('d-name').textContent=p.name;
+  document.getElementById('d-price').textContent='$'+p.price.toFixed(2);
+  document.getElementById('d-desc').textContent=p.desc;
+  document.getElementById('d-add-btn').textContent='Add to Cart →';
+  document.getElementById('d-add-btn').onclick=()=>addFromDetail(p.id);
+  document.getElementById('shop-grid').style.display='none';
+  document.querySelector('.shop-filters').style.display='none';
+  document.getElementById('product-detail').style.display='block';
+  window.scrollTo(0,0);
+}
+function hideProduct(){
+  document.getElementById('shop-grid').style.display='grid';
+  document.querySelector('.shop-filters').style.display='block';
+  document.getElementById('product-detail').style.display='none';
+}
+function addFromDetail(id){
+  addToCart(id);
+  document.getElementById('d-add-btn').textContent='✓ Added';
+  setTimeout(()=>{document.getElementById('d-add-btn').textContent='Add to Cart →';},1400);
+}
+function addToCart(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p)return;
+  cart.push(p);
+  const total=cart.reduce((s,x)=>s+x.price,0);
+  document.getElementById('cart-count').textContent=cart.length+(cart.length===1?' Item':' Items');
+  document.getElementById('cart-total').textContent='$'+total.toFixed(2);
+  const nc=document.getElementById('nav-cart');
+  nc.textContent='Cart ('+cart.length+')';
+  nc.classList.toggle('has-items',cart.length>0);
+  document.getElementById('cart-bar').style.display='flex';
+  const btn=document.getElementById('ab-'+id);
+  if(btn){btn.textContent='✓';btn.classList.add('added');setTimeout(()=>{btn.textContent='Add +';btn.classList.remove('added');},1200);}
+}
+
+function show(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn&&btn.classList)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+const orders=[
+  {id:'#4821',date:'March 28, 2025',status:'Delivered',items:[{name:'Product One',price:24.99},{name:'Product Three',price:34.99}],sub:47.98,total:52.97},
+  {id:'#4790',date:'March 12, 2025',status:'Delivered',items:[{name:'Product Two',price:18.99},{name:'Product Four',price:10.00 /* partial */}],sub:29.99,total:34.98},
+  {id:'#4755',date:'February 28, 2025',status:'Processing',items:[{name:'Product Six',price:52.00},{name:'Product Five',price:10.50}],sub:62.50,total:67.49}
+];
+function showOrder(i){
+  const o=orders[i];
+  document.getElementById('od-id').textContent='Order '+o.id;
+  document.getElementById('od-date').textContent=o.date;
+  document.getElementById('od-status').textContent=o.status;
+  document.getElementById('od-sub').textContent='$'+o.sub.toFixed(2);
+  document.getElementById('od-total').textContent='$'+o.total.toFixed(2);
+  document.getElementById('od-items').innerHTML=o.items.map(item=>`
+    <div class="order-item">
+      <div class="item-img">PHOTO</div>
+      <div><div class="item-name">${item.name}</div><div class="item-price">$${item.price.toFixed(2)}</div></div>
+    </div>
+  `).join('');
+  document.getElementById('acct-main').style.display='none';
+  document.getElementById('order-detail').style.display='block';
+  window.scrollTo(0,0);
+}
+function hideOrder(){
+  document.getElementById('acct-main').style.display='block';
+  document.getElementById('order-detail').style.display='none';
+  window.scrollTo(0,0);
+}
+
+renderGrid('all');
+</script>
+</body>
+</html>

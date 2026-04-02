@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WisdomLayers — Hand Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page { size: 6in 4in landscape; margin: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #d1d5db;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 32px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* both cards: fixed 6x4 */
+    .card {
+      width: 6in;
+      height: 4in;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    /* ══════════ FRONT ══════════ */
+    .front {
+      background: linear-gradient(135deg, #0d9488 0%, #14b8a6 55%, #5eead4 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.28in 0.36in;
+    }
+    .front .c1 { position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.08); top: -80px; right: -50px; pointer-events: none; }
+    .front .c2 { position: absolute; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,0.06); bottom: -40px; left: -20px; pointer-events: none; }
+
+    .front-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
+    .front-brand { display: flex; align-items: center; gap: 8px; }
+    .front-brand img { width: 30px; height: 30px; object-fit: contain; filter: brightness(0) invert(1); }
+    .front-brand-name { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 800; color: #fff; }
+    .front-tagline { font-size: 10px; color: rgba(255,255,255,0.65); font-style: italic; padding-top: 4px; }
+
+    .front-mid { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+    .front-headline { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -0.5px; }
+    .front-headline em { font-style: normal; color: rgba(255,255,255,0.7); }
+    .front-story { font-size: 11.5px; color: rgba(255,255,255,0.88); line-height: 1.55; max-width: 3.6in; background: rgba(0,0,0,0.13); border-radius: 8px; padding: 8px 12px; }
+    .front-story strong { color: #fff; font-weight: 700; }
+
+    .front-bottom { display: flex; justify-content: space-between; align-items: flex-end; position: relative; z-index: 1; }
+    .front-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 11px; font-size: 10px; font-weight: 600; color: #fff; }
+    .front-url { background: #fff; color: #0d9488; border-radius: 8px; padding: 7px 14px; font-family: 'Poppins', sans-serif; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+
+    /* ══════════ BACK ══════════ */
+    .back {
+      background: #ffffff;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+
+    .back-left { padding: 0.24in 0.26in; display: flex; flex-direction: column; gap: 10px; }
+    .back-brand { display: flex; align-items: center; gap: 7px; }
+    .back-brand img { width: 24px; height: 24px; object-fit: contain; }
+    .back-brand-name { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; background: linear-gradient(135deg, #0d9488, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .back-story { background: #f0fdfa; border-left: 3px solid #0d9488; border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 11.5px; color: #134e4a; line-height: 1.55; }
+    .back-story strong { color: #0d9488; font-weight: 700; }
+    .back-outcomes { display: flex; flex-direction: column; gap: 5px; flex: 1; justify-content: center; }
+    .bo { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #374151; font-weight: 500; }
+    .bo-dot { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(135deg, #0d9488, #14b8a6); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .bo-dot svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .back-divider { background: #e5e7eb; }
+
+    .back-right { padding: 0.24in 0.26in; display: flex; flex-direction: column; justify-content: space-between; }
+    .back-section-label { font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #0d9488; margin-bottom: 8px; }
+    .steps { display: flex; flex-direction: column; gap: 7px; }
+    .step { display: flex; align-items: center; gap: 8px; }
+    .sn { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #0d9488, #14b8a6); color: #fff; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sl { font-size: 11.5px; font-weight: 600; color: #111827; }
+    .sd { font-size: 10px; color: #9ca3af; }
+    .back-cta { background: linear-gradient(135deg, #0d9488, #14b8a6); border-radius: 8px; padding: 10px 14px; }
+    .back-cta .cq { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .back-cta .ce { font-size: 10.5px; font-weight: 600; color: #fff; }
+    .back-cta .cw { font-size: 10px; color: rgba(255,255,255,0.72); margin-top: 1px; }
+
+    @media print {
+      body { background: none; padding: 0; gap: 0; flex-direction: column; }
+      .side { gap: 0; }
+      .label { display: none; }
+      .card { border-radius: 0; box-shadow: none; page-break-after: always; }
+      .card:last-of-type { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FRONT -->
+  <div class="side">
+    <div class="label">Front</div>
+    <div class="card front">
+      <div class="c1"></div>
+      <div class="c2"></div>
+      <div class="front-top">
+        <div class="front-brand">
+          <img src="../assets/images/brand/logo.webp" alt="WisdomLayers" />
+          <span class="front-brand-name">WisdomLayers</span>
+        </div>
+        <div class="front-tagline">Layered thinking. Clear design.</div>
+      </div>
+      <div class="front-mid">
+        <div class="front-headline">Websites That<br /><em>Win Customers.</em></div>
+        <div class="front-story">
+          <strong>We're high school students working to pay for college.</strong>
+          Every site we build funds our education — so we build like our future depends on it. Because it does.
+        </div>
+      </div>
+      <div class="front-bottom">
+        <div class="front-pills">
+          <div class="pill">Custom Design</div>
+          <div class="pill">Mobile-First</div>
+          <div class="pill">SEO Ready</div>
+          <div class="pill">Booking Systems</div>
+        </div>
+        <div class="front-url">wisdomlayers.com</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BACK -->
+  <div class="side">
+    <div class="label">Back</div>
+    <div class="card back">
+      <div class="back-left">
+        <div class="back-brand">
+          <img src="../assets/images/brand/logo.webp" alt="WisdomLayers" />
+          <span class="back-brand-name">WisdomLayers</span>
+        </div>
+        <div class="back-story">
+          We're a team of high school students building real websites to fund our college education.
+          <strong>Real work. Real results. Real stakes.</strong>
+        </div>
+        <div class="back-outcomes">
+          <div class="bo"><div class="bo-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Turn visitors into paying customers</div>
+          <div class="bo"><div class="bo-dot"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Get found on Google — no ads needed</div>
+          <div class="bo"><div class="bo-dot"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div>Mobile-first, fast, and built to impress</div>
+          <div class="bo"><div class="bo-dot"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>Look as professional as you are in person</div>
+        </div>
+      </div>
+      <div class="back-divider"></div>
+      <div class="back-right">
+        <div>
+          <div class="back-section-label">How It Works</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div><div class="sl">Discovery Call</div><div class="sd">We learn your goals &amp; vision</div></div></div>
+            <div class="step"><div class="sn">2</div><div><div class="sl">We Build It</div><div class="sd">Custom design, built to your brand</div></div></div>
+            <div class="step"><div class="sn">3</div><div><div class="sl">Review &amp; Refine</div><div class="sd">Your feedback, built in</div></div></div>
+            <div class="step"><div class="sn">4</div><div><div class="sl">Launch &amp; Grow</div><div class="sd">Go live with full support</div></div></div>
+          </div>
+        </div>
+        <div class="back-cta">
+          <div class="cq">Free consultation — no pressure.</div>
+          <div class="ce">contact@wisdomlayer.com</div>
+          <div class="cw">wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

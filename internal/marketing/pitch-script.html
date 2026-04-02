@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WisdomLayers — Pitch Script</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    @page { size: letter portrait; margin: 0.55in; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 7.5in;
+      margin: 0 auto;
+      padding: 40px 40px 56px;
+      background: #ffffff;
+      min-height: 100vh;
+      box-shadow: 0 0 0 1px #e5e7eb;
+    }
+
+    /* HEADER */
+    .page-header {
+      display: flex; align-items: center; gap: 13px;
+      border-bottom: 3px solid #0d9488;
+      padding-bottom: 16px; margin-bottom: 24px;
+    }
+    .page-header img { width: 42px; height: 42px; object-fit: contain; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: 21px; font-weight: 800; background: linear-gradient(135deg, #0d9488, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header p { font-size: 11.5px; color: #9ca3af; margin-top: 2px; }
+
+    /* TIP */
+    .tip-box { background: #f0fdfa; border-left: 4px solid #0d9488; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 24px; font-size: 13px; color: #374151; line-height: 1.6; }
+    .tip-box strong { color: #0d9488; }
+
+    /* SECTION */
+    .section { margin-bottom: 24px; }
+    .sec-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .badge { width: 27px; height: 27px; border-radius: 50%; background: linear-gradient(135deg, #0d9488, #14b8a6); color: #fff; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sec-title { font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 700; color: #111827; }
+    .sec-time { font-size: 11px; color: #9ca3af; margin-left: auto; font-style: italic; }
+
+    /* SCRIPT BOX */
+    .script-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 18px; margin-bottom: 8px; }
+    .script-box .speaker { font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #0d9488; margin-bottom: 6px; }
+    .script-box .words { font-size: 13.5px; color: #111827; line-height: 1.7; font-style: italic; }
+    .script-box .words strong { font-style: normal; color: #0d9488; font-weight: 600; }
+
+    /* NOTE */
+    .note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 9px 13px; font-size: 12px; color: #92400e; margin-bottom: 8px; line-height: 1.5; }
+    .note strong { color: #78350f; }
+
+    /* OBJECTIONS */
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .obj-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 13px; }
+    .obj-card .q { font-size: 11.5px; font-weight: 700; color: #6b7280; margin-bottom: 5px; }
+    .obj-card .a { font-size: 12.5px; color: #111827; line-height: 1.6; font-style: italic; }
+    .obj-card .a strong { font-style: normal; color: #0d9488; }
+
+    /* CHECKLIST */
+    .checklist { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 16px; }
+    .ci { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12.5px; color: #374151; border-bottom: 1px solid #f3f4f6; }
+    .ci:last-child { border-bottom: none; }
+    .check { width: 17px; height: 17px; border: 2px solid #d1d5db; border-radius: 4px; flex-shrink: 0; }
+
+    /* FOOTER */
+    .footer-bar { margin-top: 28px; background: linear-gradient(135deg, #0d9488, #14b8a6); border-radius: 10px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bar .mantra { font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 700; color: #fff; }
+    .footer-bar .contact { font-size: 11.5px; color: rgba(255,255,255,0.8); text-align: right; }
+
+    @media print {
+      body { background: none; }
+      .page { box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <img src="../assets/images/brand/logo.webp" alt="WisdomLayers" />
+    <div>
+      <h1>WisdomLayers — Pitch Script</h1>
+      <p>In-person sales guide · Keep this with you · Read it until it's natural</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>The story is the pitch.</strong> You're not just selling a website — you're a group of high school students working hard to pay your way through college. People want to help young people who are putting in the work. Lead with that. It's not a gimmick, it's the truth — and the truth sells.
+  </div>
+
+  <div class="section">
+    <div class="sec-header"><div class="badge">1</div><div class="sec-title">The Opener — Walk in, get their attention</div><div class="sec-time">~30 sec</div></div>
+    <div class="script-box">
+      <div class="speaker">You say</div>
+      <div class="words">"Hi, my name is <strong>Wisdom</strong> — I'm not trying to take up too much of your time. I'm a high school student and I run a small web design company called <strong>WisdomLayers</strong> with a group of my classmates. We're all working to pay our way through college, and we build professional websites for local businesses like yours. Do you have about 60 seconds? I'd love to show you what we do."</div>
+    </div>
+    <div class="note"><strong>Body language:</strong> Smile, make eye contact, hold the card in your hand so they can see it. Don't shove it at them — wait until they say yes.</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header"><div class="badge">2</div><div class="sec-title">The Hook — Make them feel the problem</div><div class="sec-time">~45 sec</div></div>
+    <div class="script-box">
+      <div class="speaker">If they say yes, continue</div>
+      <div class="words">"Most small businesses have a website that's either outdated, super slow, or just doesn't look the way the business actually is. And the problem is — when someone looks you up online, <strong>that's their first impression.</strong> If the site doesn't look professional, they assume the business isn't either. We fix that. We build clean, fast, modern websites that actually make people want to call you."</div>
+    </div>
+    <div class="note"><strong>Pause here.</strong> Let it land. Then hand them the card.</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header"><div class="badge">3</div><div class="sec-title">The Show — Hand them something</div><div class="sec-time">~30 sec</div></div>
+    <div class="script-box">
+      <div class="speaker">Hand them the card and say</div>
+      <div class="words">"This is our work — you can check out <strong>wisdomlayers.com</strong> to see the actual sites we've built. We've done a therapy practice, a pressure washing company, and we have more in the works. Everything is custom — we don't use templates. And we keep our prices fair because we're building our portfolio and we genuinely want to help local businesses win online."</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header"><div class="badge">4</div><div class="sec-title">The Ask — Close without pressure</div><div class="sec-time">~20 sec</div></div>
+    <div class="script-box">
+      <div class="speaker">Then ask</div>
+      <div class="words">"Is your current website something you're happy with? Or is it something you've been meaning to update?"</div>
+    </div>
+    <div class="note"><strong>Shut up after you ask.</strong> Let them answer. Don't fill the silence. Whatever they say, listen fully before responding.</div>
+    <div class="script-box">
+      <div class="speaker">If they're interested, say</div>
+      <div class="words">"Awesome — the best next step is just a quick free call where I ask you some questions about your business and we figure out what makes sense. No commitment at all. Can I get your email or number so I can send you a time that works?"</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header"><div class="badge">!</div><div class="sec-title">Handling Objections</div></div>
+    <div class="obj-grid">
+      <div class="obj-card"><div class="q">They say: "We already have a website."</div><div class="a">"That's great — honestly most of our clients did too. The question is whether it's actually bringing people in or just sitting there. Would you be open to a quick look together? No pressure either way."</div></div>
+      <div class="obj-card"><div class="q">They say: "We don't have the budget right now."</div><div class="a">"Totally understand. We work in a <strong>50/50 payment split</strong> — half upfront, half when it's done. But even if the timing isn't right, take our info for when it is."</div></div>
+      <div class="obj-card"><div class="q">They say: "How old are you guys?"</div><div class="a">"We're in high school — but our work isn't. Pull up wisdomlayers.com right now and judge us by what we build, not our age. Our clients trusted us for the same reason."</div></div>
+      <div class="obj-card"><div class="q">They say: "I need to talk to my partner/boss."</div><div class="a">"Of course — here's our flyer so you have all the info. If it's easier, I can send a quick email you can both review together. What's the best email?"</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header"><div class="badge">5</div><div class="sec-title">Before You Leave</div></div>
+    <div class="checklist">
+      <div class="ci"><div class="check"></div>Left them the hand card (front/back)</div>
+      <div class="ci"><div class="check"></div>Left them the full flyer if they seemed interested</div>
+      <div class="ci"><div class="check"></div>Mentioned wisdomlayers.com at least twice</div>
+      <div class="ci"><div class="check"></div>Got their name, email, or number — OR confirmed they'll reach out</div>
+      <div class="ci"><div class="check"></div>Thanked them genuinely regardless of their answer</div>
+      <div class="ci"><div class="check"></div>Left on a positive note — you may come back someday</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="mantra">"We're not just selling websites. We're funding our future."</div>
+    <div class="contact">contact@wisdomlayer.com · wisdomlayers.com</div>
+  </div>
+
+</div>
+</body>
+</html>

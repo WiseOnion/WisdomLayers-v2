@@ -2,7 +2,7 @@
 // Dynamic path resolution based on current page location
 
 // Detect if we're on the root page or in a subdirectory
-const isSubdirectory = window.location.pathname.includes('/html/');
+const isSubdirectory = window.location.pathname.includes('/pages/');
 const assetsPath = isSubdirectory ? '../assets' : 'assets';
 
 const projectData = {
@@ -32,33 +32,33 @@ const projectData = {
         },
         tech: ["HTML/CSS", "JavaScript", "Booking Integration", "Form Handling", "Payment Setup"],
         link: "https://miles2wisdom.com",
-        cardImage: `${assetsPath}/images/miles2wisdom/m2w-home-card.webp`,
-        desktopVideo: `${assetsPath}/images/miles2wisdom/m2w-desktop-demo.webm`,
-        mobileVideo: `${assetsPath}/images/miles2wisdom/m2w-mobile-demo.webm`,
+        cardImage: `${assetsPath}/images/portfolio/miles2wisdom/m2w-home-card.webp`,
+        desktopVideo: `${assetsPath}/images/portfolio/miles2wisdom/m2w-desktop-demo.webm`,
+        mobileVideo: `${assetsPath}/images/portfolio/miles2wisdom/m2w-mobile-demo.webm`,
         screenshots: [
             {
                 title: "Home",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-home-card.webp`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-home-desktop.webp`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-home-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/miles2wisdom/m2w-home-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/miles2wisdom/m2w-home-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/miles2wisdom/m2w-home-mobile.webp`
             },
             {
                 title: "Booking System",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-booking-card.webp`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-booking-desktop.webp`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-booking-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/miles2wisdom/m2w-booking-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/miles2wisdom/m2w-booking-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/miles2wisdom/m2w-booking-mobile.webp`
             },
             {
                 title: "Meet the Team",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-team-card.webp`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-team-desktop.webp`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-team-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/miles2wisdom/m2w-team-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/miles2wisdom/m2w-team-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/miles2wisdom/m2w-team-mobile.webp`
             },
             {
                 title: "Services Page",
-                thumb: `${assetsPath}/images/miles2wisdom/m2w-services-card.webp`,
-                desktop: `${assetsPath}/images/miles2wisdom/m2w-services-desktop.webp`,
-                mobile: `${assetsPath}/images/miles2wisdom/m2w-services-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/miles2wisdom/m2w-services-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/miles2wisdom/m2w-services-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/miles2wisdom/m2w-services-mobile.webp`
             }
         ]
     },
@@ -91,29 +91,29 @@ const projectData = {
         },
         tech: ["HTML/CSS", "JavaScript", "Interactive before/after slider", "Fully responsive design", "Online quote forms and contact integration", "Local SEO optimization"],
         link: "https://pjpressurewash.com",
-        cardImage: `${assetsPath}/images/pjpressure/pj-home-card.webp`,
-        desktopVideo: `${assetsPath}/images/pjpressure/pj-desktop-demo.webm`,
-        mobileVideo: `${assetsPath}/images/pjpressure/pj-mobile-demo.webm`,
+        cardImage: `${assetsPath}/images/portfolio/pjpressure/pj-home-card.webp`,
+        desktopVideo: `${assetsPath}/images/portfolio/pjpressure/pj-desktop-demo.webm`,
+        mobileVideo: `${assetsPath}/images/portfolio/pjpressure/pj-mobile-demo.webm`,
         screenshots: [
             {
                 title: "Home",
-                desktop: `${assetsPath}/images/pjpressure/pj-home-desktop.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-home-mobile.webp`
+                desktop: `${assetsPath}/images/portfolio/pjpressure/pj-home-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/pjpressure/pj-home-mobile.webp`
             },
             {
                 title: "Service Areas",
-                desktop: `${assetsPath}/images/pjpressure/pj-areas-desktop.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-areas-mobile.webp`
+                desktop: `${assetsPath}/images/portfolio/pjpressure/pj-areas-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/pjpressure/pj-areas-mobile.webp`
             },
             {
                 title: "About",
-                desktop: `${assetsPath}/images/pjpressure/pj-about-desktop.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-about-mobile.webp`
+                desktop: `${assetsPath}/images/portfolio/pjpressure/pj-about-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/pjpressure/pj-about-mobile.webp`
             },
             {
                 title: "Gallery",
-                desktop: `${assetsPath}/images/pjpressure/pj-gallery-desktop.webp`,
-                mobile: `${assetsPath}/images/pjpressure/pj-gallery-mobile.webp`
+                desktop: `${assetsPath}/images/portfolio/pjpressure/pj-gallery-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/pjpressure/pj-gallery-mobile.webp`
             }
         ]
     },
@@ -136,33 +136,33 @@ const projectData = {
         testimonial: null,
         tech: ["HTML/CSS", "JavaScript", "Responsive Design", "Animation System"],
         link: null,
-        cardImage: `${assetsPath}/images/triplenickle/tn-home-card.webp`,
+        cardImage: `${assetsPath}/images/portfolio/triplenickle/tn-home-card.webp`,
         desktopVideo: null,
         mobileVideo: null,
         screenshots: [
             {
                 title: "Home",
-                thumb: `${assetsPath}/images/triplenickle/tn-home-card.webp`,
-                desktop: `${assetsPath}/images/triplenickle/tn-home-desktop.webp`,
-                mobile: `${assetsPath}/images/triplenickle/tn-home-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/triplenickle/tn-home-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/triplenickle/tn-home-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/triplenickle/tn-home-mobile.webp`
             },
             {
                 title: "About",
-                thumb: `${assetsPath}/images/triplenickle/tn-about-card.webp`,
-                desktop: `${assetsPath}/images/triplenickle/tn-about-desktop.webp`,
-                mobile: `${assetsPath}/images/triplenickle/tn-about-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/triplenickle/tn-about-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/triplenickle/tn-about-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/triplenickle/tn-about-mobile.webp`
             },
             {
                 title: "Events",
-                thumb: `${assetsPath}/images/triplenickle/tn-events-card.webp`,
-                desktop: `${assetsPath}/images/triplenickle/tn-events-desktop.webp`,
-                mobile: `${assetsPath}/images/triplenickle/tn-events-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/triplenickle/tn-events-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/triplenickle/tn-events-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/triplenickle/tn-events-mobile.webp`
             },
             {
                 title: "Membership",
-                thumb: `${assetsPath}/images/triplenickle/tn-membership-card.webp`,
-                desktop: `${assetsPath}/images/triplenickle/tn-membership-desktop.webp`,
-                mobile: `${assetsPath}/images/triplenickle/tn-membership-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/triplenickle/tn-membership-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/triplenickle/tn-membership-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/triplenickle/tn-membership-mobile.webp`
             }
         ]
     },
@@ -184,33 +184,33 @@ const projectData = {
         testimonial: null,
         tech: ["HTML/CSS", "JavaScript", "Responsive Design", "Animation System"],
         link: null,
-        cardImage: `${assetsPath}/images/ncrmpa1/ncrmpa-home-card.webp`,
+        cardImage: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-home-card.webp`,
         desktopVideo: null,
         mobileVideo: null,
         screenshots: [
             {
                 title: "Home",
-                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-home-card.webp`,
-                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-home-desktop.webp`,
-                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-home-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-home-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-home-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-home-mobile.webp`
             },
             {
                 title: "About",
-                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-about-card.webp`,
-                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-about-desktop.webp`,
-                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-about-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-about-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-about-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-about-mobile.webp`
             },
             {
                 title: "Events",
-                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-events-card.webp`,
-                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-events-desktop.webp`,
-                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-events-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-events-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-events-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-events-mobile.webp`
             },
             {
                 title: "Membership",
-                thumb: `${assetsPath}/images/ncrmpa1/ncrmpa-membership-card.webp`,
-                desktop: `${assetsPath}/images/ncrmpa1/ncrmpa-membership-desktop.webp`,
-                mobile: `${assetsPath}/images/ncrmpa1/ncrmpa-membership-mobile.webp`
+                thumb: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-membership-card.webp`,
+                desktop: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-membership-desktop.webp`,
+                mobile: `${assetsPath}/images/portfolio/ncrmpa/ncrmpa-membership-mobile.webp`
             }
         ]
     },

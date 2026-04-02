@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" width="device-width, initial-scale=1.0"/>
+  <title>WisdomLayers — Today's Route</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; padding: 1.5rem; max-width: 700px; margin: 0 auto; }
+
+    h1 { font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem; }
+    .sub { color: #555; font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+    /* Time picker */
+    .time-row {
+      background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px;
+      padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .time-row label { color: #888; font-size: 0.85rem; }
+    .time-row input {
+      background: #111; border: 1px solid #333; color: #fff;
+      padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 1rem; width: 130px;
+    }
+    .time-row button {
+      background: #2563eb; border: none; color: #fff;
+      padding: 0.5rem 1.1rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem;
+    }
+
+    /* Progress bar */
+    .progress-wrap { background: #1a1a1a; border-radius: 4px; height: 6px; margin-bottom: 1.25rem; }
+    .progress-fill { background: #2563eb; height: 6px; border-radius: 4px; width: 0%; transition: width 0.3s; }
+    .progress-label { font-size: 0.78rem; color: #555; margin-top: 0.3rem; margin-bottom: 1.25rem; }
+
+    /* Stop card */
+    .stop-card {
+      background: #141414; border: 1px solid #222; border-radius: 12px;
+      margin-bottom: 0.75rem; overflow: hidden;
+    }
+    .stop-card.visited { border-color: #14532d; opacity: 0.5; }
+    .stop-card.skipped { border-color: #1a1a1a; opacity: 0.35; }
+
+    .stop-header {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem; cursor: pointer;
+    }
+    .stop-num {
+      font-size: 1.5rem; font-weight: 800; color: #2563eb;
+      min-width: 2rem; text-align: center;
+    }
+    .stop-visited .stop-num { color: #22c55e; }
+    .stop-skipped .stop-num { color: #444; }
+
+    .stop-info { flex: 1; }
+    .stop-name { font-size: 1rem; font-weight: 700; color: #fff; }
+    .stop-addr { font-size: 0.82rem; color: #555; margin-top: 0.15rem; }
+
+    .stop-time-badge {
+      font-size: 0.85rem; font-weight: 700; color: #4ade80;
+      white-space: nowrap;
+    }
+
+    /* Expanded body */
+    .stop-body { padding: 0 1.25rem 1rem 1.25rem; display: none; }
+    .stop-body.open { display: block; }
+
+    .info-row { font-size: 0.85rem; color: #888; margin-bottom: 0.35rem; }
+    .info-row a { color: #2563eb; text-decoration: none; }
+    .info-row strong { color: #ccc; }
+
+    .pitch {
+      background: #0f1f0f; border-left: 3px solid #22c55e;
+      padding: 0.75rem 1rem; border-radius: 0 8px 8px 0;
+      font-size: 0.88rem; color: #d1fae5; line-height: 1.6;
+      margin: 0.75rem 0;
+    }
+    .pitch-label { font-size: 0.72rem; color: #555; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+
+    .opp-tag {
+      display: inline-block; padding: 0.2rem 0.65rem; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .opp-none { background: #3a0a0a; color: #f87171; }
+    .opp-bad  { background: #2a1a00; color: #fbbf24; }
+
+    .btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;
+      cursor: pointer; border: none; font-weight: 600;
+    }
+    .btn-maps  { background: #1e3a5f; color: #60a5fa; text-decoration: none; display: inline-flex; align-items: center; }
+    .btn-visit { background: #14532d; color: #4ade80; }
+    .btn-skip  { background: #1e1e1e; color: #555; }
+    .btn:hover { filter: brightness(1.15); }
+
+    /* Zone label */
+    .zone-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #333;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    /* Drive arrow */
+    .drive-arrow { text-align: center; color: #2a2a2a; font-size: 0.8rem; padding: 0.1rem 0; }
+  </style>
+</head>
+<body>
+
+<h1>Today's Route</h1>
+<p class="sub">Starting from Pine Forest High School &mdash; 525 Andrews Rd, Fayetteville NC</p>
+
+<div class="time-row">
+  <label>What time are you starting?</label>
+  <input type="time" id="startTime" value="09:00" />
+  <button onclick="renderRoute()">Set Time</button>
+</div>
+
+<div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label" id="progressLabel">0 of 26 visited</div>
+
+<div id="routeList"></div>
+
+<script>
+const stops = [
+  // ZONE 1
+  { zone: "Zone 1 — Start here (closest to Pine Forest)",
+    name: "3K Barber & Beauty Shop",        cat: "Barber",    phone: "(910) 920-2834", addr: "3300 Rosehill Rd, Fayetteville, NC",       fb: "", opp: "No Website",
+    pitch: "Hey, I noticed you guys don't have a website. I build websites for local barbers starting at $599 — you'd show up on Google and people could book online. Mind if I leave my card?" },
+  { name: "K's Hair Salon & Barber Shop",   cat: "Salon",     phone: "(910) 488-9729", addr: "4704 Rosehill Rd, Fayetteville, NC",       fb: "https://www.facebook.com/p/Ks-Hair-Salon-Barber-Shop-100063602498822/", opp: "No Website",
+    pitch: "You have a solid Facebook page but no website — that means you're invisible on Google. New customers search Google first. I build salon sites starting at $599, I can have it live in a week." },
+  { name: "A-One Moving & Packing",         cat: "Moving",    phone: "",               addr: "4617 Devonshire Dr, Fayetteville, NC",    fb: "https://www.facebook.com/Aonemovingandpacking/", opp: "No Website",
+    pitch: "People Google 'movers near me' constantly — without a website you're not showing up at all. I build mover sites with a quote form starting at $999. Got 5 minutes to talk?" },
+
+  // ZONE 2
+  { zone: "Zone 2 — Bragg Blvd",
+    name: "Midway Barber Shop",             cat: "Barber",    phone: "(910) 551-1424", addr: "4521 Bragg Blvd, Fayetteville, NC",       fb: "", opp: "No Website",
+    pitch: "Bragg Blvd has huge traffic but your customers can't find you online. A site with your hours, services, and a booking button brings in new people every week. Starting at $599." },
+  { name: "Crazy Taco Food Truck",          cat: "Food",      phone: "(910) 808-5332", addr: "3315 Bragg Blvd, Fayetteville, NC",       fb: "https://www.facebook.com/CRAZYTACOfoodtruckfayetteville/", opp: "No Website",
+    pitch: "People Google 'food trucks near me' every day. A site with your schedule and location turns one-time customers into regulars. I can build it for $599." },
+  { name: "Ill Ville Barbershop",           cat: "Barber",    phone: "",               addr: "125 N Reilly Rd STE 104, Fayetteville, NC", fb: "https://www.facebook.com/WeDaIllest/", opp: "No Website",
+    pitch: "Facebook-only means new customers can't find you on Google. I build barber sites starting at $599 — let me show you a quick example on my phone." },
+  { name: "Southern Customs Tattoo Company",cat: "Tattoo",    phone: "(910) 920-2683", addr: "500 N. Reilly Rd Suite #102, Fayetteville, NC", fb: "https://www.facebook.com/SCTATCO/", opp: "Bad Website",
+    pitch: "Right now you just have a booking portal — no gallery, no artist bios, no brand. People research tattoo shops before they commit. A real site with your portfolio would close way more bookings." },
+
+  // ZONE 3
+  { zone: "Zone 3 — Fort Bragg Rd / Ramsey St",
+    name: "Fit4Life Personal Trainers",     cat: "Fitness",   phone: "(910) 568-5962", addr: "2803 Fort Bragg Rd, Fayetteville, NC",   fb: "https://www.facebook.com/fit4lifefayettevillepersonaltraining/", opp: "No Website",
+    pitch: "Personal trainers with a website get leads while they sleep — people fill out inquiry forms at midnight. Right now you have no way to capture that. Starting at $999." },
+  { name: "Top of the Hill Boutique",       cat: "Boutique",  phone: "(910) 850-6591", addr: "2018 Fort Bragg Rd Suite 116-A, Fayetteville, NC", fb: "https://www.facebook.com/topofthehillboutique/", opp: "No Website",
+    pitch: "You have 4,200 Facebook likes — that's a real audience. With a website you could sell online too. Boutique sites with a shop page starting at $1,499." },
+  { name: "Action Electric & HVAC Repair",  cat: "Handyman",  phone: "(910) 476-6586", addr: "2009 Ramsey St, Fayetteville, NC",         fb: "https://www.facebook.com/p/Action-Electric-HVAC-Repair-100071471332572/", opp: "No Website",
+    pitch: "When someone's AC dies on a Saturday they Google 'HVAC repair near me' immediately. You're not showing up. A simple site with a call button would get you those emergency calls. $999." },
+
+  // ZONE 4
+  { zone: "Zone 4 — Skibo / Morganton / Raeford Rd",
+    name: "Red Carpet Barber Shop & Salon", cat: "Salon",     phone: "(910) 764-0609", addr: "2157 Skibo Rd, Fayetteville, NC",         fb: "https://www.facebook.com/redcarpetbarbershopandsalon/", opp: "No Website",
+    pitch: "Skibo Rd is one of the busiest roads in Fayetteville. You should be showing up when people search for salons here. No website means no Google presence. I fix that for $599." },
+  { name: "A Touch Of Class Beauty & Barber",cat: "Salon",    phone: "(910) 835-1315", addr: "1102 Strickland Bridge Rd, Fayetteville, NC", fb: "https://www.facebook.com/atouchofclasssalon/", opp: "No Website",
+    pitch: "Your name is 'Touch of Class' — the website should match. Right now it's just Facebook. Clean, professional salon site with booking link starting at $599." },
+  { name: "The Split End Salon and Boutique",cat: "Salon",    phone: "(910) 483-7545", addr: "1327 Morganton Rd, Fayetteville, NC",     fb: "https://www.facebook.com/splitendsalonfaync/", opp: "No Website",
+    pitch: "Salon AND boutique — two businesses with no website. People can't find either one online. I'll build one site that covers both, starting at $999." },
+  { name: "Salon 360",                       cat: "Salon",    phone: "(910) 323-0394", addr: "2829 Raeford Rd, Fayetteville, NC",       fb: "https://www.facebook.com/Salon360nc/", opp: "No Website",
+    pitch: "Color and Brazilian blowouts are high-ticket services — clients research online before booking. A site with your service menu would convert those searches into appointments. $599 to start." },
+
+  // ZONE 5
+  { zone: "Zone 5 — Yadkin Rd / Outer Loop",
+    name: "Balla World",                    cat: "Barber",    phone: "(910) 868-8331", addr: "4772 Yadkin Rd, Fayetteville, NC",        fb: "https://www.facebook.com/p/Balla-World-100063738065931/", opp: "No Website",
+    pitch: "Balla World — dope name, no website. Let me put the brand online. Barber sites starting at $599, live in under a week." },
+  { name: "Savages Barbershop",             cat: "Barber",    phone: "",               addr: "6256-102 Yadkin Rd, Fayetteville, NC",   fb: "https://www.facebook.com/savages.barbershop/", opp: "No Website",
+    pitch: "No phone public, no website — the only way new customers find you is if someone tags you. A site with your number, hours, and booking link makes you 10x easier to find. $599." },
+  { name: "On The Go Kutz",                 cat: "Salon",     phone: "",               addr: "5353 Red Tip Rd Suite 104, Fayetteville, NC", fb: "https://www.facebook.com/OnTheGoKutzs/", opp: "No Website",
+    pitch: "Mobile cuts are all about convenience — your website should match that. Quick, clean, easy to book. I build mobile stylist sites starting at $599." },
+  { name: "Candle Nail Bar",                cat: "Salon",     phone: "(910) 758-9266", addr: "111 S. McPherson Church Rd, Fayetteville, NC", fb: "https://www.facebook.com/FayettevilleCandleNailBar/", opp: "No Website",
+    pitch: "Nail bars do huge business from Google searches. Without a site you're losing bookings to competitors who have one. Gallery + booking link starting at $599." },
+
+  // ZONE 6
+  { zone: "Zone 6 — Boonetrail / Events",
+    name: "Special Security Patrol",        cat: "Security",  phone: "(910) 849-7575", addr: "3037-C Boonetrail Ext, Fayetteville, NC", fb: "https://www.facebook.com/SSPNorthCarolina/", opp: "No Website",
+    pitch: "Businesses Google for security vendors before calling. Without a website you're invisible to that market. A professional site with a quote form opens corporate contracts. $999–$1,499." },
+  { name: "Parties All About Me Events",    cat: "DJ",        phone: "(910) 308-8425", addr: "803 Stamper Rd Ste W, Fayetteville, NC", fb: "https://www.facebook.com/Partiesallaboutme/", opp: "No Website",
+    pitch: "Couples planning weddings Google DJs months in advance. No website means no Google presence. I build event/DJ sites with a booking inquiry form starting at $999." },
+
+  // ZONE 7
+  { zone: "Zone 7 — Downtown Fayetteville",
+    name: "Pratt Security Services LLC",    cat: "Security",  phone: "(910) 494-5433", addr: "823 Elm St, Fayetteville, NC",            fb: "https://www.facebook.com/p/Pratt-Security-Services-LLC-100090255884490/", opp: "Bad Website",
+    pitch: "You have a Google Sites page — that looks unprofessional to corporate clients and doesn't rank in search. I'll build a real site that matches your credibility. Starting at $999." },
+  { name: "Eutaw Barber Shop",              cat: "Barber",    phone: "(910) 485-4807", addr: "837 Elm St, Fayetteville, NC",            fb: "https://www.facebook.com/EutawBarberShop/", opp: "No Website",
+    pitch: "124 reviews on Birdeye and no website — you've built real credibility. A site would let you own that reputation on Google too. $599 and it's live in days." },
+  { name: "Quack Quack Phone Repair",       cat: "Repair",    phone: "",               addr: "218 Hay St, Fayetteville, NC",            fb: "https://www.facebook.com/QuackQuackNC/", opp: "No Website",
+    pitch: "Someone cracks their screen and immediately Googles 'phone repair near me.' You're not showing up. A simple site with services and turnaround time gets you those searches. $599." },
+  { name: "The Loft Hair Salon",            cat: "Salon",     phone: "(910) 323-5638", addr: "223 W Russell St, Fayetteville, NC",      fb: "https://www.facebook.com/Thelofthairsalonnc/", opp: "No Website",
+    pitch: "Downtown location is prime real estate — but only if people can find you. A website with your address, services, and booking link would fill your chairs with new clients from Google. $599." },
+
+  // ZONE 8
+  { zone: "Zone 8 — Wrap it up",
+    name: "Precision Clean of Fayetteville",cat: "Cleaning",  phone: "(910) 339-0903", addr: "200 Lamon Street Suite 200, Fayetteville, NC", fb: "https://www.facebook.com/PrecisionCleanofFayetteville/", opp: "No Website",
+    pitch: "Property managers Google for cleaning companies before calling. Without a website you can't compete for commercial contracts. Site with a quote form starting at $999." },
+  { name: "Dixie Clip Mobile Pet Grooming", cat: "Pet",       phone: "(910) 261-9086", addr: "2601 Quail Forest Dr, Fayetteville, NC", fb: "https://www.facebook.com/p/Dixie-Clip-Mobile-Pet-Grooming-100057782614635/", opp: "No Website",
+    pitch: "Pet owners search online constantly for mobile groomers. You come to them — your site should make booking just as easy. Service area, pricing, booking form. $599." },
+];
+
+const stateMap = {};
+
+function parseTime(str) {
+  const [h, m] = str.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function fmt(mins) {
+  const h = Math.floor(mins / 60) % 24;
+  const m = mins % 60;
+  const ap = h >= 12 ? "PM" : "AM";
+  return `${h % 12 || 12}:${String(m).padStart(2,"0")} ${ap}`;
+}
+
+function mapsLink(addr) {
+  return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(addr);
+}
+
+function markStop(i, action) {
+  stateMap[i] = stateMap[i] === action ? null : action;
+  renderRoute();
+}
+
+function renderRoute() {
+  const startMins = parseTime(document.getElementById("startTime").value);
+  const PER_STOP = 15, DRIVE = 8;
+  const list = document.getElementById("routeList");
+  list.innerHTML = "";
+
+  let cursor = startMins;
+  let lastZone = null;
+  let visitedCount = 0, skippedCount = 0;
+
+  stops.forEach((s, i) => {
+    const state = stateMap[i] || null;
+    if (state === "visited") visitedCount++;
+    if (state === "skipped") skippedCount++;
+
+    if (s.zone && s.zone !== lastZone) {
+      lastZone = s.zone;
+      const lbl = document.createElement("div");
+      lbl.className = "zone-label";
+      lbl.textContent = s.zone;
+      list.appendChild(lbl);
+    }
+
+    const isBad = s.opp && s.opp.startsWith("Bad");
+    const card = document.createElement("div");
+    card.className = "stop-card" + (state === "visited" ? " visited" : state === "skipped" ? " skipped" : "");
+
+    card.innerHTML = `
+      <div class="stop-header" onclick="toggleBody(${i})">
+        <div class="stop-num">${state === "visited" ? "✓" : state === "skipped" ? "—" : i + 1}</div>
+        <div class="stop-info">
+          <div class="stop-name">${s.name}</div>
+          <div class="stop-addr">${s.addr}</div>
+        </div>
+        <div class="stop-time-badge">${fmt(cursor)}</div>
+      </div>
+      <div class="stop-body" id="body-${i}">
+        <div class="opp-tag ${isBad ? "opp-bad" : "opp-none"}">${isBad ? "Bad Website — redesign pitch" : "No Website — new build pitch"}</div>
+        ${s.phone ? `<div class="info-row"><strong>Phone:</strong> <a href="tel:${s.phone}">${s.phone}</a></div>` : ""}
+        ${s.fb ? `<div class="info-row"><strong>Facebook:</strong> <a href="${s.fb}" target="_blank">View page</a></div>` : ""}
+        <div class="pitch-label">What to say when you walk in</div>
+        <div class="pitch">${s.pitch}</div>
+        <div class="btn-row">
+          <a class="btn btn-maps" href="${mapsLink(s.addr)}" target="_blank">Get Directions</a>
+          <button class="btn btn-visit" onclick="markStop(${i},'visited')">
+            ${state === "visited" ? "Undo" : "Mark Visited"}
+          </button>
+          <button class="btn btn-skip" onclick="markStop(${i},'skipped')">
+            ${state === "skipped" ? "Undo Skip" : "Skip"}
+          </button>
+        </div>
+      </div>
+    `;
+
+    list.appendChild(card);
+
+    if (i < stops.length - 1) {
+      const arrow = document.createElement("div");
+      arrow.className = "drive-arrow";
+      arrow.textContent = "↓  ~8 min drive";
+      list.appendChild(arrow);
+    }
+
+    cursor += PER_STOP + DRIVE;
+  });
+
+  // Progress
+  const done = visitedCount + skippedCount;
+  document.getElementById("progressFill").style.width = (done / stops.length * 100) + "%";
+  document.getElementById("progressLabel").textContent = `${visitedCount} visited · ${skippedCount} skipped · ${stops.length - done} remaining`;
+}
+
+function toggleBody(i) {
+  const el = document.getElementById("body-" + i);
+  el.classList.toggle("open");
+}
+
+renderRoute();
+</script>
+</body>
+</html>

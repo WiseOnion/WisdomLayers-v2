@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WisdomLayers Invoice — Triple Nickle Samuel Council Chapter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 0.5in 0.65in;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 9.5pt;
+            line-height: 1.45;
+            color: #374151;
+            background: #e5e7eb;
+        }
+
+        .page {
+            max-width: 7.5in;
+            margin: 0.4in auto 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            overflow: hidden;
+        }
+
+        /* Each sheet is a flex column — sheet-body grows to fill space, footer stays at bottom */
+        .sheet { display: flex; flex-direction: column; }
+        .sheet-body { flex: 1; padding: 20px 30px; }
+
+        /* PRINT BUTTON */
+        .print-bar { text-align: center; padding: 14px 0 10px; }
+        .print-bar button {
+            font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10pt;
+            background: #0d9488; color: white; border: none; border-radius: 6px;
+            padding: 9px 30px; cursor: pointer;
+        }
+        .print-bar button:hover { background: #0f766e; }
+        .print-hint { font-size: 8pt; color: #6b7280; margin-top: 6px; }
+
+        /* HEADER */
+        .hdr {
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            padding: 22px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .hdr-l { display: flex; align-items: center; gap: 13px; }
+        .logo-circle {
+            background: white; border-radius: 50%;
+            width: 54px; height: 54px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-circle img { width: 40px; height: 40px; object-fit: contain; }
+        .biz-name { font-family: 'Poppins', sans-serif; font-size: 16pt; font-weight: 700; color: white; line-height: 1; }
+        .biz-sub  { font-size: 8.5pt; color: rgba(255,255,255,0.82); margin-top: 3px; }
+        .hdr-r { text-align: right; }
+        .inv-title { font-family: 'Poppins', sans-serif; font-size: 24pt; font-weight: 700; color: white; letter-spacing: 3px; line-height: 1; }
+        .inv-num   { font-size: 9pt; color: rgba(255,255,255,0.85); margin-top: 4px; }
+        .inv-num strong { color: white; }
+
+        .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 13px; }
+
+        .card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 7px; padding: 12px 14px; }
+        .card-label { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #0d9488; margin-bottom: 6px; }
+        .card p { font-size: 9pt; color: #374151; margin: 2px 0; }
+        .card strong { color: #111827; }
+
+        .strip {
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border: 1px solid #5eead4; border-radius: 7px;
+            padding: 11px 16px; margin-bottom: 13px;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+        }
+        .strip .lbl { font-size: 7.5pt; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; }
+        .strip .val { font-size: 9.5pt; font-weight: 600; color: #111827; margin-top: 3px; }
+        .badge { display: inline-block; background: #fef3c7; -webkit-print-color-adjust: exact; print-color-adjust: exact; color: #92400e; font-size: 8pt; font-weight: 700; padding: 3px 11px; border-radius: 20px; margin-top: 4px; }
+
+        .tbl-wrap { border: 1px solid #e5e7eb; border-radius: 7px; overflow: hidden; margin-bottom: 11px; }
+        table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+        thead th {
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            color: white; font-family: 'Poppins', sans-serif; font-weight: 600;
+            font-size: 8pt; padding: 9px 11px; text-align: left;
+        }
+        th.r, td.r { text-align: right; }
+        th.c, td.c { text-align: center; }
+        tbody tr { border-bottom: 1px solid #f3f4f6; }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr.alt td { background: #f9fafb; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        tbody td { padding: 9px 11px; vertical-align: top; }
+        .iname { font-weight: 600; color: #111827; display: block; margin-bottom: 2px; }
+        .idesc { font-size: 8pt; color: #6b7280; line-height: 1.4; }
+
+        .totals-wrap { display: flex; justify-content: flex-end; margin-bottom: 13px; }
+        .totals-inner { width: 260px; }
+        .trow { display: flex; justify-content: space-between; padding: 4px 9px; font-size: 9pt; color: #6b7280; }
+        .trow.grand {
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-radius: 6px; font-family: 'Poppins', sans-serif;
+            font-size: 12pt; font-weight: 700; color: #0d9488;
+            padding: 9px 9px; margin-top: 4px;
+        }
+
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+        .split-now  { background: #d1fae5; border: 1.5px solid #10b981; border-radius: 7px; padding: 13px 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .split-later{ background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 7px; padding: 13px 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .split-lbl  { font-family: 'Poppins', sans-serif; font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+        .split-now  .split-lbl  { color: #065f46; }
+        .split-later .split-lbl { color: #64748b; }
+        .split-amt  { font-family: 'Poppins', sans-serif; font-size: 18pt; font-weight: 700; line-height: 1.15; }
+        .split-now  .split-amt  { color: #065f46; }
+        .split-later .split-amt { color: #475569; }
+        .split-note { font-size: 8pt; margin-top: 4px; }
+        .split-now  .split-note { color: #047857; }
+        .split-later .split-note { color: #64748b; }
+
+        .ibox { border-left: 3.5px solid; border-radius: 6px; padding: 11px 14px; margin-bottom: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .ibox h4 { font-family: 'Poppins', sans-serif; font-size: 9.5pt; font-weight: 700; margin-bottom: 5px; }
+        .ibox p, .ibox li { font-size: 8.5pt; line-height: 1.4; margin: 2px 0; }
+        .ibox ul { padding-left: 15px; }
+        .ibox li { margin: 3px 0; }
+        .blue   { background: #dbeafe; border-color: #3b82f6; }
+        .blue   h4, .blue p { color: #1e40af; }
+        .yellow { background: #fef3c7; border-color: #f59e0b; }
+        .yellow h4 { color: #92400e; }
+        .yellow li { color: #78350f; }
+        .red    { background: #fee2e2; border-color: #ef4444; }
+        .red    h4, .red p { color: #991b1b; }
+        .green  { background: #d1fae5; border-color: #10b981; }
+        .green  h4, .green p { color: #065f46; }
+
+        .pay-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin: 7px 0 5px; }
+        .pay-item { background: white; border: 1px solid #bfdbfe; border-radius: 5px; padding: 7px 10px; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .pay-item strong { display: block; font-size: 8pt; color: #1e40af; }
+        .pay-item span   { font-size: 8pt; color: #374151; }
+
+        .row2-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 11px; }
+
+        .sig { border: 1px solid #e5e7eb; border-radius: 7px; padding: 14px 16px; margin-bottom: 9px; background: #f9fafb; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .sig h4 { font-family: 'Poppins', sans-serif; font-size: 9.5pt; color: #0d9488; margin-bottom: 5px; }
+        .sig .ack { font-size: 8pt; color: #6b7280; margin-bottom: 10px; line-height: 1.4; }
+        .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+        .sig-field p   { font-size: 8pt; color: #6b7280; margin-bottom: 2px; }
+        .sig-line { border-bottom: 1.5px solid #1f2937; min-height: 26px; margin-bottom: 2px; }
+        .sig-sub  { font-size: 7pt; color: #9ca3af; }
+
+        .ftr {
+            background: #f9fafb;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            border-top: 1px solid #e5e7eb;
+            padding: 11px 30px;
+            text-align: center;
+        }
+        .ftr p { font-size: 8pt; color: #6b7280; margin: 2px 0; }
+        .ftr strong { color: #111827; }
+
+        /* ══ PRINT ══ */
+        @media print {
+            body { background: white; }
+            .print-bar { display: none; }
+            .page { max-width: 100%; margin: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+
+            /* Each .sheet must be EXACTLY one page tall so flex pushes footer to bottom */
+            .sheet {
+                height: 100vh;
+                page-break-after: always;
+                break-after: always;
+            }
+            .sheet:last-child {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="print-bar">
+    <button onclick="window.print()">&#128424; Print / Save as PDF</button>
+    <p class="print-hint">Print dialog &#8594; Paper: <strong>Letter</strong> &#8594; Margins: <strong>Default</strong> &#8594; Scale: <strong>100%</strong> &#8594; &#9989; Background graphics</p>
+</div>
+
+<div class="page">
+
+    <!-- ═══════════ SHEET 1 ═══════════ -->
+    <div class="sheet">
+
+        <div class="hdr">
+            <div class="hdr-l">
+                <div class="logo-circle">
+                    <img src="C:/Users/wisem/Downloads/Projects/WisdomLayer/assets/images/brand/logo.webp" alt="WL">
+                </div>
+                <div>
+                    <div class="biz-name">WisdomLayers</div>
+                    <div class="biz-sub">Web Development Services &mdash; Fayetteville, NC</div>
+                </div>
+            </div>
+            <div class="hdr-r">
+                <div class="inv-title">INVOICE</div>
+                <div class="inv-num">Invoice No. <strong>WL-001</strong></div>
+            </div>
+        </div>
+
+        <div class="sheet-body">
+
+            <div class="row2">
+                <div class="card">
+                    <div class="card-label">From</div>
+                    <p><strong>WisdomLayers</strong></p>
+                    <p>Fayetteville, NC</p>
+                    <p>contact@wisdomlayers.com</p>
+                    <p>wisdomlayers.com</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">Bill To</div>
+                    <p><strong>Triple Nickle Samuel Council Chapter</strong></p>
+                    <p>555th Parachute Infantry Association</p>
+                    <p>P.O. Box 555, Fayetteville, NC 28302</p>
+                    <p>samuelcouncil555@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="strip">
+                <div><div class="lbl">Invoice Date</div><div class="val">March 29, 2026</div></div>
+                <div><div class="lbl">Due Date</div><div class="val">April 28, 2026</div></div>
+                <div><div class="lbl">Status</div><div class="badge">Payment Due</div></div>
+            </div>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:52%;">Description</th>
+                            <th class="c" style="width:8%;">Qty</th>
+                            <th class="r" style="width:18%;">Unit Price</th>
+                            <th class="r" style="width:22%;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="iname">Premium Website Package</span>
+                                <span class="idesc">6-page custom site: Home, About, Membership, Events, Donate, Contact. Mobile-responsive, animations, gallery, 3 months support.</span>
+                            </td>
+                            <td class="c">1</td><td class="r">$2,199.00</td><td class="r"><strong>$2,199.00</strong></td>
+                        </tr>
+                        <tr class="alt">
+                            <td>
+                                <span class="iname">Logo Design &amp; Remake</span>
+                                <span class="idesc">Updated mark, refined colors, PNG/SVG/WebP files. Full ownership upon final payment.</span>
+                            </td>
+                            <td class="c">1</td><td class="r">$200.00</td><td class="r"><strong>$200.00</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="iname">Hosting Setup</span>
+                                <span class="idesc">Server config, deployment, SSL, live launch. Client retains full account ownership.</span>
+                            </td>
+                            <td class="c">1</td><td class="r">$150.00</td><td class="r"><strong>$150.00</strong></td>
+                        </tr>
+                        <tr class="alt">
+                            <td>
+                                <span class="iname">Domain Setup &amp; Configuration</span>
+                                <span class="idesc">Registration, DNS config, email forwarding. Client retains full domain ownership.</span>
+                            </td>
+                            <td class="c">1</td><td class="r">$75.00</td><td class="r"><strong>$75.00</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="totals-wrap">
+                <div class="totals-inner">
+                    <div class="trow"><span>Subtotal</span><span>$2,624.00</span></div>
+                    <div class="trow"><span>Tax (0%)</span><span>$0.00</span></div>
+                    <div class="trow grand"><span>Project Total</span><span>$2,624.00</span></div>
+                </div>
+            </div>
+
+            <div class="split">
+                <div class="split-now">
+                    <div class="split-lbl">Due Now &mdash; 50% Deposit</div>
+                    <div class="split-amt">$1,312.00</div>
+                    <div class="split-note">Due upon contract execution. <strong>Non-refundable</strong> once work begins.</div>
+                </div>
+                <div class="split-later">
+                    <div class="split-lbl">Due at Launch &mdash; 50% Final</div>
+                    <div class="split-amt">$1,312.00</div>
+                    <div class="split-note">Due upon completion, <strong>prior to</strong> launch &amp; file delivery.</div>
+                </div>
+            </div>
+
+        </div><!-- /sheet-body -->
+
+        <div class="ftr">
+            <p><strong>WisdomLayers</strong> &nbsp;|&nbsp; Fayetteville, NC &nbsp;|&nbsp; contact@wisdomlayers.com &nbsp;|&nbsp; wisdomlayers.com</p>
+            <p>Invoice WL-001 &mdash; Page 1 of 2 &mdash; Continued on next page</p>
+        </div>
+
+    </div><!-- /sheet 1 -->
+
+    <!-- ═══════════ SHEET 2 ═══════════ -->
+    <div class="sheet">
+
+        <div class="hdr" style="padding: 16px 30px;">
+            <div class="hdr-l">
+                <div class="logo-circle">
+                    <img src="C:/Users/wisem/Downloads/Projects/WisdomLayer/assets/images/brand/logo.webp" alt="WL">
+                </div>
+                <div>
+                    <div class="biz-name" style="font-size:13pt;">WisdomLayers</div>
+                    <div class="biz-sub">Invoice WL-001 &mdash; Triple Nickle Samuel Council Chapter</div>
+                </div>
+            </div>
+            <div class="hdr-r">
+                <div style="font-family:'Poppins',sans-serif; font-size:10pt; font-weight:700; color:white; letter-spacing:1px;">TERMS &amp; CONDITIONS</div>
+                <div class="inv-num">Page 2 of 2</div>
+            </div>
+        </div>
+
+        <div class="sheet-body">
+
+            <div class="ibox blue">
+                <h4>Payment Information</h4>
+                <p>Send payment via any method below. Always include invoice number <strong>WL-001</strong> with your payment.</p>
+                <div class="pay-grid">
+                    <div class="pay-item"><strong>PayPal</strong><span>Request details by email</span></div>
+                    <div class="pay-item"><strong>Money Order</strong><span>Request details by email</span></div>
+                    <div class="pay-item"><strong>Cashier's Check</strong><span>Request details by email</span></div>
+                </div>
+            </div>
+
+            <div class="ibox yellow">
+                <h4>Payment Terms &amp; Conditions</h4>
+                <ul>
+                    <li>Deposit is <strong>non-refundable</strong> once work commences (planning, design, or development).</li>
+                    <li>Payment due within <strong>30 days</strong> of invoice date.</li>
+                    <li>Late payments (14+ days) incur a <strong>$50/week fee</strong> plus 1.5% monthly interest.</li>
+                    <li>Development starts within <strong>2 business days</strong> of deposit clearance.</li>
+                    <li>Final 50% due upon completion — <strong>prior to</strong> launch or file transfer.</li>
+                    <li>Disputes must be reported in writing within <strong>5 business days</strong> of receipt.</li>
+                </ul>
+            </div>
+
+            <div class="row2-boxes">
+                <div class="ibox red" style="margin-bottom:0;">
+                    <h4>Late Payment Policy</h4>
+                    <p>Accounts unpaid after 30 days may be referred to collections. Client is responsible for all collection costs including reasonable attorney fees.</p>
+                </div>
+                <div class="ibox green" style="margin-bottom:0;">
+                    <h4>After Payment Is Received</h4>
+                    <p>&#8212; Project locked into schedule</p>
+                    <p>&#8212; Welcome email + portal access within 24 hrs</p>
+                    <p>&#8212; Discovery call scheduled</p>
+                    <p>&#8212; Development starts within 2 business days</p>
+                </div>
+            </div>
+
+            <div style="height:12px;"></div>
+
+            <div class="sig">
+                <h4>Client Acknowledgment &amp; Signature</h4>
+                <p class="ack">By submitting payment or signing below, the Client agrees to these terms and confirms the deposit is non-refundable once work commences. This agreement is governed by the laws of North Carolina.</p>
+                <div class="sig-grid">
+                    <div class="sig-field">
+                        <p>Client Signature</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-sub">Authorized Signature</p>
+                        <p style="margin-top:10px;">Printed Name</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-sub">Print Full Legal Name</p>
+                        <p style="margin-top:10px;">Title / Role</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-sub">Position within Organization</p>
+                    </div>
+                    <div class="sig-field">
+                        <p>Date Signed</p>
+                        <div class="sig-line"></div>
+                        <p class="sig-sub">Date</p>
+                        <p style="margin-top:10px;">Package Selected</p>
+                        <div class="sig-line" style="display:flex;align-items:flex-end;padding-bottom:3px;">
+                            <span style="font-size:8.5pt;color:#111827;font-weight:600;">Premium Website Package + Logo + Hosting + Domain</span>
+                        </div>
+                        <p class="sig-sub">Package / Services</p>
+                        <p style="margin-top:10px;">Project Total Agreed</p>
+                        <div class="sig-line" style="display:flex;align-items:flex-end;padding-bottom:3px;">
+                            <span style="font-size:9pt;color:#0d9488;font-weight:700;">$2,624.00</span>
+                        </div>
+                        <p class="sig-sub">Contract Amount</p>
+                    </div>
+                </div>
+                <div style="margin-top:16px;border-top:1px solid #e5e7eb;padding-top:12px;">
+                    <div class="sig-grid">
+                        <div class="sig-field">
+                            <p>Authorized by &#8212; Service Provider</p>
+                            <div class="sig-line" style="display:flex;align-items:flex-end;padding-bottom:4px;">
+                                <span style="font-size:10pt;font-family:'Poppins',sans-serif;font-style:italic;color:#0d9488;font-weight:600;">Wisdom Johnson</span>
+                            </div>
+                            <p class="sig-sub">WisdomLayers &#8212; Service Provider</p>
+                        </div>
+                        <div class="sig-field">
+                            <p>Invoice Issued</p>
+                            <div class="sig-line" style="display:flex;align-items:flex-end;padding-bottom:4px;">
+                                <span style="font-size:9pt;color:#111827;font-weight:600;">March 28, 2026</span>
+                            </div>
+                            <p class="sig-sub">Date Issued</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align:center;font-size:8.5pt;color:#6b7280;">
+                Questions? <a href="mailto:contact@wisdomlayers.com" style="color:#0d9488;font-weight:600;">contact@wisdomlayers.com</a> &mdash; response within 24 business hours.
+            </p>
+
+        </div><!-- /sheet-body -->
+
+        <div class="ftr">
+            <p><strong>WisdomLayers</strong> &nbsp;|&nbsp; Fayetteville, NC &nbsp;|&nbsp; contact@wisdomlayers.com &nbsp;|&nbsp; wisdomlayers.com</p>
+            <p>Invoice WL-001 &mdash; March 2026 &mdash; Governed by the laws of North Carolina &mdash; Page 2 of 2</p>
+        </div>
+
+    </div><!-- /sheet 2 -->
+
+</div><!-- /page -->
+</body>
+</html>
