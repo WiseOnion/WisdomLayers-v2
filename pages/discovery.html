@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Questionnaire | WisdomLayers</title>
+    <meta name="description" content="Tell us about your business and vision. Fill out WisdomLayers' discovery questionnaire before your consultation call.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="shortcut icon" href="../assets/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="../assets/favicons/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        .field-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+        .field-note {
+            display: block;
+            font-size: 0.78rem;
+            color: #64748b;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        .field-input {
+            width: 100%;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: #1e293b;
+            background: #f8fafc;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            outline: none;
+            resize: vertical;
+        }
+        .field-input:focus {
+            border-color: #0d9488;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(13,148,136,0.1);
+        }
+        input.field-input { resize: none; height: 42px; }
+        textarea.field-input { min-height: 80px; }
+        textarea.field-input.tall { min-height: 110px; }
+
+        .section-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+        }
+        .section-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0d9488;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid #ccfbf1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            letter-spacing: 0.02em;
+        }
+        .submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .success-banner {
+            display: none;
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 24px;
+        }
+        .success-banner.show { display: block; }
+
+        /* Section number badge */
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px; height: 26px;
+            background: linear-gradient(135deg, #0d9488, #14b8a6);
+            color: white;
+            border-radius: 50%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+        .section-heading {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .section-heading h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #134e4a;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="../index.html" class="flex items-center gap-3">
+                    <img src="../assets/images/brand/logo.webp" alt="WisdomLayers Logo" class="h-10 w-10">
+                    <span class="text-2xl font-bold bg-gradient-to-r from-teal-600 to-teal-500 bg-clip-text text-transparent">
+                        WisdomLayers
+                    </span>
+                </a>
+                <nav class="hidden md:flex gap-8">
+                    <a href="projects.html" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Projects</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Pricing</a>
+                    <a href="../index.html#about" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">About</a>
+                    <a href="../index.html#contact" class="text-gray-600 hover:text-teal-600 font-medium transition-colors">Contact</a>
+                </nav>
+                <a href="../index.html#contact" class="hidden md:block px-5 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium">
+                    Get Started
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 text-gray-600 hover:text-teal-600 transition-colors" aria-label="Toggle menu">
+                    <div class="mobile-menu-icon">
+                        <span></span><span></span><span></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="mobile-menu-inner">
+            <nav class="mobile-menu-nav">
+                <a href="projects.html" class="mobile-menu-link">Projects</a>
+                <a href="pricing.html" class="mobile-menu-link">Pricing</a>
+                <a href="../index.html#about" class="mobile-menu-link">About</a>
+                <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+            </nav>
+            <a href="../index.html#contact" class="mobile-menu-cta-btn">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-teal-700 to-teal-500 py-16 px-4">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full translate-x-1/3 -translate-y-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-56 h-56 bg-white/8 rounded-full -translate-x-1/4 translate-y-1/3"></div>
+        <div class="relative max-w-3xl mx-auto text-center z-10">
+            <div class="inline-flex items-center gap-2 bg-white/15 text-white text-xs font-bold tracking-widest uppercase rounded-full px-4 py-1.5 mb-5">
+                Client Onboarding
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">Discovery Questionnaire</h1>
+            <p class="text-teal-100 text-lg max-w-xl mx-auto leading-relaxed">Help us understand your business and vision before your discovery call. The more detail you share, the better we can serve you.</p>
+        </div>
+    </section>
+
+    <!-- Form -->
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+        <!-- Intro box -->
+        <div class="bg-teal-50 border border-teal-200 rounded-xl p-5 mb-8">
+            <h2 class="text-teal-800 font-bold text-base mb-1">Before We Begin Building</h2>
+            <p class="text-teal-700 text-sm leading-relaxed">This questionnaire helps WisdomLayers understand your business, goals, and vision before the discovery call. Completing it in advance ensures our session is focused and productive. There are no wrong answers — answer as thoroughly as you can. Incomplete answers are fine; we will cover the rest during the call.</p>
+        </div>
+
+        <form id="discoveryForm" action="https://formspree.io/f/mykoyrva" method="POST">
+
+            <!-- Hidden subject line for email -->
+            <input type="hidden" name="_subject" value="New Discovery Questionnaire Submission — WisdomLayers">
+
+            <!-- CLIENT INFO -->
+            <div class="section-card mb-6">
+                <h3>Client Information</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="full_name">Full Name <span class="text-red-400">*</span></label>
+                        <input id="full_name" name="full_name" type="text" class="field-input" placeholder="Your name" required>
+                    </div>
+                    <div>
+                        <label class="field-label" for="business_name">Business Name <span class="text-red-400">*</span></label>
+                        <input id="business_name" name="business_name" type="text" class="field-input" placeholder="Business or brand name" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="email">Email Address <span class="text-red-400">*</span></label>
+                        <input id="email" name="email" type="email" class="field-input" placeholder="your@email.com" required>
+                    </div>
+                    <div>
+                        <label class="field-label" for="phone">Phone Number</label>
+                        <input id="phone" name="phone" type="tel" class="field-input" placeholder="(___) ___-____">
+                    </div>
+                </div>
+                <div>
+                    <label class="field-label" for="best_time">Best Day and Time to Reach You</label>
+                    <input id="best_time" name="best_time" type="text" class="field-input" placeholder="e.g., Weekdays after 3pm, Saturday mornings">
+                </div>
+            </div>
+
+            <!-- SECTION 1 -->
+            <div class="section-heading">
+                <span class="section-num">1</span>
+                <h2>Your Business</h2>
+            </div>
+            <div class="section-card">
+                <h3>Business Overview</h3>
+                <div class="mb-4">
+                    <label class="field-label" for="business_description">Describe your business in 2 to 3 sentences.</label>
+                    <span class="field-note">What do you do, and what makes you different from competitors?</span>
+                    <textarea id="business_description" name="business_description" class="field-input tall" placeholder="Example: We are a mobile auto detailing company serving Fayetteville, NC. We come to the client's location and offer premium detailing packages. Unlike competitors, we specialize in ceramic coating for long-term protection."></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="field-label" for="target_customer">Who is your target customer?</label>
+                    <span class="field-note">Describe the type of person most likely to buy from you (age range, location, profession, lifestyle, problem they have, etc.)</span>
+                    <textarea id="target_customer" name="target_customer" class="field-input" placeholder="Example: Car enthusiasts aged 25–50 in the Fayetteville area who value their vehicles and want professional-level results without going to a shop."></textarea>
+                </div>
+                <div>
+                    <label class="field-label" for="website_goal">What is the primary goal of this website?</label>
+                    <span class="field-note">Describe in your own words what you want the site to accomplish.</span>
+                    <textarea id="website_goal" name="website_goal" class="field-input" placeholder="Examples: Generate leads / inquiries, sell products or services online, build credibility, replace an outdated site, book appointments..."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="section-heading mt-6">
+                <span class="section-num">2</span>
+                <h2>Website Scope</h2>
+            </div>
+            <div class="section-card">
+                <h3>Pages and Features</h3>
+                <div class="mb-4">
+                    <label class="field-label" for="pages_needed">What pages do you need on your website?</label>
+                    <span class="field-note">List every page you want (e.g., Home, About, Services, Portfolio, Contact, Blog, FAQ, etc.)</span>
+                    <textarea id="pages_needed" name="pages_needed" class="field-input" placeholder="Example: Home, About, Services (with individual pages for each service), Gallery, Pricing, Testimonials, Contact, Booking"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="field-label" for="features_needed">What specific features do you need?</label>
+                    <span class="field-note">List any functionality beyond standard pages. Some features may require third-party tools or additional cost.</span>
+                    <textarea id="features_needed" name="features_needed" class="field-input tall" placeholder="Examples: Online booking, contact form, photo gallery, payment integration, newsletter signup, live chat, social media feed, e-commerce store, member login, FAQ accordion..."></textarea>
+                </div>
+                <div>
+                    <label class="field-label" for="existing_content">Do you have any existing content (text, images, videos) ready to use?</label>
+                    <span class="field-note">Let us know what exists and what still needs to be written or created.</span>
+                    <textarea id="existing_content" name="existing_content" class="field-input" placeholder="Example: I have a logo and some photos. I need help with the written copy. I have a services list but no photos of the work yet."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 3 -->
+            <div class="section-heading mt-6">
+                <span class="section-num">3</span>
+                <h2>Brand and Design</h2>
+            </div>
+            <div class="section-card">
+                <h3>Visual Identity</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="has_logo">Do you have a logo?</label>
+                        <input id="has_logo" name="has_logo" type="text" class="field-input" placeholder="Yes / No / In progress">
+                    </div>
+                    <div>
+                        <label class="field-label" for="has_colors">Do you have brand colors?</label>
+                        <input id="has_colors" name="has_colors" type="text" class="field-input" placeholder="Yes (list hex codes) / No">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="field-label" for="brand_colors">List your brand colors (hex codes or descriptions)</label>
+                    <span class="field-note">If you do not have hex codes, describe the colors or the feeling you want (e.g., professional dark navy with gold accents).</span>
+                    <input id="brand_colors" name="brand_colors" type="text" class="field-input" placeholder="Example: #1a1a2e (dark navy), #e8b96a (gold), white">
+                </div>
+                <div class="mb-4">
+                    <label class="field-label" for="design_inspiration">List 3 to 5 websites whose design you like</label>
+                    <span class="field-note">These do not need to be in your industry — just sites whose look and feel appeals to you. This is one of the most helpful things you can provide.</span>
+                    <textarea id="design_inspiration" name="design_inspiration" class="field-input tall" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5."></textarea>
+                </div>
+                <div>
+                    <label class="field-label" for="design_feel">Describe the overall look and feel you want</label>
+                    <span class="field-note">Think about words like: modern, minimal, bold, elegant, warm, playful, professional, luxury, corporate, casual...</span>
+                    <textarea id="design_feel" name="design_feel" class="field-input" placeholder="Example: Clean and modern. I want it to feel high-end and professional but not cold. Think luxury service brand — dark background, clean typography, gold accents."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 4 -->
+            <div class="section-heading mt-6">
+                <span class="section-num">4</span>
+                <h2>Competition and Market</h2>
+            </div>
+            <div class="section-card">
+                <h3>Competitive Landscape</h3>
+                <div class="mb-4">
+                    <label class="field-label" for="competitors">List 2 to 3 competitors or businesses in your space</label>
+                    <span class="field-note">Include their website URLs if possible. This helps us understand the market standard and how to position your site.</span>
+                    <textarea id="competitors" name="competitors" class="field-input" placeholder="1. &#10;2. &#10;3."></textarea>
+                </div>
+                <div>
+                    <label class="field-label" for="competitive_advantage">What do you want your site to do better than your competitors?</label>
+                    <span class="field-note">Design quality, clarity of services, stronger call to action, mobile experience, trust signals, etc.</span>
+                    <textarea id="competitive_advantage" name="competitive_advantage" class="field-input" placeholder="Example: My competitors' sites look outdated and are hard to navigate on mobile. I want mine to feel premium and make it very easy to get a quote within 30 seconds of landing on the page."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 5 -->
+            <div class="section-heading mt-6">
+                <span class="section-num">5</span>
+                <h2>Domain and Hosting</h2>
+            </div>
+            <div class="section-card">
+                <h3>Technical Setup</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="has_domain">Do you own a domain name?</label>
+                        <input id="has_domain" name="has_domain" type="text" class="field-input" placeholder="Yes / No / Not sure">
+                    </div>
+                    <div>
+                        <label class="field-label" for="domain_name">If yes — what is the domain?</label>
+                        <input id="domain_name" name="domain_name" type="text" class="field-input" placeholder="www.yourbusiness.com">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="has_hosting">Do you have web hosting?</label>
+                        <input id="has_hosting" name="has_hosting" type="text" class="field-input" placeholder="Yes / No / Not sure">
+                    </div>
+                    <div>
+                        <label class="field-label" for="hosting_provider">If yes — who is your hosting provider?</label>
+                        <input id="hosting_provider" name="hosting_provider" type="text" class="field-input" placeholder="e.g., GoDaddy, Hostgator, Bluehost, etc.">
+                    </div>
+                </div>
+                <div>
+                    <label class="field-label" for="existing_website">Do you have an existing website?</label>
+                    <span class="field-note">If so, provide the URL and describe what you want to keep, improve, or completely replace.</span>
+                    <textarea id="existing_website" name="existing_website" class="field-input" placeholder="Example: Yes — www.mybusiness.com. Built in 2018, full redesign needed. Keep the color scheme but replace everything else."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 6 -->
+            <div class="section-heading mt-6">
+                <span class="section-num">6</span>
+                <h2>Social Media and Online Presence</h2>
+            </div>
+            <div class="section-card">
+                <h3>Online Profiles</h3>
+                <p class="field-note mb-4">List all active social media profiles to be linked or integrated. Leave blank if you do not have that platform.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="instagram">Instagram</label>
+                        <input id="instagram" name="instagram" type="text" class="field-input" placeholder="@handle or full URL">
+                    </div>
+                    <div>
+                        <label class="field-label" for="facebook">Facebook</label>
+                        <input id="facebook" name="facebook" type="text" class="field-input" placeholder="Page name or full URL">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="linkedin">LinkedIn</label>
+                        <input id="linkedin" name="linkedin" type="text" class="field-input" placeholder="Profile or company page URL">
+                    </div>
+                    <div>
+                        <label class="field-label" for="tiktok">TikTok</label>
+                        <input id="tiktok" name="tiktok" type="text" class="field-input" placeholder="@handle or full URL">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="field-label" for="youtube">YouTube</label>
+                        <input id="youtube" name="youtube" type="text" class="field-input" placeholder="Channel URL">
+                    </div>
+                    <div>
+                        <label class="field-label" for="google_business">Google Business Profile</label>
+                        <input id="google_business" name="google_business" type="text" class="field-input" placeholder="Profile URL or business name">
+                    </div>
+                </div>
+                <div>
+                    <label class="field-label" for="other_platforms">Other platforms (Pinterest, Twitter/X, Yelp, etc.)</label>
+                    <input id="other_platforms" name="other_platforms" type="text" class="field-input" placeholder="Platform: URL">
+                </div>
+            </div>
+
+            <!-- SECTION 7 -->
+            <div class="section-heading mt-6">
+                <span class="section-num">7</span>
+                <h2>Anything Else</h2>
+            </div>
+            <div class="section-card">
+                <h3>Final Notes</h3>
+                <div class="mb-4">
+                    <label class="field-label" for="additional_notes">Is there anything important about your business or project that we have not covered?</label>
+                    <span class="field-note">Any unique requirements, constraints, special requests, or context we should know before we begin.</span>
+                    <textarea id="additional_notes" name="additional_notes" class="field-input tall" placeholder="Share anything else that is on your mind regarding the project."></textarea>
+                </div>
+                <div>
+                    <label class="field-label" for="success_definition">What does success look like to you?</label>
+                    <span class="field-note">When you look at the finished website, what would make you say "this is exactly what I wanted"?</span>
+                    <textarea id="success_definition" name="success_definition" class="field-input" placeholder="Example: Success looks like a site that immediately makes visitors trust us, clearly shows our services and pricing, and makes it easy to call or book. I want to feel proud to share it with anyone."></textarea>
+                </div>
+            </div>
+
+            <!-- Note -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-xl p-4 mb-6 mt-2">
+                <p class="text-blue-800 text-sm"><strong>Note:</strong> You do not need to answer every question perfectly. Bring your best effort and we will clarify anything during the discovery call. The more detail you provide, the more focused and productive our session will be.</p>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Submit Questionnaire
+            </button>
+
+            <!-- Success message -->
+            <div class="success-banner" id="successBanner">
+                <div class="text-5xl mb-4">✓</div>
+                <h3 class="text-2xl font-bold mb-2">We Got It — Thank You!</h3>
+                <p class="text-teal-100 text-base">Your questionnaire has been submitted. We'll review your answers before the call and reach out within one business day to confirm your discovery call time.</p>
+                <p class="text-teal-100 text-sm mt-3">Questions in the meantime? Email us at <strong>contact@wisdomlayers.com</strong></p>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-teal-400 to-teal-300 bg-clip-text text-transparent">
+                    WisdomLayers
+                </h3>
+                <p class="text-gray-400 mb-4">Layered thinking. Clear design.</p>
+                <div class="flex justify-center gap-6 text-gray-500 text-sm mb-4">
+                    <a href="privacy-policy.html" class="hover:text-teal-400 transition-colors">Privacy Policy</a>
+                </div>
+                <p class="text-gray-500">&#169; 2026 WisdomLayers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const form = document.getElementById('discoveryForm');
+        const btn = document.getElementById('submitBtn');
+        const successBanner = document.getElementById('successBanner');
+        const STORAGE_KEY = 'wl_discovery_draft';
+
+        // ── Auto-save to localStorage ──────────────────────────────
+        const fields = form.querySelectorAll('input[name], textarea[name]');
+
+        function saveDraft() {
+            const draft = {};
+            fields.forEach(f => { draft[f.name] = f.value; });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+            showSaveStatus();
+        }
+
+        function loadDraft() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            try {
+                const draft = JSON.parse(raw);
+                fields.forEach(f => {
+                    if (draft[f.name] !== undefined) f.value = draft[f.name];
+                });
+                if (Object.values(draft).some(v => v.trim() !== '')) {
+                    showSaveStatus('Draft restored');
+                }
+            } catch(e) {}
+        }
+
+        // Save status indicator (top-right, like Google Docs)
+        const saveIndicator = document.createElement('div');
+        saveIndicator.style.cssText = `
+            position: fixed; top: 72px; right: 20px; z-index: 100;
+            background: white; border: 1px solid #e2e8f0;
+            border-radius: 8px; padding: 6px 12px;
+            font-family: 'Inter', sans-serif; font-size: 0.78rem;
+            color: #64748b; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex; align-items: center; gap: 6px;
+            opacity: 0; transition: opacity 0.3s;
+            pointer-events: none;
+        `;
+        document.body.appendChild(saveIndicator);
+
+        let saveTimeout, fadeTimeout;
+        function showSaveStatus(msg) {
+            clearTimeout(saveTimeout);
+            clearTimeout(fadeTimeout);
+            const isSaving = !msg;
+            saveIndicator.innerHTML = isSaving
+                ? '<span style="color:#0d9488">●</span> Saving...'
+                : '<span style="color:#0d9488">✓</span> ' + (msg || 'Draft saved');
+            saveIndicator.style.opacity = '1';
+            if (!isSaving) {
+                fadeTimeout = setTimeout(() => { saveIndicator.style.opacity = '0'; }, 2500);
+            } else {
+                saveTimeout = setTimeout(() => {
+                    saveIndicator.innerHTML = '<span style="color:#0d9488">✓</span> Draft saved';
+                    fadeTimeout = setTimeout(() => { saveIndicator.style.opacity = '0'; }, 2500);
+                }, 600);
+            }
+        }
+
+        // Debounced save on every keystroke
+        let debounce;
+        fields.forEach(f => {
+            f.addEventListener('input', () => {
+                clearTimeout(debounce);
+                debounce = setTimeout(saveDraft, 800);
+            });
+        });
+
+        // Load draft on page open
+        loadDraft();
+
+        // ── Form submit ────────────────────────────────────────────
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    localStorage.removeItem(STORAGE_KEY);
+                    form.querySelectorAll('input, textarea, button').forEach(el => el.style.display = 'none');
+                    saveIndicator.style.opacity = '0';
+                    successBanner.classList.add('show');
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Submit Questionnaire';
+                    alert('Something went wrong. Please try again or email us at contact@wisdomlayers.com');
+                }
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Submit Questionnaire';
+                alert('Something went wrong. Please try again or email us at contact@wisdomlayers.com');
+            }
+        });
+    </script>
+</body>
+</html>
