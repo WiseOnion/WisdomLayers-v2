@@ -1,0 +1,6 @@
+internal/
+client-docs/
+scripts/
+node_modules/
+package.json
+package-lock.json
