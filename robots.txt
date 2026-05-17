@@ -1,5 +1,27 @@
 User-agent: *
 Allow: /
 Disallow: /assets/favicons/
+Disallow: /studio/
+Disallow: /pages/client-docs/
+
+# Allow beneficial AI search crawlers to cite your site
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Block non-beneficial AI training scrapers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
 
 Sitemap: https://wisdomlayers.com/sitemap.xml
