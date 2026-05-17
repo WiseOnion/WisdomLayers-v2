@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WisdomLayers — Hiring Operations Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #050c15;
+  --panel:     #0b1623;
+  --card:      #0e1d2c;
+  --border:    #152640;
+  --border2:   #1c3050;
+  --teal:      #0d9488;
+  --teal-b:    #14b8a6;
+  --teal-dim:  rgba(13,148,136,0.15);
+  --teal-glow: rgba(13,148,136,0.08);
+  --txt:       #b8cdd8;
+  --txt-dim:   #4e6880;
+  --txt-hi:    #e8f2f8;
+  --amber:     #f59e0b;
+  --blue:      #3b82f6;
+  --violet:    #8b5cf6;
+  --rose:      #f43f5e;
+  --emerald:   #10b981;
+  --sidebar-w: 228px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  font-size: 13.5px;
+  line-height: 1.65;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 28px 24px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo-text strong {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95em;
+  color: var(--txt-hi);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.sidebar-logo-text span {
+  font-size: 0.72em;
+  color: var(--teal-b);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.sidebar-nav { padding: 20px 12px; flex: 1; }
+.nav-group-label {
+  font-size: 0.62em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--txt-dim);
+  padding: 0 10px;
+  margin: 18px 0 6px;
+}
+.nav-group-label:first-child { margin-top: 0; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--txt-dim);
+  font-size: 0.86em;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.nav-link:hover { background: var(--teal-dim); color: var(--teal-b); }
+.nav-link svg { width: 16px; height: 16px; opacity: 0.6; flex-shrink: 0; }
+.nav-link:hover svg { opacity: 1; }
+.sidebar-bottom {
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.75em;
+  color: var(--txt-dim);
+  line-height: 1.7;
+}
+.sidebar-bottom strong { color: var(--teal); }
+
+/* ── MAIN ── */
+.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+.page-wrap { max-width: 980px; padding: 40px 40px 100px; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.eyebrow {
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.page-header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.4em;
+  font-weight: 800;
+  color: var(--txt-hi);
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+.page-header h1 span { color: var(--teal-b); }
+.status-pill {
+  background: var(--teal-dim);
+  border: 1px solid rgba(13,148,136,0.3);
+  color: var(--teal-b);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.header-meta { font-size: 0.78em; color: var(--txt-dim); margin-top: 6px; }
+
+/* ── SECTIONS ── */
+.section-block { margin-bottom: 56px; }
+.section-hd {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.section-hd-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.icon-teal   { background: rgba(13,148,136,0.15); }
+.icon-amber  { background: rgba(245,158,11,0.12); }
+.icon-blue   { background: rgba(59,130,246,0.12); }
+.icon-violet { background: rgba(139,92,246,0.12); }
+.icon-rose   { background: rgba(244,63,94,0.12); }
+.icon-emerald{ background: rgba(16,185,129,0.12); }
+.section-hd h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--txt-hi);
+}
+.section-hd p { font-size: 0.8em; color: var(--txt-dim); margin: 0; }
+
+/* ── CARDS ── */
+.info-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 14px;
+}
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--teal-b);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.panel-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ── STEPS ── */
+.steps-list { display: flex; flex-direction: column; gap: 10px; }
+.step-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 24px; height: 24px;
+  background: var(--teal);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72em;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-num.amber { background: var(--amber); }
+.step-num.violet { background: var(--violet); }
+.step-num.blue { background: var(--blue); }
+.step-body h4 {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  margin-bottom: 4px;
+}
+.step-body p { font-size: 0.84em; color: var(--txt-dim); margin: 0; line-height: 1.6; }
+.step-body p + p { margin-top: 6px; }
+.step-body strong { color: var(--txt); }
+
+/* ── CALLOUTS ── */
+.callout {
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 0.85em;
+  margin: 12px 0;
+  line-height: 1.7;
+}
+.callout-teal { background: var(--teal-glow); border-left: 3px solid var(--teal); color: var(--txt-dim); }
+.callout-teal strong { color: var(--teal-b); }
+.callout-amber { background: rgba(245,158,11,0.07); border-left: 3px solid var(--amber); color: #fde68a; }
+.callout-amber strong { color: var(--amber); }
+.callout-rose { background: rgba(244,63,94,0.06); border-left: 3px solid var(--rose); color: #fda4af; }
+.callout-rose strong { color: var(--rose); }
+.callout-blue { background: rgba(59,130,246,0.07); border-left: 3px solid var(--blue); color: #93c5fd; }
+.callout-blue strong { color: #93c5fd; }
+
+/* ── QUESTION CARDS ── */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.q-card-q {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 18px;
+  font-size: 0.84em;
+  font-weight: 600;
+  color: var(--txt-hi);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.q-badge {
+  font-size: 0.65em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.q-badge-ask { background: rgba(13,148,136,0.15); color: var(--teal-b); border: 1px solid rgba(13,148,136,0.2); }
+.q-badge-red  { background: rgba(244,63,94,0.12); color: #fda4af; border: 1px solid rgba(244,63,94,0.2); }
+.q-card-a {
+  padding: 12px 18px;
+  font-size: 0.83em;
+  color: var(--txt-dim);
+  line-height: 1.7;
+}
+.q-card-a strong { color: var(--txt); }
+
+/* ── TOOL KIT ── */
+.toolkit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.toolkit-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.toolkit-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.9em;
+}
+.toolkit-icon.teal { background: rgba(13,148,136,0.15); }
+.toolkit-icon.amber { background: rgba(245,158,11,0.12); }
+.toolkit-icon.violet { background: rgba(139,92,246,0.12); }
+.toolkit-icon.blue { background: rgba(59,130,246,0.12); }
+.toolkit-icon.emerald { background: rgba(16,185,129,0.12); }
+.toolkit-body h4 { font-size: 0.84em; font-weight: 700; color: var(--txt-hi); margin-bottom: 3px; }
+.toolkit-body p { font-size: 0.78em; color: var(--txt-dim); margin: 0; line-height: 1.5; }
+
+/* ── VERDICT ── */
+.verdict-box {
+  background: var(--teal-glow);
+  border: 1px solid rgba(13,148,136,0.3);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.verdict-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.verdict-box p { font-size: 0.9em; color: var(--txt); line-height: 1.8; margin-bottom: 8px; }
+.verdict-box p:last-child { margin-bottom: 0; }
+.verdict-box strong { color: var(--teal-b); }
+
+/* ── GEO SPLIT ── */
+.geo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.geo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+.geo-card.active-now { border-color: rgba(13,148,136,0.4); }
+.geo-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.geo-label.teal { color: var(--teal-b); }
+.geo-label.dim { color: var(--txt-dim); }
+.geo-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  margin-bottom: 10px;
+}
+.geo-card ul { list-style: none; }
+.geo-card li {
+  font-size: 0.83em;
+  color: var(--txt-dim);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+.geo-card li:last-child { border-bottom: none; }
+.geo-card li::before { content: '→ '; color: var(--teal); font-weight: 700; }
+
+/* ── MATH ROW ── */
+.math-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.86em;
+}
+.math-row:last-child { border-bottom: none; }
+.math-row .label { color: var(--txt-dim); }
+.math-row .value { font-weight: 600; color: var(--txt-hi); }
+.math-row .value.teal { color: var(--teal-b); }
+.math-row .value.amber { color: var(--amber); }
+.math-row .value.rose { color: var(--rose); }
+.math-row .value.green { color: var(--emerald); }
+
+/* ── SCRIPT BLOCK ── */
+.script-block {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.script-block-label {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 7px 16px;
+  font-size: 0.68em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal-b);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.copy-btn {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.82em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.copy-btn:hover { background: #0f766e; }
+.copy-btn.copied { background: #065f46; }
+.script-block-body {
+  padding: 14px 16px;
+  font-size: 0.84em;
+  color: var(--txt);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ── TAG ROW ── */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.tag {
+  font-size: 0.7em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.tag-yes  { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+.tag-no   { background: rgba(244,63,94,0.1);   color: #fda4af; border: 1px solid rgba(244,63,94,0.2); }
+.tag-warn { background: rgba(245,158,11,0.1);  color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+.tag-info { background: rgba(59,130,246,0.1);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+
+/* ── FOOTER ── */
+.page-footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  font-size: 0.77em;
+  color: var(--txt-dim);
+  line-height: 1.9;
+}
+.page-footer strong { color: var(--teal); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .page-wrap { padding: 28px 20px 80px; }
+  .geo-grid { grid-template-columns: 1fr; }
+  .toolkit-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">
+      <strong>WisdomLayers</strong>
+      <span>Hiring Ops Manual</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">The Big Question</div>
+    <a class="nav-link" href="#geography">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+      Local vs. Everywhere
+    </a>
+    <div class="nav-group-label">Hiring Process</div>
+    <a class="nav-link" href="#where-post">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+      Where to Post
+    </a>
+    <a class="nav-link" href="#post-templates">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      Exact Post Templates
+    </a>
+    <a class="nav-link" href="#screening">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      Screening Questions
+    </a>
+    <a class="nav-link" href="#redflags">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      Red Flags
+    </a>
+    <div class="nav-group-label">Onboarding</div>
+    <a class="nav-link" href="#day-one">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      Day One Checklist
+    </a>
+    <a class="nav-link" href="#what-to-give">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      What to Give Each Role
+    </a>
+    <div class="nav-group-label">Management</div>
+    <a class="nav-link" href="#managing">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      How to Manage Them
+    </a>
+    <a class="nav-link" href="#firing">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+      When It's Not Working
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <strong>Wisdom Johnson</strong><br>
+    Fayetteville, NC<br>
+    contact@wisdomlayers.com
+  </div>
+</aside>
+
+<main class="main">
+<div class="page-wrap">
+
+  <header class="page-header">
+    <div>
+      <div class="eyebrow">WisdomLayers — Internal</div>
+      <h1>Hiring <span>Operations Manual</span></h1>
+      <p style="font-size:0.85em;color:var(--txt-dim);margin-top:8px;">How to actually find, hire, onboard, and manage your team — no holes</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
+      <span class="status-pill">Internal Only</span>
+      <span class="header-meta">See also: hiring.html for money breakdown</span>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════
+       GEOGRAPHY — LOCAL VS EVERYWHERE
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="geography">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-blue">
+        <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+      </div>
+      <div>
+        <h2>Local vs. Everywhere — The Real Answer</h2>
+        <p>You've only worked Fayetteville. Here's exactly what to do and when to expand</p>
+      </div>
+    </div>
+
+    <div class="callout callout-teal" style="margin-bottom:16px;">
+      <strong>Short answer:</strong> Stay local for client outreach right now. Go fully remote/national for your team hires immediately. These are two different decisions and most people confuse them.
+    </div>
+
+    <div class="geo-grid">
+      <div class="geo-card active-now">
+        <div class="geo-label teal">Client Outreach — Do This Now</div>
+        <h3>Stay Local (Fayetteville + NC)</h3>
+        <ul>
+          <li>You already know the market — local businesses, local needs</li>
+          <li>Your story ("high school students in Fayetteville") lands harder locally</li>
+          <li>Local SEO is easier to win when you're actually in the city</li>
+          <li>You can walk in and pitch face-to-face if needed</li>
+          <li>Word of mouth spreads faster in a contained geography</li>
+          <li>Fayetteville is ~200K people — that's hundreds of small businesses with bad or no websites</li>
+          <li>You haven't come close to exhausting this market yet</li>
+        </ul>
+      </div>
+      <div class="geo-card">
+        <div class="geo-label dim">When to Expand Clients — Later</div>
+        <h3>Go Regional/National at 10+ Clients</h3>
+        <ul>
+          <li>Once you have 8–10 completed local sites, your portfolio speaks for itself anywhere</li>
+          <li>Expand to other NC cities first: Raleigh, Charlotte, Greensboro, Durham</li>
+          <li>Then go national — target small businesses in cities with high concentrations of your niche</li>
+          <li>Remote clients work fine — your entire process is already email/async</li>
+          <li>Your outreach hire can target any city once you expand</li>
+          <li>Don't expand before you've nailed the process locally — fix holes here first</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="geo-grid">
+      <div class="geo-card active-now">
+        <div class="geo-label teal">Team Hires — Go Remote Immediately</div>
+        <h3>Your Team Is Online, Not Local</h3>
+        <ul>
+          <li>Discord/Reddit has far more hungry, commission-hungry people than Fayetteville alone</li>
+          <li>Location is completely irrelevant — all your tools are digital</li>
+          <li>Outreach coordinator can email businesses in any city from anywhere</li>
+          <li>SEO Specialist works entirely online — city doesn't matter</li>
+          <li>Content Coordinator manages files and emails — 100% remote</li>
+          <li>Time zones are fine — you communicate async anyway</li>
+        </ul>
+      </div>
+      <div class="geo-card">
+        <div class="geo-label dim">One Exception — In-Person Outreach</div>
+        <h3>Local Walk-In Hire (Optional)</h3>
+        <ul>
+          <li>If you want someone to physically walk into Fayetteville businesses with flyers and pitch scripts — they need to be local</li>
+          <li>This is a different role from email outreach — call it "Field Rep"</li>
+          <li>Pay: $25–$50 per qualified in-person conversation that leads to a call</li>
+          <li>Good candidate: classmate, someone from school, trusted contact</li>
+          <li>Give them: pitch script, business cards, flyers, a phone number to text leads to</li>
+          <li>Optional — email outreach scales better, but in-person is a strong local supplement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <div class="verdict-label">The Strategy in One Sentence</div>
+      <p><strong>Dominate Fayetteville with clients, hire your team from anywhere online, and expand to other cities only after you've proven the system works locally.</strong> Right now Fayetteville is your market and the internet is your talent pool.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       WHERE TO POST
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="where-post">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-teal">
+        <svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+      </div>
+      <div>
+        <h2>Where to Post — By Role</h2>
+        <p>Exact platforms, exact communities, in priority order</p>
+      </div>
+    </div>
+
+    <!-- OUTREACH COORDINATOR -->
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">Outreach Coordinator — Where to Find</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Discord — Disboard.org search: "entrepreneur" or "hustle"</h4>
+            <p>Filter for active servers with 1,000+ members. Join, read the rules, then post in their job/gig/opportunity channels. Servers like Entrepreneur Hub, The Grind, Side Hustle Nation. Look for pinned "hiring" or "opportunities" channels. Don't spam — read the channel purpose first.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Reddit — r/forhire</h4>
+            <p>Post a [HIRING] thread. This subreddit has 500K+ members specifically looking for work. Commission-only roles are accepted and common. Title format: <strong>[HIRING] Remote Outreach Coordinator — 12% Commission — Web Design Agency</strong>. Include all the details from the role card in hiring.html.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Reddit — r/beermoney and r/WorkOnline</h4>
+            <p>These communities are full of people actively looking for commission and performance-based income online. Post the same [HIRING] thread. r/beermoney has 1M+ members who explicitly want side income. Your commission structure is exactly what they're looking for.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Twitter/X — Public post + targeted DMs</h4>
+            <p>Post publicly: "Hiring a commission-based outreach coordinator for a web design agency. You source leads, I close them, you earn 12% per deal ($120–$264/client). Tools and scripts all provided. DM me." Then search "looking for remote work" or "looking for side income" and DM people directly. Keep DMs short — two sentences max.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Your Own Network — Ask First</h4>
+            <p>Before posting anywhere, ask people you already know and trust. A classmate who's outgoing and good on the phone. Someone in your community who hustles. The advantage here is you already know their character — the biggest risk with online hires is you don't know who you're dealing with until they've already wasted your time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO SPECIALIST -->
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">SEO Specialist — Where to Find</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Reddit — r/SEO and r/BigSEO</h4>
+            <p>The actual SEO community lives here. Post in the weekly "hire me" or "job board" threads. Look for people who share their results publicly in the sub — ranking screenshots, case studies, "here's what I did for a local client" posts. That's the person you want. DM them directly.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Discord — Web design and marketing servers</h4>
+            <p>Search Disboard for "digital marketing," "web design," or "SEO" servers. These communities often have people who do SEO as a side skill alongside web work. Look for someone who knows the difference between on-page and off-page SEO without you explaining it — that's the baseline bar.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Upwork or Fiverr — Vet Carefully</h4>
+            <p>Last resort for SEO because bad SEO hires are a real risk — someone who does keyword stuffing or buys backlinks can actually hurt your site's rankings. If you use Upwork, only consider people with 90%+ job success, reviews specifically mentioning local SEO, and ask them to explain their process before hiring. <strong>Anyone who promises page 1 rankings in 30 days is a scam — pass on them immediately.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT COORDINATOR -->
+    <div class="info-panel">
+      <div class="panel-title">Content Coordinator — Where to Find</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Your Personal Network First</h4>
+            <p>This is an organized, detail-oriented person who's good at following up with people. You probably already know someone who fits this description — a friend who's naturally organized, a sibling, a classmate. The job is simple enough to train anyone. Character and reliability matter more than experience here.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Reddit — r/forhire and r/WorkOnline</h4>
+            <p>Same approach as outreach coordinator. Post a [HIRING] thread. Title: <strong>[HIRING] Remote Content Coordinator — $30/Project — Web Agency</strong>. This role is easy to explain and easy to do — you'll get a lot of applicants. Screen for organization and communication quality above anything else.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       POST TEMPLATES
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="post-templates">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-violet">
+        <svg width="16" height="16" fill="none" stroke="#c4b5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      </div>
+      <div>
+        <h2>Exact Post Templates</h2>
+        <p>Copy these word-for-word — ready for Discord, Reddit, and Twitter</p>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-block-label">
+        Outreach Coordinator — Discord / Reddit Post
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+      </div>
+      <div class="script-block-body">[HIRING] Remote Outreach Coordinator — 12% Commission — Web Design Agency
+
+I run WisdomLayers, a web design agency building custom websites for local small businesses. I'm looking for a hungry, self-motivated person to run outreach for me.
+
+What you do:
+- Find small businesses with no website or a bad one (using Google Maps, Yelp, Instagram)
+- Send personalized cold emails using my proven templates — no writing from scratch
+- Follow up after 7 days if no response
+- Log every lead in a simple tracker I provide
+- Hand off interested prospects to me — your job ends at the warm handoff
+
+What you get:
+- 12% of every project that closes from your leads ($120 on a $999 site, $180 on a $1,499 site, $264 on a $2,199 site)
+- All scripts, templates, and tools are already built — you're running a system, not building one from scratch
+- 100% remote, async — work whenever you want, no set hours
+- This is commission-only. If you need a guaranteed base pay, this isn't the right fit. If you're confident in your ability to execute and want unlimited upside, this is.
+
+One rule: leads must sign within 30 days of first contact to qualify for commission. Keeps it clean.
+
+To apply: DM me with one sentence about why you'd be good at this. That's it.</div>
+    </div>
+
+    <div class="script-block" style="margin-top:10px;">
+      <div class="script-block-label">
+        SEO Specialist — Discord / Reddit Post
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+      </div>
+      <div class="script-block-body">[HIRING] SEO Specialist — Revenue Share + Retainer — Web Design Agency
+
+I run WisdomLayers, a web design agency building custom websites for local small businesses. I'm adding SEO as a core service and need someone who actually knows what they're doing to execute it.
+
+What you do:
+- Optimize wisdomlayers.com for local search (we're in Fayetteville NC)
+- For every client site we build: keyword research, on-page optimization, meta tags, schema markup, sitemap setup
+- Set up and fully build out every client's Google Business Profile at launch
+- Submit sites to Google Search Console, Bing Places, Apple Maps, and local directories
+- Manage ongoing monthly SEO retainer clients — GBP posts, review monitoring, ranking reports
+
+What you get:
+- 40% of every client SEO package you execute ($100 per $249 SEO Launch Package)
+- 40% of every client SEO retainer you manage ($60/mo per $150/mo retainer client — recurring)
+- Small monthly retainer for managing WisdomLayers' own site SEO (negotiable, ~$75–100/mo)
+- 100% remote, async, real deliverables
+
+To apply: DM me with one result you've gotten for a site — your own counts. I want to see that you've actually done this before, not just read about it.</div>
+    </div>
+
+    <div class="script-block" style="margin-top:10px;">
+      <div class="script-block-label">
+        Content Coordinator — Discord / Reddit Post
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+      </div>
+      <div class="script-block-body">[HIRING] Remote Content Coordinator — $30/Project — Web Design Agency
+
+I run WisdomLayers, a web design agency. When a client signs, they need to send me their logos, photos, copy, and brand assets before I can build. My job is to build — not to chase people for files. That's where you come in.
+
+What you do:
+- After a client signs, you become their main contact for content collection
+- Follow up with clients who haven't sent their materials — politely but persistently
+- Organize all files when they come in and send them to me in a clean, labeled format
+- Send mid-project check-in emails using my provided templates
+- Flag to me immediately if a client goes quiet for more than 5 days
+
+What you get:
+- $30 per active project you coordinate from content collection to build handoff
+- Fully remote, email-based — no calls required
+- At 4 projects/month that's $120 for part-time async work
+
+What I need from you: someone organized, reliable, and good at following up. This is not a complex job — it's a detail and communication job. If you're naturally organized and good with people, you'll be great at this.
+
+To apply: DM me and tell me how you stay organized day-to-day. What tools do you use?</div>
+    </div>
+
+    <div class="script-block" style="margin-top:10px;">
+      <div class="script-block-label">
+        Twitter/X — Short Version (All Roles)
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+      </div>
+      <div class="script-block-body">Building a web design agency and hiring the first team.
+
+Looking for:
+→ Outreach Coordinator (12% commission per closed client)
+→ SEO Specialist (40% rev share on client work)
+→ Content Coordinator ($30/project)
+
+All remote. All async. Tools and systems already built — you just execute.
+
+DM me which role fits you and why.</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SCREENING
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="screening">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-amber">
+        <svg width="16" height="16" fill="none" stroke="#fcd34d" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <h2>Screening Questions</h2>
+        <p>What to ask before you say yes to anyone — by role</p>
+      </div>
+    </div>
+
+    <div class="callout callout-amber" style="margin-bottom:16px;">
+      <strong>How to screen:</strong> You don't need a formal interview. A DM conversation is enough. Ask these questions naturally over chat. You're looking for how they respond — fast and clear beats slow and vague every time.
+    </div>
+
+    <!-- Outreach -->
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">Outreach Coordinator — Ask These</div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"Have you ever done any kind of sales, outreach, or cold messaging before — even informally?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Yes — sold something, ran a small hustle, done cold DMs, anything. Specifics don't matter, the pattern does. <strong>Acceptable answer:</strong> No but I'm confident and not scared of rejection. <strong>Bad answer:</strong> Vague, no examples, deflects the question.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"Commission-only means no guaranteed pay — if you send 100 emails and nothing closes, you make $0 that month. Does that work for you?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Yes, I understand — I'd rather have upside than a small flat rate. <strong>Bad answer:</strong> Any hesitation, asking for a base, trying to negotiate before they've proven anything. This question filters out people who'll quit after two weeks of no results.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"How many outreach emails do you think you could realistically send per week?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> A specific number — 50, 100, 200. They've thought about it. <strong>Bad answer:</strong> "A lot" or "as many as needed." That's not an answer, it's avoidance. You want someone who thinks in actual numbers.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"What would you do if you sent 50 emails and got zero responses?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Analyze the subject lines, try different approaches, ask for feedback on the template. <strong>Bad answer:</strong> "Keep sending" with no thought about why it's not working, or anything that suggests they'd just give up.</div>
+      </div>
+    </div>
+
+    <!-- SEO -->
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">SEO Specialist — Ask These</div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"Walk me through what you'd do in the first 48 hours of taking on a new local business SEO client."</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Should mention keyword research, Google Business Profile audit, checking current rankings, on-page review, competitor analysis. They don't need to say all of it but should hit several without prompting. <strong>Bad answer:</strong> Vague, mentions "posting on social media," or immediately jumps to backlinks before mentioning on-page work.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"What tools do you use for keyword research?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Any real tools — Ahrefs, SEMrush, Ubersuggest, Google Search Console, Google Keyword Planner, even free tools. The point is they use something specific. <strong>Bad answer:</strong> "I just think about what people would search" or no answer at all.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"Show me one result you've gotten — ranking improvement, traffic increase, anything. Even your own site counts."</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Screenshot of Search Console, before/after ranking comparison, any real data. The result doesn't need to be huge. <strong>Bad answer:</strong> Nothing to show, makes excuses, or "I know the theory but haven't applied it yet." Do not hire an SEO person who has never actually done SEO.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"Someone offers to get a site to page 1 in two weeks using backlinks they'll buy. What do you tell them?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> That's a black-hat tactic and it gets sites penalized. Real SEO takes time. <strong>Bad answer:</strong> "That could work" or anything that suggests they think bought backlinks are a legitimate strategy. This is a dealbreaker question.</div>
+      </div>
+    </div>
+
+    <!-- Content Coordinator -->
+    <div class="info-panel">
+      <div class="panel-title">Content Coordinator — Ask These</div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"How do you currently keep track of things you need to follow up on?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Any system — Notion, a notes app, a physical notebook, Google Sheets, anything. The answer reveals whether they actually think about organization. <strong>Bad answer:</strong> "I just remember" or "I don't really have a system." This role is entirely about not letting things fall through cracks.</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-q"><span class="q-badge q-badge-ask">Ask</span>"If a client hasn't responded to two follow-up emails in 10 days, what do you do?"</div>
+        <div class="q-card-a"><strong>Good answer:</strong> Send a third email with a different angle, try a different communication method if available, flag to Wisdom so a decision can be made. <strong>Bad answer:</strong> "Give up and wait" or "keep sending the same email." You need persistence without being annoying.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       RED FLAGS
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="redflags">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-rose">
+        <svg width="16" height="16" fill="none" stroke="#fda4af" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <div>
+        <h2>Red Flags — Pass Immediately</h2>
+        <p>If you see any of these, move on. No exceptions.</p>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>They take more than 24 hours to respond to a simple DM</h4>
+            <p>If they can't respond quickly when they're trying to get hired, they won't respond quickly when they're working for you. Communication speed is a core trait of this job. Slow responders become ghost employees.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>They immediately ask for a base salary or guaranteed pay</h4>
+            <p>Commission-only work requires confidence in your own output. Anyone who demands a base before proving they can deliver a single result doesn't believe in their own ability — or they plan to coast. Pass.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>They can't give you a single specific example of relevant work</h4>
+            <p>For outreach: any sales or hustle experience. For SEO: any result, any site, even their own. For content coord: any organizational system. If they have zero examples and zero specifics, they're all talk. You need people who have actually done things.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>Their messages are sloppy — bad spelling, no punctuation, lowercase everything</h4>
+            <p>These people will be communicating with your leads (outreach) or your clients (content coordinator) on behalf of WisdomLayers. How they write to you is how they'll write to everyone. Standards matter.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>They try to immediately renegotiate the pay structure</h4>
+            <p>You haven't even hired them yet and they're already trying to change the deal. That's a preview of what working with them looks like. A person worth hiring accepts the structure, proves themselves, then earns the right to negotiate after they've delivered results.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>For SEO: they guarantee rankings or mention buying backlinks</h4>
+            <p>This is a hard scam signal. No legitimate SEO professional promises specific rankings. If they mention "guaranteed page 1" or "package of backlinks" — they will get your site or your clients' sites penalized by Google. This is a permanent disqualifier.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rose);">✕</div>
+          <div class="step-body">
+            <h4>They ghost you after expressing interest</h4>
+            <p>Someone who disappears mid-conversation is showing you exactly what they'll do when things get hard or boring. Close the conversation and move on. Don't follow up more than once.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       DAY ONE CHECKLIST
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="day-one">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-emerald">
+        <svg width="16" height="16" fill="none" stroke="#6ee7b7" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <div>
+        <h2>Day One Checklist</h2>
+        <p>What happens the moment someone is hired — in order</p>
+      </div>
+    </div>
+
+    <div class="callout callout-teal" style="margin-bottom:16px;">
+      <strong>The goal of Day One:</strong> They should be able to start working within 2 hours of being hired. Everything they need is already built. Your job is to hand it over clearly.
+    </div>
+
+    <div class="info-panel">
+      <div class="panel-title">Day One — Outreach Coordinator</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Send them the Onboarding Message (see template below)</h4>
+            <p>This is the first thing they receive. It sets the tone, gives them the links to everything, and explains exactly how to get started today.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Share access to the Lead Tracker</h4>
+            <p>Export the leads.html lead tracker as a shared Google Sheet or give them a copy to use. They log every business they contact: business name, owner name if known, email sent, date, follow-up date, status. No undocumented outreach — ever.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Share the Cold Email Templates</h4>
+            <p>Pull Template A and Template B from the playbook and paste them into a Google Doc they can edit. Tell them: use these word-for-word to start. Once they've sent 50+ emails and have a feel for what gets responses, they can adjust — but not before.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Explain what a "qualified lead" is</h4>
+            <p>A qualified lead is: a real local business, with a real email address, that responds with genuine interest in a website. Not every reply counts — someone saying "please remove me from your list" is not a lead. Make this crystal clear upfront so there's no argument about commissions later.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Set the first weekly check-in</h4>
+            <p>Every Monday, they send you a short update: how many emails sent that week, how many responses, any warm leads to discuss. This is non-negotiable. If they miss the first check-in with no warning, that's already a red flag.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <h4>Give them a target for Week 1</h4>
+            <p>50 outreach emails sent to real businesses. Not "a lot" — exactly 50. This tells you immediately whether they're actually doing the work or just talking about it. No one who sends 50 real emails in their first week is going to be a problem hire.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">Day One — SEO Specialist</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Give them access to wisdomlayers.com</h4>
+            <p>They need view access to your site to audit it. Don't give them edit access on Day 1 — let them audit first, present findings, then earn editing trust. Their first deliverable is a written audit of your site's current SEO state, due within 5 business days.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Add them to Google Search Console</h4>
+            <p>Give them "Full" access to your Search Console property so they can see performance data, coverage, and indexing status. This is how they'll track results and prove the work is working.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Share your Google Business Profile access</h4>
+            <p>Add them as a Manager (not Owner) on your GBP. Manager access lets them post, edit info, and respond to reviews without being able to remove you as owner.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Define the first deliverable clearly</h4>
+            <p>Week 1: SEO audit of wisdomlayers.com with specific recommendations. Week 2: Begin implementing the top 5 fixes. Month 1: First ranking report showing baseline — where the site currently stands for target keywords. This gives you something measurable to evaluate before the 30-day mark.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="panel-title">Day One — Content Coordinator</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Introduce them to the active client(s)</h4>
+            <p>Send an email to the client with the coordinator CC'd: "I'm bringing in [Name] to help coordinate the content collection process — they'll be your main point of contact for sending over your materials." This establishes them immediately.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Share the content checklist from the Welcome Document</h4>
+            <p>This is the list of things every client needs to send: logo files, photos, brand colors, copy, social links, etc. The coordinator's entire job is getting this checklist completed for each client before you need it.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Set up a shared folder system</h4>
+            <p>Create a Google Drive folder for each active client. The coordinator collects all assets and organizes them into these folders — labeled clearly, no random file names. When they hand off to you, you should be able to open the folder and immediately know what's there.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       WHAT TO GIVE EACH ROLE
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="what-to-give">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-blue">
+        <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      </div>
+      <div>
+        <h2>What to Give Each Role</h2>
+        <p>The exact kit each person receives on Day 1 — nothing more, nothing less</p>
+      </div>
+    </div>
+
+    <div class="toolkit-grid">
+      <div class="toolkit-item">
+        <div class="toolkit-icon teal">
+          <svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="toolkit-body">
+          <h4>Outreach Coordinator Gets</h4>
+          <p>Cold Email Template A + B (Google Doc)<br>
+          Follow-up email template<br>
+          Lead tracker (Google Sheet copy)<br>
+          Quick one-pager: what WisdomLayers does, pricing, website URL<br>
+          The 30-day commission rule in writing<br>
+          Weekly check-in format<br>
+          Week 1 target: 50 emails sent</p>
+        </div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-icon violet">
+          <svg width="16" height="16" fill="none" stroke="#c4b5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <div class="toolkit-body">
+          <h4>SEO Specialist Gets</h4>
+          <p>Google Search Console access (Full)<br>
+          Google Business Profile access (Manager)<br>
+          Site URL and page list<br>
+          Target keyword list to start (you write 5–10, they expand)<br>
+          Client SEO deliverables checklist (what's done at every launch)<br>
+          Monthly report template (what they send you each month)<br>
+          Week 1 deliverable: site audit doc</p>
+        </div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-icon amber">
+          <svg width="16" height="16" fill="none" stroke="#fcd34d" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <div class="toolkit-body">
+          <h4>Content Coordinator Gets</h4>
+          <p>Client contact info for active projects<br>
+          Content checklist (from Welcome Document)<br>
+          Mid-project check-in email template<br>
+          Access to client Google Drive folders<br>
+          File naming convention doc (how to label everything)<br>
+          "Flag immediately" list: what warrants texting Wisdom directly<br>
+          Status update format for weekly handoffs</p>
+        </div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-icon blue">
+          <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <div class="toolkit-body">
+          <h4>What Nobody Gets</h4>
+          <p>Client payment info or invoice access<br>
+          Contract signing authority<br>
+          Access to your personal email or GoDaddy account<br>
+          Ability to quote prices to clients (only you do this)<br>
+          Login to wisdomlayers.com backend without supervision<br>
+          Any access beyond what their specific role requires</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Onboarding message template -->
+    <div class="script-block" style="margin-top:16px;">
+      <div class="script-block-label">
+        Onboarding Message — Outreach Coordinator (Send on Day 1)
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+      </div>
+      <div class="script-block-body">Hey [Name],
+
+Welcome to WisdomLayers. Here's everything you need to get started today.
+
+WHAT WE DO
+WisdomLayers builds custom websites for local small businesses. Starter sites start at $999. Most clients end up in the $999–$1,499 range. You can see the full pricing at wisdomlayers.com/pages/pricing.html.
+
+YOUR JOB
+Find small businesses in [city/NC] with no website or a bad one, send them a cold email using the template I'm sharing below, follow up once after 7 days if no response, and log every contact in the tracker. When someone replies with genuine interest — you hand it off to me. Your job ends there.
+
+COMMISSION RULE
+You earn 12% of the project value when a lead you sourced signs a contract AND pays their deposit. The lead must sign within 30 days of your first email to them. I'll track this with the lead log. When a deal closes from your lead, I'll send your cut within 3 days of receiving the deposit payment.
+
+YOUR TOOLS
+Cold email templates: [link to Google Doc]
+Lead tracker: [link to Google Sheet]
+WisdomLayers website: wisdomlayers.com
+
+WEEK 1 TARGET
+Send 50 cold emails to real businesses. Log every one. That's it. Don't worry about responses yet — just build the habit of outreach.
+
+WEEKLY CHECK-IN
+Every Monday, send me a short message: how many emails sent that week, how many responses, any promising leads. Keep it brief. I'll respond within 24 hours.
+
+Any questions before you get started, just ask. Let's go.
+
+Wisdom
+WisdomLayers</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       MANAGING
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="managing">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-teal">
+        <svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      </div>
+      <div>
+        <h2>How to Manage Them</h2>
+        <p>Weekly rhythm, expectations, and how to keep the team running without it becoming a second job for you</p>
+      </div>
+    </div>
+
+    <div class="callout callout-teal" style="margin-bottom:16px;">
+      <strong>The goal:</strong> Your team should be mostly self-managing. You give them systems, targets, and check-ins — not hand-holding. If you're spending more than 1 hour per week managing someone, something is broken.
+    </div>
+
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">The Weekly Rhythm — Outreach Coordinator</div>
+      <div class="math-row"><span class="label">Every Monday</span><span class="value teal">They send you: emails sent, responses, hot leads</span></div>
+      <div class="math-row"><span class="label">You respond</span><span class="value teal">Within 24 hours — brief, direct, action items if any</span></div>
+      <div class="math-row"><span class="label">Minimum acceptable output</span><span class="value amber">40 emails/week — below this is a performance conversation</span></div>
+      <div class="math-row"><span class="label">When a lead warms up</span><span class="value teal">They DM you immediately — don't wait for Monday</span></div>
+      <div class="math-row"><span class="label">30-day review</span><span class="value teal">After 30 days: did any leads close? If 0 closes from 200+ emails, diagnose together</span></div>
+    </div>
+
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">The Weekly Rhythm — SEO Specialist</div>
+      <div class="math-row"><span class="label">Monthly report</span><span class="value teal">First Monday of every month — rankings, traffic, GBP activity</span></div>
+      <div class="math-row"><span class="label">New client launch</span><span class="value teal">They get 48 hours notice before launch — SEO must be complete before the site goes live</span></div>
+      <div class="math-row"><span class="label">GBP management</span><span class="value teal">At least 2 posts per month per active retainer client — you can spot check this</span></div>
+      <div class="math-row"><span class="label">90-day milestone</span><span class="value amber">WisdomLayers should show movement on at least one target keyword by day 90</span></div>
+    </div>
+
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">The Weekly Rhythm — Content Coordinator</div>
+      <div class="math-row"><span class="label">Every Friday</span><span class="value teal">They send you: status of every active project's content — what's in, what's missing</span></div>
+      <div class="math-row"><span class="label">Immediate flag</span><span class="value amber">Any client silent for 5+ business days — they tell you same day, not Friday</span></div>
+      <div class="math-row"><span class="label">Handoff standard</span><span class="value teal">When content is complete: organized Google Drive folder, labeled files, summary message to Wisdom</span></div>
+    </div>
+
+    <div class="info-panel">
+      <div class="panel-title">General Rules for Managing a Remote Team</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Communicate in writing, always</h4>
+            <p>No verbal agreements. If you tell someone something important over voice or video, follow it up in writing immediately. "Just to confirm what we discussed..." This protects you and keeps everyone accountable.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Measure outputs, not hours</h4>
+            <p>You don't care how many hours they work. You care how many emails were sent, how many leads came in, whether the SEO report arrived on time. If the output is there, everything else is irrelevant. If it's not there, no amount of "I was busy" matters.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Be direct about problems immediately</h4>
+            <p>If something's wrong — output is down, quality is slipping, check-ins are being missed — address it in the same week it happens. Do not let it build. A direct message like "Hey, you missed the Monday check-in this week — what's going on?" is not harsh. It's professional.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Pay on time, every time</h4>
+            <p>When a commission is owed, pay it within 3 days of you receiving the client payment. Non-negotiable. Late pay destroys trust fast and kills motivation. Your team is motivated by results because results pay — if results don't pay on time, that equation breaks.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Keep the vision in front of them</h4>
+            <p>Remind them occasionally what you're building. You're not a random gig — you're a growing agency. People who feel like they're part of something work harder than people who feel like a contractor. The "high school students funding college" story applies to your team too. They're building something with you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       WHEN IT'S NOT WORKING
+  ══════════════════════════════════════ -->
+  <div class="section-block" id="firing">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-rose">
+        <svg width="16" height="16" fill="none" stroke="#fda4af" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+      </div>
+      <div>
+        <h2>When It's Not Working</h2>
+        <p>Clear thresholds for performance conversations and when to let someone go</p>
+      </div>
+    </div>
+
+    <div class="info-panel" style="margin-bottom:12px;">
+      <div class="panel-title">Performance Thresholds — When to Have the Conversation</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num amber">!</div>
+          <div class="step-body">
+            <h4>Outreach Coordinator: 0 closed leads after 60 days of active outreach</h4>
+            <p>60 days and 400+ emails with zero closes is a signal — not necessarily a dealbreaker, but worth a direct conversation. Ask: is the outreach actually happening? Are the emails going to real addresses? Are responses being followed up? Work through it together before pulling the plug. Sometimes the issue is the template, not the person.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num amber">!</div>
+          <div class="step-body">
+            <h4>SEO Specialist: No ranking movement after 90 days on any target keyword</h4>
+            <p>SEO takes time, but 90 days with zero movement on anything — not even small terms — is a sign the work either isn't being done or isn't being done correctly. Ask for their process documentation. If they can't show you what they've actually done and why, that's your answer.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num amber">!</div>
+          <div class="step-body">
+            <h4>Content Coordinator: Projects stalling because of content that was their job to collect</h4>
+            <p>One missed follow-up is human. Two is a pattern. If a project gets delayed specifically because they didn't chase the client when they were supposed to, that's a direct failure of the role. Address it immediately and specifically — not generally.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="panel-title">How to Let Someone Go — Keep It Clean</div>
+      <div class="callout callout-amber">
+        <strong>Rule:</strong> You don't owe anyone an extended explanation. Be honest, be brief, be final. This is business.
+      </div>
+      <div class="script-block" style="margin-top:12px;">
+        <div class="script-block-label">
+          Letting Someone Go — Message Template
+          <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+        </div>
+        <div class="script-block-body">Hey [Name],
+
+I want to be straight with you — this isn't working the way I hoped. [Brief specific reason: the volume isn't there / the deliverables haven't been consistent / we're not seeing the results we need.]
+
+I'm going to move in a different direction. I appreciate you giving it a shot.
+
+Any commissions earned on leads that close within 30 days of your last outreach will still be paid — I'll track and send those when they come in.
+
+No hard feelings. Good luck with whatever's next.
+
+Wisdom</div>
+      </div>
+      <div class="callout callout-teal" style="margin-top:12px;">
+        <strong>Important:</strong> When you let someone go, immediately revoke any access they had — Google Drive, Search Console, GBP, lead tracker. Do this the same day. Not because they're a bad person, but because it's clean and professional to close access when a working relationship ends.
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <strong>WisdomLayers Hiring Ops Manual</strong> &nbsp;·&nbsp; Wisdom Johnson &nbsp;·&nbsp; Fayetteville, NC<br>
+    contact@wisdomlayers.com &nbsp;·&nbsp; wisdomlayers.com &nbsp;·&nbsp; Internal use only
+  </footer>
+
+</div>
+</main>
+
+<script>
+function copyBlock(btn) {
+  const body = btn.closest('.script-block').querySelector('.script-block-body');
+  navigator.clipboard.writeText(body.textContent.trim()).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = body.textContent.trim();
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

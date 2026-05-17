@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WisdomLayers — Playbook</title>
+<link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #050c15;
+  --panel:     #0b1623;
+  --card:      #0e1d2c;
+  --border:    #152640;
+  --border2:   #1c3050;
+  --teal:      #0d9488;
+  --teal-b:    #14b8a6;
+  --teal-dim:  rgba(13,148,136,0.15);
+  --teal-glow: rgba(13,148,136,0.08);
+  --txt:       #b8cdd8;
+  --txt-dim:   #4e6880;
+  --txt-hi:    #e8f2f8;
+  --white:     #ffffff;
+  --amber:     #f59e0b;
+  --blue:      #3b82f6;
+  --violet:    #8b5cf6;
+  --rose:      #f43f5e;
+  --emerald:   #10b981;
+  --sidebar-w: 228px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  font-size: 13.5px;
+  line-height: 1.65;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 28px 24px 22px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sidebar-logo img {
+  width: 38px; height: 38px;
+  object-fit: contain;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.sidebar-logo-text {
+  line-height: 1.25;
+}
+.sidebar-logo-text strong {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95em;
+  color: var(--txt-hi);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.sidebar-logo-text span {
+  font-size: 0.72em;
+  color: var(--teal-b);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sidebar-nav {
+  padding: 20px 12px;
+  flex: 1;
+}
+.nav-group-label {
+  font-size: 0.62em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--txt-dim);
+  padding: 0 10px;
+  margin: 18px 0 6px;
+}
+.nav-group-label:first-child { margin-top: 0; }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--txt-dim);
+  font-size: 0.86em;
+  font-weight: 500;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-link:hover { background: var(--teal-dim); color: var(--teal-b); }
+.nav-link .nav-icon {
+  width: 16px; height: 16px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+.nav-link:hover .nav-icon { opacity: 1; }
+
+.sidebar-bottom {
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.75em;
+  color: var(--txt-dim);
+  line-height: 1.7;
+}
+.sidebar-bottom strong { color: var(--teal); }
+
+/* ─── MAIN ─── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+
+.page-wrap {
+  max-width: 980px;
+  padding: 40px 40px 100px;
+}
+
+/* ─── PAGE HEADER ─── */
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.page-header-left .eyebrow {
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.page-header-left h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.6em;
+  font-weight: 800;
+  color: var(--txt-hi);
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+.page-header-left h1 span { color: var(--teal-b); }
+.page-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.status-pill {
+  background: var(--teal-dim);
+  border: 1px solid rgba(13,148,136,0.3);
+  color: var(--teal-b);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.header-meta {
+  font-size: 0.78em;
+  color: var(--txt-dim);
+}
+
+/* ─── SECTION HEADER ─── */
+.section-hd {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.section-hd-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1em;
+  flex-shrink: 0;
+}
+.icon-teal  { background: rgba(13,148,136,0.15); }
+.icon-amber { background: rgba(245,158,11,0.12); }
+.icon-blue  { background: rgba(59,130,246,0.12); }
+.icon-violet{ background: rgba(139,92,246,0.12); }
+.icon-rose  { background: rgba(244,63,94,0.12);  }
+
+.section-hd h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--txt-hi);
+}
+.section-hd p {
+  font-size: 0.8em;
+  color: var(--txt-dim);
+  margin: 0;
+}
+
+/* ─── SECTION SPACER ─── */
+.section-block {
+  margin-bottom: 56px;
+}
+.section-block:last-child { margin-bottom: 0; }
+
+/* ─── FLOW BAR ─── */
+.flow-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 26px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.flow-bar-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  margin-right: 6px;
+  white-space: nowrap;
+}
+.flow-node {
+  background: var(--teal-dim);
+  border: 1px solid rgba(13,148,136,0.28);
+  color: var(--teal-b);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.78em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.flow-arrow {
+  color: var(--border2);
+  font-size: 0.9em;
+}
+
+/* ─── DOC TABLE ─── */
+.doc-rows { display: flex; flex-direction: column; gap: 8px; }
+
+.doc-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.doc-row:hover { border-color: var(--border2); background: #111d2c; }
+
+.doc-index {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82em;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: var(--txt-hi);
+}
+.idx-teal   { background: rgba(13,148,136,0.18); border: 1px solid rgba(13,148,136,0.25); }
+.idx-blue   { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.22); }
+.idx-violet { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.22); }
+.idx-amber  { background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.22); }
+.idx-rose   { background: rgba(244,63,94,0.14);  border: 1px solid rgba(244,63,94,0.22);  }
+.idx-slate  { background: rgba(100,116,139,0.12);border: 1px solid rgba(100,116,139,0.2); }
+
+.doc-row-info h3 {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--txt-hi);
+  margin-bottom: 2px;
+}
+.doc-row-info p {
+  font-size: 0.78em;
+  color: var(--txt-dim);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.doc-row-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ─── TAGS ─── */
+.tag {
+  font-size: 0.67em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+.tag-read    { background: rgba(59,130,246,0.12);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+.tag-fill    { background: rgba(139,92,246,0.12);  color: #c4b5fd; border: 1px solid rgba(139,92,246,0.2); }
+.tag-sign    { background: rgba(245,158,11,0.1);   color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+.tag-pay     { background: rgba(16,185,129,0.1);   color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+.tag-both    { background: rgba(244,63,94,0.1);    color: #fda4af; border: 1px solid rgba(244,63,94,0.2);  }
+.tag-pdf     { background: rgba(100,116,139,0.12); color: #94a3b8; border: 1px solid rgba(100,116,139,0.2);}
+.tag-example { background: rgba(245,158,11,0.1);   color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+
+/* ─── BUTTONS ─── */
+.btn {
+  text-decoration: none;
+  border-radius: 7px;
+  padding: 6px 14px;
+  font-size: 0.76em;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn-primary {
+  background: var(--teal);
+  color: white;
+  border: 1px solid transparent;
+}
+.btn-primary:hover { background: #0f766e; }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--txt-dim);
+}
+.btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+.btn-pdf {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--txt-dim);
+}
+.btn-pdf:hover { border-color: var(--blue); color: #93c5fd; }
+
+/* ─── INFO PANEL ─── */
+.info-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--teal-b);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.panel-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 18px 0 20px;
+}
+
+/* ─── PRINT STEPS ─── */
+.steps-list { display: flex; flex-direction: column; gap: 8px; }
+.step-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 12px;
+  align-items: flex-start;
+}
+.step-item-num {
+  width: 22px; height: 22px;
+  background: var(--teal);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72em;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-item p { font-size: 0.88em; margin: 0; color: var(--txt); }
+.step-item strong { color: var(--txt-hi); }
+
+.callout {
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 0.85em;
+  margin: 14px 0;
+}
+.callout-teal {
+  background: var(--teal-glow);
+  border-left: 3px solid var(--teal);
+  color: var(--txt-dim);
+}
+.callout-teal strong { color: var(--teal-b); }
+.callout-amber {
+  background: rgba(245,158,11,0.07);
+  border-left: 3px solid var(--amber);
+  color: #fde68a;
+}
+
+/* ─── OVERVIEW TABLE ─── */
+.overview-table { width: 100%; border-collapse: collapse; font-size: 0.84em; }
+.overview-table thead th {
+  background: var(--teal);
+  color: white;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8em;
+  letter-spacing: 0.02em;
+}
+.overview-table thead th:first-child { border-radius: 8px 0 0 0; }
+.overview-table thead th:last-child  { border-radius: 0 8px 0 0; }
+.overview-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--txt-dim);
+  vertical-align: top;
+  line-height: 1.45;
+}
+.overview-table tbody tr:last-child td { border-bottom: none; }
+.overview-table tbody tr:nth-child(even) td { background: rgba(5,12,21,0.6); }
+.overview-table tbody td:first-child { color: var(--txt-hi); font-weight: 600; white-space: nowrap; }
+.overview-table tbody td:nth-child(2) { color: var(--txt); font-weight: 500; }
+
+/* ─── LIFECYCLE ─── */
+.lc-step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.lc-step:last-child { margin-bottom: 0; }
+
+.lc-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.lc-badge {
+  background: var(--teal);
+  color: white;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.lc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.97em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  line-height: 1.3;
+}
+.lc-body p {
+  font-size: 0.86em;
+  color: var(--txt-dim);
+  margin: 0 0 10px;
+}
+.lc-body p:last-child { margin-bottom: 0; }
+
+.doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.78em;
+  color: var(--teal-b);
+  font-weight: 600;
+  margin: 4px 4px 8px 0;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+.doc-link:hover { border-color: var(--teal); }
+
+/* ─── EMAIL CARDS ─── */
+.email-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+.email-card-top {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.email-card-name {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--txt-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.copy-btn {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 13px;
+  font-size: 0.72em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.copy-btn:hover { background: #0f766e; }
+.copy-btn.copied { background: #065f46; }
+.email-card-subj {
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8em;
+  color: var(--txt-dim);
+}
+.email-card-subj strong { color: var(--txt); }
+.email-card-body {
+  padding: 16px 18px;
+  font-size: 0.83em;
+  color: var(--txt);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ─── QUICK REF GRID ─── */
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.ref-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.ref-card-title {
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal-b);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.ref-card-title::before {
+  content: '';
+  width: 3px; height: 12px;
+  background: var(--teal);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.ref-card ul { list-style: none; }
+.ref-card li {
+  font-size: 0.84em;
+  color: var(--txt-dim);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.ref-card li:last-child { border-bottom: none; }
+.ref-card li .label { flex-shrink: 0; }
+.ref-card li .value { color: var(--txt-hi); font-weight: 600; text-align: right; }
+
+/* ─── BROWSER TABS ─── */
+.browser-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: -1px;
+}
+.browser-tab {
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--txt-dim);
+  cursor: pointer;
+  background: var(--bg);
+  transition: all 0.15s;
+}
+.browser-tab.active {
+  background: var(--card);
+  color: var(--txt-hi);
+  border-color: var(--border2);
+}
+.browser-pane { display: none; }
+.browser-pane.active { display: block; }
+.browser-wrap {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 0 8px 8px 8px;
+  padding: 22px 24px;
+}
+
+/* ─── COLD EMAILS QUICK ACCESS ─── */
+.email-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.email-quick-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.email-quick-card h4 {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  margin-bottom: 4px;
+}
+.email-quick-card p {
+  font-size: 0.76em;
+  color: var(--txt-dim);
+  margin: 0 0 12px;
+}
+
+/* ─── FOOTER ─── */
+.page-footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  font-size: 0.77em;
+  color: var(--txt-dim);
+  line-height: 1.9;
+}
+.page-footer strong { color: var(--teal); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .page-wrap { padding: 28px 20px 80px; }
+  .doc-row { grid-template-columns: 38px 1fr; }
+  .doc-row-right { grid-column: 1 / -1; justify-content: flex-start; flex-wrap: wrap; }
+  .ref-grid { grid-template-columns: 1fr; }
+  .email-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="assets/images/brand/logo.webp" alt="WL">
+    <div class="sidebar-logo-text">
+      <strong>WisdomLayers</strong>
+      <span>Playbook</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Overview</div>
+    <a class="nav-link" href="#documents">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      Documents
+    </a>
+    <a class="nav-link" href="#overview-table">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M10 3v18"/></svg>
+      Doc Overview
+    </a>
+
+    <div class="nav-group-label">Operations</div>
+    <a class="nav-link" href="#lifecycle">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Client Lifecycle
+    </a>
+    <a class="nav-link" href="#cold-emails">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Cold Emails
+    </a>
+    <a class="nav-link" href="#pdf-settings">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+      PDF Settings
+    </a>
+
+    <div class="nav-group-label">Reference</div>
+    <a class="nav-link" href="#quickref">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      Quick Reference
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <strong>Wisdom Johnson</strong><br>
+    Fayetteville, NC<br>
+    contact@wisdomlayers.com
+  </div>
+</aside>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+<div class="page-wrap">
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="page-header-left">
+      <div class="eyebrow">WisdomLayers — Internal</div>
+      <h1>The <span>Playbook</span></h1>
+    </div>
+    <div class="page-header-right">
+      <span class="status-pill">Internal Only</span>
+      <span class="header-meta">Wisdom Johnson &nbsp;·&nbsp; wisdomlayers.com</span>
+    </div>
+  </header>
+
+  <!-- SEND ORDER -->
+  <div class="flow-bar">
+    <span class="flow-bar-label">Send Order</span>
+    <span class="flow-node">1 · Welcome PDF + Discovery Q</span>
+    <span class="flow-arrow">&#8594;</span>
+    <span class="flow-node">2 · Discovery Call</span>
+    <span class="flow-arrow">&#8594;</span>
+    <span class="flow-node">3 · Agreement Summary + Full Agreement + Deposit Invoice</span>
+    <span class="flow-arrow">&#8594;</span>
+    <span class="flow-node">4 · Change Requests (if needed)</span>
+    <span class="flow-arrow">&#8594;</span>
+    <span class="flow-node">5 · Launch Approval + Final Invoice</span>
+  </div>
+
+  <!-- ══ DOCUMENTS ══ -->
+  <div class="section-block" id="documents" style="margin-top:44px;">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-teal"><svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+      <div>
+        <h2>Client Documents</h2>
+        <p>All working files — open to fill, print, or export as PDF</p>
+      </div>
+    </div>
+
+    <div class="doc-rows">
+
+      <div class="doc-row">
+        <div class="doc-index idx-teal">PDF</div>
+        <div class="doc-row-info">
+          <h3>Client Welcome Document</h3>
+          <p>Sent first alongside the Discovery Questionnaire. Explains the 7-step process, timelines, revision policy, and what the client needs to prepare. No signature required.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-read">Read Only</span>
+          <a class="btn btn-pdf" href="pages/client-docs/WisdomLayers — Client Welcome Document.pdf" target="_blank">Open PDF</a>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-index idx-violet">05</div>
+        <div class="doc-row-info">
+          <h3>Discovery Questionnaire</h3>
+          <p>Sent with the Welcome doc. Client fills out business details, goals, design preferences, and content status before the discovery call.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-fill">Fill &amp; Return</span>
+          <a class="btn btn-primary" href="pages/client-docs/05-discovery-questionnaire.html" target="_blank">Open</a>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-index idx-amber">02</div>
+        <div class="doc-row-info">
+          <h3>Agreement Summary</h3>
+          <p>Sent after the discovery call with the Full Agreement and Invoice. Shows package details, pricing, optional services, and timeline. Client signs.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-sign">Client Signs</span>
+          <a class="btn btn-primary" href="pages/client-docs/02-agreement-summary.html" target="_blank">Open</a>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-index idx-rose">03</div>
+        <div class="doc-row-info">
+          <h3>Full Web Development Agreement</h3>
+          <p>The binding legal contract. Covers scope, IP ownership, payment terms, revisions, cancellation, liability, and governing law.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-sign">Client Signs</span>
+          <a class="btn btn-primary" href="pages/client-docs/03-full-agreement.html" target="_blank">Open</a>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-index idx-teal">04</div>
+        <div class="doc-row-info">
+          <h3>Invoice Template</h3>
+          <p>Blank editable invoice — fill in client name, line items, amounts, and dates. Used for both the 50% deposit and the final balance.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-pay">Payment</span>
+          <a class="btn btn-primary" href="pages/client-docs/04-invoice.html" target="_blank">Open</a>
+          <a class="btn btn-ghost" href="pages/client-docs/examples/WisdomLayers Invoice — Triple Nickle Samuel Council Chapter EXAMPLE.pdf" target="_blank">Example</a>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-index idx-blue">06</div>
+        <div class="doc-row-info">
+          <h3>Change Request Form</h3>
+          <p>Used when the client requests scope additions beyond the original agreement. Documents the request, cost, and timeline before work begins.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-both">Both Sign</span>
+          <a class="btn btn-primary" href="pages/client-docs/06-change-request.html" target="_blank">Open</a>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-index idx-amber">07</div>
+        <div class="doc-row-info">
+          <h3>Launch Approval Form</h3>
+          <p>Sent after all revisions are complete. Client confirms every page, link, and form is correct and authorizes deployment. Triggers the final invoice.</p>
+        </div>
+        <div class="doc-row-right">
+          <span class="tag tag-sign">Client Signs</span>
+          <a class="btn btn-primary" href="pages/client-docs/07-launch-approval.html" target="_blank">Open</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ OVERVIEW TABLE ══ -->
+  <div class="section-block" id="overview-table">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-blue"><svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M10 3v18"/></svg></div>
+      <div>
+        <h2>Document Overview</h2>
+        <p>All seven documents at a glance — when to send and what each one does</p>
+      </div>
+    </div>
+    <div class="info-panel" style="padding: 0; overflow: hidden;">
+      <table class="overview-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Document</th>
+            <th>When to Send</th>
+            <th>Purpose</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PDF</td>
+            <td>Welcome Document</td>
+            <td>After initial interest — first touchpoint</td>
+            <td>Sets expectations, 7-step process, content checklist</td>
+            <td><span class="tag tag-read">Read Only</span></td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>Discovery Questionnaire</td>
+            <td>Same send as Welcome doc</td>
+            <td>Collects business info, goals, design preferences</td>
+            <td><span class="tag tag-fill">Fill &amp; Return</span></td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Agreement Summary</td>
+            <td>After discovery call</td>
+            <td>Package, pricing, add-ons, timeline — client signs</td>
+            <td><span class="tag tag-sign">Client Signs</span></td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Full Web Dev Agreement</td>
+            <td>Same send as Agreement Summary</td>
+            <td>Binding contract — scope, IP, revisions, payment</td>
+            <td><span class="tag tag-sign">Client Signs</span></td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>Invoice</td>
+            <td>After agreements signed (deposit) &amp; post-launch approval (final)</td>
+            <td>50% deposit or final balance — fill per client</td>
+            <td><span class="tag tag-pay">Payment</span></td>
+          </tr>
+          <tr>
+            <td>06</td>
+            <td>Change Request Form</td>
+            <td>Mid-project — any out-of-scope request</td>
+            <td>Authorizes additional work, locks cost and timeline</td>
+            <td><span class="tag tag-both">Both Sign</span></td>
+          </tr>
+          <tr>
+            <td>07</td>
+            <td>Launch Approval Form</td>
+            <td>After revisions complete — before going live</td>
+            <td>Client confirms site is correct, authorizes deployment</td>
+            <td><span class="tag tag-sign">Client Signs</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ PDF SETTINGS ══ -->
+  <div class="section-block" id="pdf-settings">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-amber"><svg width="16" height="16" fill="none" stroke="#fcd34d" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg></div>
+      <div>
+        <h2>PDF &amp; Print Settings</h2>
+        <p>Save any HTML doc as a clean, fully styled PDF</p>
+      </div>
+    </div>
+
+    <div class="browser-tabs">
+      <div class="browser-tab active" onclick="switchTab(this,'chrome')">Chrome</div>
+      <div class="browser-tab" onclick="switchTab(this,'edge')">Edge</div>
+      <div class="browser-tab" onclick="switchTab(this,'firefox')">Firefox</div>
+    </div>
+
+    <div class="browser-wrap">
+      <div class="browser-pane active" id="pane-chrome">
+        <div class="steps-list">
+          <div class="step-item"><div class="step-item-num">1</div><p>Open the HTML file in Chrome. Press <strong>Ctrl + P</strong> (Windows) or <strong>Cmd + P</strong> (Mac).</p></div>
+          <div class="step-item"><div class="step-item-num">2</div><p><strong>Destination:</strong> Click "Change" → select <strong>Save as PDF</strong>.</p></div>
+          <div class="step-item"><div class="step-item-num">3</div><p><strong>Paper size:</strong> Letter &nbsp;|&nbsp; <strong>Pages:</strong> All</p></div>
+          <div class="step-item"><div class="step-item-num">4</div><p><strong>Margins:</strong> Default — documents already have built-in margins.</p></div>
+          <div class="step-item"><div class="step-item-num">5</div><p><strong>Headers and footers: OFF</strong> — docs have their own footers. Browser headers create duplicates.</p></div>
+          <div class="step-item"><div class="step-item-num">6</div><p><strong>Background graphics: ON (required)</strong> — click "More settings" to find it. Without this, teal headers and colored elements print white.</p></div>
+          <div class="step-item"><div class="step-item-num">7</div><p>Click <strong>Save</strong> and choose your destination.</p></div>
+        </div>
+        <div class="callout callout-amber" style="margin-top:14px;"><strong>Background graphics must be ON every time.</strong> If your PDF looks washed out, that setting was missed.</div>
+      </div>
+      <div class="browser-pane" id="pane-edge">
+        <div class="steps-list">
+          <div class="step-item"><div class="step-item-num">1</div><p>Press <strong>Ctrl + P</strong>.</p></div>
+          <div class="step-item"><div class="step-item-num">2</div><p>Printer: <strong>Save as PDF</strong></p></div>
+          <div class="step-item"><div class="step-item-num">3</div><p>Click <strong>More settings</strong> → enable <strong>Background graphics</strong> → disable <strong>Headers and footers</strong>.</p></div>
+          <div class="step-item"><div class="step-item-num">4</div><p>Click <strong>Save</strong>.</p></div>
+        </div>
+      </div>
+      <div class="browser-pane" id="pane-firefox">
+        <div class="steps-list">
+          <div class="step-item"><div class="step-item-num">1</div><p>Press <strong>Ctrl + P</strong>.</p></div>
+          <div class="step-item"><div class="step-item-num">2</div><p>Select <strong>Save to PDF</strong>.</p></div>
+          <div class="step-item"><div class="step-item-num">3</div><p>Click <strong>Options</strong> → check <strong>Print Background Colors and Images</strong> → uncheck <strong>Headers and Footers</strong>.</p></div>
+          <div class="step-item"><div class="step-item-num">4</div><p>Click <strong>Save</strong>.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CLIENT LIFECYCLE ══ -->
+  <div class="section-block" id="lifecycle">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-teal"><svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+      <div>
+        <h2>Client Lifecycle</h2>
+        <p>Full sequence from first cold email through post-launch — Steps 0 through 11</p>
+      </div>
+    </div>
+
+    <!-- STEP 0 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 0</div>
+        <div class="lc-title">Cold Outreach — Initial Contact with a New Prospect</div>
+      </div>
+      <div class="lc-body">
+        <p>You found a business without a website or with a weak one. Send a short, personalized cold email. Do not attach documents yet.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Cold Email — Small Business (Restaurant, Salon, Contractor)</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Quick question about [Business Name]</div>
+          <div class="email-card-body">Hey [First Name],
+
+My name is Wisdom Johnson and I run WisdomLayers, a web design and development studio out of Fayetteville, NC.
+
+I came across [Business Name] and honestly I think you're sitting on a real opportunity. [Personalized line, e.g., "You've got great reviews but no website to send people to" or "Your current site hasn't been updated in a while and it's probably costing you customers."]
+
+A solid website works for you 24/7. It's the thing that makes someone trust you before they ever pick up the phone or walk through your door.
+
+I build custom websites for local businesses starting at $499. No templates, no monthly fees. You own it outright and it actually looks good.
+
+Would you be open to a quick 15 minute conversation? I'd love to show you what's possible. You can also check out some of my work at wisdomlayers.com/projects.
+
+Talk soon,
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+        <div class="email-card" style="margin-top:10px;">
+          <div class="email-card-top">
+            <span class="email-card-name">Cold Email — Coach or Consultant</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Your website and what it could be doing for you</div>
+          <div class="email-card-body">Hey [First Name],
+
+My name is Wisdom and I'm a web developer based in Fayetteville, NC. I work with coaches and consultants who are doing great work but whose websites don't reflect that yet.
+
+I came across your profile on [Platform] and I was genuinely impressed by [specific thing they do or have built]. You've clearly put in the work on your craft.
+
+Here's what I see a lot: talented people lose potential clients to someone with a better website, not better skills. Your site is usually the first thing a prospect checks before they decide whether to reach out. If it doesn't build trust immediately, they're gone.
+
+I build custom websites for coaches starting at $799. One time investment, no recurring fees, built to actually convert visitors into inquiries. You can see examples at wisdomlayers.com/projects.
+
+Would 15 to 20 minutes this week work for a quick call? I'd love to show you what something like this could look like for your brand.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 1</div>
+        <div class="lc-title">Follow-Up — No Response After 7 Days</div>
+      </div>
+      <div class="lc-body">
+        <p>Send one follow-up if you have not heard back. Keep it short — reference the original email and give them an easy out.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Follow-Up Email (7-Day No Response)</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Re: Quick question about [Business Name]</div>
+          <div class="email-card-body">Hey [First Name],
+
+Just circling back on my last message in case it got buried in your inbox.
+
+No pressure at all. If a website isn't on your radar right now, totally understand. I just wanted to make sure you actually saw it before I moved on.
+
+If you ever want to explore what a proper website could do for [Business Name], I'm always happy to start with a free conversation, no strings attached.
+
+Feel free to reply here or check out wisdomlayers.com to see some of my work.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 2</div>
+        <div class="lc-title">Send Welcome Doc + Discovery Questionnaire</div>
+      </div>
+      <div class="lc-body">
+        <p>Prospect has expressed interest and you've had an initial conversation. Send both documents together as PDFs.</p>
+        <a class="doc-link" href="pages/client-docs/WisdomLayers — Client Welcome Document.pdf" target="_blank">Welcome Document.pdf</a>
+        <a class="doc-link" href="pages/client-docs/05-discovery-questionnaire.html" target="_blank">05-discovery-questionnaire.html</a>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Send With: Welcome Doc + Discovery Questionnaire</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Welcome to WisdomLayers! Here's what's next</div>
+          <div class="email-card-body">Hey [First Name],
+
+So glad you're here! I'm genuinely excited to work on this with you and I think we're going to build something you'll be really proud of.
+
+I've attached two documents to kick things off:
+
+1. Welcome Document: This walks you through the full project process step by step, so you know exactly what to expect and what to start pulling together on your end.
+
+2. Discovery Questionnaire: This helps me really understand your business, your goals, and your vision before we jump on a call. Fill it out as best you can and email it back when you're ready. There are no wrong answers, and even partial answers are helpful. We'll dig into anything that's still fuzzy during our call.
+
+Once I get the questionnaire back I'll reach out to schedule our discovery call, usually about 30 to 45 minutes.
+
+Any questions before then, just reply here. My inbox is always open.
+
+Talk soon,
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 3</div>
+        <div class="lc-title">Discovery Call Done — Send Agreement Package + Deposit Invoice</div>
+      </div>
+      <div class="lc-body">
+        <p>Discovery call is complete. You know the scope. Send all three documents in the same email.</p>
+        <a class="doc-link" href="pages/client-docs/02-agreement-summary.html" target="_blank">02-agreement-summary.html</a>
+        <a class="doc-link" href="pages/client-docs/03-full-agreement.html" target="_blank">03-full-agreement.html</a>
+        <a class="doc-link" href="pages/client-docs/04-invoice.html" target="_blank">04-invoice.html</a>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Send With: Agreement Summary + Full Agreement + Deposit Invoice</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Your WisdomLayers Project Documents: Agreement + Invoice</div>
+          <div class="email-card-body">Hey [First Name],
+
+Really enjoyed our conversation today. I can already see how this project comes together and I'm fired up to get started.
+
+As promised, I've attached three documents:
+
+1. Agreement Summary: A one page overview of your package, pricing, timeline, and key terms. Sign and send back.
+
+2. Web Development Agreement: The full contract covering scope, revisions, payment terms, and everything in between. Sign and send back.
+
+3. Deposit Invoice: Your 50% deposit to lock in your spot and get this thing moving.
+
+To get started:
+Review and sign both the Agreement Summary and the Full Agreement, then submit the $[AMOUNT] deposit via PayPal, Money Order, or Cashier's Check, and email the signed docs back to me.
+
+Once I have everything in hand your project is officially active. I'll be in touch within one business day with your next steps.
+
+Read through everything at your own pace and if anything raises a question just reply here. I'm happy to walk through it with you.
+
+Let's build something great,
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 4</div>
+        <div class="lc-title">Deposit Received — Confirm and Begin</div>
+      </div>
+      <div class="lc-body">
+        <p>You have the signed agreements and confirmed deposit. Send a short confirmation email and begin content collection.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Deposit Confirmation Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Deposit Confirmed! Your Project Is Active</div>
+          <div class="email-card-body">Hey [First Name],
+
+Deposit received. We are officially doing this!
+
+Here is what happens next:
+
+1. Content Collection: Start pulling together the materials from the checklist in your Welcome document. Text, photos, logo, brand colors, all of it. The faster I have content, the faster I can build. Send everything to contact@wisdomlayers.com.
+
+2. Timeline: Based on what you send me, your estimated delivery window is [DATE RANGE].
+
+3. Check-ins: I'll keep you updated at key milestones throughout the build. If you have questions or feedback along the way, just shoot me an email so we keep everything documented.
+
+If you have anything ready to go right now, send it over. No need to wait.
+
+Let's build,
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 5</div>
+        <div class="lc-title">Mid-Project Check-In</div>
+      </div>
+      <div class="lc-body">
+        <p>Send a progress update when you hit a significant milestone. Keep it brief and professional.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Mid-Project Check-In Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Project Update: [Milestone]</div>
+          <div class="email-card-body">Hey [First Name],
+
+Just wanted to drop you a quick update. [Brief description of milestone, e.g., "The homepage and About page are done and they're looking really clean."]
+
+[Optional: note anything still in progress or any content still needed from the client.]
+
+I'm on track to have the full site in your hands by [DATE]. I'll send over a preview link at that point so you can go through everything before we finalize anything.
+
+Any questions before then, just reply here.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 6</div>
+        <div class="lc-title">Build Complete — Send for Review</div>
+      </div>
+      <div class="lc-body">
+        <p>The full website is built. Share the staging link and give the client their 10-business-day review window.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Website Ready for Review Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Your Website Is Ready! Here's Your Preview Link</div>
+          <div class="email-card-body">Hey [First Name],
+
+It's done. Your website is built and ready for your eyes.
+
+Preview link: [STAGING URL]
+
+Take your time going through every single page. Content, links, contact forms, how it looks on your phone, all of it. When you're ready to send feedback, compile everything into one email and send it to contact@wisdomlayers.com. That way I can action everything at once and get the updated version back to you quickly.
+
+Per our agreement you have 10 business days to submit revision requests. Anything after final approval is billed as new work.
+
+A few things I'd recommend checking specifically:
+
+Is all the text correct and free of errors?
+Are your contact details accurate everywhere they appear?
+Do all the buttons and links work the way you'd expect?
+Does it look good on your phone?
+Does the overall look and feel feel right for your brand?
+
+Take a good look and let me know what you think. I'm proud of this one.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 7</div>
+        <div class="lc-title">Revisions Done — Send Launch Approval Form</div>
+      </div>
+      <div class="lc-body">
+        <p>Revisions are complete. Do not launch until the signed form is back in hand.</p>
+        <a class="doc-link" href="pages/client-docs/07-launch-approval.html" target="_blank">07-launch-approval.html</a>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Send With: Launch Approval Form</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Revisions Complete! One Last Step Before We Launch</div>
+          <div class="email-card-body">Hey [First Name],
+
+Every revision is done. Your site is looking great and we are right at the finish line.
+
+Before I can push it live I need your signed Launch Approval Form, which I've attached to this email.
+
+Here's all you need to do:
+
+1. Pull up the preview link one more time: [STAGING URL]
+2. Go through the checklist in the form and check off each item after you verify it
+3. Sign the form and email it back to me
+
+Once I have that signed form and your final payment, your site goes live. That's it.
+
+Any last questions before we launch, just reply here.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 8 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 8</div>
+        <div class="lc-title">Launch Approval Signed — Send Final Invoice</div>
+      </div>
+      <div class="lc-body">
+        <p>Launch Approval is signed. Issue the final 50% invoice. Do not deploy until payment is confirmed.</p>
+        <a class="doc-link" href="pages/client-docs/04-invoice.html" target="_blank">04-invoice.html (final balance)</a>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Final Invoice Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Final Invoice: [Business Name] Website Project</div>
+          <div class="email-card-body">Hey [First Name],
+
+Thank you for signing the Launch Approval! We are officially in the home stretch.
+
+I've attached the final invoice for the remaining balance of $[AMOUNT]. Once payment clears, I'll deploy your site to the live domain and send you the confirmation email with your URL.
+
+You can pay via:
+PayPal: Request details by email
+Money Order: Request details by email
+Cashier's Check: Request details by email
+
+Per our agreement the final invoice is due within 7 days. Your site will go live within 1 business day of confirmed payment.
+
+Almost there. Can't wait for you to see it live.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 9 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 9</div>
+        <div class="lc-title">Site Launched — Send Launch Confirmation</div>
+      </div>
+      <div class="lc-body">
+        <p>Payment received. Site is deployed. Send the launch confirmation with the live URL and support period start date.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Launch Confirmation Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Your Website Is LIVE!</div>
+          <div class="email-card-body">Hey [First Name],
+
+It's live. Go check it out!
+
+[LIVE URL]
+
+Your [X] month post-launch support period starts today, [DATE], and runs through [END DATE]. During that window minor corrections like broken links, text updates, and image swaps are covered at no charge. Just email me at contact@wisdomlayers.com and I'll take care of it.
+
+A few things worth doing this week while you're riding the excitement:
+
+Share the link on your social media. Let people know you've leveled up.
+Update your Google Business Profile with your new website URL.
+Send yourself a test message through your contact form to make sure it's hitting your inbox.
+Pull it up on your phone one more time just to admire it.
+
+This has been a great project and I'm genuinely proud of what we built together. You invested in your business and it's going to pay off.
+
+I'll check back in before your support period ends with your options for keeping things fresh going forward.
+
+Thank you for trusting WisdomLayers with this. Means a lot.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 10 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 10</div>
+        <div class="lc-title">Support Period Ending — Send Options Email</div>
+      </div>
+      <div class="lc-body">
+        <p>Send 2 weeks before the support period expires. Give them options and make it easy to continue.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Support Period Ending — Options Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Your Support Period Ends on [DATE]: Here Are Your Options</div>
+          <div class="email-card-body">Hey [First Name],
+
+Quick heads up, your post-launch support period wraps up on [DATE], about two weeks from now. I wanted to give you a heads up early so you're not caught off guard.
+
+After that date here's how we can keep things moving:
+
+Option 1: Pay Per Change
+Only pay when you need something done. Simple as that.
+Small change (text, links, minor styling): $50
+Medium change (new section, page updates): $150
+Large change (new page, new feature): $300+
+
+Option 2: Monthly Maintenance Retainer at $150 per month
+This gets you 3 small changes per month, priority response time, and a monthly site health check. You can cancel anytime with 30 days notice.
+
+Just reply and let me know what direction works best for you. If I don't hear back your account will default to pay per change after the support period ends.
+
+It's been a genuine pleasure building this for you. Looking forward to staying in your corner.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 11 -->
+    <div class="lc-step">
+      <div class="lc-header">
+        <div class="lc-badge">Step 11</div>
+        <div class="lc-title">Ask for Testimonial and Portfolio Permission</div>
+      </div>
+      <div class="lc-body">
+        <p>Send 1 to 2 weeks after launch. Keep it short and make it easy to say yes.</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Testimonial Request Email</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Quick favor to ask!</div>
+          <div class="email-card-body">Hey [First Name],
+
+Hope you've been getting some good traction with the new site! Would love to hear how it's been going.
+
+I have a small favor to ask. If you're happy with how everything turned out, would you be willing to write me a short testimonial? Even just 2 or 3 sentences about your experience means a ton to a small business like mine. You can reply right here and I'll handle the formatting.
+
+Also wanted to ask: would you be okay with me adding [Business Name] and [website URL] to my portfolio at wisdomlayers.com/projects? I'd only be showing the finished site itself, nothing internal.
+
+Absolutely no pressure either way. I just wanted to ask while everything is fresh.
+
+Thank you again for trusting me with this. It was a great project and I'm proud of what we built.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /lifecycle -->
+
+  <!-- ══ COLD EMAILS ══ -->
+  <div class="section-block" id="cold-emails">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-violet"><svg width="16" height="16" fill="none" stroke="#c4b5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+      <div>
+        <h2>Cold Email Templates</h2>
+        <p>Quick-grab templates for prospecting — mirror Step 0 &amp; 1 of the lifecycle</p>
+      </div>
+    </div>
+
+    <div class="email-grid">
+      <div class="email-quick-card">
+        <h4>Template A — Local Small Business</h4>
+        <p>Restaurant, salon, contractor, retail</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Restaurant / Salon / Contractor / Retail</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Quick question about [Business Name]</div>
+          <div class="email-card-body">Hey [First Name],
+
+My name is Wisdom Johnson and I run WisdomLayers, a web design and development studio out of Fayetteville, NC.
+
+I came across [Business Name] and honestly I think you're sitting on a real opportunity. [Personalized observation, e.g., "You've got great reviews but no website to send people to" or "Your current site hasn't been updated in a while and it's probably costing you customers."]
+
+A solid website works for you 24/7. It's the thing that makes someone trust you before they ever pick up the phone or walk through your door.
+
+I build custom websites for local businesses starting at $499. No templates, no monthly fees. You own it outright and it actually looks good.
+
+Would you be open to a quick 15 minute conversation? I'd love to show you what's possible. You can also check out some of my work at wisdomlayers.com/projects.
+
+Talk soon,
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+
+      <div class="email-quick-card">
+        <h4>Template B — Coach or Consultant</h4>
+        <p>Coach, consultant, service professional</p>
+        <div class="email-card">
+          <div class="email-card-top">
+            <span class="email-card-name">Coach / Consultant / Service Professional</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <div class="email-card-subj"><strong>Subject:</strong> Your website and what it could be doing for you</div>
+          <div class="email-card-body">Hey [First Name],
+
+My name is Wisdom and I'm a web developer based in Fayetteville, NC. I work with coaches and consultants who are doing great work but whose websites don't reflect that yet.
+
+I came across your profile on [Platform] and I was genuinely impressed by [specific thing they do or have built]. You've clearly put in the work on your craft.
+
+Here's what I see a lot: talented people lose potential clients to someone with a better website, not better skills. Your site is usually the first thing a prospect checks before they decide whether to reach out. If it doesn't build trust immediately, they're gone.
+
+I build custom websites for coaches starting at $799. One time investment, no recurring fees, built to actually convert visitors into inquiries. You can see examples at wisdomlayers.com/projects.
+
+Would 15 to 20 minutes this week work for a quick call? I'd love to show you what something like this could look like for your brand.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-panel" style="padding:20px 24px;">
+      <div class="panel-title" style="margin-bottom:10px;">Template C — Follow-Up (7-Day No Response)</div>
+      <div class="email-card">
+        <div class="email-card-top">
+          <span class="email-card-name">Follow-Up After No Response</span>
+          <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+        </div>
+        <div class="email-card-subj"><strong>Subject:</strong> Re: Quick question about [Business Name]</div>
+        <div class="email-card-body">Hey [First Name],
+
+Just circling back on my last message in case it got buried in your inbox.
+
+No pressure at all. If a website isn't on your radar right now, totally understand. I just wanted to make sure you actually saw it before I moved on.
+
+If you ever want to explore what a proper website could do for [Business Name], I'm always happy to start with a free conversation, no strings attached.
+
+Feel free to reply here or check out wisdomlayers.com to see some of my work.
+
+Wisdom Johnson
+WisdomLayers
+contact@wisdomlayers.com
+wisdomlayers.com</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ QUICK REFERENCE ══ -->
+  <div class="section-block" id="quickref">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-amber"><svg width="16" height="16" fill="none" stroke="#fcd34d" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+      <div>
+        <h2>Quick Reference</h2>
+        <p>Pricing, timelines, rates, and contact — all in one place</p>
+      </div>
+    </div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Package Pricing</div>
+        <ul>
+          <li><span class="label">Starter</span><span class="value">$499 — 3–5 pages</span></li>
+          <li><span class="label">Professional</span><span class="value">$799 — 6–10 pages</span></li>
+          <li><span class="label">Premium</span><span class="value">$1,199 — 10+ pages</span></li>
+          <li><span class="label">Custom</span><span class="value">Quote on consult</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Timelines</div>
+        <ul>
+          <li><span class="label">Starter</span><span class="value">1–2 weeks</span></li>
+          <li><span class="label">Professional</span><span class="value">2–3 weeks</span></li>
+          <li><span class="label">Premium</span><span class="value">3–4 weeks</span></li>
+          <li><span class="label">Expedited</span><span class="value">+25% of project cost</span></li>
+          <li><span class="label">Review window</span><span class="value">10 business days</span></li>
+          <li><span class="label">Inactivity limit</span><span class="value">30 days = pause/cancel</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Payment Methods</div>
+        <ul>
+          <li><span class="label">PayPal</span><span class="value">Request by email</span></li>
+          <li><span class="label">Money Order</span><span class="value">Request by email</span></li>
+          <li><span class="label">Cashier's Check</span><span class="value">Request by email</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Late Fee Schedule</div>
+        <ul>
+          <li><span class="label">Invoice due</span><span class="value">Within 7 days</span></li>
+          <li><span class="label">14+ days overdue</span><span class="value">$50/week fee</span></li>
+          <li><span class="label">Monthly interest</span><span class="value">1.5% (18% annual)</span></li>
+          <li><span class="label">Disputes</span><span class="value">Within 5 business days</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Support Periods</div>
+        <ul>
+          <li><span class="label">Starter</span><span class="value">1 month post-launch</span></li>
+          <li><span class="label">Professional</span><span class="value">2 months post-launch</span></li>
+          <li><span class="label">Premium</span><span class="value">3 months post-launch</span></li>
+          <li><span class="label">Custom</span><span class="value">Up to 6 months</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Post-Support Rates</div>
+        <ul>
+          <li><span class="label">Small change</span><span class="value">$50</span></li>
+          <li><span class="label">Medium change</span><span class="value">$150</span></li>
+          <li><span class="label">Large change</span><span class="value">$300+</span></li>
+          <li><span class="label">Monthly retainer</span><span class="value">$150/mo</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Add-On Services</div>
+        <ul>
+          <li><span class="label">Domain Purchase Setup</span><span class="value">$35</span></li>
+          <li><span class="label">Domain Renewal Mgmt</span><span class="value">$45/yr</span></li>
+          <li><span class="label">Logo Design</span><span class="value">Quote on consult</span></li>
+          <li><span class="label">SEO Optimization</span><span class="value">Quote on consult</span></li>
+          <li><span class="label">Confidentiality Agmt</span><span class="value">Additional fee</span></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Contact</div>
+        <ul>
+          <li><span class="label">Email</span><span class="value">contact@wisdomlayers.com</span></li>
+          <li><span class="label">Website</span><span class="value">wisdomlayers.com</span></li>
+          <li><span class="label">Portfolio</span><span class="value">wisdomlayers.com/projects</span></li>
+          <li><span class="label">Location</span><span class="value">Fayetteville, NC</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <strong>WisdomLayers Playbook</strong> &nbsp;·&nbsp; Wisdom Johnson &nbsp;·&nbsp; Fayetteville, NC<br>
+    contact@wisdomlayers.com &nbsp;·&nbsp; wisdomlayers.com &nbsp;·&nbsp; Internal use only
+  </footer>
+
+</div>
+</main>
+
+<script>
+function switchTab(tab, paneId) {
+  document.querySelectorAll('.browser-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.browser-pane').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('pane-' + paneId).classList.add('active');
+}
+
+function copyEmail(btn) {
+  const t = btn.closest('.email-card');
+  const body = t.querySelector('.email-card-body');
+  const subj = t.querySelector('.email-card-subj');
+  let text = '';
+  if (subj) text = subj.textContent.replace(/^\s*Subject:\s*/i, 'Subject: ').trim() + '\n\n';
+  text += body.textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

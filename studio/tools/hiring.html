@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WisdomLayers — Hiring Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #050c15;
+  --panel:     #0b1623;
+  --card:      #0e1d2c;
+  --border:    #152640;
+  --border2:   #1c3050;
+  --teal:      #0d9488;
+  --teal-b:    #14b8a6;
+  --teal-dim:  rgba(13,148,136,0.15);
+  --teal-glow: rgba(13,148,136,0.08);
+  --txt:       #b8cdd8;
+  --txt-dim:   #4e6880;
+  --txt-hi:    #e8f2f8;
+  --white:     #ffffff;
+  --amber:     #f59e0b;
+  --blue:      #3b82f6;
+  --violet:    #8b5cf6;
+  --rose:      #f43f5e;
+  --emerald:   #10b981;
+  --sidebar-w: 228px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  font-size: 13.5px;
+  line-height: 1.65;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 28px 24px 22px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sidebar-logo-text strong {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95em;
+  color: var(--txt-hi);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.sidebar-logo-text span {
+  font-size: 0.72em;
+  color: var(--teal-b);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.sidebar-nav { padding: 20px 12px; flex: 1; }
+.nav-group-label {
+  font-size: 0.62em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--txt-dim);
+  padding: 0 10px;
+  margin: 18px 0 6px;
+}
+.nav-group-label:first-child { margin-top: 0; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--txt-dim);
+  font-size: 0.86em;
+  font-weight: 500;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-link:hover { background: var(--teal-dim); color: var(--teal-b); }
+.nav-link svg { width: 16px; height: 16px; opacity: 0.6; flex-shrink: 0; }
+.nav-link:hover svg { opacity: 1; }
+.sidebar-bottom {
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.75em;
+  color: var(--txt-dim);
+  line-height: 1.7;
+}
+.sidebar-bottom strong { color: var(--teal); }
+
+/* ── MAIN ── */
+.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+.page-wrap { max-width: 980px; padding: 40px 40px 100px; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.eyebrow {
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.page-header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.6em;
+  font-weight: 800;
+  color: var(--txt-hi);
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+.page-header h1 span { color: var(--teal-b); }
+.status-pill {
+  background: var(--teal-dim);
+  border: 1px solid rgba(13,148,136,0.3);
+  color: var(--teal-b);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.header-meta { font-size: 0.78em; color: var(--txt-dim); margin-top: 6px; }
+
+/* ── SECTION ── */
+.section-block { margin-bottom: 56px; }
+.section-hd {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.section-hd-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1em;
+  flex-shrink: 0;
+}
+.icon-teal   { background: rgba(13,148,136,0.15); }
+.icon-amber  { background: rgba(245,158,11,0.12); }
+.icon-blue   { background: rgba(59,130,246,0.12); }
+.icon-violet { background: rgba(139,92,246,0.12); }
+.icon-emerald{ background: rgba(16,185,129,0.12); }
+.section-hd h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--txt-hi);
+}
+.section-hd p { font-size: 0.8em; color: var(--txt-dim); margin: 0; }
+
+/* ── CARDS ── */
+.info-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--teal-b);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+/* ── MONEY TABLE ── */
+.money-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.money-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.money-card-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--txt-dim);
+  margin-bottom: 8px;
+}
+.money-card-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.9em;
+  font-weight: 800;
+  color: var(--txt-hi);
+  letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.money-card-sub { font-size: 0.78em; color: var(--txt-dim); }
+.money-card.highlight { border-color: rgba(13,148,136,0.4); background: var(--teal-glow); }
+.money-card.highlight .money-card-val { color: var(--teal-b); }
+
+.math-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88em;
+}
+.math-row:last-child { border-bottom: none; }
+.math-row .label { color: var(--txt-dim); }
+.math-row .value { font-weight: 600; color: var(--txt-hi); }
+.math-row .value.green { color: var(--emerald); }
+.math-row .value.teal { color: var(--teal-b); }
+.math-row .value.amber { color: var(--amber); }
+
+.verdict-box {
+  background: var(--teal-glow);
+  border: 1px solid rgba(13,148,136,0.3);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.verdict-box .verdict-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.verdict-box p {
+  font-size: 0.92em;
+  color: var(--txt);
+  line-height: 1.7;
+}
+.verdict-box strong { color: var(--teal-b); }
+
+/* ── SCENARIO TABS ── */
+.scenario-tabs { display: flex; gap: 6px; margin-bottom: -1px; }
+.scenario-tab {
+  padding: 7px 18px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--txt-dim);
+  cursor: pointer;
+  background: var(--bg);
+  transition: all 0.15s;
+}
+.scenario-tab.active { background: var(--card); color: var(--txt-hi); border-color: var(--border2); }
+.scenario-pane { display: none; }
+.scenario-pane.active { display: block; }
+.scenario-wrap {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 0 8px 8px 8px;
+  padding: 22px 24px;
+}
+
+/* ── ROLE CARDS ── */
+.role-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  transition: border-color 0.15s;
+}
+.role-card:hover { border-color: var(--border2); }
+.role-card-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.role-num {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 1em;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+.role-num-1 { background: var(--teal); }
+.role-num-2 { background: var(--violet); }
+.role-num-3 { background: var(--amber); }
+.role-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  margin-bottom: 3px;
+}
+.role-pay-badge {
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pay-commission { background: rgba(13,148,136,0.15); color: var(--teal-b); border: 1px solid rgba(13,148,136,0.25); }
+.pay-revshare   { background: rgba(139,92,246,0.12); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.2); }
+.pay-perproject { background: rgba(245,158,11,0.1); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+
+.role-body { padding: 20px 24px; }
+.role-section-title {
+  font-size: 0.68em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--txt-dim);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+.role-section-title:first-child { margin-top: 0; }
+
+.task-list { list-style: none; }
+.task-list li {
+  font-size: 0.86em;
+  color: var(--txt);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.task-list li:last-child { border-bottom: none; }
+.task-list li::before {
+  content: '→';
+  color: var(--teal);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.growth-pill {
+  display: inline-block;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.2);
+  color: #6ee7b7;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.78em;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ── WHERE TO FIND ── */
+.find-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.find-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.find-card-title {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.platform-tag {
+  font-size: 0.65em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(59,130,246,0.12);
+  color: #93c5fd;
+  border: 1px solid rgba(59,130,246,0.2);
+}
+.platform-tag.discord { background: rgba(88,101,242,0.15); color: #a5b4fc; border-color: rgba(88,101,242,0.25); }
+.platform-tag.reddit  { background: rgba(255,69,0,0.12);   color: #fca5a5; border-color: rgba(255,69,0,0.2); }
+.platform-tag.twitter { background: rgba(29,155,240,0.12); color: #7dd3fc; border-color: rgba(29,155,240,0.2); }
+.find-list { list-style: none; }
+.find-list li {
+  font-size: 0.82em;
+  color: var(--txt-dim);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+.find-list li:last-child { border-bottom: none; }
+
+.callout {
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  font-size: 0.85em;
+  margin: 14px 0;
+}
+.callout-teal {
+  background: var(--teal-glow);
+  border-left: 3px solid var(--teal);
+  color: var(--txt-dim);
+}
+.callout-teal strong { color: var(--teal-b); }
+.callout-amber {
+  background: rgba(245,158,11,0.07);
+  border-left: 3px solid var(--amber);
+  color: #fde68a;
+}
+.callout-amber strong { color: var(--amber); }
+
+/* ── ROADMAP ── */
+.roadmap { display: flex; flex-direction: column; gap: 0; }
+.roadmap-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0;
+  position: relative;
+}
+.roadmap-timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px;
+  padding-bottom: 8px;
+}
+.roadmap-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--teal);
+  flex-shrink: 0;
+  margin-top: 16px;
+  z-index: 1;
+}
+.roadmap-dot.future { background: var(--border2); box-shadow: 0 0 0 2px var(--border2); }
+.roadmap-line {
+  width: 2px;
+  flex: 1;
+  background: var(--border);
+  margin-top: 4px;
+}
+.roadmap-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  padding-top: 14px;
+  text-align: right;
+  padding-right: 8px;
+}
+.roadmap-label.future { color: var(--txt-dim); }
+.roadmap-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+}
+.roadmap-content h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--txt-hi);
+  margin-bottom: 4px;
+}
+.roadmap-content p { font-size: 0.82em; color: var(--txt-dim); margin: 0; }
+
+/* ── POST SCRIPT ── */
+.post-script {
+  background: var(--card);
+  border: 1px solid rgba(13,148,136,0.3);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-top: 16px;
+}
+.post-script h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--teal-b);
+  margin-bottom: 12px;
+}
+.post-script p {
+  font-size: 0.88em;
+  color: var(--txt);
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+.post-script p:last-child { margin-bottom: 0; }
+.post-script strong { color: var(--txt-hi); }
+
+/* ── FOOTER ── */
+.page-footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  font-size: 0.77em;
+  color: var(--txt-dim);
+  line-height: 1.9;
+}
+.page-footer strong { color: var(--teal); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .page-wrap { padding: 28px 20px 80px; }
+  .money-grid { grid-template-columns: 1fr; }
+  .find-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; align-items: flex-start; }
+  .roadmap-item { grid-template-columns: 80px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">
+      <strong>WisdomLayers</strong>
+      <span>Hiring Strategy</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Strategy</div>
+    <a class="nav-link" href="#money">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      The Money
+    </a>
+    <a class="nav-link" href="#first-hire">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      First Hire
+    </a>
+    <a class="nav-link" href="#where">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+      Where to Find Them
+    </a>
+    <div class="nav-group-label">Roles</div>
+    <a class="nav-link" href="#role-outreach">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Outreach Coordinator
+    </a>
+    <a class="nav-link" href="#role-seo">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      SEO Specialist
+    </a>
+    <a class="nav-link" href="#role-content">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Content Coordinator
+    </a>
+    <div class="nav-group-label">Vision</div>
+    <a class="nav-link" href="#roadmap">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Agency Roadmap
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <strong>Wisdom Johnson</strong><br>
+    Fayetteville, NC<br>
+    contact@wisdomlayers.com
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="main">
+<div class="page-wrap">
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div>
+      <div class="eyebrow">WisdomLayers — Internal</div>
+      <h1>Hiring <span>Strategy</span></h1>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
+      <span class="status-pill">Internal Only</span>
+      <span class="header-meta">Wisdom Johnson &nbsp;·&nbsp; wisdomlayers.com</span>
+    </div>
+  </header>
+
+  <!-- ══ THE MONEY ══ -->
+  <div class="section-block" id="money">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-emerald">
+        <svg width="16" height="16" fill="none" stroke="#6ee7b7" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div>
+        <h2>The Money Breakdown</h2>
+        <p>Exactly what you make, what they make, and whether it's worth it</p>
+      </div>
+    </div>
+
+    <!-- pricing baseline -->
+    <div class="info-panel" style="margin-bottom:16px;">
+      <div class="panel-title">Your Current Pricing</div>
+      <div class="money-grid">
+        <div class="money-card">
+          <div class="money-card-label">Starter</div>
+          <div class="money-card-val">$999</div>
+          <div class="money-card-sub">3–5 pages · 1–2 weeks</div>
+        </div>
+        <div class="money-card">
+          <div class="money-card-label">Professional</div>
+          <div class="money-card-val">$1,499</div>
+          <div class="money-card-sub">6–10 pages · 2–3 weeks</div>
+        </div>
+        <div class="money-card">
+          <div class="money-card-label">Premium</div>
+          <div class="money-card-val">$2,199</div>
+          <div class="money-card-sub">10+ pages · 3–4 weeks</div>
+        </div>
+        <div class="money-card highlight">
+          <div class="money-card-label">Average Deal Value</div>
+          <div class="money-card-val">~$1,249</div>
+          <div class="money-card-sub">Assuming mix of Starter + Professional</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- commission model -->
+    <div class="info-panel" style="margin-bottom:16px;">
+      <div class="panel-title">Commission Model — Outreach Coordinator at 12%</div>
+      <div class="callout callout-teal" style="margin-bottom:16px;">
+        <strong>The rule:</strong> They bring you a lead. The lead signs and pays the deposit. You pay them 12% of the project value. Zero risk — you only pay when money hits your account.
+      </div>
+      <div class="math-row">
+        <span class="label">$999 Starter closes</span>
+        <span class="value teal">They get $120 · You keep $879</span>
+      </div>
+      <div class="math-row">
+        <span class="label">$1,499 Professional closes</span>
+        <span class="value teal">They get $180 · You keep $1,319</span>
+      </div>
+      <div class="math-row">
+        <span class="label">$2,199 Premium closes</span>
+        <span class="value teal">They get $264 · You keep $1,935</span>
+      </div>
+    </div>
+
+    <!-- assumptions note -->
+    <div class="callout callout-teal" style="margin-bottom:14px;">
+      <strong>How to read this:</strong> Each tab shows a different volume level. "Team cost" = what you pay all hired roles combined that month. "You keep" = what's left after team costs. SEO add-on revenue assumes 60% of clients buy the $249 SEO Launch Package — the SEO Specialist gets 40% of that, you keep 60%.
+    </div>
+
+    <!-- scenario tabs -->
+    <div class="scenario-tabs">
+      <div class="scenario-tab active" onclick="switchScenario(this,'s2')">2 Clients/Month</div>
+      <div class="scenario-tab" onclick="switchScenario(this,'s4')">4 Clients/Month</div>
+      <div class="scenario-tab" onclick="switchScenario(this,'s8')">8 Clients/Month</div>
+      <div class="scenario-tab" onclick="switchScenario(this,'s12')">12 Clients/Month</div>
+    </div>
+    <div class="scenario-wrap">
+
+      <!-- 2/month — solo + outreach only -->
+      <div class="scenario-pane active" id="pane-s2">
+        <div style="font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--txt-dim);margin-bottom:10px;">Team: You + Outreach Coordinator only</div>
+        <div class="money-grid" style="margin-bottom:12px;">
+          <div class="money-card">
+            <div class="money-card-label">Web Build Revenue</div>
+            <div class="money-card-val">$2,498</div>
+            <div class="money-card-sub">2 × avg $1,249</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Add-On Revenue</div>
+            <div class="money-card-val">$299</div>
+            <div class="money-card-sub">~1 client buys $249 SEO Launch + $50 to you</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">Gross Monthly</div>
+            <div class="money-card-val">$2,797</div>
+            <div class="money-card-sub">Web + SEO add-ons combined</div>
+          </div>
+          <div class="money-card" style="border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.05);">
+            <div class="money-card-label">Team Cost (What You Lose)</div>
+            <div class="money-card-val" style="color:var(--rose);">$300</div>
+            <div class="money-card-sub">Outreach: 12% of $2,498 = $300</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep</div>
+            <div class="money-card-val">$2,497</div>
+            <div class="money-card-sub">Per month after all team costs</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep (Annual)</div>
+            <div class="money-card-val">$29,964</div>
+            <div class="money-card-sub">If pace holds all year</div>
+          </div>
+        </div>
+        <div class="math-row"><span class="label">Outreach Coordinator earns</span><span class="value amber">$300/mo · $3,600/yr</span></div>
+        <div class="math-row"><span class="label">SEO Specialist earns</span><span class="value" style="color:var(--txt-dim);">Not hired yet at this volume</span></div>
+        <div class="math-row"><span class="label">Content Coordinator earns</span><span class="value" style="color:var(--txt-dim);">Not hired yet at this volume</span></div>
+        <div class="callout callout-amber" style="margin-top:12px;"><strong>Reality check:</strong> 2 clients/month is a solid start. This is the "prove it works" stage. Your only cost is $300 — and you would not have had those clients without the outreach hire.</div>
+      </div>
+
+      <!-- 4/month — outreach + SEO + content -->
+      <div class="scenario-pane" id="pane-s4">
+        <div style="font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--txt-dim);margin-bottom:10px;">Team: You + Outreach + SEO Specialist + Content Coordinator</div>
+        <div class="money-grid" style="margin-bottom:12px;">
+          <div class="money-card">
+            <div class="money-card-label">Web Build Revenue</div>
+            <div class="money-card-val">$4,996</div>
+            <div class="money-card-sub">4 × avg $1,249</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Add-On Revenue</div>
+            <div class="money-card-val">$598</div>
+            <div class="money-card-sub">~2–3 clients buy $249 SEO Launch package</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Retainer Revenue</div>
+            <div class="money-card-val">$300</div>
+            <div class="money-card-sub">2 clients on $150/mo maintenance</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">Gross Monthly</div>
+            <div class="money-card-val">$5,894</div>
+            <div class="money-card-sub">Web + SEO add-ons + retainers</div>
+          </div>
+          <div class="money-card" style="border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.05);">
+            <div class="money-card-label">Team Cost (What You Lose)</div>
+            <div class="money-card-val" style="color:var(--rose);">$1,078</div>
+            <div class="money-card-sub">Outreach $600 + SEO $388 + Content $120 — see breakdown below</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep</div>
+            <div class="money-card-val">$4,816</div>
+            <div class="money-card-sub">Per month after all team costs</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep (Annual)</div>
+            <div class="money-card-val">$57,792</div>
+            <div class="money-card-sub">If pace holds all year</div>
+          </div>
+        </div>
+        <div class="math-row"><span class="label">Outreach Coordinator earns</span><span class="value amber">$600/mo · 12% of $4,996</span></div>
+        <div class="math-row"><span class="label">SEO Specialist earns</span><span class="value amber">$388/mo · 40% of SEO add-ons ($239) + $149 retainer split</span></div>
+        <div class="math-row"><span class="label">Content Coordinator earns</span><span class="value amber">$120/mo · $30 × 4 projects</span></div>
+        <div class="math-row"><span class="label">Total team cost</span><span class="value" style="color:var(--rose);">$1,078/mo</span></div>
+        <div class="callout callout-teal" style="margin-top:12px;"><strong>This is the sweet spot.</strong> Full team running, SEO add-ons paying for themselves, and you're keeping $4,816 doing what you're best at — building great sites.</div>
+      </div>
+
+      <!-- 8/month — full team at scale -->
+      <div class="scenario-pane" id="pane-s8">
+        <div style="font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--txt-dim);margin-bottom:10px;">Team: You + Outreach + SEO Specialist + Content Coordinator (full pace)</div>
+        <div class="money-grid" style="margin-bottom:12px;">
+          <div class="money-card">
+            <div class="money-card-label">Web Build Revenue</div>
+            <div class="money-card-val">$9,992</div>
+            <div class="money-card-sub">8 × avg $1,249</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Add-On Revenue</div>
+            <div class="money-card-val">$1,195</div>
+            <div class="money-card-sub">~5 clients buy $249 SEO Launch package</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Retainer Revenue</div>
+            <div class="money-card-val">$900</div>
+            <div class="money-card-sub">6 clients on $150/mo maintenance</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">Gross Monthly</div>
+            <div class="money-card-val">$12,087</div>
+            <div class="money-card-sub">Web + SEO add-ons + retainers</div>
+          </div>
+          <div class="money-card" style="border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.05);">
+            <div class="money-card-label">Team Cost (What You Lose)</div>
+            <div class="money-card-val" style="color:var(--rose);">$2,137</div>
+            <div class="money-card-sub">Outreach $1,199 + SEO $718 + Content $240 — see below</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep</div>
+            <div class="money-card-val">$9,950</div>
+            <div class="money-card-sub">Per month after all team costs</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep (Annual)</div>
+            <div class="money-card-val">$119,400</div>
+            <div class="money-card-sub">Six figures. As a high school student.</div>
+          </div>
+        </div>
+        <div class="math-row"><span class="label">Outreach Coordinator earns</span><span class="value amber">$1,199/mo · 12% of $9,992</span></div>
+        <div class="math-row"><span class="label">SEO Specialist earns</span><span class="value amber">$718/mo · 40% of SEO add-ons + retainer split</span></div>
+        <div class="math-row"><span class="label">Content Coordinator earns</span><span class="value amber">$240/mo · $30 × 8 projects</span></div>
+        <div class="math-row"><span class="label">Total team cost</span><span class="value" style="color:var(--rose);">$2,137/mo</span></div>
+        <div class="callout callout-teal" style="margin-top:12px;"><strong>At 8 clients/month</strong> you're likely at capacity for solo building — even with AI. This is where you seriously consider hiring a second builder and stepping into full CEO mode. You're running an agency.</div>
+      </div>
+
+      <!-- 12/month — agency scale -->
+      <div class="scenario-pane" id="pane-s12">
+        <div style="font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--txt-dim);margin-bottom:10px;">Team: You + Outreach + SEO Specialist + Content Coordinator + Second Builder</div>
+        <div class="money-grid" style="margin-bottom:12px;">
+          <div class="money-card">
+            <div class="money-card-label">Web Build Revenue</div>
+            <div class="money-card-val">$14,988</div>
+            <div class="money-card-sub">12 × avg $1,249</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Add-On Revenue</div>
+            <div class="money-card-val">$1,743</div>
+            <div class="money-card-sub">~7 clients buy $249 SEO Launch package</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">SEO Retainer Revenue</div>
+            <div class="money-card-val">$1,800</div>
+            <div class="money-card-sub">12 clients on $150/mo maintenance</div>
+          </div>
+          <div class="money-card">
+            <div class="money-card-label">Gross Monthly</div>
+            <div class="money-card-val">$18,531</div>
+            <div class="money-card-sub">Web + SEO add-ons + retainers</div>
+          </div>
+          <div class="money-card" style="border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.05);">
+            <div class="money-card-label">Team Cost (What You Lose)</div>
+            <div class="money-card-val" style="color:var(--rose);">$4,747</div>
+            <div class="money-card-sub">Outreach $1,799 + SEO $1,108 + Content $360 + Builder $1,500 — see below</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep</div>
+            <div class="money-card-val">$13,784</div>
+            <div class="money-card-sub">Per month after all team costs</div>
+          </div>
+          <div class="money-card highlight">
+            <div class="money-card-label">You Keep (Annual)</div>
+            <div class="money-card-val">$165,408</div>
+            <div class="money-card-sub">Full agency. You're the CEO.</div>
+          </div>
+        </div>
+        <div class="math-row"><span class="label">Outreach Coordinator earns</span><span class="value amber">$1,799/mo · 12% of $14,988</span></div>
+        <div class="math-row"><span class="label">SEO Specialist earns</span><span class="value amber">$1,108/mo · 40% of all SEO revenue</span></div>
+        <div class="math-row"><span class="label">Content Coordinator earns</span><span class="value amber">$360/mo · $30 × 12 projects</span></div>
+        <div class="math-row"><span class="label">Second Builder earns</span><span class="value amber">~$1,500/mo · flat or per-project pay</span></div>
+        <div class="math-row"><span class="label">Total team cost</span><span class="value" style="color:var(--rose);">$4,747/mo</span></div>
+        <div class="callout callout-teal" style="margin-top:12px;"><strong>This is the agency vision fully realized.</strong> You keep $13,784/month running a team. You barely touch individual sites. WisdomLayers is a real company — not a freelance hustle.</div>
+      </div>
+
+    </div><!-- /scenario-wrap -->
+
+    <div class="verdict-box">
+      <div class="verdict-label">Is it worth it?</div>
+      <p><strong>Yes — clearly.</strong> You're a high school student with AI assistance who can build sites fast. Your bottleneck isn't building — it's getting clients in the door. An outreach person fixes exactly that. You pay 12% of revenue they generate that you never would have had. <strong>88% of something is infinitely better than 100% of nothing.</strong> The only scenario where it's not worth it is if they bring in zero clients — and that's what the 30-day rule is for.</p>
+    </div>
+  </div>
+
+  <!-- ══ FIRST HIRE ══ -->
+  <div class="section-block" id="first-hire">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-teal">
+        <svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      </div>
+      <div>
+        <h2>Your First Hire</h2>
+        <p>One person, one job, zero upfront cost — here's exactly why</p>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="panel-title">Why Outreach Coordinator First</div>
+      <div class="math-row">
+        <span class="label">More clients =</span>
+        <span class="value teal">More revenue</span>
+      </div>
+      <div class="math-row">
+        <span class="label">More revenue =</span>
+        <span class="value teal">Can afford the next hire</span>
+      </div>
+      <div class="math-row">
+        <span class="label">Next hire =</span>
+        <span class="value teal">Less work on your plate</span>
+      </div>
+      <div class="math-row">
+        <span class="label">Risk to you =</span>
+        <span class="value green">$0 — commission only, no upfront pay</span>
+      </div>
+      <div class="callout callout-teal" style="margin-top:16px;">
+        <strong>Everything they need already exists.</strong> Your playbook, cold email templates, lead tracker, and pitch script are all built. You're not training them from scratch — you're handing them a system and saying "run this."
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="panel-title">The 30-Day Rule</div>
+      <p style="font-size:0.88em;color:var(--txt);line-height:1.8;">If a lead they sourced signs a contract within <strong style="color:var(--txt-hi);">30 days</strong> of first contact, they earn the commission. This protects you from paying commission on a lead that took 6 months to close without their involvement. Keep it clean and simple — sign within 30 days, they get paid.</p>
+    </div>
+  </div>
+
+  <!-- ══ WHERE TO FIND ══ -->
+  <div class="section-block" id="where">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-blue">
+        <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+      </div>
+      <div>
+        <h2>Where to Find Them</h2>
+        <p>Specific platforms and servers — not generic advice</p>
+      </div>
+    </div>
+
+    <div class="find-grid">
+      <div class="find-card">
+        <div class="find-card-title">
+          Discord Servers
+          <span class="platform-tag discord">Discord</span>
+        </div>
+        <ul class="find-list">
+          <li>Entrepreneur & Hustle servers</li>
+          <li>Web Design / Dev community servers</li>
+          <li>Student hustle / teen entrepreneur servers</li>
+          <li>Side hustle & passive income servers</li>
+          <li>Freelancer community servers</li>
+          <li>Search: "entrepreneur discord" on Disboard.org</li>
+        </ul>
+      </div>
+      <div class="find-card">
+        <div class="find-card-title">
+          Reddit
+          <span class="platform-tag reddit">Reddit</span>
+        </div>
+        <ul class="find-list">
+          <li>r/forhire — post your role</li>
+          <li>r/slavelabour — budget gigs, commission work</li>
+          <li>r/beermoney — people looking for online income</li>
+          <li>r/entrepreneur — find hungry people</li>
+          <li>r/webdesign — find SEO / design skills</li>
+        </ul>
+      </div>
+      <div class="find-card">
+        <div class="find-card-title">
+          Twitter / X
+          <span class="platform-tag twitter">Twitter/X</span>
+        </div>
+        <ul class="find-list">
+          <li>Post your role publicly — "hiring commission"</li>
+          <li>DM people who tweet about hustle / side income</li>
+          <li>Search "looking for remote work" + DM</li>
+          <li>Young entrepreneur spaces and threads</li>
+        </ul>
+      </div>
+      <div class="find-card">
+        <div class="find-card-title">
+          What to Look For
+          <span class="platform-tag">Traits</span>
+        </div>
+        <ul class="find-list">
+          <li>Communicates clearly and quickly</li>
+          <li>Has done any kind of sales or outreach before</li>
+          <li>Hungry — wants to earn, not just clock hours</li>
+          <li>Commission-comfortable (not scared of no base)</li>
+          <li>Young is fine — attitude matters more than experience</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-teal" style="margin-top:16px;">
+      <strong>Your pitch to them:</strong> "I'm building a web design agency and I'm looking for someone hungry to run outreach. Commission-based — you bring in a client that signs, you get 12% of the deal. I close $1,000–$2,000 projects. All the scripts and tools are already built — you just execute. DM me if you're interested."
+    </div>
+  </div>
+
+  <!-- ══ ROLE DOCUMENTS ══ -->
+  <div class="section-block">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-violet">
+        <svg width="16" height="16" fill="none" stroke="#c4b5fd" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      </div>
+      <div>
+        <h2>Role Documents</h2>
+        <p>Copy and post these — they are ready to go</p>
+      </div>
+    </div>
+
+    <!-- ROLE 1 -->
+    <div class="role-card" id="role-outreach">
+      <div class="role-card-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="role-num role-num-1">01</div>
+          <div>
+            <div class="role-title">Outreach Coordinator</div>
+            <div style="font-size:0.78em;color:var(--txt-dim);">First hire · Commission only · Hire now</div>
+          </div>
+        </div>
+        <span class="role-pay-badge pay-commission">12% Commission</span>
+      </div>
+      <div class="role-body">
+        <div class="role-section-title">What You Do</div>
+        <ul class="task-list">
+          <li>Find local businesses in NC (and beyond) with no website or a weak one using Google Maps, Yelp, Instagram, and Facebook</li>
+          <li>Send personalized cold emails using WisdomLayers' proven templates — no writing from scratch required</li>
+          <li>Send one follow-up email after 7 days if no response</li>
+          <li>Log every lead in the WisdomLayers lead tracker with status updates</li>
+          <li>Hand off interested prospects to Wisdom — your job ends at the warm handoff</li>
+        </ul>
+
+        <div class="role-section-title">What You Get</div>
+        <ul class="task-list">
+          <li>12% of the project value when a lead you sourced signs a contract and pays the deposit</li>
+          <li>$120 on a $999 Starter — $180 on a $1,499 Professional — $264 on a $2,199 Premium</li>
+          <li>All cold email scripts, templates, and tools provided — you don't build anything</li>
+          <li>Work fully remote, fully async — no schedule, no check-ins, just results</li>
+        </ul>
+
+        <div class="role-section-title">What Success Looks Like</div>
+        <ul class="task-list">
+          <li>2+ clients closed per month from your outreach within the first 60 days</li>
+          <li>Every lead logged — no ghost leads, no undocumented outreach</li>
+          <li>Lead must sign within 30 days of first contact to qualify for commission</li>
+        </ul>
+
+        <div class="role-section-title">Growth Path</div>
+        <div class="growth-pill">Head of Sales as the agency scales</div>
+
+        <div class="callout callout-teal" style="margin-top:16px;">
+          <strong>To apply:</strong> Discord DM Wisdom or email contact@wisdomlayers.com — subject line "Outreach Role". Tell me one thing about yourself that makes you the right person for this.
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE 2 -->
+    <div class="role-card" id="role-seo">
+      <div class="role-card-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="role-num role-num-2">02</div>
+          <div>
+            <div class="role-title">SEO Specialist</div>
+            <div style="font-size:0.78em;color:var(--txt-dim);">Second hire · Revenue share + small retainer · Hire at 4+ clients/mo</div>
+          </div>
+        </div>
+        <span class="role-pay-badge pay-revshare">40% Rev Share</span>
+      </div>
+      <div class="role-body">
+        <div class="role-section-title">For WisdomLayers' Own Site</div>
+        <ul class="task-list">
+          <li>Optimize wisdomlayers.com to rank for "web design Fayetteville NC," "small business website NC," and related local terms</li>
+          <li>Manage the WisdomLayers Google Business Profile — photos, posts, hours, services, review responses</li>
+          <li>Write and optimize meta titles, meta descriptions, and heading structure across all public pages</li>
+          <li>Track rankings monthly and report what's moving — no vague updates, real numbers</li>
+        </ul>
+
+        <div class="role-section-title">For Every Client Site We Build (During the Build)</div>
+        <ul class="task-list">
+          <li>Keyword research specific to that business and city — what are their customers actually searching for</li>
+          <li>Optimized page titles, meta descriptions, and heading structure on every single page before launch</li>
+          <li>Image alt text, internal linking structure, and page speed basics checked and fixed</li>
+          <li>Schema markup added — tells Google exactly what the business is, where it is, and what it does</li>
+          <li>XML sitemap and robots.txt set up correctly so Google can crawl it from day one</li>
+        </ul>
+
+        <div class="role-section-title">For Every Client Site at Launch</div>
+        <ul class="task-list">
+          <li>Google Business Profile created or claimed, fully built out — photos, hours, services, description, website linked</li>
+          <li>Site submitted to Google Search Console so indexing starts immediately</li>
+          <li>Bing Places set up — easy win most agencies skip entirely</li>
+          <li>Core local directory listings submitted: Yelp, Apple Maps, Facebook, local chambers where relevant</li>
+        </ul>
+
+        <div class="role-section-title">Ongoing (Monthly Retainer Clients)</div>
+        <ul class="task-list">
+          <li>Monthly Google Business Profile posts to keep the listing active and ranking</li>
+          <li>Review monitoring and response drafts sent to the client for approval</li>
+          <li>Monthly ranking report — where they're showing up, what moved, what's next</li>
+          <li>Adjustments to on-page content based on what's working</li>
+        </ul>
+
+        <div class="role-section-title">What You Get</div>
+        <ul class="task-list">
+          <li>40% of every client SEO add-on you execute — the $249 SEO Launch Package means you earn $100 per site launched</li>
+          <li>40% of client monthly retainers — a client on $150/mo means you earn $60/mo recurring, every month they stay</li>
+          <li>Small monthly retainer (~$75–100/mo, negotiable) for managing WisdomLayers' own SEO</li>
+          <li>Fully remote, async — real deliverables, real results, no micromanagement</li>
+          <li>Real portfolio: local business SEO results you can show anyone you ever work with after this</li>
+        </ul>
+
+        <div class="role-section-title">What Success Looks Like</div>
+        <ul class="task-list">
+          <li>WisdomLayers ranks on page 1 for at least one local search term within 90 days</li>
+          <li>Every client site launched with full SEO setup completed — no exceptions</li>
+          <li>Monthly ranking report delivered on time with actual data, not summaries</li>
+          <li>Client GBP profiles active, posted to, and properly set up within 48 hours of launch</li>
+        </ul>
+
+        <div class="role-section-title">Growth Path</div>
+        <div class="growth-pill">Head of Marketing as WisdomLayers expands into full digital marketing</div>
+
+        <div class="callout callout-teal" style="margin-top:16px;">
+          <strong>To apply:</strong> Discord DM Wisdom or email contact@wisdomlayers.com — subject line "SEO Role". Show me one result you've gotten for a site — even your own.
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE 3 -->
+    <div class="role-card" id="role-content">
+      <div class="role-card-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="role-num role-num-3">03</div>
+          <div>
+            <div class="role-title">Content Coordinator</div>
+            <div style="font-size:0.78em;color:var(--txt-dim);">Third hire · Per-project pay · Hire when volume picks up</div>
+          </div>
+        </div>
+        <span class="role-pay-badge pay-perproject">$30 / Project</span>
+      </div>
+      <div class="role-body">
+        <div class="role-section-title">What You Do</div>
+        <ul class="task-list">
+          <li>After a client signs, you become their main point of contact for content collection</li>
+          <li>Follow up with clients who haven't sent logos, photos, copy, or brand assets</li>
+          <li>Organize all incoming files and send them to Wisdom in a clean, labeled format</li>
+          <li>Send mid-project check-ins using provided email templates — keep clients feeling the project is alive</li>
+          <li>Flag to Wisdom immediately if a client goes quiet for more than 5 business days</li>
+        </ul>
+
+        <div class="role-section-title">What You Get</div>
+        <ul class="task-list">
+          <li>$30 per active project you coordinate from content collection to build handoff</li>
+          <li>Fully remote — email and file management, no calls required unless you want them</li>
+          <li>On a good month with 4 projects, that's $120 for part-time async work</li>
+        </ul>
+
+        <div class="role-section-title">What Success Looks Like</div>
+        <ul class="task-list">
+          <li>Zero projects stalled because of missing client content — that's the whole job</li>
+          <li>Wisdom always knows the status of every active project's content without having to chase it himself</li>
+        </ul>
+
+        <div class="role-section-title">Growth Path</div>
+        <div class="growth-pill">Client Success Manager — owns the full client experience as the agency grows</div>
+
+        <div class="callout callout-teal" style="margin-top:16px;">
+          <strong>To apply:</strong> Discord DM Wisdom or email contact@wisdomlayers.com — subject line "Content Coordinator". Tell me how organized you are and what tools you use to stay on top of things.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ROADMAP ══ -->
+  <div class="section-block" id="roadmap">
+    <div class="section-hd">
+      <div class="section-hd-icon icon-teal">
+        <svg width="16" height="16" fill="none" stroke="#14b8a6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      </div>
+      <div>
+        <h2>Agency Roadmap</h2>
+        <p>Where you are, where you're going, what unlocks each stage</p>
+      </div>
+    </div>
+
+    <div class="roadmap">
+
+      <div class="roadmap-item">
+        <div>
+          <div class="roadmap-label">Now</div>
+        </div>
+        <div>
+          <div class="roadmap-timeline"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+        </div>
+        <div class="roadmap-content">
+          <h4>Solo Operator</h4>
+          <p>You build, you sell, you deliver. 2 completed clients. The playbook, docs, and systems are all built. The foundation is real.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div>
+          <div class="roadmap-label">Month 1–2</div>
+        </div>
+        <div>
+          <div class="roadmap-timeline"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+        </div>
+        <div class="roadmap-content">
+          <h4>Hire Outreach Coordinator</h4>
+          <p>Commission only — zero risk. They run outreach using your templates. Revenue starts climbing. You focus entirely on building great sites.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div>
+          <div class="roadmap-label">Month 3–4</div>
+        </div>
+        <div>
+          <div class="roadmap-timeline"><div class="roadmap-dot future"></div><div class="roadmap-line"></div></div>
+        </div>
+        <div class="roadmap-content">
+          <h4>Hire SEO Specialist</h4>
+          <p>Revenue supports it. They pay for themselves through client SEO add-ons. WisdomLayers starts ranking locally. This is also your first step into the marketing agency vision.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div>
+          <div class="roadmap-label">Month 5–6</div>
+        </div>
+        <div>
+          <div class="roadmap-timeline"><div class="roadmap-dot future"></div><div class="roadmap-line"></div></div>
+        </div>
+        <div class="roadmap-content">
+          <h4>Hire Content Coordinator</h4>
+          <p>Project volume justifies it. You stop chasing clients for their logos and photos. Every project moves faster. You build more in less time.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div>
+          <div class="roadmap-label">Month 6–12</div>
+        </div>
+        <div>
+          <div class="roadmap-timeline"><div class="roadmap-dot future"></div><div class="roadmap-line"></div></div>
+        </div>
+        <div class="roadmap-content">
+          <h4>Consider Second Builder</h4>
+          <p>Only if you're turning down work. If the outreach is working and you're booked out weeks in advance, train someone on your AI workflow and hand off builds. You step into CEO mode.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div>
+          <div class="roadmap-label">Year 2+</div>
+        </div>
+        <div>
+          <div class="roadmap-timeline"><div class="roadmap-dot future"></div></div>
+        </div>
+        <div class="roadmap-content">
+          <h4>Full Digital Marketing Agency</h4>
+          <p>Web design + SEO + social media + paid ads + branding. WisdomLayers becomes the agency for small businesses in NC — and eventually beyond. You're not building sites anymore. You're running a company.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="post-script">
+      <h3>The Honest Take</h3>
+      <p>You're a high school student who already has a real business — legal contracts, a full client lifecycle, marketing materials, and 2 paying clients. Most people twice your age haven't built what you've built.</p>
+      <p>The agency vision is completely realistic. The path is clear. The first move is simple — find one hungry person on Discord, hand them your playbook, and let them run outreach while you build. <strong>That's it. That's how it starts.</strong></p>
+      <p>The money works. The structure works. The only thing left is to actually do it.</p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <strong>WisdomLayers Hiring Strategy</strong> &nbsp;·&nbsp; Wisdom Johnson &nbsp;·&nbsp; Fayetteville, NC<br>
+    contact@wisdomlayers.com &nbsp;·&nbsp; wisdomlayers.com &nbsp;·&nbsp; Internal use only
+  </footer>
+
+</div>
+</main>
+
+<script>
+function switchScenario(tab, paneId) {
+  tab.closest('.section-block').querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+  tab.closest('.section-block').querySelectorAll('.scenario-pane').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('pane-' + paneId).classList.add('active');
+}
+</script>
+</body>
+</html>
